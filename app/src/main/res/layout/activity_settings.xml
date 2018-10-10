@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.SettingsActivity"
+    android:orientation="vertical">
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        stv:sLeftTextString="账号与安全"
+        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sShapeCornersRadius="5dp"
+        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true" />
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        stv:sLeftTextString="五星好评"
+        stv:sLeftTextColor="@color/colorAccent"
+        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sShapeCornersRadius="5dp"
+        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true" />
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        stv:sLeftTextString="商务合作"
+        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sShapeCornersRadius="5dp"
+        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true" />
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        stv:sLeftTextString="微信公众号"
+        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sShapeCornersRadius="5dp"
+        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true" />
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        stv:sLeftTextString="检查新版本"
+        stv:sRightTextString="@string/version"
+        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sShapeCornersRadius="5dp"
+        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true" />
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        stv:sLeftTextString="用户协议"
+        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sShapeCornersRadius="5dp"
+        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true" />
+
+    <com.allen.library.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        stv:sLeftTextString="免责声明"
+        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sShapeCornersRadius="5dp"
+        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true" />
+
+
+</LinearLayout>
