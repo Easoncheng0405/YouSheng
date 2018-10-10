@@ -223,6 +223,8 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
             return "每天提醒";
         if (res.equals("周一 周二 周三 周四 周五 "))
             return "周一到周五";
+        if (res.equals(""))
+            return "单次提醒";
         return res;
 
     }
