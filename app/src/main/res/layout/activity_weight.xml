@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.WeightActivity">
+
+    <RelativeLayout
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="50"
+            android:textSize="50sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_marginBottom="10sp"
+            android:text="公斤"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/number"
+            android:layout_alignBottom="@id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <com.zjun.widget.RuleView
+        android:id="@+id/ruler"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:gv_maxValue="150"
+        app:gv_minValue="0"
+        app:zjun_indicatorLineColor="@color/colorAccent"
+        app:zjun_textSize="18sp" />
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

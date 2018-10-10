@@ -19,7 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
+    <Button
+        android:text="@string/weightRecord"
+        android:id="@+id/weightRecord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

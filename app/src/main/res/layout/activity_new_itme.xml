@@ -31,6 +31,20 @@
         stv:sUseShape="true" />
 
     <com.allen.library.SuperTextView
+        android:id="@+id/repeat"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        stv:sLeftTextString="重复"
+        stv:sRightTextString="单次提醒"
+        stv:sShapeCornersRadius="5dp"
+        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true" />
+
+    <com.allen.library.SuperTextView
         android:id="@+id/notify"
         android:layout_width="match_parent"
         android:layout_height="50dp"

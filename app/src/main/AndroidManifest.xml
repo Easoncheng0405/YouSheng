@@ -24,6 +24,9 @@
         <activity
             android:name=".activities.NewItemActivity"
             android:label="@string/new_item" />
+        <activity
+            android:name=".activities.WeightActivity"
+            android:label="@string/weightRecord" />
     </application>
 
 </manifest>

@@ -2,11 +2,12 @@ package com.yousheng.yousheng.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.yousheng.yousheng.R;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +16,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         findViewById(R.id.settings).setOnClickListener(this);
         findViewById(R.id.newItem).setOnClickListener(this);
+        findViewById(R.id.weightRecord).setOnClickListener(this);
     }
 
 
@@ -26,6 +28,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.newItem:
                 startActivity(new Intent(this, NewItemActivity.class));
+                break;
+            case R.id.weightRecord:
+                startActivity(new Intent(this, WeightActivity.class));
                 break;
             default:
                 break;
