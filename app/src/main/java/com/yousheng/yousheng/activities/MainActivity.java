@@ -14,6 +14,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.settings).setOnClickListener(this);
+        findViewById(R.id.newItem).setOnClickListener(this);
     }
 
 
@@ -22,6 +23,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case R.id.newItem:
+                startActivity(new Intent(this, NewItemActivity.class));
+                break;
             default:
                 break;
         }

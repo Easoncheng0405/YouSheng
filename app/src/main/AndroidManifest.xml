@@ -21,6 +21,9 @@
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/settings" />
+        <activity
+            android:name=".activities.NewItemActivity"
+            android:label="@string/new_item" />
     </application>
 
 </manifest>
