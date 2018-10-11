@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.notify.NewItemActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
