@@ -15,8 +15,8 @@
         android:layout_marginRight="5dp"
         stv:sLeftTextString="账号与安全"
         stv:sRightIconRes="@mipmap/arrow_right"
-        stv:sShapeCornersRadius="5dp"
-        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
     <com.allen.library.SuperTextView
@@ -28,8 +28,8 @@
         stv:sLeftTextString="五星好评"
         stv:sLeftTextColor="@color/colorAccent"
         stv:sRightIconRes="@mipmap/arrow_right"
-        stv:sShapeCornersRadius="5dp"
-        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
@@ -41,8 +41,8 @@
         android:layout_marginRight="5dp"
         stv:sLeftTextString="商务合作"
         stv:sRightIconRes="@mipmap/arrow_right"
-        stv:sShapeCornersRadius="5dp"
-        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
@@ -54,8 +54,8 @@
         android:layout_marginRight="5dp"
         stv:sLeftTextString="微信公众号"
         stv:sRightIconRes="@mipmap/arrow_right"
-        stv:sShapeCornersRadius="5dp"
-        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
@@ -68,8 +68,8 @@
         stv:sLeftTextString="检查新版本"
         stv:sRightTextString="@string/version"
         stv:sRightIconRes="@mipmap/arrow_right"
-        stv:sShapeCornersRadius="5dp"
-        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
@@ -81,8 +81,8 @@
         android:layout_marginRight="5dp"
         stv:sLeftTextString="用户协议"
         stv:sRightIconRes="@mipmap/arrow_right"
-        stv:sShapeCornersRadius="5dp"
-        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
@@ -94,8 +94,8 @@
         android:layout_marginRight="5dp"
         stv:sLeftTextString="免责声明"
         stv:sRightIconRes="@mipmap/arrow_right"
-        stv:sShapeCornersRadius="5dp"
-        stv:sShapeStrokeColor="@color/colorAccent"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
