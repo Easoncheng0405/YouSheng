@@ -1,5 +1,8 @@
 package com.yousheng.yousheng.notify;
 
+import android.support.annotation.NonNull;
+
+import org.litepal.LitePal;
 import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
 
@@ -9,6 +12,7 @@ import org.litepal.crud.LitePalSupport;
 public class NewItem extends LitePalSupport {
 
 
+    private long id;
 
     //提醒事项内容
     private String content;
@@ -16,7 +20,14 @@ public class NewItem extends LitePalSupport {
     //提醒时间戳(未设置为0)
     private long time;
 
-    public NewItem(String content, long time) {
+    NewItem(String content, long time) {
+        this.content = content;
+        this.time = time;
+        this.id = LitePal.count(NewItem.class);
+    }
+
+    NewItem(long id, String content, long time) {
+        this.id = id;
         this.content = content;
         this.time = time;
     }
@@ -37,8 +48,16 @@ public class NewItem extends LitePalSupport {
         this.time = time;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "{content='" + content + '\'' + ", time=" + time + '}';
+        return "{id=" + id + ", content='" + content + '\'' + ", time=" + time + '}';
     }
 }

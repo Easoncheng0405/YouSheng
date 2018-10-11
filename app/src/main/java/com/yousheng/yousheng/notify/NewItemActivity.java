@@ -24,6 +24,7 @@ import com.yousheng.yousheng.activities.BaseActivity;
 import com.yousheng.yousheng.receiver.AlarmReceiver;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,6 +49,8 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
 
     private boolean legal = true;
 
+    private long id = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,12 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
         calendar.add(Calendar.DATE, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 8);
         calendar.set(Calendar.MINUTE, 0);
+
+        //要更新在start activity时传入要更新的id
+        Intent intent = getIntent();
+        id = intent.getLongExtra("id", -1);
+
+        time.setLeftString(format.format(calendar.getTime()));
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -88,7 +97,7 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
-        time.setLeftString(format.format(calendar.getTime()));
+
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,8 +148,14 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
             PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             am.set(AlarmManager.RTC, time, sender);
         }
-        NewItem item = new NewItem(str, time);
-        item.save();
+        if (id == -1) {
+            NewItem item = new NewItem(str, time);
+            item.save();
+        } else {
+            //未测试
+            NewItem item = new NewItem(id, str, time);
+            item.update(id);
+        }
         ToastUtil.showMsg(context, "成功添加提醒事项！");
         finish();
     }
