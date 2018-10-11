@@ -87,7 +87,7 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
 
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
-        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+        timePickerDialog = new TimePickerDialog(this,0, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
