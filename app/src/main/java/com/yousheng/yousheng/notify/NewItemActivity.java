@@ -148,7 +148,7 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
             PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             am.set(AlarmManager.RTC, time, sender);
         }
-        if (id == -1) {
+        if (id < 0) {
             NewItem item = new NewItem(str, time);
             item.save();
         } else {
