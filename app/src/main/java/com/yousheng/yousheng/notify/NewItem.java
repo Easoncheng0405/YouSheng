@@ -23,7 +23,8 @@ public class NewItem extends LitePalSupport {
     NewItem(String content, long time) {
         this.content = content;
         this.time = time;
-        this.id = LitePal.count(NewItem.class);
+        //id从1开始
+        this.id = LitePal.count(NewItem.class) + 1;
     }
 
     NewItem(long id, String content, long time) {
@@ -50,10 +51,6 @@ public class NewItem extends LitePalSupport {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     @Override

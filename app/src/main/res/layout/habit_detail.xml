@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:stv="http://schemas.android.com/apk/res-auto">
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/habit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        stv:sCenterSpaceHeight="3dp"
+        stv:sLeftViewGravity="left_center"
+        stv:sLeftTextSize="20sp"
+        stv:sLeftTextColor="@color/black"
+        stv:sLeftBottomTextColor="@color/gray"
+        stv:sLeftBottomTextSize="13sp"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeStrokeColor="@color/gray"
+        stv:sShapeStrokeWidth="0.3dp"
+        stv:sUseShape="true">
+    </com.allen.library.SuperTextView>
+
+</LinearLayout>
