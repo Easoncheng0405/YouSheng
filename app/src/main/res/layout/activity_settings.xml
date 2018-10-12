@@ -7,6 +7,20 @@
     tools:context=".activities.SettingsActivity"
     android:orientation="vertical">
 
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/settings_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        stv:titleBarHeight="60dp"
+        stv:titleBarColor="@color/colorPrimary"
+        stv:leftTextSize="20sp"
+        stv:leftTextColor="@color/white"
+        stv:leftDrawable="@drawable/back"
+        stv:leftType="textView"
+        stv:leftText="  设置"
+        stv:fillStatusBar="true"
+        stv:statusBarColor="@color/colorPrimaryDark"/>
+
     <com.allen.library.SuperTextView
         android:layout_width="match_parent"
         android:layout_height="50dp"

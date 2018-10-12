@@ -4,6 +4,7 @@ package com.yousheng.yousheng.activities;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.yousheng.yousheng.R;
@@ -19,7 +20,7 @@ import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class WeightActivity extends BaseActivity {
+public class WeightActivity extends AppCompatActivity {
 
 
     private TextView weight;

@@ -24,7 +24,8 @@
             android:label="@string/settings" />
         <activity
             android:name=".notify.NewItemActivity"
-            android:label="@string/new_item" />
+            android:label="@string/new_item"
+            />
         <activity
             android:name=".activities.WeightActivity"
             android:label="@string/weightRecord" />

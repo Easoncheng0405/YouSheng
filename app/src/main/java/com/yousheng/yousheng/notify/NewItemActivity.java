@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import android.util.Log;
@@ -19,8 +20,8 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.activities.BaseActivity;
 import com.yousheng.yousheng.receiver.AlarmReceiver;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
@@ -32,7 +33,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 
-public class NewItemActivity extends BaseActivity implements View.OnClickListener {
+public class NewItemActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
@@ -57,11 +58,27 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.activity_new_itme);
         context = this;
 
+        CommonTitleBar titleBar = findViewById(R.id.title);
+        titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
+            @Override
+            public void onClicked(View v, int action, String extra) {
+                switch (action) {
+                    case 1:
+                        finish();
+                        break;
+                    case 3:
+                        addNewItem();
+                        break;
+                }
+            }
+        });
+
         time = findViewById(R.id.time);
         notify = findViewById(R.id.notify);
         content = findViewById(R.id.content);
 
         findViewById(R.id.ok).setOnClickListener(this);
+        time.setOnClickListener(this);
         notify.setOnClickListener(this);
 
         //默认提醒时间是明天早上8点
@@ -87,7 +104,7 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
 
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
-        timePickerDialog = new TimePickerDialog(this,0, new TimePickerDialog.OnTimeSetListener() {
+        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -97,20 +114,15 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
-
-        time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePickerDialog.show();
-            }
-        });
         notify.setSwitchCheckedChangeListener(new SuperTextView.OnSwitchCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b)
+                if (b) {
                     time.setVisibility(View.VISIBLE);
-                else
-                    time.setVisibility(View.INVISIBLE);
+                } else {
+                    time.setVisibility(View.GONE);
+                }
+
             }
         });
 
@@ -168,6 +180,9 @@ public class NewItemActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.notify:
                 notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
+                break;
+            case R.id.time:
+                datePickerDialog.show();
                 break;
         }
     }
