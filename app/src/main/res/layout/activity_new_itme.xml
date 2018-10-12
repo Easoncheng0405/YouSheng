@@ -63,7 +63,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             stv:sLeftTextString="提醒"
-            stv:sRightViewType="switchBtn"
             stv:sShapeCornersRadius="3dp"
             stv:sShapeStrokeColor="@color/gray"
             stv:sShapeStrokeWidth="0.3dp"

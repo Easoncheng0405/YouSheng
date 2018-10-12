@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".habit.AllHabitActivity">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/habit_all_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        stv:fillStatusBar="true"
+        stv:leftDrawable="@drawable/back"
+        stv:leftText="  添加新习惯"
+        stv:leftTextColor="@color/white"
+        stv:leftTextSize="20sp"
+        stv:leftType="textView"
+        stv:rightImageResource="@drawable/add"
+        stv:rightType="imageButton"
+        stv:statusBarColor="@color/colorPrimaryDark"
+        stv:titleBarColor="@color/colorPrimary"
+        stv:titleBarHeight="60dp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/habits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

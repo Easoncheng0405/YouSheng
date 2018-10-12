@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.notify.NewItemActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.settings).setOnClickListener(this);
         findViewById(R.id.newItem).setOnClickListener(this);
         findViewById(R.id.weightRecord).setOnClickListener(this);
+        findViewById(R.id.habit).setOnClickListener(this);
     }
 
 
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.weightRecord:
                 startActivity(new Intent(this, WeightActivity.class));
+                break;
+            case R.id.habit:
+                startActivity(new Intent(this, AllHabitActivity.class));
                 break;
             default:
                 break;
