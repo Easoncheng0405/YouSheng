@@ -30,13 +30,15 @@
             stv:fillStatusBar="true"
             stv:statusBarColor="@color/colorPrimaryDark"/>
         <EditText
+            android:background="@drawable/edit_text"
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
             android:hint="@string/new_item_hint"
+            android:textSize="16sp"
             android:inputType="text" />
 
         <com.allen.library.SuperTextView

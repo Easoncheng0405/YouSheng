@@ -135,7 +135,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
 
     private void addNewItem() {
         String str = content.getText().toString();
-        if (TextUtils.isEmpty(str)) {
+        if (TextUtils.isEmpty(str)||str.trim().length()==0) {
             ToastUtil.showMsg(context, "请填写提醒内容");
             return;
         }
