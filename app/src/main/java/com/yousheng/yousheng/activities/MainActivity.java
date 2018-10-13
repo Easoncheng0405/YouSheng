@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.haibin.calendarview.CalendarView;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.calendarlib.CalendarView;
 import com.yousheng.yousheng.notify.NewItemActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CalendarView calendarView;
         findViewById(R.id.settings).setOnClickListener(this);
         findViewById(R.id.newItem).setOnClickListener(this);
         findViewById(R.id.weightRecord).setOnClickListener(this);

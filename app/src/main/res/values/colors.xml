@@ -7,4 +7,10 @@
     <color name="blue">#0000ff</color>
     <color name="gray">#bcb5b5</color>
     <color name="white">#ffffff</color>
+
+    <!--calendarview-->
+    <color name="calendar_jingqi">#FCE4EC</color>
+    <color name="calendar_pailuan_date">#E91E63</color>
+    <color name="calendar_pailuan_duration">#F8BBD0</color>
+    <color name="calendar_normal">#ffffff</color>
 </resources>

@@ -1,12 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools"  tools:ignore="MissingTranslation">
-    <string name="app_name">柚生</string>
-    <string name="settings">设置</string>
-    <string name="new_item">添加新事项</string>
-    <string name="new_item_hint">例如：明天买两张电影票</string>
-    <string name="weightRecord">体重记录</string>
-    <string name="version">V1.0.0</string>
-
-    <!--calendarview-->
+<resources>
     <string name="cv_app_name">CalendarView</string>
     <string-array name="lunar_first_of_month">
         <item>春节</item>
@@ -66,7 +58,7 @@
         <item>三十</item>
     </string-array>
 
-    <string-array name="solar_festival" tools:ignore="InconsistentArrays">
+    <string-array name="solar_festival">
         <item>0101元旦</item>
         <item>0214情人节</item>
         <item>0308妇女节</item>
@@ -120,13 +112,14 @@
         <item>感恩节</item>
     </string-array>
 
-    <string name="sun">Sun</string>
-    <string name="mon">Mon</string>
-    <string name="tue">Tue</string>
-    <string name="wed">Wed</string>
-    <string name="thu">Thu</string>
-    <string name="fri">Fri</string>
-    <string name="sat">Sat</string>
+    <string name="sun">日</string>
+    <string name="mon">一</string>
+    <string name="tue">二</string>
+    <string name="wed">三</string>
+    <string name="thu">四</string>
+    <string name="fri">五</string>
+    <string name="sat">六</string>
+
 
     <string-array name="week_string_array">
         <item>日</item>
@@ -139,27 +132,27 @@
     </string-array>
 
     <string-array name="year_view_week_string_array">
-        <item>S</item>
-        <item>M</item>
-        <item>T</item>
-        <item>W</item>
-        <item>T</item>
-        <item>F</item>
-        <item>S</item>
+        <item>日</item>
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
     </string-array>
 
     <string-array name="month_string_array">
-        <item>JAN</item>
-        <item>FEB</item>
-        <item>MAR</item>
-        <item>APR</item>
-        <item>MAY</item>
-        <item>JUN</item>
-        <item>JUL</item>
-        <item>AUG</item>
-        <item>SEP</item>
-        <item>OCT</item>
-        <item>NOV</item>
-        <item>DEC</item>
+        <item>1月</item>
+        <item>2月</item>
+        <item>3月</item>
+        <item>4月</item>
+        <item>5月</item>
+        <item>6月</item>
+        <item>7月</item>
+        <item>8月</item>
+        <item>9月</item>
+        <item>10月</item>
+        <item>11月</item>
+        <item>12月</item>
     </string-array>
 </resources>
