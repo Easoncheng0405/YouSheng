@@ -1,29 +1,426 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
+    <!--标题栏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/title_bar_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="26dp">
+
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/title_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_date_text"
+            tools:text="@string/title_date_text" />
+
+        <ImageView
+            android:id="@+id/tv_setting"
+            android:layout_width="11dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/title_triangle_down" />
+        <!--holder-->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            style="@style/title_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="26dp"
+            android:text="@string/setting" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--日历模块最外层布局 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="21dp">
+            <!--好孕率及安全期-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_pregnant_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:text="20%"
+                    android:textColor="@color/text_color_red"
+                    android:textSize="40sp"
+                    tools:text="20%" />
+
+                <TextView
+                    android:id="@+id/tv_pregnant_percent_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/tv_pregnant_percent"
+                    android:layout_alignTop="@id/tv_pregnant_percent"
+                    android:layout_marginStart="9dp"
+                    android:layout_toEndOf="@id/tv_pregnant_percent"
+                    android:gravity="center_vertical"
+                    android:text="好孕率\n极低"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:text="好孕率\n极低" />
+
+                <TextView
+                    android:id="@+id/tv_pregnant_securedate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/tv_pregnant_percent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@id/tv_pregnant_percent"
+                    android:layout_marginEnd="19dp"
+                    android:gravity="center_vertical"
+                    android:text="2018年5月19日\n您今天处于安全期"
+                    android:textColor="@color/black"
+                    tools:text="2018年5月19日\n您今天处于安全期" />
+            </RelativeLayout>
+
+            <com.yousheng.yousheng.calendarlib.CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="33dp"
+                android:background="#fff"
+                app:calendar_padding="0dp"
+                app:calendar_width="50dp"
+                app:current_month_lunar_text_color="#CFCFCF"
+                app:current_month_text_color="#333333"
+                app:max_year="2020"
+                app:min_year="2004"
+                app:month_view="com.yousheng.yousheng.calendarlib.MeiZuMonthView"
+                app:month_view_show_mode="mode_all"
+                app:other_month_lunar_text_color="#e1e1e1"
+                app:other_month_text_color="#e1e1e1"
+                app:scheme_text="假"
+                app:scheme_text_color="#333"
+                app:scheme_theme_color="#128c4b"
+                app:selected_lunar_text_color="#CFCFCF"
+                app:selected_text_color="#333"
+                app:selected_theme_color="#80cfcfcf"
+                app:week_background="#fff"
+                app:week_bar_width="350dp"
+                app:week_start_with="sun"
+                app:week_text_color="#111111"
+                app:week_view="com.yousheng.yousheng.calendarlib.MeizuWeekView"
+                app:week_view_scrollable="false"
+                app:year_view_day_text_color="#333333"
+                app:year_view_day_text_size="9sp"
+                app:year_view_month_text_color="#ff0000"
+                app:year_view_month_text_size="20sp"
+                app:year_view_scheme_color="#f17706" />
+
+            <!--时期说明-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="12dp">
+
+                <ImageView
+                    android:id="@+id/iv_dot_jingqi"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/dot_pailuan_date" />
+
+                <TextView
+                    android:id="@+id/tv_dot_jingqi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_toEndOf="@id/iv_dot_jingqi"
+                    android:text="@string/text_jingqi_duration"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/iv_dot_pailuan_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_toEndOf="@id/tv_dot_jingqi"
+                    android:src="@drawable/dot_pailuan_date" />
+
+                <TextView
+                    android:id="@+id/tv_dot_pailuan_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_toEndOf="@id/iv_dot_pailuan_duration"
+                    android:text="@string/text_pailuan_duration"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/iv_dot_pailuan_date"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_toEndOf="@id/tv_dot_pailuan_duration"
+                    android:src="@drawable/dot_pailuan_date" />
+
+                <TextView
+                    android:id="@+id/tv_dot_pailuan_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_toEndOf="@id/iv_dot_pailuan_date"
+                    android:text="@string/text_pailuan_date"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/iv_dot_pailuan_suggestion_ml"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/tv_dot_pailuan_date"
+                    android:src="@drawable/dot_pailuan_date" />
+
+                <TextView
+                    android:id="@+id/tv_dot_pailuan_suggestion_ml"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_toEndOf="@id/iv_dot_pailuan_suggestion_ml"
+                    android:text="@string/text_suggestion_ml"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/iv_dot_pailuan_already_ml"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_toEndOf="@id/tv_dot_pailuan_suggestion_ml"
+                    android:src="@drawable/dot_pailuan_date" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_toEndOf="@id/iv_dot_pailuan_already_ml"
+                    android:text="@string/text_already_ml"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <!--开关-->
+            <!--月经开始-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="19dp"
+                    android:text="@string/menstruation_start"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_menstruation_start"
+                    style="@style/Widget.AppCompat.CompoundButton.Switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="18dp" />
+            </RelativeLayout>
+
+            <!--月经结束-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="19dp"
+                    android:text="@string/menstruation_end"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_menstruation_end"
+                    style="@style/Widget.AppCompat.CompoundButton.Switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="18dp" />
+            </RelativeLayout>
+
+            <!--同房爱爱-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="19dp"
+                    android:text="@string/make_love"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_make_love"
+                    style="@style/Widget.AppCompat.CompoundButton.Switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="18dp" />
+            </RelativeLayout>
+
+            <!--排卵试纸-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <TextView
+                    android:id="@+id/tv_ovulation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:text="@string/ovulation"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/tv_ovulation"
+                    android:layout_below="@id/tv_ovulation"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/ovulation_tip"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_plus_ovulation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="19dp"
+                    android:src="@drawable/plus" />
+            </RelativeLayout>
+
+            <!--备住-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:text="@string/comment"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/tv_comment"
+                    android:layout_below="@id/tv_comment"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/come_on"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_plus_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="19dp"
+                    android:src="@drawable/plus" />
+            </RelativeLayout>
+
+            <!--备孕必检项-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@color/pink_pregnant_prepare"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tv_beiyun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prepare_pregnant"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/tv_beiyun"
+                    android:layout_below="@id/tv_beiyun"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/tip_prepare_pregnant"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_forward_pregnant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/forward" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
     <Button
-        android:text="@string/settings"
         android:id="@+id/settings"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/settings" />
 
     <Button
-        android:text="@string/new_item"
         android:id="@+id/newItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/new_item" />
 
     <Button
-        android:text="@string/weightRecord"
         android:id="@+id/weightRecord"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:text="@string/weightRecord" />
 
 </LinearLayout>

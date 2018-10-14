@@ -32,7 +32,7 @@ public class WeekBar extends LinearLayout {
 
     public WeekBar(Context context) {
         super(context);
-        if ("com.haibin.calendarview.WeekBar".equals(getClass().getName())) {
+        if ("com.yousheng.yousheng.calendarlib.WeekBar".equals(getClass().getName())) {
             LayoutInflater.from(context).inflate(R.layout.cv_week_bar, this, true);
         }
     }
@@ -44,7 +44,7 @@ public class WeekBar extends LinearLayout {
      */
     void setup(CalendarViewDelegate delegate) {
         this.mDelegate = delegate;
-        if ("com.haibin.calendarview.WeekBar".equalsIgnoreCase(getClass().getName())) {
+        if ("com.yousheng.yousheng.calendarlib.WeekBar".equalsIgnoreCase(getClass().getName())) {
             setTextSize(mDelegate.getWeekTextSize());
             setTextColor(delegate.getWeekTextColor());
             setBackgroundColor(delegate.getWeekBackground());
@@ -93,7 +93,7 @@ public class WeekBar extends LinearLayout {
      * @param weekStart 周起始
      */
     protected void onWeekStartChange(int weekStart) {
-        if (!"com.haibin.calendarview.WeekBar".equalsIgnoreCase(getClass().getName())) {
+        if (!"com.yousheng.yousheng.calendarlib.WeekBar".equalsIgnoreCase(getClass().getName())) {
             return;
         }
         for (int i = 0; i < getChildCount(); i++) {
@@ -148,7 +148,7 @@ public class WeekBar extends LinearLayout {
         } else {
             heightMeasureSpec = MeasureSpec.makeMeasureSpec(CalendarUtil.dipToPx(getContext(), 40), MeasureSpec.EXACTLY);
             widthMeasureSpec = MeasureSpec.makeMeasureSpec(CalendarUtil.dipToPx(getContext(),
-                    315) + mDelegate.getCalendarPadding() * 2, MeasureSpec.EXACTLY);
+                    350) + mDelegate.getCalendarPadding() * 2, MeasureSpec.EXACTLY);
         }
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

@@ -1,4 +1,4 @@
-package com.yousheng.yousheng.activities;
+package com.yousheng.yousheng.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

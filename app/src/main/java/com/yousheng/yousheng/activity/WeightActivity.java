@@ -1,4 +1,4 @@
-package com.yousheng.yousheng.activities;
+package com.yousheng.yousheng.activity;
 
 
 import android.graphics.Color;

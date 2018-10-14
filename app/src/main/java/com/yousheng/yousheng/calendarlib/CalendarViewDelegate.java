@@ -374,7 +374,7 @@ final class CalendarViewDelegate {
         mWeekBarHeight = (int) array.getDimension(R.styleable.CalendarView_week_bar_height,
                 CalendarUtil.dipToPx(context, 40));
         mWeekBarWidth = (int) array.getDimension(R.styleable.CalendarView_week_bar_width,
-                CalendarUtil.dipToPx(context, 315));
+                CalendarUtil.dipToPx(context, 350));
         mWeekLineMargin = (int) array.getDimension(R.styleable.CalendarView_week_line_margin,
                 CalendarUtil.dipToPx(context, 0));
 

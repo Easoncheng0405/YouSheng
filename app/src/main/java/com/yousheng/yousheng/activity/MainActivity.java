@@ -1,4 +1,4 @@
-package com.yousheng.yousheng.activities;
+package com.yousheng.yousheng.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

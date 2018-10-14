@@ -12,13 +12,13 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <com.haibin.calendarview.MonthViewPager
+        <com.yousheng.yousheng.calendarlib.MonthViewPager
             android:id="@+id/vp_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="41dp" />
 
-        <com.haibin.calendarview.WeekViewPager
+        <com.yousheng.yousheng.calendarlib.WeekViewPager
             android:id="@+id/vp_week"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -36,7 +36,7 @@
 
     </FrameLayout>
 
-    <com.haibin.calendarview.YearViewSelectLayout
+    <com.yousheng.yousheng.calendarlib.YearViewSelectLayout
         android:id="@+id/selectLayout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

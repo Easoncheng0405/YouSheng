@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,14 +20,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".activity.SettingsActivity"
             android:label="@string/settings" />
         <activity
             android:name=".notify.NewItemActivity"
             android:label="@string/new_item"
             />
         <activity
-            android:name=".activities.WeightActivity"
+            android:name=".activity.WeightActivity"
             android:label="@string/weightRecord" />
 
         <receiver android:name=".receiver.AlarmReceiver">
