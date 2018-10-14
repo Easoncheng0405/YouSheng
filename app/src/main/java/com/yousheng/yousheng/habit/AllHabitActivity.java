@@ -11,7 +11,6 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class AllHabitActivity extends AppCompatActivity {
 
@@ -41,18 +40,38 @@ public class AllHabitActivity extends AppCompatActivity {
         habits = findViewById(R.id.habits);
 
         ArrayList<Habit> list = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 30; i++) {
-            int a = Math.abs(random.nextInt() % 2);
-            int b = Math.abs(random.nextInt() % 2);
-            list.add(new Habit(i, "补充叶酸" + a + b, "避免胎儿畸形，应提前3个月每天坚" +
-                    "持补充400微克避免胎儿畸形，应提前3个月每天坚持补充400微克",
-                    "c", 0, a, b));
-        }
+        Habit a=new Habit();
+        a.setState(HabitHelper.OUT);
+        a.setType(HabitHelper.OFFICIAL);
+        a.setTitle("补充叶酸");
+        a.setTitle2("避免胎儿畸形，应提前3个月坚持每天补充400微克");
+        list.add(a);
+        Habit b=new Habit();
+        b.setState(HabitHelper.OUT);
+        b.setType(HabitHelper.OFFICIAL);
+        b.setTitle("不喝咖啡");
+        b.setTitle2("咖啡影响孕育，每天喝一杯咖啡以上的育龄女性，怀孕的可能性只是不喝咖啡者的一半");
+        list.add(b);
+
+        Habit c=new Habit();
+        c.setState(HabitHelper.OUT);
+        c.setType(HabitHelper.CUSTOM);
+        c.setTitle("补充鱼油");
+        list.add(c);
+
+        Habit d=new Habit();
+        d.setState(HabitHelper.IN);
+        d.setType(HabitHelper.OFFICIAL);
+        d.setTitle("坚持运动");
+        d.setTitle2("运动使人快乐");
+        list.add(d);
+
         HabitAdapter adapter = new HabitAdapter(this, HabitHelper.getAllHabitInState(list));
+        adapter.setHasStableIds(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         ((LinearLayoutManager) manager).setOrientation(LinearLayout.VERTICAL);
         habits.setLayoutManager(manager);
         habits.setAdapter(adapter);
+
     }
 }

@@ -3,6 +3,8 @@ package com.yousheng.yousheng.habit;
 import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
+import java.util.Objects;
+
 
 //习惯
 public class Habit extends LitePalSupport {
@@ -27,24 +29,12 @@ public class Habit extends LitePalSupport {
     //官方习惯或自定义习惯
     private int type;
 
-    public Habit(long id, String title, String title2, String content, int days, int state, int type) {
+    public Habit(long id) {
         this.id = id;
-        this.title = title;
-        this.title2 = title2;
-        this.content = content;
-        this.days = days;
-        this.state = state;
-        this.type = type;
     }
 
-    public Habit(String title, String title2, String content, int days, int state, int type) {
+    public Habit() {
         this.id = LitePal.count(Habit.class) + 1;
-        this.title = title;
-        this.title2 = title2;
-        this.content = content;
-        this.days = days;
-        this.state = state;
-        this.type = type;
     }
 
     public long getId() {
@@ -97,5 +87,18 @@ public class Habit extends LitePalSupport {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Habit habit = (Habit) o;
+        return id == habit.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

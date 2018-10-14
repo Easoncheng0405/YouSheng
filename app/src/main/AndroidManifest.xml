@@ -12,21 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activity.MainActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".activity.SettingsActivity"
             android:label="@string/settings" />
         <activity
             android:name=".notify.NewItemActivity"
             android:label="@string/new_item" />
         <activity
-            android:name=".activities.WeightActivity"
+            android:name=".activity.WeightActivity"
             android:label="@string/weightRecord" />
 
         <receiver android:name=".receiver.AlarmReceiver">
@@ -35,8 +31,15 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".habit.AllHabitActivity" />
-        <activity android:name=".habit.HabitActivity"></activity>
+        <activity android:name=".activity.OvulationActivity" />
+        <activity android:name=".activity.TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".habit.AllHabitActivity"/>
     </application>
 
 </manifest>

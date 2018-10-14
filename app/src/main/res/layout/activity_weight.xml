@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.WeightActivity">
+    tools:context=".activity.WeightActivity">
 
     <RelativeLayout
         android:layout_marginRight="30dp"

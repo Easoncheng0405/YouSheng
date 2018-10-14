@@ -37,7 +37,6 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
         oo = officialOut.size();
         ci = customIn.size();
         co = customOut.size();
-        System.out.println(oi + "," + oo + "," + ci + "," + co + ",");
     }
 
     @NonNull
@@ -48,8 +47,9 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
+        viewHolder.setIsRecyclable(false);
 
         //末尾自定义添加按钮
         if (i + 1 == getItemCount()) {
@@ -71,10 +71,11 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
             return;
         }
 
-        final int id = i;
+
         final Habit habit;
         //排列顺序从上往下依次为官方未添加，自定义未添加，官方已添加，自定义已添加
-        switch (getStateByIndex(i)) {
+        final HabitHelper.HabitState state = getStateByIndex(i);
+        switch (state) {
             case OFFICIAL_OUT:
                 if (i == 0) {
                     viewHolder.textView.setVisibility(View.VISIBLE);
@@ -85,7 +86,6 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
                 viewHolder.superTextView.setLeftBottomString(habit.getTitle2());
                 viewHolder.superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.add_red));
                 viewHolder.superTextView.getRightIconIV().setPadding(40, 40, 22, 40);
-
                 break;
             case OFFICIAL_IN:
                 if (i == oo + co) {
@@ -111,6 +111,10 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
                 break;
             //自定义已添加一定在最后面
             default:
+                if (i == oo + co && oi == 0) {
+                    viewHolder.textView.setVisibility(View.VISIBLE);
+                    viewHolder.textView.setText("已添加");
+                }
                 habit = customIn.get(i - oo - co - oi);
                 viewHolder.superTextView.setLeftString(habit.getTitle());
                 viewHolder.superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.dev_red));
@@ -119,19 +123,46 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
                 break;
         }
 
-        viewHolder.superTextView.getLeftBottomTextView().setPadding(0,0,150,0);
+        viewHolder.superTextView.getLeftBottomTextView().setPadding(0, 0, 150, 0);
         viewHolder.superTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showMsg(context, id + "");
+                ToastUtil.showMsg(context, habit.getId() + "");
             }
         });
 
         viewHolder.superTextView.getRightIconIV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str = habit.getState() == 1 ? "添加" : "删除";
-                ToastUtil.showMsg(context, id + str + "打卡！");
+                if (habit.getState() == HabitHelper.IN) {
+                    if (state == HabitHelper.HabitState.CUSTOM_IN) {
+                        customIn.remove(habit);
+                        habit.setState(HabitHelper.IN);
+                        ci--;
+                        customOut.add(habit);
+                        co++;
+                    } else {
+                        officialIn.remove(habit);
+                        habit.setState(HabitHelper.IN);
+                        oi--;
+                        officialOut.add(habit);
+                        oo++;
+                    }
+                } else {
+                    if (state == HabitHelper.HabitState.CUSTOM_OUT) {
+                        customOut.remove(habit);
+                        habit.setState(HabitHelper.IN);
+                        co--;
+                        customIn.add(habit);
+                        ci++;
+                    } else {
+                        officialOut.remove(habit);
+                        habit.setState(HabitHelper.IN);
+                        oo--;
+                        officialIn.add(habit);
+                        oi++;
+                    }
+                }
             }
         });
     }
@@ -143,7 +174,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public long getItemId(int position) {
         return position;
     }
 

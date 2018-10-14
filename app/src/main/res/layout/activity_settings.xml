@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:stv="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.SettingsActivity"
+    tools:context=".activity.SettingsActivity"
     android:orientation="vertical">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-        android:id="@+id/settings_title"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         stv:titleBarHeight="60dp"
