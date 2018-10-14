@@ -18,25 +18,40 @@ public class HabitHelper {
     //未加入打卡
     public static final int OUT = 1;
 
-    //返回官方的:1，自定义的:0两种类型下的已加入打开的数组
-    public static HashMap<Integer, List<Habit>> getAllInHabit() {
-        List<Habit> habits = getAll();
+    enum HabitState {
+        OFFICIAL_IN,
+        OFFICIAL_OUT,
+        CUSTOM_IN,
+        CUSTOM_OUT,
+    }
 
-        List<Habit> official = new ArrayList<>();
-        List<Habit> custom = new ArrayList<>();
+    //返回官方的所有四种状态下的habit数组
+    public static HashMap<HabitState, List<Habit>> getAllHabitInState(List<Habit> habits) {
+
+        List<Habit> officialIn = new ArrayList<>();
+        List<Habit> officialOut = new ArrayList<>();
+        List<Habit> customIn = new ArrayList<>();
+        List<Habit> customOut = new ArrayList<>();
 
         for (Habit habit : habits) {
             if (habit.getState() == IN) {
                 if (habit.getType() == OFFICIAL)
-                    official.add(habit);
+                    officialIn.add(habit);
                 if (habit.getType() == CUSTOM)
-                    custom.add(habit);
+                    customIn.add(habit);
+            } else {
+                if (habit.getType() == OFFICIAL)
+                    officialOut.add(habit);
+                if (habit.getType() == CUSTOM)
+                    customOut.add(habit);
             }
         }
 
-        HashMap<Integer, List<Habit>> map = new HashMap<>();
-        map.put(OFFICIAL, official);
-        map.put(CUSTOM, custom);
+        HashMap<HabitState, List<Habit>> map = new HashMap<>();
+        map.put(HabitState.OFFICIAL_IN, officialIn);
+        map.put(HabitState.OFFICIAL_OUT, officialOut);
+        map.put(HabitState.CUSTOM_IN, customIn);
+        map.put(HabitState.CUSTOM_OUT, customOut);
         return map;
     }
 

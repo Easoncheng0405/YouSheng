@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:stv="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="3dp"/>
 
     <com.allen.library.SuperTextView
         android:id="@+id/habit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:padding="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginRight="5dp"
+        android:padding="5dp"
         stv:sCenterSpaceHeight="3dp"
-        stv:sLeftViewGravity="left_center"
-        stv:sLeftTextSize="20sp"
-        stv:sLeftTextColor="@color/black"
+        stv:sCenterTextSize="20sp"
         stv:sLeftBottomTextColor="@color/gray"
         stv:sLeftBottomTextSize="13sp"
+        stv:sLeftTextColor="@color/black"
+        stv:sLeftTextSize="20sp"
+        stv:sLeftViewGravity="left_center"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
-        stv:sUseShape="true">
-    </com.allen.library.SuperTextView>
+        stv:sUseShape="true" />
 
 </LinearLayout>

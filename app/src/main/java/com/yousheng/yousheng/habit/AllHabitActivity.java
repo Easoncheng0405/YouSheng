@@ -11,6 +11,7 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AllHabitActivity extends AppCompatActivity {
 
@@ -40,13 +41,18 @@ public class AllHabitActivity extends AppCompatActivity {
         habits = findViewById(R.id.habits);
 
         ArrayList<Habit> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++)
-            list.add(new Habit(i, "补充叶酸", "避免胎儿畸形，应提前3个月每天坚持补充400微克避免胎儿畸形，应提前3个月每天坚持补充400微克", "c", 0, 0, 1));
-        HabitAdapter adapter = new HabitAdapter(this, list);
+        Random random = new Random();
+        for (int i = 0; i < 30; i++) {
+            int a = Math.abs(random.nextInt() % 2);
+            int b = Math.abs(random.nextInt() % 2);
+            list.add(new Habit(i, "补充叶酸" + a + b, "避免胎儿畸形，应提前3个月每天坚" +
+                    "持补充400微克避免胎儿畸形，应提前3个月每天坚持补充400微克",
+                    "c", 0, a, b));
+        }
+        HabitAdapter adapter = new HabitAdapter(this, HabitHelper.getAllHabitInState(list));
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         ((LinearLayoutManager) manager).setOrientation(LinearLayout.VERTICAL);
         habits.setLayoutManager(manager);
         habits.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 }
