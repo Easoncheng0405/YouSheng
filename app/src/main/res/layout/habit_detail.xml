@@ -28,6 +28,8 @@
         stv:sLeftBottomTextSize="13sp"
         stv:sLeftTextColor="@color/black"
         stv:sLeftTextSize="20sp"
+        stv:sLeftTextString=""
+        stv:sLeftBottomTextString=""
         stv:sLeftViewGravity="left_center"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"

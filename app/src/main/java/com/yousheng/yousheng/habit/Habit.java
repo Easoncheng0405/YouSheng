@@ -101,4 +101,17 @@ public class Habit extends LitePalSupport {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Habit{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", title2='" + title2 + '\'' +
+                ", content='" + content + '\'' +
+                ", days=" + days +
+                ", state=" + state +
+                ", type=" + type +
+                '}';
+    }
 }

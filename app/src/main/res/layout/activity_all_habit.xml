@@ -22,7 +22,7 @@
         stv:statusBarColor="@color/colorPrimaryDark"
         stv:titleBarColor="@color/colorPrimary"
         stv:titleBarHeight="60dp" />
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:id="@+id/habits"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
