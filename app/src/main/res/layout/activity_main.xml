@@ -302,6 +302,8 @@
 
             <!--排卵试纸-->
             <RelativeLayout
+                android:onClick="onClick"
+                android:id="@+id/layout_ovulation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp">

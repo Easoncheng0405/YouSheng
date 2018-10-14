@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.OvulationActivity">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        stv:fillStatusBar="true"
+        stv:leftDrawable="@drawable/back"
+        stv:leftDrawablePadding="25dp"
+        stv:leftText="@string/ovulation"
+        stv:leftTextColor="@color/white"
+        stv:leftTextSize="20sp"
+        stv:leftType="textView"
+        stv:statusBarColor="@color/colorPrimaryDark"
+        stv:titleBarColor="@color/colorPrimary"
+        stv:titleBarHeight="60dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/pink_pregnant_prepare"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/tip_ovulation_suggestion"
+            android:textColor="@color/text_color_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_ml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:text="@string/text_already_ml"
+            android:textColor="@color/text_color_gray"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="4dp"
+            android:layout_toStartOf="@id/tv_ml"
+            android:src="@drawable/calendar_love_fill" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/no_ovulation"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_record_ovulation"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/calendar_pailuan_date"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/record_ovulation_result"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</LinearLayout>

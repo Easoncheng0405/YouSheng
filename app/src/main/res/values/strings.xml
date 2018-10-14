@@ -172,7 +172,7 @@
     <string name="text_pailuan_duration">排卵期间</string>
     <string name="text_pailuan_date">排卵日</string>
     <string name="text_suggestion_ml">建议同房</string>
-    <string name="text_already_ml">已经同房</string>
+    <string name="text_already_ml">已同房</string>
 
     <string name="menstruation_start">月经开始</string>
     <string name="menstruation_end">月经结束</string>
@@ -183,4 +183,9 @@
     <string name="come_on">加油坚持，小宝贝</string>
     <string name="prepare_pregnant">备孕必检项</string>
     <string name="tip_prepare_pregnant">这些东西您一定要注意</string>
+
+    <!--排卵试纸界面-->
+    <string name="tip_ovulation_suggestion">及时录入试纸结果智能预测排卵日</string>
+    <string name="record_ovulation_result">录入试纸结果</string>
+    <string name="no_ovulation">无记录，快录入试纸结果</string>
 </resources>

@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.weightRecord:
                 startActivity(new Intent(this, WeightActivity.class));
                 break;
+            case R.id.layout_ovulation:
+                startActivity(new Intent(this, OvulationActivity.class));
+                break;
             default:
                 break;
         }
