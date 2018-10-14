@@ -49,8 +49,6 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
-        viewHolder.setIsRecyclable(false);
-
         //末尾自定义添加按钮
         if (i + 1 == getItemCount()) {
             LinearLayout.LayoutParams margin = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -163,6 +161,9 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ViewHolder> 
                         oi++;
                     }
                 }
+
+                for (int i = 0; i < getItemCount(); i++)
+                    notifyItemChanged(i);
             }
         });
     }
