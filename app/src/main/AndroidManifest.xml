@@ -35,7 +35,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.OvulationActivity"></activity>
+        <activity android:name=".activity.OvulationActivity" />
+        <activity android:name=".activity.RecordOvulationActivity"></activity>
     </application>
 
 </manifest>

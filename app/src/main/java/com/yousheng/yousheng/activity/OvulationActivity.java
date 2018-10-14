@@ -1,5 +1,6 @@
 package com.yousheng.yousheng.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.view.View;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.uitl.TitleBarUtils;
 
 public class OvulationActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView mRecyclerView;
@@ -20,17 +22,8 @@ public class OvulationActivity extends AppCompatActivity implements View.OnClick
 
     private void initView() {
         CommonTitleBar titleBar = findViewById(R.id.title);
-        titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
-            @Override
-            public void onClicked(View v, int action, String extra) {
-                switch (action) {
-                    case CommonTitleBar.ACTION_LEFT_TEXT:
-                        finish();
-                        break;
-                }
-            }
-        });
-
+        TitleBarUtils.changeTitleImageLeftMargin(this, titleBar);
+        TitleBarUtils.addTitleBarListener(this, titleBar);
         mRecyclerView = findViewById(R.id.listview);
     }
 
@@ -38,6 +31,7 @@ public class OvulationActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_record_ovulation:
+                startActivity(new Intent(OvulationActivity.this, RecordOvulationActivity.class));
                 break;
         }
     }
