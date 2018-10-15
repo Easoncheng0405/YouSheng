@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
                     android:text="20%"
-                    android:textColor="@color/text_color_red"
+                    android:textColor="@color/text_color_red_theme"
                     android:textSize="40sp"
                     tools:text="20%" />
 

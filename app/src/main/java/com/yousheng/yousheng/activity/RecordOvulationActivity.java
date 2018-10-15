@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.uitl.TitleBarUtils;
 
+@Route(path = "/recordovulation/activity")
 public class RecordOvulationActivity extends AppCompatActivity {
 
     @Override

@@ -266,7 +266,7 @@
         android:layout_marginTop="9dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="9dp"
-        android:background="@color/calendar_pailuan_date"
+        android:background="@color/text_color_red_theme"
         android:text="@string/make_sure"
         android:textColor="@color/white"
         android:textSize="20sp" />

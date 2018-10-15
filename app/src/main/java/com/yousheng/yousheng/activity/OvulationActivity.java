@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.uitl.TitleBarUtils;
@@ -31,7 +32,7 @@ public class OvulationActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_record_ovulation:
-                startActivity(new Intent(OvulationActivity.this, RecordOvulationActivity.class));
+                ARouter.getInstance().build("/recordovulation/activity").navigation();
                 break;
         }
     }

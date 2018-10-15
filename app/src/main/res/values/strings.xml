@@ -166,6 +166,7 @@
     <!--index page-->
     <string name="title_date_text">2018年5月</string>
     <string name="setting">设置</string>
+    <string name="mense_management">经期管理</string>
     <string name="make_sure">确定</string>
     <string name="pregnant_percent">好孕率</string>
 
@@ -196,4 +197,7 @@
     <string name="ovulation_level_two">弱阳</string>
     <string name="ovulation_level_three">阳</string>
     <string name="ovulation_level_four">强阳</string>
+
+    <!--广告页面-->
+    <string name="welcome_text">柚生 ( 有质有料才精彩 )</string>
 </resources>
