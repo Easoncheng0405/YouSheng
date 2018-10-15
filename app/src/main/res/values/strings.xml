@@ -166,6 +166,7 @@
     <!--index page-->
     <string name="title_date_text">2018年5月</string>
     <string name="setting">设置</string>
+    <string name="make_sure">确定</string>
     <string name="pregnant_percent">好孕率</string>
 
     <string name="text_jingqi_duration">经期</string>
