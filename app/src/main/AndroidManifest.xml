@@ -40,7 +40,10 @@
         <activity android:name=".habit.AllHabitActivity" />
         <activity android:name=".activity.RecordOvulationActivity" />
         <activity android:name=".activity.SplashActivity" />
-        <activity android:name=".activity.MenseManagementActivity"></activity>
+        <activity android:name=".activity.MenseManagementActivity" />
+        <activity android:name=".habit.HabitActivity" />
+        <activity android:name=".habit.HabitDetailActivity" />
+        <activity android:name=".habit.HoldOnDays"></activity>
     </application>
 
 </manifest>

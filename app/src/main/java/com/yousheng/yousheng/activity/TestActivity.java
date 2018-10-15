@@ -8,6 +8,7 @@ import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.habit.AllHabitActivity;
+import com.yousheng.yousheng.habit.HoldOnDays;
 import com.yousheng.yousheng.notify.NewItemActivity;
 
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,6 +22,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.weightRecord).setOnClickListener(this);
         findViewById(R.id.main).setOnClickListener(this);
         findViewById(R.id.habit).setOnClickListener(this);
+        findViewById(R.id.holdDays).setOnClickListener(this);
     }
 
     @Override
@@ -46,6 +48,9 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.mense_management:
                 ARouter.getInstance().build("/mensemanage/activity").navigation();
+                break;
+            case R.id.holdDays:
+                startActivity(new Intent(this, HoldOnDays.class));
                 break;
         }
     }

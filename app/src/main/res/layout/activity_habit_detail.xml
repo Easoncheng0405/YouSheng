@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".habit.HabitDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            stv:fillStatusBar="true"
+            stv:leftDrawable="@drawable/back"
+            stv:leftText="  自定义添加"
+            stv:leftTextColor="@color/white"
+            stv:leftTextSize="20sp"
+            stv:leftType="textView"
+            stv:rightText="完成 "
+            stv:rightTextColor="@color/white"
+            stv:rightTextSize="20sp"
+            stv:rightType="textView"
+            stv:statusBarColor="@color/colorPrimaryDark"
+            stv:titleBarColor="@color/colorPrimary"
+            stv:titleBarHeight="60dp" />
+
+        <com.allen.library.SuperTextView
+            android:id="@+id/notify"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            stv:sLeftTextString="提醒"
+            stv:sRightViewType="switchBtn"
+            stv:sShapeCornersRadius="3dp"
+            stv:sShapeStrokeColor="@color/gray"
+            stv:sShapeStrokeWidth="0.3dp"
+            stv:sUseShape="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="补充叶酸"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="第一，会让人精神变好，晚间人体会进行排毒跟修养，因此早睡第二天才会充满活力，精神状态自然是极好的"
+            android:textColor="@color/Drakgray"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/ok"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        stv:sCenterTextColor="@color/white"
+        stv:sCenterTextString="完成"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeSelectorNormalColor="@color/colorPrimary"
+        stv:sShapeSelectorPressedColor="@color/gray"
+        stv:sUseShape="true" />
+</RelativeLayout>

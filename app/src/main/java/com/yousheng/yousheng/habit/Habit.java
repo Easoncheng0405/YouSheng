@@ -29,6 +29,9 @@ public class Habit extends LitePalSupport {
     //官方习惯或自定义习惯
     private int type;
 
+    //时间
+    private long time;
+
     public Habit(long id) {
         this.id = id;
     }
@@ -89,6 +92,14 @@ public class Habit extends LitePalSupport {
         this.type = type;
     }
 
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -114,4 +125,6 @@ public class Habit extends LitePalSupport {
                 ", type=" + type +
                 '}';
     }
+
+
 }

@@ -6,6 +6,7 @@
     <color name="black">#000000</color>
     <color name="blue">#0000ff</color>
     <color name="gray">#bcb5b5</color>
+    <color name="Drakgray">#646161</color>
     <color name="white">#ffffff</color>
 
     <!--calendarview-->

@@ -8,15 +8,13 @@ import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    public static final String NOTIFY_IN_TIME="com.yousheng.newitem";
+    public static final String NOTIFY_IN_TIME = "com.yousheng.newitem";
+    public static final String HABIT_IN_TIME = "com.yousheng.habit";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction() != null)
-            switch (intent.getAction()) {
-                case NOTIFY_IN_TIME:
-                    Log.d("AlarmReceiver", intent.getStringExtra("str"));
-                    break;
-            }
+            Log.d("AlarmReceiver", intent.getAction() + "|"
+                    + intent.getStringExtra("str"));
     }
 }

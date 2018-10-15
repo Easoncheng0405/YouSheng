@@ -39,9 +39,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     private TimePickerDialog timePickerDialog;
     private Calendar calendar = Calendar.getInstance(Locale.CHINA);
 
-    private SuperTextView time;
-    private SuperTextView notify;
 
+    private SuperTextView notify;
+    private SuperTextView time;
     private EditText content;
 
     private Context context;
@@ -89,7 +89,16 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         //要更新在start activity时传入要更新的id
         Intent intent = getIntent();
         id = intent.getLongExtra("id", -1);
-
+        //初始化数据
+        if (id != -1) {
+            content.setText(intent.getStringExtra("content"));
+            long l = intent.getLongExtra("time", 0);
+            if (l > 0) {
+                calendar.setTimeInMillis(l);
+                time.setVisibility(View.VISIBLE);
+                notify.setSwitchIsChecked(true);
+            }
+        }
         time.setLeftString(format.format(calendar.getTime()));
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -135,13 +144,13 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
 
     private void addNewItem() {
         String str = content.getText().toString();
-        if (TextUtils.isEmpty(str)||str.trim().length()==0) {
+        if (TextUtils.isEmpty(str) || str.trim().length() == 0) {
             ToastUtil.showMsg(context, "请填写提醒内容");
             return;
         }
 
-        if (str.length() > 250) {
-            ToastUtil.showMsg(context, "内容不能超过250字符哦");
+        if (str.length() > 150) {
+            ToastUtil.showMsg(context, "内容不能超过150字符哦");
             return;
         }
 
@@ -160,7 +169,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             am.set(AlarmManager.RTC, time, sender);
         }
-        if (id < 0) {
+        if (id == -1) {
             NewItem item = new NewItem(str, time);
             item.save();
         } else {

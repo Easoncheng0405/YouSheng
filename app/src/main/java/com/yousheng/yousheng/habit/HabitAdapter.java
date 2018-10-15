@@ -2,6 +2,7 @@ package com.yousheng.yousheng.habit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -76,7 +77,7 @@ public class HabitAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
+    public View getView(final int i, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.habit_detail, null);
         SuperTextView superTextView = convertView.findViewById(R.id.habit);
         TextView textView = convertView.findViewById(R.id.title);
@@ -93,13 +94,14 @@ public class HabitAdapter extends BaseAdapter {
             superTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.showMsg(context, "自定义添加");
+                    Intent intent = new Intent(context, HabitActivity.class);
+                    intent.putExtra("id", -1);
+                    context.startActivity(intent);
                 }
             });
             return convertView;
         }
         final Habit habit = (Habit) getItem(i);
-        System.out.println(habit);
         switch (getStateByIndex(i)) {
             case OFFICIAL_OUT:
                 if (i == 0) {
@@ -148,7 +150,19 @@ public class HabitAdapter extends BaseAdapter {
         superTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showMsg(context, habit.getId() + "");
+                if (habit.getType() == HabitHelper.OFFICIAL) {
+                    //官方的去详情页面
+                    Intent intent = new Intent(context, HabitDetailActivity.class);
+                    context.startActivity(intent);
+                } else {
+                    //自定义的去编辑页面
+                    Intent intent = new Intent(context, HabitActivity.class);
+                    intent.putExtra("id", habit.getId());
+                    //自定义习惯只有标题
+                    intent.putExtra("content", habit.getTitle());
+                    intent.putExtra("time", habit.getTime());
+                    context.startActivity(intent);
+                }
             }
         });
 
@@ -185,10 +199,8 @@ public class HabitAdapter extends BaseAdapter {
                     }
                 }
                 notifyDataSetInvalidated();
-
             }
         });
-
         return convertView;
     }
 
