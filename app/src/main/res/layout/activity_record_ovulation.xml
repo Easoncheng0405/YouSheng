@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:stv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-
     tools:context=".activity.RecordOvulationActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         stv:fillStatusBar="true"
         stv:leftDrawable="@drawable/back"
         stv:leftDrawablePadding="25dp"
@@ -23,229 +21,253 @@
         stv:titleBarColor="@color/colorPrimary"
         stv:titleBarHeight="60dp" />
 
+
     <!--main content-->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp">
+        android:layout_below="@id/title">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/shape_background_rectangle"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:text="检测时间:2018/09/11 12:00"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="21dp"
-                android:src="@drawable/forward" />
-        </RelativeLayout>
-
-        <!--强性RadioGroup-->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/shape_background_rectangle"
-            android:gravity="center_vertical"
-            android:paddingBottom="23dp"
-            android:paddingEnd="19dp"
-            android:paddingStart="19dp"
-            android:paddingTop="23dp">
+            android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
 
-            <!--试纸强度说明-->
-            <LinearLayout
-                android:id="@+id/layout_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_background_rectangle"
+                android:gravity="center_vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/iv_level_one"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ovulation_level_one" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@id/iv_level_one"
-                        android:text="@string/ovulation_level_one"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:id="@+id/rd_one"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:gravity="center_vertical">
+                    android:layout_marginStart="18dp"
+                    android:text="检测时间:2018/09/11 12:00"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-                    <ImageView
-                        android:id="@+id/iv_level_two"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ovulation_level_two" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="20dp"
-
-                        android:layout_toEndOf="@id/iv_level_two"
-                        android:text="@string/ovulation_level_two"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:id="@+id/rd_two"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:gravity="center_vertical">
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="21dp"
+                    android:src="@drawable/forward" />
+            </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/iv_level_three"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+            <!--强性RadioGroup-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_background_rectangle"
+                android:gravity="center_vertical"
+                android:paddingStart="19dp"
+                android:paddingTop="23dp"
+                android:paddingEnd="19dp"
+                android:paddingBottom="23dp">
 
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ovulation_level_three" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@id/iv_level_three"
-                        android:text="@string/ovulation_level_three"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:id="@+id/rd_three"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <!--试纸强度说明-->
+                <LinearLayout
+                    android:id="@+id/layout_description"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:gravity="center_vertical">
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/iv_level_four"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_level_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ovulation_level_one" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/iv_level_one"
+                            android:text="@string/ovulation_level_one"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rd_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center_vertical">
 
-                        android:src="@drawable/ovulation_level_four" />
+                        <ImageView
+                            android:id="@+id/iv_level_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ovulation_level_two" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+
+                            android:layout_toEndOf="@id/iv_level_two"
+                            android:text="@string/ovulation_level_two"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rd_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center_vertical">
 
-                        android:layout_toEndOf="@id/iv_level_four"
-                        android:text="@string/ovulation_level_four"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        <ImageView
+                            android:id="@+id/iv_level_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-                    <android.support.v7.widget.AppCompatRadioButton
-                        android:id="@+id/rd_four"
-                        android:layout_width="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ovulation_level_three" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@id/iv_level_three"
+                            android:text="@string/ovulation_level_three"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rd_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true" />
-                </RelativeLayout>
-            </LinearLayout>
+                        android:layout_marginTop="24dp"
+                        android:gravity="center_vertical">
 
-        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/iv_level_four"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
 
-        <!--同房爱爱-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/shape_background_rectangle">
+                            android:src="@drawable/ovulation_level_four" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/make_love"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/switch_make_love"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
+                            android:layout_toEndOf="@id/iv_level_four"
+                            android:text="@string/ovulation_level_four"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
 
-        <!--使用说明-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/shape_background_rectangle">
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rd_four"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/instruction"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+            </RelativeLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/forward" />
+            <!--同房爱爱-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_background_rectangle"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/make_love"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-    </LinearLayout>
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_make_love"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <!--使用说明-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_background_rectangle"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/instruction"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/forward" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 
-</LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="9dp"
+        android:background="@color/text_color_red_theme"
+        android:text="@string/make_sure"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</RelativeLayout>

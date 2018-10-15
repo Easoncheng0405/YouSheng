@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.notify.NewItemActivity;
@@ -24,7 +25,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
@@ -40,7 +41,12 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.main:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
-
+            case R.id.splash:
+                ARouter.getInstance().build("/splash/activity").navigation();
+                break;
+            case R.id.mense_management:
+                ARouter.getInstance().build("/mensemanage/activity").navigation();
+                break;
         }
     }
 }

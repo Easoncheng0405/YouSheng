@@ -12,9 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.MainActivity">
-
-        </activity>
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/settings" />
@@ -32,7 +30,6 @@
         </receiver>
 
         <activity android:name=".activity.OvulationActivity" />
-
         <activity android:name=".activity.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,9 +38,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".habit.AllHabitActivity" />
-
-        <activity android:name=".activity.RecordOvulationActivity"></activity>
-
+        <activity android:name=".activity.RecordOvulationActivity" />
+        <activity android:name=".activity.SplashActivity" />
+        <activity android:name=".activity.MenseManagementActivity"></activity>
     </application>
 
 </manifest>

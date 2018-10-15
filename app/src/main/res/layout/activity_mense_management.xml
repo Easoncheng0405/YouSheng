@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MenseManagementActivity">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/title"
+        style="@style/common_title_bar_style"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        stv:leftText="@string/mense_management" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/layout_mense_duration"
+            layout="@layout/layout_mense_management_item_one" />
+
+        <include
+            android:id="@+id/layout_mense_days"
+            layout="@layout/layout_mense_management_item_one" />
+
+        <include
+            android:id="@+id/layout_mense_start"
+            layout="@layout/layout_mense_management_item_one" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_start"
+        style="@style/bottom_button_style"
+        android:layout_height="wrap_content"
+        android:text="立即开始" />
+</RelativeLayout>

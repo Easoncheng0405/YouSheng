@@ -22,4 +22,30 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="common_title_bar_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fillStatusBar">true</item>
+        <item name="titleBarHeight">60dp</item>
+        <item name="leftType">textView</item>
+        <item name="leftDrawablePadding">25dp</item>
+        <item name="leftTextSize">20sp</item>
+        <item name="leftTextColor">@color/white</item>
+        <item name="leftDrawable">@drawable/back</item>
+        <item name="statusBarColor">@color/colorPrimaryDark</item>
+        <item name="titleBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="bottom_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">9dp</item>
+        <item name="android:layout_marginBottom">9dp</item>
+        <item name="android:background">@color/text_color_red_theme</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
 </resources>
