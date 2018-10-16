@@ -17,6 +17,8 @@ import com.allen.library.SuperTextView;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
+import org.litepal.LitePal;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -153,14 +155,13 @@ public class HabitAdapter extends BaseAdapter {
                 if (habit.getType() == HabitHelper.OFFICIAL) {
                     //官方的去详情页面
                     Intent intent = new Intent(context, HabitDetailActivity.class);
+                    intent.putExtra("id", habit.getId());
                     context.startActivity(intent);
                 } else {
                     //自定义的去编辑页面
                     Intent intent = new Intent(context, HabitActivity.class);
                     intent.putExtra("id", habit.getId());
                     //自定义习惯只有标题
-                    intent.putExtra("content", habit.getTitle());
-                    intent.putExtra("time", habit.getTime());
                     context.startActivity(intent);
                 }
             }
@@ -198,6 +199,9 @@ public class HabitAdapter extends BaseAdapter {
                         oi++;
                     }
                 }
+                Habit h=LitePal.find(Habit.class,habit.getId());
+                h.setState(habit.getState());
+                h.save();
                 notifyDataSetInvalidated();
             }
         });

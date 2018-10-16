@@ -1,6 +1,7 @@
 package com.yousheng.yousheng.habit;
 
 import org.litepal.LitePal;
+import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
 
 import java.util.Objects;
@@ -9,6 +10,7 @@ import java.util.Objects;
 //习惯
 public class Habit extends LitePalSupport {
 
+    @Column(unique = true)
     private long id;
 
     //标题
@@ -30,7 +32,10 @@ public class Habit extends LitePalSupport {
     private int type;
 
     //时间
+    @Column(defaultValue = "-1")
     private long time;
+
+    private int notify;
 
     public Habit(long id) {
         this.id = id;

@@ -18,11 +18,9 @@
             android:layout_height="wrap_content"
             stv:fillStatusBar="true"
             stv:leftDrawable="@drawable/back"
-            stv:leftText="  自定义添加"
             stv:leftTextColor="@color/white"
             stv:leftTextSize="20sp"
             stv:leftType="textView"
-            stv:rightText="完成 "
             stv:rightTextColor="@color/white"
             stv:rightTextSize="20sp"
             stv:rightType="textView"
@@ -31,12 +29,26 @@
             stv:titleBarHeight="60dp" />
 
         <com.allen.library.SuperTextView
+            android:id="@+id/time"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="8dp"
+            stv:sRightIconRes="@mipmap/arrow_right"
+            stv:sShapeCornersRadius="3dp"
+            stv:sShapeStrokeColor="@color/gray"
+            stv:sShapeStrokeWidth="0.3dp"
+            stv:sUseShape="true" />
+
+        <com.allen.library.SuperTextView
             android:id="@+id/notify"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="8dp"
             stv:sLeftTextString="提醒"
             stv:sRightViewType="switchBtn"
             stv:sShapeCornersRadius="3dp"
@@ -46,24 +58,23 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/title1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:text="补充叶酸"
             android:textColor="@color/black"
             android:textSize="25sp" />
 
         <TextView
+            android:id="@+id/title2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="第一，会让人精神变好，晚间人体会进行排毒跟修养，因此早睡第二天才会充满活力，精神状态自然是极好的"
             android:textColor="@color/Drakgray"
             android:textSize="20sp" />
     </LinearLayout>
@@ -75,7 +86,6 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
         stv:sCenterTextColor="@color/white"
-        stv:sCenterTextString="完成"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeSelectorNormalColor="@color/colorPrimary"
         stv:sShapeSelectorPressedColor="@color/gray"

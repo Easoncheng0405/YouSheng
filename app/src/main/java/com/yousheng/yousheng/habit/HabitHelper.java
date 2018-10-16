@@ -18,6 +18,8 @@ public class HabitHelper {
     //未加入打卡
     public static final int OUT = 1;
 
+
+
     enum HabitState {
         OFFICIAL_IN,
         OFFICIAL_OUT,

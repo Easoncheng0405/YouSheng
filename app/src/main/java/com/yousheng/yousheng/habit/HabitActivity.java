@@ -19,6 +19,8 @@ import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.receiver.AlarmReceiver;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
+import org.litepal.LitePal;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -58,9 +60,9 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         //初始化数据
         if (id != -1) {
             content.setText(intent.getStringExtra("content"));
-            long l = intent.getLongExtra("time", 0L);
-            if (l > 0) {
-                calendar.setTimeInMillis(l);
+            Habit habit = LitePal.find(Habit.class, id);
+            if (habit.getTime() > 0) {
+                calendar.setTimeInMillis(habit.getTime());
                 time.setVisibility(View.VISIBLE);
                 time.setLeftString("每天" + format.format(calendar.getTime()));
                 notify.setSwitchIsChecked(true);
