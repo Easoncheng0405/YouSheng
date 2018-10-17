@@ -1,8 +1,5 @@
 package com.yousheng.yousheng.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,13 +12,8 @@ import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.habit.HabitHelper;
 import com.yousheng.yousheng.habit.HoldOnDays;
 import com.yousheng.yousheng.notify.NewItemActivity;
-import com.yousheng.yousheng.receiver.AlarmHelper;
-import com.yousheng.yousheng.receiver.AlarmReceiver;
-import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
-
-import java.text.SimpleDateFormat;
 
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +27,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.main).setOnClickListener(this);
         findViewById(R.id.habit).setOnClickListener(this);
         findViewById(R.id.holdDays).setOnClickListener(this);
+        findViewById(R.id.btn_ready).setOnClickListener(this);
 
         //默认文案
         {
@@ -101,6 +94,9 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.holdDays:
                 startActivity(new Intent(this, HoldOnDays.class));
+                break;
+            case R.id.btn_ready:
+                startActivity(new Intent(this,ReadyActivity.class));
                 break;
         }
     }
