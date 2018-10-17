@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yousheng.yousheng">
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -22,13 +27,6 @@
         <activity
             android:name=".activity.WeightActivity"
             android:label="@string/weightRecord" />
-
-        <receiver android:name=".receiver.AlarmReceiver">
-            <intent-filter>
-                <action android:name="com.yousheng.newitem" />
-            </intent-filter>
-        </receiver>
-
         <activity android:name=".activity.OvulationActivity" />
         <activity android:name=".activity.TestActivity">
             <intent-filter>
@@ -43,7 +41,16 @@
         <activity android:name=".activity.MenseManagementActivity" />
         <activity android:name=".habit.HabitActivity" />
         <activity android:name=".habit.HabitDetailActivity" />
-        <activity android:name=".habit.HoldOnDays"></activity>
+        <activity android:name=".habit.HoldOnDays"/>
+
+        <receiver android:name=".receiver.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

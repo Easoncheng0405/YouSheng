@@ -16,6 +16,7 @@ import android.widget.TimePicker;
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.receiver.AlarmReceiver;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
@@ -134,28 +135,25 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
-        long time = 0;
+        long time = -1;
         if (notify.getSwitchIsChecked()) {
+            if (calendar.getTimeInMillis() < System.currentTimeMillis())
+                calendar.add(Calendar.DATE, 1);
             time = calendar.getTimeInMillis();
-            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(AlarmReceiver.HABIT_IN_TIME);
-            intent.putExtra("str", str);
-            PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            //todo 这里要改成每日重复闹钟
-            am.set(AlarmManager.RTC, time, sender);
         }
+        Habit habit;
         if (id == -1) {
-            Habit habit = new Habit();
+            habit = new Habit();
             habit.setTitle(str);
             habit.setTime(time);
             habit.save();
         } else {
-            //未测试
-            Habit habit = new Habit(id);
+            habit = LitePal.find(Habit.class, id);
             habit.setTitle(str);
             habit.setTime(time);
-            habit.update(id);
+            habit.save();
         }
+        AlarmHelper.notifyHabit(context, habit);
         ToastUtil.showMsg(context, "成功添加自定义习惯！");
         finish();
     }

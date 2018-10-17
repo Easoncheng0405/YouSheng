@@ -9,6 +9,7 @@ import com.yousheng.yousheng.R;
 
 import com.yousheng.yousheng.calendarlib.CalendarView;
 import com.yousheng.yousheng.notify.NewItemActivity;
+import com.yousheng.yousheng.receiver.AlarmHelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,7 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         CalendarView calendarView;
-
+        //唤醒所有闹钟
+        AlarmHelper.notifyAllAlarm(this);
     }
 
 

@@ -22,9 +22,12 @@ import android.widget.TimePicker;
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.receiver.AlarmReceiver;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
+
+import org.litepal.LitePal;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -160,23 +163,21 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         }
 
 
-        long time = 0;
+        long time = -1;
         if (notify.getSwitchIsChecked()) {
             time = calendar.getTimeInMillis();
-            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(AlarmReceiver.NOTIFY_IN_TIME);
-            intent.putExtra("str", str);
-            PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            am.set(AlarmManager.RTC, time, sender);
         }
+        NewItem item;
         if (id == -1) {
-            NewItem item = new NewItem(str, time);
+            item = new NewItem(str, time);
             item.save();
         } else {
-            //未测试
-            NewItem item = new NewItem(id, str, time);
-            item.update(id);
+            item = LitePal.find(NewItem.class, id);
+            item.setContent(str);
+            item.setTime(time);
+            item.save();
         }
+        AlarmHelper.notifyNewItem(context, item);
         ToastUtil.showMsg(context, "成功添加提醒事项！");
         finish();
     }
