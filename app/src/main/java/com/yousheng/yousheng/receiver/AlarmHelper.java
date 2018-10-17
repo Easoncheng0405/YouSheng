@@ -27,8 +27,8 @@ import java.util.List;
 public class AlarmHelper {
 
     //到提醒时间了
-    private static final String ITEM_IN_TIME = "com.yousheng.item";
-    private static final String HABIT_IN_TIME = "com.yousheng.habit";
+    static final String ITEM_IN_TIME = "com.yousheng.item";
+    static final String HABIT_IN_TIME = "com.yousheng.habit";
     private static final long DAY = 24 * 60 * 60 * 1000;
 
     //依次打开所有闹钟，PendingIntent.FLAG_CANCEL_CURRENT会取消掉已有闹钟重新设置

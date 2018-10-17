@@ -20,27 +20,23 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (intent.getAction() == null)
             return;
         //收到开机，网络切换广播，打开所有闹钟
-        Log.d("onReceive", "intent aciton = "+intent.getAction());
+        Log.d("AlarmReceiver", "intent aciton = " + intent.getAction());
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) || intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
             AlarmHelper.notifyAllAlarm(context);
         }
-        String action = intent.getAction();
         //自己人
-        if (action.contains("yousheng")) {
-            try {
-                String type = intent.getStringExtra("type");
-                long id = intent.getLongExtra("id", -1);
-                String str;
-                if (id == -1)
-                    return;
-                if (type.equals("item"))
-                    str = LitePal.find(NewItem.class, id).getContent();
-                else
-                    str = LitePal.find(Habit.class, id).getTitle();
-                ToastUtil.showMsg(context, "type = " + type + " ,id = " + id + " content = " + str);
-            } catch (Exception e) {
-                Log.e("AlarmReceiver", "onReceive exception", e);
-            }
+        switch (intent.getAction()) {
+            case AlarmHelper.HABIT_IN_TIME:
+                Habit habit = LitePal.find(Habit.class, (long) getResultCode());
+                Log.d("AlarmReceiver", "onReceive habit notify, id=" + habit.getId() + ",content=" + habit.getTitle());
+                break;
+            case AlarmHelper.ITEM_IN_TIME:
+                NewItem item = LitePal.find(NewItem.class, (long) getResultCode());
+                //提醒事项只提醒一次
+                item.setTime(-1);
+                item.save();
+                Log.d("AlarmReceiver", "onReceive item notify, id=" + item.getId() + ",content=" + item.getContent());
+                break;
         }
     }
 }
