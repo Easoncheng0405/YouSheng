@@ -45,6 +45,12 @@
 
         <receiver android:name=".receiver.AlarmReceiver">
             <intent-filter>
+                <action android:name="com.yousheng.item"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.yousheng.habit"/>
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
             <intent-filter>
