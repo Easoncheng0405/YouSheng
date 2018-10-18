@@ -210,4 +210,8 @@
 
     <!--备孕详情-->
     <string name="pregnant_check_item_detail">备孕比检项详情</string>
+
+    <!--设置-->
+    <string name="wechat_text_title">微信公众号</string>
+    <string name="wechat_text_content">请搜索：  "柚生" 并关注</string>
 </resources>

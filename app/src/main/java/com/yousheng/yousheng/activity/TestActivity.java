@@ -28,6 +28,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.habit).setOnClickListener(this);
         findViewById(R.id.holdDays).setOnClickListener(this);
         findViewById(R.id.btn_ready).setOnClickListener(this);
+        findViewById(R.id.btn_show_pop_up_window).setOnClickListener(this);
 
         //默认文案
         {
