@@ -1,11 +1,8 @@
 package com.yousheng.yousheng.habit;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,6 @@ import android.widget.TextView;
 
 import com.allen.library.SuperTextView;
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
 
@@ -152,7 +148,7 @@ public class HabitAdapter extends BaseAdapter {
         superTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (habit.getType() == HabitHelper.OFFICIAL) {
+                if (habit.isOfficial()) {
                     //官方的去详情页面
                     Intent intent = new Intent(context, HabitDetailActivity.class);
                     intent.putExtra("id", habit.getId());
@@ -170,37 +166,38 @@ public class HabitAdapter extends BaseAdapter {
         superTextView.getRightIconIV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (habit.getState() == HabitHelper.IN) {
-                    if (habit.getType() == HabitHelper.CUSTOM) {
-                        customIn.remove(habit);
-                        habit.setState(HabitHelper.OUT);
-                        ci--;
-                        customOut.add(habit);
-                        co++;
-                    } else {
+                if (habit.isRecord()) {
+                    if (habit.isOfficial()) {
                         officialIn.remove(habit);
-                        habit.setState(HabitHelper.OUT);
+                        habit.setRecord(false);
                         oi--;
                         officialOut.add(habit);
                         oo++;
+                    } else {
+                        customIn.remove(habit);
+                        habit.setRecord(false);
+                        ci--;
+                        customOut.add(habit);
+                        co++;
                     }
                 } else {
-                    if (habit.getType() == HabitHelper.CUSTOM) {
-                        customOut.remove(habit);
-                        habit.setState(HabitHelper.IN);
-                        co--;
-                        customIn.add(habit);
-                        ci++;
-                    } else {
+                    if (habit.isOfficial()) {
                         officialOut.remove(habit);
-                        habit.setState(HabitHelper.IN);
+                        habit.setRecord(true);
                         oo--;
                         officialIn.add(habit);
                         oi++;
+
+                    } else {
+                        customOut.remove(habit);
+                        habit.setRecord(true);
+                        co--;
+                        customIn.add(habit);
+                        ci++;
                     }
                 }
-                Habit h=LitePal.find(Habit.class,habit.getId());
-                h.setState(habit.getState());
+                Habit h = LitePal.find(Habit.class, habit.getId());
+                h.setRecord(habit.isRecord());
                 h.save();
                 notifyDataSetInvalidated();
             }

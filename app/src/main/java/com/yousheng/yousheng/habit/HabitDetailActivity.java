@@ -42,8 +42,8 @@ public class HabitDetailActivity extends AppCompatActivity {
         try {
             final Habit habit = LitePal.find(Habit.class, id);
             CommonTitleBar titleBar = findViewById(R.id.title);
-            titleBar.getLeftTextView().setText("  "+habit.getTitle());
-            String str = habit.getState() == HabitHelper.IN ? "移除" : "添加";
+            titleBar.getLeftTextView().setText("  " + habit.getTitle());
+            String str = habit.isRecord() ? "移除" : "添加";
             titleBar.getRightTextView().setText(str);
             SuperTextView superTextView = findViewById(R.id.ok);
             superTextView.setCenterString(str.equals("移除") ? "从首页移除" : "添加到首页");
@@ -127,12 +127,13 @@ public class HabitDetailActivity extends AppCompatActivity {
     }
 
     private void update(final Habit habit) {
-        if (habit.getState() == HabitHelper.IN)
-            habit.setState(HabitHelper.OUT);
+        if (habit.isRecord())
+            //只能这样置为false
+            habit.setToDefault("record");
         else
-            habit.setState(HabitHelper.IN);
+            habit.setRecord(true);
         Habit h = LitePal.find(Habit.class, habit.getId());
-        h.setState(habit.getState());
+        h.setRecord(habit.isRecord());
         h.setTime(notify.getSwitchIsChecked() ? calendar.getTimeInMillis() : 0);
         h.save();
     }

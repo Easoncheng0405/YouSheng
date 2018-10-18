@@ -12,7 +12,6 @@ import org.litepal.crud.LitePalSupport;
 public class NewItem extends LitePalSupport {
 
 
-    @Column(unique = true)
     private long id;
 
     //提醒事项内容

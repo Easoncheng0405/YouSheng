@@ -9,7 +9,7 @@ public class Record extends LitePalSupport {
     private long id;
     //打卡时间
     private long time;
-
+    //已经坚持的天数
     private int days;
 
     public long getId() {

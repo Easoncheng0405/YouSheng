@@ -3,8 +3,9 @@ package com.yousheng.yousheng.habit;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
@@ -34,6 +35,12 @@ public class HoldOnDays extends AppCompatActivity {
                 record();
             }
         });
+        CommonTitleBar titleBar = findViewById(R.id.title);
+        titleBar.getLeftTextView().setText("  " + habit.getTitle());
+        ((TextView) findViewById(R.id.title1)).setText(habit.getTitle());
+        if (habit.isOfficial())
+            ((TextView) findViewById(R.id.title2)).setText(habit.getTitle2());
+        ((TextView) findViewById(R.id.number)).setText(record.getDays());
     }
 
     //打卡
@@ -55,11 +62,12 @@ public class HoldOnDays extends AppCompatActivity {
             ToastUtil.showMsg(this, "今天已经打过卡了哦！");
             return;
         }
-
         //记录上次打卡时间
         record.setTime(millis);
         //打卡+1
         record.setDays(record.getDays() + 1);
         record.save();
+        //页面显示+1
+        ((TextView) findViewById(R.id.number)).setText(record.getDays());
     }
 }

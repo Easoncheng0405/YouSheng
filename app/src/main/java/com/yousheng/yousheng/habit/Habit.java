@@ -10,7 +10,6 @@ import java.util.Objects;
 //习惯
 public class Habit extends LitePalSupport {
 
-    @Column(unique = true)
     private long id;
 
     //标题
@@ -22,11 +21,14 @@ public class Habit extends LitePalSupport {
     //习惯的好处,官方习惯才有
     private String content;
 
-    //是否已加入打卡
-    private int state;
+    //已加入打卡?
+    private boolean record;
 
-    //官方习惯或自定义习惯
-    private int type;
+    //官方习惯?
+    private boolean official;
+
+    //优生打卡?
+    private boolean youSheng;
 
     //时间
     @Column(defaultValue = "-1")
@@ -68,20 +70,28 @@ public class Habit extends LitePalSupport {
         this.content = content;
     }
 
-    public int getState() {
-        return state;
+    public boolean isRecord() {
+        return record;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setRecord(boolean record) {
+        this.record = record;
     }
 
-    public int getType() {
-        return type;
+    public boolean isOfficial() {
+        return official;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setOfficial(boolean official) {
+        this.official = official;
+    }
+
+    public boolean isYouSheng() {
+        return youSheng;
+    }
+
+    public void setYouSheng(boolean youSheng) {
+        this.youSheng = youSheng;
     }
 
     public long getTime() {

@@ -8,18 +8,6 @@ import java.util.List;
 
 public class HabitHelper {
 
-    //官方
-    public static final int OFFICIAL = 0;
-    //自定义
-    public static final int CUSTOM = 1;
-
-    //已加入打卡
-    public static final int IN = 0;
-    //未加入打卡
-    public static final int OUT = 1;
-
-
-
     enum HabitState {
         OFFICIAL_IN,
         OFFICIAL_OUT,
@@ -29,26 +17,23 @@ public class HabitHelper {
 
     //返回官方的所有四种状态下的habit数组
     public static HashMap<HabitState, List<Habit>> getAllHabitInState(List<Habit> habits) {
-
         List<Habit> officialIn = new ArrayList<>();
         List<Habit> officialOut = new ArrayList<>();
         List<Habit> customIn = new ArrayList<>();
         List<Habit> customOut = new ArrayList<>();
-
         for (Habit habit : habits) {
-            if (habit.getState() == IN) {
-                if (habit.getType() == OFFICIAL)
+            if (habit.isRecord()) {
+                if (habit.isOfficial())
                     officialIn.add(habit);
-                if (habit.getType() == CUSTOM)
+                else
                     customIn.add(habit);
             } else {
-                if (habit.getType() == OFFICIAL)
+                if (habit.isOfficial())
                     officialOut.add(habit);
-                if (habit.getType() == CUSTOM)
+                else
                     customOut.add(habit);
             }
         }
-
         HashMap<HabitState, List<Habit>> map = new HashMap<>();
         map.put(HabitState.OFFICIAL_IN, officialIn);
         map.put(HabitState.OFFICIAL_OUT, officialOut);

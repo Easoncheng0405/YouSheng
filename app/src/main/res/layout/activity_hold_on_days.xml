@@ -71,6 +71,20 @@
             </RelativeLayout>
 
             <com.allen.library.SuperTextView
+                android:id="@+id/time"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                stv:sRightIconRes="@mipmap/arrow_right"
+                stv:sShapeCornersRadius="3dp"
+                stv:sShapeStrokeColor="@color/gray"
+                stv:sShapeStrokeWidth="0.3dp"
+                stv:sUseShape="true" />
+
+            <com.allen.library.SuperTextView
                 android:id="@+id/notify"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -96,15 +110,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:text="补充叶酸"
+                android:id="@+id/habit_title"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="第一，会让人精神变好，晚间人体会进行排毒跟修养，因此早睡第二天才会充满活力，精神状态自然是极好的"
+                android:id="@+id/habit_title2"
                 android:textColor="@color/Drakgray"
                 android:textSize="20sp" />
         </LinearLayout>
