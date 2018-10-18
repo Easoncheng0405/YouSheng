@@ -22,9 +22,6 @@ public class Habit extends LitePalSupport {
     //习惯的好处,官方习惯才有
     private String content;
 
-    //已打卡天数
-    private int days;
-
     //是否已加入打卡
     private int state;
 
@@ -34,8 +31,6 @@ public class Habit extends LitePalSupport {
     //时间
     @Column(defaultValue = "-1")
     private long time;
-
-    private int notify;
 
     public Habit(long id) {
         this.id = id;
@@ -73,14 +68,6 @@ public class Habit extends LitePalSupport {
         this.content = content;
     }
 
-    public int getDays() {
-        return days;
-    }
-
-    public void setDays(int days) {
-        this.days = days;
-    }
-
     public int getState() {
         return state;
     }
@@ -116,19 +103,6 @@ public class Habit extends LitePalSupport {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Habit{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", title2='" + title2 + '\'' +
-                ", content='" + content + '\'' +
-                ", days=" + days +
-                ", state=" + state +
-                ", type=" + type +
-                '}';
     }
 
 
