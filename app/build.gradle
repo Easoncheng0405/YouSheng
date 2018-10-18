@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.yousheng.yousheng"
         minSdkVersion 19
-        targetSdkVersion 19
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,6 +15,12 @@ android {
             }
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false

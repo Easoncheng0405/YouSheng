@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PregnantCheckDetailActivity">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        stv:fillStatusBar="true"
+        stv:leftDrawable="@drawable/back"
+        stv:leftDrawablePadding="25dp"
+        stv:leftText="@string/pregnant_check_item_detail"
+        stv:leftTextColor="@color/white"
+        stv:leftTextSize="20sp"
+        stv:leftType="textView"
+        stv:statusBarColor="@color/colorPrimaryDark"
+        stv:titleBarColor="@color/colorPrimary"
+        stv:titleBarHeight="60dp" />
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginEnd="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="27dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+</RelativeLayout>

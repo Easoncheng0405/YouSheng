@@ -42,24 +42,29 @@
         <activity android:name=".activity.MenseManagementActivity" />
         <activity android:name=".habit.HabitActivity" />
         <activity android:name=".habit.HabitDetailActivity" />
-        <activity android:name=".habit.HoldOnDays"/>
+        <activity android:name=".habit.HoldOnDays" />
 
         <receiver android:name=".receiver.AlarmReceiver">
             <intent-filter>
-                <action android:name="com.yousheng.item"/>
+                <action android:name="com.yousheng.item" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.yousheng.habit"/>
+                <action android:name="com.yousheng.habit" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".activity.ReadyActivity" />
+        <activity android:name=".activity.PregnantCheckActivity" />
+        <activity android:name=".activity.PregnantCheckDetailActivity"></activity>
     </application>
 
 </manifest>

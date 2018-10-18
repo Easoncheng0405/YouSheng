@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PregnantCheckActivity">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        stv:fillStatusBar="true"
+        stv:leftDrawable="@drawable/back"
+        stv:leftDrawablePadding="25dp"
+        stv:leftText="@string/pregnant_check"
+        stv:leftTextColor="@color/white"
+        stv:leftTextSize="20sp"
+        stv:leftType="textView"
+        stv:statusBarColor="@color/colorPrimaryDark"
+        stv:titleBarColor="@color/colorPrimary"
+        stv:titleBarHeight="60dp" />
+</RelativeLayout>
