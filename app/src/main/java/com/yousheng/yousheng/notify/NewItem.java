@@ -17,8 +17,11 @@ public class NewItem extends LitePalSupport {
     //提醒事项内容
     private String content;
 
-    //提醒时间戳(未设置为0)
+    //提醒时间戳
     private long time;
+
+    //提醒?
+    private boolean notify;
 
     NewItem(String content, long time) {
         this.content = content;
@@ -51,6 +54,14 @@ public class NewItem extends LitePalSupport {
 
     public long getId() {
         return id;
+    }
+
+    public boolean isNotify() {
+        return notify;
+    }
+
+    public void setNotify(boolean notify) {
+        this.notify = notify;
     }
 
     @Override

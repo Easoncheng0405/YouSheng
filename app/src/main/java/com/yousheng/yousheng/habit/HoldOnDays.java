@@ -27,8 +27,10 @@ public class HoldOnDays extends AppCompatActivity {
         habit = LitePal.find(Habit.class, id);
         record = LitePal.find(Record.class, id);
         //必须传入一个合法的并且从数据库查到此习惯
-        if (id == -1 || habit == null)
+        if (id == -1 || habit == null) {
             finish();
+            return;
+        }
         findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -29,6 +29,8 @@ public class HabitDetailActivity extends AppCompatActivity {
     private SimpleDateFormat format = new SimpleDateFormat("HH:mm");
     private TimePickerDialog timePickerDialog;
 
+    private boolean isNotify;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +52,12 @@ public class HabitDetailActivity extends AppCompatActivity {
 
             time = findViewById(R.id.time);
             notify = findViewById(R.id.notify);
+            isNotify = habit.isNotify();
             //初始化数据
-            if (habit.getTime() > 0) {
-                calendar.setTimeInMillis(habit.getTime());
+            calendar.setTimeInMillis(habit.getTime());
+            time.setLeftString("每天" + format.format(calendar.getTime()));
+            if (habit.isNotify()) {
                 time.setVisibility(View.VISIBLE);
-                time.setLeftString("每天" + format.format(calendar.getTime()));
                 notify.setSwitchIsChecked(true);
             }
             time.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +88,7 @@ public class HabitDetailActivity extends AppCompatActivity {
             notify.setSwitchCheckedChangeListener(new SuperTextView.OnSwitchCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    isNotify = b;
                     if (b) {
                         time.setVisibility(View.VISIBLE);
                     } else {
@@ -93,7 +97,6 @@ public class HabitDetailActivity extends AppCompatActivity {
 
                 }
             });
-
 
             TextView title1 = findViewById(R.id.title1);
             TextView title2 = findViewById(R.id.title2);
@@ -126,15 +129,11 @@ public class HabitDetailActivity extends AppCompatActivity {
         }
     }
 
-    private void update(final Habit habit) {
-        if (habit.isRecord())
-            //只能这样置为false
-            habit.setToDefault("record");
-        else
-            habit.setRecord(true);
+    private void update(final Habit habit) { ;
         Habit h = LitePal.find(Habit.class, habit.getId());
         h.setRecord(habit.isRecord());
-        h.setTime(notify.getSwitchIsChecked() ? calendar.getTimeInMillis() : 0);
+        h.setTime(calendar.getTimeInMillis());
+        h.setNotify(isNotify);
         h.save();
     }
 }

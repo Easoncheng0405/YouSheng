@@ -38,6 +38,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
     private long id = -1;
 
     private Context context;
+    private boolean isNotify = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +61,21 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
 
         //初始化数据
         if (id != -1) {
-            content.setText(intent.getStringExtra("content"));
             Habit habit = LitePal.find(Habit.class, id);
+            content.setText(habit.getTitle());
+            ToastUtil.showMsg(context, "" + habit.getTime());
             if (habit.getTime() > 0) {
                 calendar.setTimeInMillis(habit.getTime());
+            }
+            time.setLeftString("每天" + format.format(calendar.getTime()));
+            if (habit.isNotify()) {
                 time.setVisibility(View.VISIBLE);
-                time.setLeftString("每天" + format.format(calendar.getTime()));
                 notify.setSwitchIsChecked(true);
             }
+            isNotify = habit.isNotify();
+        } else {
+            finish();
+            return;
         }
 
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
@@ -97,6 +105,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         notify.setSwitchCheckedChangeListener(new SuperTextView.OnSwitchCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                isNotify = b;
                 if (b) {
                     time.setVisibility(View.VISIBLE);
                 } else {
@@ -135,22 +144,22 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
-        long time = -1;
-        if (notify.getSwitchIsChecked()) {
-            if (calendar.getTimeInMillis() < System.currentTimeMillis())
-                calendar.add(Calendar.DATE, 1);
-            time = calendar.getTimeInMillis();
-        }
+        if (calendar.getTimeInMillis() < System.currentTimeMillis())
+            calendar.add(Calendar.DATE, 1);
+        long time = calendar.getTimeInMillis();
+
         Habit habit;
         if (id == -1) {
             habit = new Habit();
             habit.setTitle(str);
             habit.setTime(time);
+            habit.setNotify(isNotify);
             habit.save();
         } else {
             habit = LitePal.find(Habit.class, id);
             habit.setTitle(str);
             habit.setTime(time);
+            habit.setNotify(isNotify);
             habit.save();
         }
         AlarmHelper.notifyHabit(context, habit);

@@ -35,11 +35,11 @@ public class AlarmHelper {
     public static void notifyAllAlarm(Context context) {
         List<NewItem> items = LitePal.findAll(NewItem.class);
         for (NewItem item : items)
-            if (item.getTime() > 0)
+            if (item.getTime() > 0 && item.isNotify())
                 notifyNewItem(context, item);
         List<Habit> habits = LitePal.findAll(Habit.class);
         for (Habit habit : habits)
-            if (habit.getTime() > 0)
+            if (habit.getTime() > 0 && habit.isNotify())
                 notifyHabit(context, habit);
     }
 

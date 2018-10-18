@@ -33,7 +33,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             case AlarmHelper.ITEM_IN_TIME:
                 NewItem item = LitePal.find(NewItem.class, (long) getResultCode());
                 //提醒事项只提醒一次
-                item.setTime(-1);
+                item.setNotify(false);
                 item.save();
                 Log.d("AlarmReceiver", "onReceive item notify, id=" + item.getId() + ",content=" + item.getContent());
                 break;

@@ -30,8 +30,10 @@ public class Habit extends LitePalSupport {
     //优生打卡?
     private boolean youSheng;
 
+    //提醒?
+    private boolean notify;
+
     //时间
-    @Column(defaultValue = "-1")
     private long time;
 
     public Habit(long id) {
@@ -92,6 +94,14 @@ public class Habit extends LitePalSupport {
 
     public void setYouSheng(boolean youSheng) {
         this.youSheng = youSheng;
+    }
+
+    public boolean isNotify() {
+        return notify;
+    }
+
+    public void setNotify(boolean notify) {
+        this.notify = notify;
     }
 
     public long getTime() {

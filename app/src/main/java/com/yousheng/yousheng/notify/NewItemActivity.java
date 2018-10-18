@@ -22,6 +22,7 @@ import android.widget.TimePicker;
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.receiver.AlarmReceiver;
 import com.yousheng.yousheng.uitl.ToastUtil;
@@ -48,12 +49,11 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     private EditText content;
 
     private Context context;
-
     private SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-
     private boolean legal = true;
-
     private long id = -1;
+
+    private boolean isNotify = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +94,21 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         id = intent.getLongExtra("id", -1);
         //初始化数据
         if (id != -1) {
-            content.setText(intent.getStringExtra("content"));
-            long l = intent.getLongExtra("time", 0);
-            if (l > 0) {
-                calendar.setTimeInMillis(l);
+            NewItem item = LitePal.find(NewItem.class, id);
+            if (item == null) {
+                ToastUtil.showMsg(context, "发生了一些错误，请联系客服！");
+                finish();
+                return;
+            }
+            isNotify = item.isNotify();
+            content.setText(item.getContent());
+            if (item.isNotify()) {
                 time.setVisibility(View.VISIBLE);
                 notify.setSwitchIsChecked(true);
+            }
+            long l = item.getTime();
+            if (l > 0) {
+                calendar.setTimeInMillis(l);
             }
         }
         time.setLeftString(format.format(calendar.getTime()));
@@ -129,6 +138,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         notify.setSwitchCheckedChangeListener(new SuperTextView.OnSwitchCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                isNotify = b;
                 if (b) {
                     time.setVisibility(View.VISIBLE);
                 } else {
@@ -163,18 +173,17 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         }
 
 
-        long time = -1;
-        if (notify.getSwitchIsChecked()) {
-            time = calendar.getTimeInMillis();
-        }
+        long time = calendar.getTimeInMillis();
         NewItem item;
         if (id == -1) {
             item = new NewItem(str, time);
+            item.setNotify(isNotify);
             item.save();
         } else {
             item = LitePal.find(NewItem.class, id);
             item.setContent(str);
             item.setTime(time);
+            item.setNotify(isNotify);
             item.save();
         }
         AlarmHelper.notifyNewItem(context, item);
