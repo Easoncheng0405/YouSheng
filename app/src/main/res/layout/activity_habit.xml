@@ -24,7 +24,6 @@
             stv:rightType="textView"
             stv:rightTextSize="20sp"
             stv:rightTextColor="@color/white"
-            stv:rightText="完成 "
             stv:fillStatusBar="true"
             stv:statusBarColor="@color/colorPrimaryDark"/>
         <EditText
@@ -74,7 +73,6 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         stv:sCenterTextColor="@color/white"
-        stv:sCenterTextString="完成"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeSelectorNormalColor="@color/colorPrimary"
         stv:sShapeSelectorPressedColor="@color/gray"

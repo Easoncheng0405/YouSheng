@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -26,7 +27,6 @@ public class HabitDetailActivity extends AppCompatActivity {
     private SuperTextView notify;
 
     private Calendar calendar = Calendar.getInstance(Locale.CHINA);
-    private SimpleDateFormat format = new SimpleDateFormat("HH:mm");
     private TimePickerDialog timePickerDialog;
 
     private boolean isNotify;
@@ -55,7 +55,7 @@ public class HabitDetailActivity extends AppCompatActivity {
             isNotify = habit.isNotify();
             //初始化数据
             calendar.setTimeInMillis(habit.getTime());
-            time.setLeftString("每天" + format.format(calendar.getTime()));
+            time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
             if (habit.isNotify()) {
                 time.setVisibility(View.VISIBLE);
                 notify.setSwitchIsChecked(true);
@@ -74,14 +74,14 @@ public class HabitDetailActivity extends AppCompatActivity {
                 }
             });
 
-            time.setLeftString("每天" + format.format(calendar.getTime()));
+            time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
 
             timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     calendar.set(Calendar.MINUTE, minute);
-                    time.setLeftString("每天" + format.format(calendar.getTime()));
+                    time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
                 }
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
@@ -129,9 +129,9 @@ public class HabitDetailActivity extends AppCompatActivity {
         }
     }
 
-    private void update(final Habit habit) { ;
+    private void update(final Habit habit) {
         Habit h = LitePal.find(Habit.class, habit.getId());
-        h.setRecord(habit.isRecord());
+        h.setRecord(!habit.isRecord());
         h.setTime(calendar.getTimeInMillis());
         h.setNotify(isNotify);
         h.save();

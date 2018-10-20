@@ -1,13 +1,12 @@
 package com.yousheng.yousheng.habit;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -17,12 +16,10 @@ import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.receiver.AlarmHelper;
-import com.yousheng.yousheng.receiver.AlarmReceiver;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -32,14 +29,12 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
     private EditText content;
     private SuperTextView time;
     private SuperTextView notify;
-
     private Calendar calendar = Calendar.getInstance(Locale.CHINA);
-    private SimpleDateFormat format = new SimpleDateFormat("HH:mm");
     private long id = -1;
 
     private Context context;
     private boolean isNotify = false;
-
+    private Habit habit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,29 +48,34 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         content = findViewById(R.id.content);
         time = findViewById(R.id.time);
         time.setOnClickListener(this);
-        time.setLeftString("每天" + format.format(calendar.getTime()));
-        CommonTitleBar titleBar = findViewById(R.id.title);
 
+        time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
+        CommonTitleBar titleBar = findViewById(R.id.title);
         Intent intent = getIntent();
         id = intent.getLongExtra("id", -1);
 
         //初始化数据
         if (id != -1) {
-            Habit habit = LitePal.find(Habit.class, id);
+            habit = LitePal.find(Habit.class, id);
             content.setText(habit.getTitle());
             ToastUtil.showMsg(context, "" + habit.getTime());
             if (habit.getTime() > 0) {
                 calendar.setTimeInMillis(habit.getTime());
             }
-            time.setLeftString("每天" + format.format(calendar.getTime()));
+            time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
             if (habit.isNotify()) {
                 time.setVisibility(View.VISIBLE);
                 notify.setSwitchIsChecked(true);
             }
             isNotify = habit.isNotify();
+            String str = habit.isRecord() ? "移除" : "添加";
+            SuperTextView superTextView = findViewById(R.id.ok);
+            superTextView.setCenterString(str.equals("移除") ? "从首页移除" : "添加到首页");
+            titleBar.getRightTextView().setText(str);
         } else {
-            finish();
-            return;
+            SuperTextView superTextView = findViewById(R.id.ok);
+            superTextView.setCenterString("添加到首页");
+            titleBar.getRightTextView().setText("添加");
         }
 
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
@@ -97,7 +97,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
-                time.setLeftString("每天" + format.format(calendar.getTime()));
+                time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
@@ -112,6 +112,12 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                     time.setVisibility(View.GONE);
                 }
 
+            }
+        });
+        notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
             }
         });
     }
@@ -163,7 +169,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
             habit.save();
         }
         AlarmHelper.notifyHabit(context, habit);
-        ToastUtil.showMsg(context, "成功添加自定义习惯！");
+        ToastUtil.showMsg(context, "编辑已保存！");
         finish();
     }
 }

@@ -14,6 +14,8 @@ import org.litepal.LitePal;
 import java.util.Calendar;
 import java.util.Locale;
 
+
+//打卡activity
 public class HoldOnDays extends AppCompatActivity {
 
     private Habit habit;
@@ -50,9 +52,11 @@ public class HoldOnDays extends AppCompatActivity {
         long millis = System.currentTimeMillis();
         //首次打卡
         if (record == null) {
+            record=new Record();
             record.setId(habit.getId());
             record.setDays(1);
             record.setTime(millis);
+            record.save();
             return;
         }
         Calendar db = Calendar.getInstance(Locale.CHINA);

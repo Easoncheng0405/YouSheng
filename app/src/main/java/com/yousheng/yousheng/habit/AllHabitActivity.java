@@ -8,10 +8,10 @@ import android.widget.ListView;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllHabitActivity extends AppCompatActivity {
@@ -39,8 +39,12 @@ public class AllHabitActivity extends AppCompatActivity {
             }
         });
 
-        ListView habits = findViewById(R.id.habits);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ListView habits = findViewById(R.id.habits);
         List<Habit> list = LitePal.findAll(Habit.class);
         HabitAdapter adapter = new HabitAdapter(this, HabitHelper.getAllHabitInState(list));
         habits.setAdapter(adapter);

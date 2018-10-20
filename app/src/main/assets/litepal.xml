@@ -10,5 +10,7 @@
         <!--这里放表-->
         <mapping class="com.yousheng.yousheng.notify.NewItem"/>
         <mapping class="com.yousheng.yousheng.habit.Habit"/>
+        <mapping class="com.yousheng.yousheng.habit.Record"/>
+        <mapping class="com.yousheng.yousheng.habit.Weight"/>
     </list>
 </litepal>

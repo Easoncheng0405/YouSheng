@@ -27,7 +27,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        stv:sLeftTextString="账号与安全"
+        stv:sLeftTextString="经期设置"
         stv:sRightIconRes="@mipmap/arrow_right"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
@@ -48,6 +48,8 @@
         stv:sUseShape="true" />
 
     <com.allen.library.SuperTextView
+        android:onClick="onClick"
+        android:id="@+id/bussiness"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -61,6 +63,8 @@
         stv:sUseShape="true" />
 
     <com.allen.library.SuperTextView
+        android:onClick="onClick"
+        android:id="@+id/wechat"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.WeightActivity">
+    tools:context=".habit.WeightActivity">
 
     <RelativeLayout
         android:layout_marginRight="30dp"
@@ -19,12 +19,12 @@
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="50"
+            android:text="110.0"
             android:textSize="50sp"
             android:textColor="@color/black"/>
         <TextView
             android:layout_marginBottom="10sp"
-            android:text="公斤"
+            android:text="斤"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:layout_toRightOf="@id/number"
@@ -37,17 +37,17 @@
         android:id="@+id/ruler"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:gv_maxValue="150"
-        app:gv_minValue="0"
+        app:gv_currentValue="110.0"
+        app:gv_maxValue="300"
+        app:gv_minValue="50"
         app:zjun_indicatorLineColor="@color/colorAccent"
         app:zjun_textSize="18sp" />
-
-    <lecho.lib.hellocharts.view.LineChartView
-        android:layout_marginTop="10dp"
-        android:layout_margin="10dp"
-        android:id="@+id/chart"
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="150dp" />
 
 
 </LinearLayout>

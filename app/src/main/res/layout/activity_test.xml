@@ -64,10 +64,5 @@
         android:layout_height="wrap_content"
         android:text="@string/pregnant_check" />
 
-    <Button
-        android:id="@+id/btn_show_pop_up_window"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="展示弹框" />
 
 </LinearLayout>

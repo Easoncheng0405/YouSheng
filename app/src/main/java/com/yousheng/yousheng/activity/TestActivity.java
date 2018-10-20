@@ -3,17 +3,15 @@ package com.yousheng.yousheng.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.habit.Habit;
-import com.yousheng.yousheng.habit.HabitHelper;
 import com.yousheng.yousheng.habit.HoldOnDays;
+import com.yousheng.yousheng.habit.WeightActivity;
 import com.yousheng.yousheng.notify.NewItemActivity;
-import com.yousheng.yousheng.view.WeChatPopUpWindow;
 
 import org.litepal.LitePal;
 
@@ -30,7 +28,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.habit).setOnClickListener(this);
         findViewById(R.id.holdDays).setOnClickListener(this);
         findViewById(R.id.btn_ready).setOnClickListener(this);
-        findViewById(R.id.btn_show_pop_up_window).setOnClickListener(this);
 
         //默认文案
         {
@@ -96,10 +93,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_ready:
                 startActivity(new Intent(this, ReadyActivity.class));
-                break;
-            case R.id.btn_show_pop_up_window:
-                WeChatPopUpWindow window = new WeChatPopUpWindow(TestActivity.this);
-                window.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
                 break;
         }
     }
