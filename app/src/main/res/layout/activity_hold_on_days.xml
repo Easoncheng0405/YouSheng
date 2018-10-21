@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
             <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-                android:id="@+id/title"
+                android:id="@+id/mainTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 stv:fillStatusBar="true"
@@ -71,7 +71,7 @@
             </RelativeLayout>
 
             <com.allen.library.SuperTextView
-                android:id="@+id/time"
+                android:id="@+id/clockTime"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

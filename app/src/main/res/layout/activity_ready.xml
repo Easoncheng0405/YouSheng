@@ -7,7 +7,7 @@
     tools:context=".activity.ReadyActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-        android:id="@+id/title"
+        android:id="@+id/mainTitle"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         stv:fillStatusBar="true"
@@ -28,7 +28,7 @@
         android:id="@+id/et_ready"
         android:layout_width="match_parent"
         android:layout_height="187dp"
-        android:layout_below="@id/title"
+        android:layout_below="@id/mainTitle"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"

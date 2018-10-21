@@ -57,10 +57,10 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         //初始化数据
         if (id != -1) {
             habit = LitePal.find(Habit.class, id);
-            content.setText(habit.getTitle());
-            ToastUtil.showMsg(context, "" + habit.getTime());
-            if (habit.getTime() > 0) {
-                calendar.setTimeInMillis(habit.getTime());
+            content.setText(habit.getMainTitle());
+            ToastUtil.showMsg(context, "" + habit.getClockTime());
+            if (habit.getClockTime() > 0) {
+                calendar.setTimeInMillis(habit.getClockTime());
             }
             time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
             if (habit.isNotify()) {
@@ -68,7 +68,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                 notify.setSwitchIsChecked(true);
             }
             isNotify = habit.isNotify();
-            String str = habit.isRecord() ? "移除" : "添加";
+            String str = habit.isNeedSign() ? "移除" : "添加";
             SuperTextView superTextView = findViewById(R.id.ok);
             superTextView.setCenterString(str.equals("移除") ? "从首页移除" : "添加到首页");
             titleBar.getRightTextView().setText(str);
@@ -157,14 +157,14 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         Habit habit;
         if (id == -1) {
             habit = new Habit();
-            habit.setTitle(str);
-            habit.setTime(time);
+            habit.setMainTitle(str);
+            habit.setClockTime(time);
             habit.setNotify(isNotify);
             habit.save();
         } else {
             habit = LitePal.find(Habit.class, id);
-            habit.setTitle(str);
-            habit.setTime(time);
+            habit.setMainTitle(str);
+            habit.setClockTime(time);
             habit.setNotify(isNotify);
             habit.save();
         }

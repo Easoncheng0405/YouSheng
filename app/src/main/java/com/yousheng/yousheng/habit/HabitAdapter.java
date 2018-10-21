@@ -106,8 +106,8 @@ public class HabitAdapter extends BaseAdapter {
                     textView.setVisibility(View.VISIBLE);
                     textView.setText("未添加");
                 }
-                superTextView.setLeftString(habit.getTitle());
-                superTextView.setLeftBottomString(habit.getTitle2());
+                superTextView.setLeftString(habit.getMainTitle());
+                superTextView.setLeftBottomString(habit.getSubTitle());
                 superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.add_red));
                 superTextView.getRightIconIV().setPadding(40, 40, 22, 40);
                 break;
@@ -116,8 +116,8 @@ public class HabitAdapter extends BaseAdapter {
                     textView.setVisibility(View.VISIBLE);
                     textView.setText("已添加");
                 }
-                superTextView.setLeftString(habit.getTitle());
-                superTextView.setLeftBottomString(habit.getTitle2());
+                superTextView.setLeftString(habit.getMainTitle());
+                superTextView.setLeftBottomString(habit.getSubTitle());
                 superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.dev_red));
                 superTextView.getRightIconIV().setPadding(40, 40, 22, 40);
                 break;
@@ -126,7 +126,7 @@ public class HabitAdapter extends BaseAdapter {
                     textView.setVisibility(View.VISIBLE);
                     textView.setText("自定义未添加");
                 }
-                superTextView.setLeftString(habit.getTitle());
+                superTextView.setLeftString(habit.getMainTitle());
                 superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.add_red));
                 superTextView.setPadding(0, 20, 0, 20);
                 superTextView.getRightIconIV().setPadding(40, 35, 35, 35);
@@ -137,7 +137,7 @@ public class HabitAdapter extends BaseAdapter {
                     textView.setVisibility(View.VISIBLE);
                     textView.setText("已添加");
                 }
-                superTextView.setLeftString(habit.getTitle());
+                superTextView.setLeftString(habit.getMainTitle());
                 superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.dev_red));
                 superTextView.setPadding(0, 35, 0, 35);
                 superTextView.getRightIconIV().setPadding(40, 40, 40, 40);
@@ -166,16 +166,16 @@ public class HabitAdapter extends BaseAdapter {
         superTextView.getRightIconIV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (habit.isRecord()) {
+                if (habit.isNeedSign()) {
                     if (habit.isOfficial()) {
                         officialIn.remove(habit);
-                        habit.setRecord(false);
+                        habit.setNeedSign(false);
                         oi--;
                         officialOut.add(habit);
                         oo++;
                     } else {
                         customIn.remove(habit);
-                        habit.setRecord(false);
+                        habit.setNeedSign(false);
                         ci--;
                         customOut.add(habit);
                         co++;
@@ -183,21 +183,21 @@ public class HabitAdapter extends BaseAdapter {
                 } else {
                     if (habit.isOfficial()) {
                         officialOut.remove(habit);
-                        habit.setRecord(true);
+                        habit.setNeedSign(true);
                         oo--;
                         officialIn.add(habit);
                         oi++;
 
                     } else {
                         customOut.remove(habit);
-                        habit.setRecord(true);
+                        habit.setNeedSign(true);
                         co--;
                         customIn.add(habit);
                         ci++;
                     }
                 }
                 Habit h = LitePal.find(Habit.class, habit.getId());
-                h.setRecord(habit.isRecord());
+                h.setNeedSign(habit.isNeedSign());
                 h.save();
                 notifyDataSetInvalidated();
             }

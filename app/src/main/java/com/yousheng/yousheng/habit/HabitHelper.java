@@ -22,7 +22,7 @@ public class HabitHelper {
         List<Habit> customIn = new ArrayList<>();
         List<Habit> customOut = new ArrayList<>();
         for (Habit habit : habits) {
-            if (habit.isRecord()) {
+            if (habit.isNeedSign()) {
                 if (habit.isOfficial())
                     officialIn.add(habit);
                 else

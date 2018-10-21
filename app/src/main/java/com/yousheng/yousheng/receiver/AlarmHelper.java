@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.notify.NewItem;
-import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
 
@@ -39,7 +38,7 @@ public class AlarmHelper {
                 notifyNewItem(context, item);
         List<Habit> habits = LitePal.findAll(Habit.class);
         for (Habit habit : habits)
-            if (habit.getTime() > 0 && habit.isNotify())
+            if (habit.getClockTime() > 0 && habit.isNotify())
                 notifyHabit(context, habit);
     }
 
@@ -64,7 +63,7 @@ public class AlarmHelper {
             intent.putExtra("id", habit.getId());
             intent.putExtra("type", "habit");
             PendingIntent sender = PendingIntent.getBroadcast(context, (int) habit.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            am.setRepeating(AlarmManager.RTC_WAKEUP, habit.getTime(), DAY, sender);
+            am.setRepeating(AlarmManager.RTC_WAKEUP, habit.getClockTime(), DAY, sender);
         } catch (Exception e) {
             Log.e("AlarmHelper", "notifyHabit exception", e);
         }

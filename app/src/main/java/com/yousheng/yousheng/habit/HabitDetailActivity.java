@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
@@ -17,10 +18,13 @@ import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * 打卡详情页面
+ * */
+@Route(path = "/habitdetail/activity")
 public class HabitDetailActivity extends AppCompatActivity {
 
     private SuperTextView time;
@@ -44,8 +48,8 @@ public class HabitDetailActivity extends AppCompatActivity {
         try {
             final Habit habit = LitePal.find(Habit.class, id);
             CommonTitleBar titleBar = findViewById(R.id.title);
-            titleBar.getLeftTextView().setText("  " + habit.getTitle());
-            String str = habit.isRecord() ? "移除" : "添加";
+            titleBar.getLeftTextView().setText("  " + habit.getMainTitle());
+            String str = habit.isNeedSign() ? "移除" : "添加";
             titleBar.getRightTextView().setText(str);
             SuperTextView superTextView = findViewById(R.id.ok);
             superTextView.setCenterString(str.equals("移除") ? "从首页移除" : "添加到首页");
@@ -54,7 +58,7 @@ public class HabitDetailActivity extends AppCompatActivity {
             notify = findViewById(R.id.notify);
             isNotify = habit.isNotify();
             //初始化数据
-            calendar.setTimeInMillis(habit.getTime());
+            calendar.setTimeInMillis(habit.getClockTime());
             time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
             if (habit.isNotify()) {
                 time.setVisibility(View.VISIBLE);
@@ -100,8 +104,8 @@ public class HabitDetailActivity extends AppCompatActivity {
 
             TextView title1 = findViewById(R.id.title1);
             TextView title2 = findViewById(R.id.title2);
-            title1.setText(habit.getTitle());
-            title2.setText(habit.getTitle2());
+            title1.setText(habit.getMainTitle());
+            title2.setText(habit.getSubTitle());
             superTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -131,8 +135,8 @@ public class HabitDetailActivity extends AppCompatActivity {
 
     private void update(final Habit habit) {
         Habit h = LitePal.find(Habit.class, habit.getId());
-        h.setRecord(!habit.isRecord());
-        h.setTime(calendar.getTimeInMillis());
+        h.setNeedSign(!habit.isNeedSign());
+        h.setClockTime(calendar.getTimeInMillis());
         h.setNotify(isNotify);
         h.save();
     }

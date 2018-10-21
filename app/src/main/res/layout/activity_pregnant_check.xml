@@ -7,7 +7,7 @@
     tools:context=".activity.PregnantCheckActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-        android:id="@+id/title"
+        android:id="@+id/mainTitle"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         stv:fillStatusBar="true"

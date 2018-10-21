@@ -12,16 +12,19 @@ public class Habit extends LitePalSupport {
     private long id;
 
     //标题
-    private String title;
+    private String mainTitle;
 
     //副标题,官方习惯才有
-    private String title2;
+    private String subTitle;
 
     //习惯的好处,官方习惯才有
     private String content;
 
-    //已加入打卡?
-    private boolean record;
+    //是否需要打卡?
+    private boolean needSign;
+
+    //是否已经打卡
+    private boolean isSigned;
 
     //官方习惯?
     private boolean official;
@@ -32,35 +35,65 @@ public class Habit extends LitePalSupport {
     //提醒?
     private boolean notify;
 
-    //时间
-    private long time;
+    //闹钟提醒时间
+    private long clockTime;
+
+    //坚持的时间
+    private int keepDays;
+
+    //打卡时间
+    private long signTime;
+
+    public boolean isSigned() {
+        return isSigned;
+    }
+
+    public void setSigned(boolean signed) {
+        isSigned = signed;
+    }
+
+    public long getSignTime() {
+        return signTime;
+    }
+
+    public void setSignTime(long signTime) {
+        this.signTime = signTime;
+    }
+
+    public int getKeepDays() {
+        return keepDays;
+    }
+
+    public void setKeepDays(int keepDays) {
+        this.keepDays = keepDays;
+    }
 
     public Habit(long id) {
         this.id = id;
     }
 
     public Habit() {
-        this.id = LitePal.count(Habit.class) + 1;
+//        this.id = LitePal.count(Habit.class) + 1;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getMainTitle() {
+        return mainTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMainTitle(String mainTitle) {
+        this.mainTitle = mainTitle;
     }
 
-    public String getTitle2() {
-        return title2;
+    public String getSubTitle() {
+        return subTitle;
     }
 
-    public void setTitle2(String title2) {
-        this.title2 = title2;
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     public String getContent() {
@@ -71,12 +104,12 @@ public class Habit extends LitePalSupport {
         this.content = content;
     }
 
-    public boolean isRecord() {
-        return record;
+    public boolean isNeedSign() {
+        return needSign;
     }
 
-    public void setRecord(boolean record) {
-        this.record = record;
+    public void setNeedSign(boolean needSign) {
+        this.needSign = needSign;
     }
 
     public boolean isOfficial() {
@@ -103,12 +136,12 @@ public class Habit extends LitePalSupport {
         this.notify = notify;
     }
 
-    public long getTime() {
-        return time;
+    public long getClockTime() {
+        return clockTime;
     }
 
-    public void setTime(long time) {
-        this.time = time;
+    public void setClockTime(long clockTime) {
+        this.clockTime = clockTime;
     }
 
     @Override

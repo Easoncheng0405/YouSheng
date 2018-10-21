@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.notify.NewItem;
-import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
 
@@ -28,7 +27,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         switch (intent.getAction()) {
             case AlarmHelper.HABIT_IN_TIME:
                 Habit habit = LitePal.find(Habit.class, (long) getResultCode());
-                Log.d("AlarmReceiver", "onReceive habit notify, id=" + habit.getId() + ",content=" + habit.getTitle());
+                Log.d("AlarmReceiver", "onReceive habit notify, id=" + habit.getId() + ",content=" + habit.getMainTitle());
                 break;
             case AlarmHelper.ITEM_IN_TIME:
                 NewItem item = LitePal.find(NewItem.class, (long) getResultCode());

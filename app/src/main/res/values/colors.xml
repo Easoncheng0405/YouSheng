@@ -15,7 +15,7 @@
     <color name="calendar_pailuan_duration">#F8BBD0</color>
     <color name="calendar_normal">#ffffff</color>
 
-    <!--title bar-->
+    <!--mainTitle bar-->
     <color name="title_bar_background">#E91E63</color>
     <color name="text_color_red_theme">#E91E63</color>
 

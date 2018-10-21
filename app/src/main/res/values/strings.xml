@@ -214,4 +214,10 @@
     <!--设置-->
     <string name="wechat_text_title">微信公众号</string>
     <string name="wechat_text_content">请搜索：  "柚生" 并关注</string>
+
+    <!--优生打卡 & 代办事项-->
+    <string name="good_lifet_sign">优生打卡</string>
+    <string name="add_new_habbit">添加新习惯</string>
+    <string name="to_do_list">代办事项</string>
+    <string name="add_new_item">添加新事项</string>
 </resources>

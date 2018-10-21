@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_rv_item_unseleceted"
+    android:padding="18dp">
+
+    <TextView
+        android:id="@+id/tv_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="每天早上七点之前起床" />
+
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_main_title"
+        android:layout_marginTop="10dp"
+        tools:text="早起的鸟儿有虫吃" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:shadowColor="@color/text_color_red_theme" />
+
+    <TextView
+        android:id="@+id/tv_keep_on_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/checkbox"
+        android:layout_alignTop="@id/checkbox"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@id/checkbox"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="已坚持了33天" />
+
+
+    <TextView
+        android:id="@+id/tv_clock_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_sub_title"
+        android:layout_marginTop="18dp"
+        android:drawableStart="@drawable/clock"
+        android:gravity="center_vertical"
+        android:textColor="@color/gray"
+        android:textSize="13sp"
+        tools:text="   07:00" />
+
+</RelativeLayout>
