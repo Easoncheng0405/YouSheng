@@ -73,7 +73,7 @@ public class Habit extends LitePalSupport {
     }
 
     public Habit() {
-//        this.id = LitePal.count(Habit.class) + 1;
+
     }
 
     public long getId() {
