@@ -117,6 +117,7 @@ public class WeightActivity extends AppCompatActivity {
 
     //初始化体重折线图
     private void initLineChart(final List<Weight> list) {
+
         if (list.size() == 0) {
             //无数据时显示的文字
             lineChart.setNoDataText("暂无数据，快去记录体重吧！");
@@ -129,7 +130,7 @@ public class WeightActivity extends AppCompatActivity {
         //设置数据
         List<Entry> entries = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            entries.add(new Entry(i, list.get(i).getWeight()));
+            entries.add(new Entry(i * 1.0f, list.get(i).getWeight()));
         }
         //一个LineDataSet就是一条线
         LineDataSet lineDataSet = new LineDataSet(entries, "");
@@ -154,8 +155,8 @@ public class WeightActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         //设置X轴坐标之间的最小间隔
         xAxis.setGranularity(1f);
-        //设置X轴的刻度数量，第二个参数为true,将会画出明确数量（带有小数点），但是可能值导致不均匀，默认（6，false）
-        //xAxis.setLabelCount(list.size() / 2, false);
+        //设置X轴的刻度数量，第二个参数为true,将会画出明确数量（带有小数点），
+        xAxis.setLabelCount(list.size());
         //设置X轴的值（最小值、最大值、然后会根据设置的刻度数量自动分配刻度显示）
         //xAxis.setAxisMinimum(0f);
         //xAxis.setAxisMaximum((float) list.size());
@@ -167,7 +168,10 @@ public class WeightActivity extends AppCompatActivity {
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return DateFormat.format("MM/dd", list.get((int) value).getTime()).toString();
+                int index = (int) value;
+                if (index < 0 || index >= list.size())
+                    return "";
+                return DateFormat.format("MM/dd", list.get(index).getTime()).toString();
             }
         });
         //得到Y轴
