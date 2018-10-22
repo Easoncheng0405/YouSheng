@@ -69,6 +69,9 @@ public class CustomDatePicker {
     /***标题**/
     private String title;
 
+    private Calendar selectedCalender;
+    private Calendar startCalendar;
+    private Calendar endCalendar;
 
     public String getTitle() {
         return title;
@@ -86,9 +89,7 @@ public class CustomDatePicker {
         this.selectedCalender = selectedCalender;
     }
 
-    private Calendar selectedCalender;
-    private Calendar startCalendar;
-    private Calendar endCalendar;
+
 
     public int getThemeColor() {
         return themeColor;

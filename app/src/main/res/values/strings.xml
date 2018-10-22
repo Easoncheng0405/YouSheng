@@ -235,4 +235,16 @@
     <string name="date_picker_current_date">当前日期</string>
     <string name="date_picker_select_time">选择时间</string>
     <string name="date_picker_current_time">当前时间</string>
+
+    <!--经期管理-->
+    <string name="mense_duration_main_title">周期天数</string>
+    <string name="mense_duration_sub_title">两次月经间隔多久</string>
+    <string name="mense_days_main_title">经期天数</string>
+    <string name="mense_days_sub_title">月经持续几天</string>
+    <string name="mense_start_day_main_title">上次月经开始</string>
+    <string name="mense_start_day_sub_title">最近一次何时开始</string>
+    <string name="mense_notify_main_title">月经提醒</string>
+    <string name="mense_notify_sub_title">提前2天提醒</string>
+    <string name="mense_pregnant_main_title">备孕模式</string>
+    <string name="mense_pregnant_sub_title">开启后切换到备孕模式</string>
 </resources>

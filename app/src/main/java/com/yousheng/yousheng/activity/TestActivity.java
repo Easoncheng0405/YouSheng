@@ -83,10 +83,12 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.splash:
-                ARouter.getInstance().build("/splash/activity").navigation();
+//                ARouter.getInstance().build("/splash/activity").navigation();
+                startActivity(new Intent(this,SplashActivity.class));
                 break;
             case R.id.mense_management:
-                ARouter.getInstance().build("/mensemanage/activity").navigation();
+                startActivity(new Intent(this,MenseManagementActivity.class));
+//                ARouter.getInstance().build("/mensemanagement/activity").navigation();
                 break;
             case R.id.holdDays:
                 startActivity(new Intent(this, HoldOnDays.class));

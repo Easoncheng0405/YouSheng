@@ -17,6 +17,8 @@ public class Application extends LitePalApplication {
         //初始化litepal配置
         LitePal.initialize(this);
         ARouter.init(this);
+        ARouter.openLog();
+        ARouter.openDebug();
 
         //test
         insertHabitData();

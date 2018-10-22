@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="77dp"
+    android:paddingStart="26dp"
+    android:paddingTop="20dp">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:minHeight="22dp"
+        android:minWidth="20dp"
+        android:src="@color/white" />
+
+    <!--主标题和副标题-->
+    <TextView
+        android:id="@+id/tv_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_toEndOf="@id/iv_logo"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="周期天数" />
+
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_main_title"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@id/iv_logo"
+        android:textColor="@color/text_color_gray"
+        android:textSize="14sp"
+        tools:text="两次月经间隔多久" />
+
+    <Switch
+        android:id="@+id/switch_mense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp" />
+</RelativeLayout>

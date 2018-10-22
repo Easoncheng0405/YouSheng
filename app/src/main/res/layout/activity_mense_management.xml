@@ -15,6 +15,7 @@
         stv:leftText="@string/mense_management" />
 
     <LinearLayout
+        android:layout_below="@id/mainTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -30,6 +31,14 @@
         <include
             android:id="@+id/layout_mense_start"
             layout="@layout/layout_mense_management_item_one" />
+
+        <include
+            android:id="@+id/layout_mense_notify"
+            layout="@layout/layout_mense_management_item_two" />
+
+        <include
+            android:id="@+id/layout_mense_mode"
+            layout="@layout/layout_mense_management_item_two" />
 
     </LinearLayout>
 
