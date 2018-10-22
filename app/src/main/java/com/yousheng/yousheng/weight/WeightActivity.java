@@ -1,4 +1,4 @@
-package com.yousheng.yousheng.habit;
+package com.yousheng.yousheng.weight;
 
 
 import android.graphics.Color;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -18,19 +20,24 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.uitl.ToastUtil;
 import com.zjun.widget.RuleView;
 
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 public class WeightActivity extends AppCompatActivity {
 
     private LineChart lineChart;
     private TextView weight;
+    private RuleView ruleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,7 @@ public class WeightActivity extends AppCompatActivity {
 
         weight = findViewById(R.id.number);
         lineChart = findViewById(R.id.lineChart);
-        RuleView ruleView = findViewById(R.id.ruler);
+        ruleView = findViewById(R.id.ruler);
 
         ruleView.setOnValueChangedListener(new RuleView.OnValueChangedListener() {
             @Override
@@ -48,19 +55,64 @@ public class WeightActivity extends AppCompatActivity {
             }
         });
 
-        //测试数据
-        {
-            for (int i = 0; i < 10; i++) {
-                Weight weight = new Weight(i + 1);
-                weight.setWeight(100 + i);
-                weight.setTime(System.currentTimeMillis());
-                if (LitePal.find(Weight.class, weight.getId()) == null)
-                    weight.save();
+        CommonTitleBar titleBar = findViewById(R.id.title);
+        titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
+            @Override
+            public void onClicked(View v, int action, String extra) {
+                switch (action) {
+                    case 1:
+                        finish();
+                        break;
+                }
             }
-        }
+        });
 
+        findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                record();
+            }
+        });
+
+        //测试数据
+//        {
+//            for (int i = 0; i < 10; i++) {
+//                Weight weight = new Weight(i + 1);
+//                weight.setWeight(100 + i);
+//                weight.setTime(System.currentTimeMillis());
+//                if (LitePal.find(Weight.class, weight.getId()) == null)
+//                    weight.save();
+//            }
+//        }
+//
         initLineChart(LitePal.findAll(Weight.class));
 
+    }
+
+    private void record() {
+
+        Log.e("Weight", "" + ruleView.getCurrentValue());
+
+        Weight weight = LitePal.findLast(Weight.class);
+        Calendar db = Calendar.getInstance(Locale.CHINA);
+        Calendar now = Calendar.getInstance(Locale.CHINA);
+        long millis = System.currentTimeMillis();
+        if (weight != null && now.get(Calendar.DAY_OF_YEAR) <= db.get(Calendar.DAY_OF_YEAR)) {
+            db.setTimeInMillis(weight.getTime());
+            now.setTimeInMillis(millis);
+            weight.setWeight(ruleView.getCurrentValue());
+            weight.setTime(millis);
+            weight.save();
+            ToastUtil.showMsg(this, "体重已更新！");
+        } else {
+            Weight w = new Weight();
+            w.setTime(millis);
+            w.setWeight(ruleView.getCurrentValue());
+            w.save();
+            ToastUtil.showMsg(this, "打卡成功！");
+        }
+
+        lineChart.invalidate();
     }
 
     //初始化体重折线图
@@ -72,7 +124,6 @@ public class WeightActivity extends AppCompatActivity {
             lineChart.invalidate();
             return;
         }
-
         //显示边界
         lineChart.setDrawBorders(false);
         //设置数据
@@ -104,7 +155,7 @@ public class WeightActivity extends AppCompatActivity {
         //设置X轴坐标之间的最小间隔
         xAxis.setGranularity(1f);
         //设置X轴的刻度数量，第二个参数为true,将会画出明确数量（带有小数点），但是可能值导致不均匀，默认（6，false）
-        xAxis.setLabelCount(list.size() / 2, false);
+        //xAxis.setLabelCount(list.size() / 2, false);
         //设置X轴的值（最小值、最大值、然后会根据设置的刻度数量自动分配刻度显示）
         //xAxis.setAxisMinimum(0f);
         //xAxis.setAxisMaximum((float) list.size());

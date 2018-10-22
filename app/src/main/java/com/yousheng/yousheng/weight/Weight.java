@@ -1,4 +1,4 @@
-package com.yousheng.yousheng.habit;
+package com.yousheng.yousheng.weight;
 
 import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
@@ -13,9 +13,6 @@ public class Weight extends LitePalSupport implements Comparator<Weight> {
     //记录时间
     private long time;
 
-    public Weight(long id) {
-        this.id = id;
-    }
 
     public Weight() {
         this.id = LitePal.count(Weight.class) + 1;

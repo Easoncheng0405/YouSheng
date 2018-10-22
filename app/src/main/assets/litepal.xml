@@ -11,6 +11,6 @@
         <mapping class="com.yousheng.yousheng.notify.NewItem"/>
         <mapping class="com.yousheng.yousheng.habit.Habit"/>
         <mapping class="com.yousheng.yousheng.habit.Record"/>
-        <mapping class="com.yousheng.yousheng.habit.Weight"/>
+        <mapping class="com.yousheng.yousheng.weight.Weight"/>
     </list>
 </litepal>

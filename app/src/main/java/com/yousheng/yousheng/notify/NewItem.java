@@ -1,16 +1,11 @@
 package com.yousheng.yousheng.notify;
 
-import android.support.annotation.NonNull;
-
-import org.litepal.LitePal;
-import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
 
 /**
  * 新事项
  */
 public class NewItem extends LitePalSupport {
-
 
     private long id;
 
@@ -26,8 +21,6 @@ public class NewItem extends LitePalSupport {
     NewItem(String content, long time) {
         this.content = content;
         this.time = time;
-        //id从1开始
-        this.id = LitePal.count(NewItem.class) + 1;
     }
 
     NewItem(long id, String content, long time) {

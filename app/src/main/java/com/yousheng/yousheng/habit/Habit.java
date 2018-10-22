@@ -1,6 +1,5 @@
 package com.yousheng.yousheng.habit;
 
-import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
 import java.util.Objects;

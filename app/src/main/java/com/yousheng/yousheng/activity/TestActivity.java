@@ -10,7 +10,7 @@ import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.habit.HoldOnDays;
-import com.yousheng.yousheng.habit.WeightActivity;
+import com.yousheng.yousheng.weight.WeightActivity;
 import com.yousheng.yousheng.notify.NewItemActivity;
 
 import org.litepal.LitePal;
