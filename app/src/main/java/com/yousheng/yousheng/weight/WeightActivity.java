@@ -90,16 +90,22 @@ public class WeightActivity extends AppCompatActivity {
     }
 
     private void record() {
-
-        Log.e("Weight", "" + ruleView.getCurrentValue());
-
         Weight weight = LitePal.findLast(Weight.class);
+        long millis = System.currentTimeMillis();
+        if(weight==null){
+            Weight w = new Weight();
+            w.setTime(millis);
+            w.setWeight(ruleView.getCurrentValue());
+            w.save();
+            ToastUtil.showMsg(this, "打卡成功！");
+            return;
+        }
+
         Calendar db = Calendar.getInstance(Locale.CHINA);
         Calendar now = Calendar.getInstance(Locale.CHINA);
-        long millis = System.currentTimeMillis();
-        if (weight != null && now.get(Calendar.DAY_OF_YEAR) <= db.get(Calendar.DAY_OF_YEAR)) {
-            db.setTimeInMillis(weight.getTime());
-            now.setTimeInMillis(millis);
+        db.setTimeInMillis(weight.getTime());
+        now.setTimeInMillis(millis);
+        if (now.get(Calendar.DAY_OF_YEAR) <= db.get(Calendar.DAY_OF_YEAR)) {
             weight.setWeight(ruleView.getCurrentValue());
             weight.setTime(millis);
             weight.save();
@@ -111,8 +117,6 @@ public class WeightActivity extends AppCompatActivity {
             w.save();
             ToastUtil.showMsg(this, "打卡成功！");
         }
-
-        lineChart.invalidate();
     }
 
     //初始化体重折线图
@@ -130,7 +134,7 @@ public class WeightActivity extends AppCompatActivity {
         //设置数据
         List<Entry> entries = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            entries.add(new Entry(i * 1.0f, list.get(i).getWeight()));
+            entries.add(new Entry(i * 1.0f, list.get(i).getWeight() * 1.0f));
         }
         //一个LineDataSet就是一条线
         LineDataSet lineDataSet = new LineDataSet(entries, "");
