@@ -10,14 +10,12 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
-import com.yousheng.yousheng.timepickerlib.DatePickerView;
 import com.yousheng.yousheng.uitl.TitleBarUtils;
 
 @Route(path = "/mensemanagement/activity")
 public class MenseManagementActivity extends AppCompatActivity {
-    private CustomDatePicker mDatePickerDuration;
-    private CustomDatePicker mDatePickerDays;
-
+    private CustomDatePicker mMenseDurationPicker;
+    private CustomDatePicker mMenseDaysPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +61,48 @@ public class MenseManagementActivity extends AppCompatActivity {
         ((TextView) layoutMenseMode.findViewById(R.id.tv_sub_title))
                 .setText(getResources().getString(R.string.mense_pregnant_sub_title));
 
-        TextView tvDaysMenseDuration = layoutMenseDuration.findViewById(R.id.tv_days);
+        final TextView tvDaysMenseDuration = layoutMenseDuration.findViewById(R.id.tv_days);
         TextView tvDaysMenseDays = layoutMenseDays.findViewById(R.id.tv_days);
         TextView tvDaysMenseStart = layoutStartDay.findViewById(R.id.tv_days);
 
+        //init listener
+        layoutMenseDuration.setOnClickListener(mClickListener);
 
+        //init date picker
+        mMenseDurationPicker =
+                new CustomDatePicker.Builder()
+                        .setContext(this)
+                        .setStartDate("2012-12-12")
+                        .setEndDate("2018-10-19")
+                        .setColor(getResources().getColor(R.color.text_color_red_theme))
+                        .setDayModeOn(true)
+                        .setTitle(getResources().getString(R.string.mense_management))
+                        .setResultHandler(new CustomDatePicker.ResultHandler() {
+                            @Override
+                            public void handle(String time) {
+                                tvDaysMenseDuration.setText(time);
+                            }
+                        })
+                        .create();
     }
+
+    private View.OnClickListener mClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.layout_mense_duration:
+                    mMenseDurationPicker.show("2018-10-10");
+                    break;
+                case R.id.layout_mense_days:
+                    break;
+                case R.id.layout_mense_start:
+                    break;
+                case R.id.layout_mense_notify:
+                    break;
+                case R.id.layout_mense_mode:
+                    break;
+            }
+        }
+    };
+
 }
