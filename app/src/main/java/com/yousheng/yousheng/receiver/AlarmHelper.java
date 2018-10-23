@@ -46,8 +46,7 @@ public class AlarmHelper {
         try {
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(AlarmHelper.ITEM_IN_TIME);
-            intent.putExtra("id", item.getId());
-            intent.putExtra("type", "item");
+            intent.putExtra("id",item.getId());
             PendingIntent sender = PendingIntent.getBroadcast(context, (int) item.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
             am.setExact(AlarmManager.RTC_WAKEUP, item.getTime(), sender);
         } catch (Exception e) {
@@ -60,8 +59,7 @@ public class AlarmHelper {
         try {
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(AlarmHelper.HABIT_IN_TIME);
-            intent.putExtra("id", habit.getId());
-            intent.putExtra("type", "habit");
+            intent.putExtra("id",habit.getId());
             PendingIntent sender = PendingIntent.getBroadcast(context, (int) habit.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
             am.setRepeating(AlarmManager.RTC_WAKEUP, habit.getClockTime(), DAY, sender);
         } catch (Exception e) {

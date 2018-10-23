@@ -129,6 +129,7 @@ public class HabitDetailActivity extends AppCompatActivity {
             });
         } catch (Exception e) {
             ToastUtil.showMsg(this, "发生了一些错误！请联系客服！");
+            e.printStackTrace();
             finish();
         }
     }
