@@ -2,6 +2,7 @@ package com.yousheng.yousheng.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,6 +51,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                                                 int which) {
                             }
                         }).show();
+                break;
+            case R.id.agreement:
+                startActivity(new Intent(this, Agreement.class));
                 break;
         }
     }
