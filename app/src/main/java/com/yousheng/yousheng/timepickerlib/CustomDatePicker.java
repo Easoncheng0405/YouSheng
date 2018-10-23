@@ -43,6 +43,17 @@ public class CustomDatePicker {
         public int value;
     }
 
+    public enum DAY_MODE {
+        DURATION(0),
+        DAYS(1);
+
+        DAY_MODE(int value) {
+            this.value = value;
+        }
+
+        public int value;
+    }
+
     private final static String TAG = "CustomDatePicker";
 
     private Context context;
@@ -59,6 +70,9 @@ public class CustomDatePicker {
 
     /***日期天数选择**/
     private boolean isDayModeOn = false;
+
+    /***日期选择模式：周期天数 | 月经天数**/
+    private DAY_MODE daMode = DAY_MODE.DURATION;
 
     /***日期模式下选中的天数(经期模式下为 21 ~ 40 天)*/
     private String selectedDaysInDayMode = "21";
@@ -77,6 +91,16 @@ public class CustomDatePicker {
 
     /***标题**/
     private String windowTitle;
+
+
+    public DAY_MODE getDaMode() {
+        return daMode;
+    }
+
+    public void setDaMode(DAY_MODE daMode) {
+        this.daMode = daMode;
+    }
+
 
     public boolean isDayModeOn() {
         return isDayModeOn;
@@ -115,16 +139,14 @@ public class CustomDatePicker {
     }
 
     public void setStartCalendar(String startDate) {
-        if (isValidDate(startDate, "yyyy-MM-dd HH:mm")) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
-            this.startCalendar = Calendar.getInstance();
-            try {
-                this.startCalendar.setTime(sdf.parse(startDate));
-                canAccess = true;
-            } catch (Exception e) {
-                canAccess = false;
-                e.printStackTrace();
-            }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+        this.startCalendar = Calendar.getInstance();
+        try {
+            this.startCalendar.setTime(sdf.parse(startDate));
+            canAccess = true;
+        } catch (Exception e) {
+            canAccess = false;
+            e.printStackTrace();
         }
     }
 
@@ -133,17 +155,17 @@ public class CustomDatePicker {
     }
 
     public void setEndCalendar(String endDate) {
-        if (isValidDate(endDate, "yyyy-MM-dd HH:mm")) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
-            this.endCalendar = Calendar.getInstance();
-            try {
-                this.endCalendar.setTime(sdf.parse(endDate));
-                canAccess = true;
-            } catch (Exception e) {
-                canAccess = false;
-                e.printStackTrace();
-            }
+//        if (isValidDate(endDate, "yyyy-MM-dd HH:mm")) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+        this.endCalendar = Calendar.getInstance();
+        try {
+            this.endCalendar.setTime(sdf.parse(endDate));
+            canAccess = true;
+        } catch (Exception e) {
+            canAccess = false;
+            e.printStackTrace();
         }
+//        }
     }
 
     public ResultHandler getHandler() {
@@ -386,8 +408,14 @@ public class CustomDatePicker {
                 }
             }
         } else {
-            for (int i = 21; i <= 40; i++) {
-                dayList.add(formatTimeUnit(i));
+            if (getDaMode().value == DAY_MODE.DURATION.value) {
+                for (int i = 21; i <= 40; i++) {
+                    dayList.add(formatTimeUnit(i));
+                }
+            } else {
+                for (int i = 3; i <= 7; i++) {
+                    dayList.add(formatTimeUnit(i));
+                }
             }
         }
         loadComponent();
@@ -872,6 +900,13 @@ public class CustomDatePicker {
         private int themeColor;
         private Context context;
         private boolean isDayModeOn;
+        private DAY_MODE dayMode = DAY_MODE.DURATION;
+
+
+        public Builder setDayMode(DAY_MODE dayMode) {
+            this.dayMode = dayMode;
+            return this;
+        }
 
         public Builder setDayModeOn(boolean dayModeOn) {
             isDayModeOn = dayModeOn;
@@ -918,6 +953,7 @@ public class CustomDatePicker {
             datePicker.setThemeColor(themeColor);
             datePicker.setWindowTitle(title);
             datePicker.setDayModeOn(isDayModeOn);
+            datePicker.setDaMode(dayMode);
 
             datePicker.initDialog();
             datePicker.initView();
