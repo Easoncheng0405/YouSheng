@@ -62,7 +62,7 @@
             android:paddingRight="20dp"
             android:paddingBottom="15dp">
 
-            <com.liuwan.customdatepicker.widget.DatePickerView
+            <com.yousheng.yousheng.timepickerlib.DatePickerView
                 android:id="@+id/year_pv"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_date_picker_view"
@@ -78,7 +78,7 @@
                 android:textColor="@color/date_picker_text2"
                 android:textSize="18sp" />
 
-            <com.liuwan.customdatepicker.widget.DatePickerView
+            <com.yousheng.yousheng.timepickerlib.DatePickerView
                 android:id="@+id/month_pv"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_date_picker_view"
@@ -94,7 +94,7 @@
                 android:textColor="@color/date_picker_text2"
                 android:textSize="18sp" />
 
-            <com.liuwan.customdatepicker.widget.DatePickerView
+            <com.yousheng.yousheng.timepickerlib.DatePickerView
                 android:id="@+id/day_pv"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_date_picker_view"
@@ -110,7 +110,7 @@
                 android:textColor="@color/date_picker_text2"
                 android:textSize="18sp" />
 
-            <com.liuwan.customdatepicker.widget.DatePickerView
+            <com.yousheng.yousheng.timepickerlib.DatePickerView
                 android:id="@+id/hour_pv"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_date_picker_view"
@@ -126,7 +126,7 @@
                 android:textColor="@color/date_picker_text2"
                 android:textSize="18sp" />
 
-            <com.liuwan.customdatepicker.widget.DatePickerView
+            <com.yousheng.yousheng.timepickerlib.DatePickerView
                 android:id="@+id/minute_pv"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/height_date_picker_view"
