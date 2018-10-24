@@ -19,7 +19,7 @@ public class Application extends LitePalApplication {
         ARouter.init(this);
         ARouter.openLog();
         ARouter.openDebug();
-
+        ApplicationContextHolder.setApplicationContext(this);
         //test
         insertHabitData();
     }

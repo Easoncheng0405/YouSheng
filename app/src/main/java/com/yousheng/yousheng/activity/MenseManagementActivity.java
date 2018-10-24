@@ -3,14 +3,17 @@ package com.yousheng.yousheng.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
+import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
+import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.TitleBarUtils;
 
 @Route(path = "/mensemanagement/activity")
@@ -88,6 +91,8 @@ public class MenseManagementActivity extends AppCompatActivity {
                             @Override
                             public void handle(String time) {
                                 tvDaysMenseDuration.setText(time);
+                                SPSingleton.get()
+                                        .putString(PrefConstants.PREFS_KEY_MENSE_DURATION, time);
                             }
                         })
                         .create();
@@ -104,6 +109,8 @@ public class MenseManagementActivity extends AppCompatActivity {
                             @Override
                             public void handle(String time) {
                                 tvDaysMenseDays.setText(time);
+                                SPSingleton.get()
+                                        .putString(PrefConstants.PREFS_KEY_MENSE_DAYS, time);
                             }
                         })
                         .create();
@@ -119,11 +126,16 @@ public class MenseManagementActivity extends AppCompatActivity {
                             @Override
                             public void handle(String time) {
                                 tvDaysMenseStart.setText(time.split(" ")[0]);
+                                SPSingleton.get()
+                                        .putString(PrefConstants.PREFS_KEY_MENSE_START_DAY, time);
                             }
                         })
                         .create();
         mMenseStartDatePicker.hideTimeUnit(CustomDatePicker.SCROLL_TYPE.HOUR,
                 CustomDatePicker.SCROLL_TYPE.MINUTE);
+
+        Button btnStart = findViewById(R.id.btn_start);
+        btnStart.setOnClickListener(mClickListener);
     }
 
     private View.OnClickListener mClickListener = new View.OnClickListener() {
@@ -133,16 +145,24 @@ public class MenseManagementActivity extends AppCompatActivity {
                 case R.id.layout_mense_duration:
                     mMenseDurationPicker.show("2018-10-10");
                     break;
+
                 case R.id.layout_mense_days:
                     mMenseDaysPicker.show("2018-10-10");
                     break;
+
                 case R.id.layout_mense_start:
                     mMenseStartDatePicker.show(CalendarUtils
                             .formatDateString(System.currentTimeMillis(), "yyyy-MM-dd"));
                     break;
+
                 case R.id.layout_mense_notify:
                     break;
+
                 case R.id.layout_mense_mode:
+                    break;
+
+                case R.id.btn_start:
+                    finish();
                     break;
             }
         }
