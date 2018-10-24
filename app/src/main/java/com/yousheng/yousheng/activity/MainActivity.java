@@ -2,16 +2,20 @@ package com.yousheng.yousheng.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.yousheng.yousheng.Constants;
+import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 
 import com.yousheng.yousheng.adapter.HabitAdapter;
 import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.receiver.AlarmHelper;
+import com.yousheng.yousheng.uitl.SPSingleton;
 
 import org.litepal.LitePal;
 import org.litepal.crud.callback.FindMultiCallback;
@@ -39,6 +43,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+        if (!SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_SAVED, false)) {
+            startActivity(new Intent(this, MenseManagementActivity.class));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -67,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 初始化activity中的变量，从数据库中查询数据
-     * */
+     */
     private void init() {
         mRvHabitiList = findViewById(R.id.rv_good_habbit);
         mRvHabitiList.setLayoutManager(new LinearLayoutManager(this));

@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -32,7 +34,7 @@ public class MenseManagementActivity extends AppCompatActivity {
     private void initView() {
         CommonTitleBar titleBar = findViewById(R.id.mainTitle);
         TitleBarUtils.changeTitleImageLeftMargin(this, titleBar);
-        TitleBarUtils.addTitleBarListener(this, titleBar);
+//        TitleBarUtils.addTitleBarListener(this, titleBar);
 
         //layout_item_one
         View layoutMenseDuration = findViewById(R.id.layout_mense_duration);
@@ -136,6 +138,31 @@ public class MenseManagementActivity extends AppCompatActivity {
 
         Button btnStart = findViewById(R.id.btn_start);
         btnStart.setOnClickListener(mClickListener);
+
+        //init switch
+        final Switch switchNotify = layoutMenseNotify.findViewById(R.id.switch_mense);
+        final Switch switchPregnant = layoutMenseMode.findViewById(R.id.switch_mense);
+
+        Switch.OnCheckedChangeListener checkListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (compoundButton.equals(switchNotify)) {
+                    SPSingleton.get().putBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY, !isChecked);
+                } else if (compoundButton.equals(switchPregnant)) {
+                    SPSingleton.get().putBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, !isChecked);
+                }
+            }
+        };
+        switchNotify.setOnCheckedChangeListener(checkListener);
+        switchPregnant.setOnCheckedChangeListener(checkListener);
+
+        boolean isNotifyOn = SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY,
+                true);
+        boolean isMenseModeOn = SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE,
+                true);
+
+        switchNotify.setChecked(true);
+        switchPregnant.setChecked(true);
     }
 
     private View.OnClickListener mClickListener = new View.OnClickListener() {
@@ -162,10 +189,16 @@ public class MenseManagementActivity extends AppCompatActivity {
                     break;
 
                 case R.id.btn_start:
+                    SPSingleton.get()
+                            .putBoolean(PrefConstants.PREFS_KEY_MENSE_SAVED, true);
                     finish();
                     break;
             }
         }
     };
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
 }
