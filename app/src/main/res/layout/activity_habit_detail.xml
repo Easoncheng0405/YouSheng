@@ -29,7 +29,7 @@
             stv:titleBarHeight="60dp" />
 
         <com.allen.library.SuperTextView
-            android:id="@+id/clockTime"
+            android:id="@+id/time"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="50dp"

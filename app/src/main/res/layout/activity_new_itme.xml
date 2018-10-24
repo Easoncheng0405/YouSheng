@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-            android:id="@+id/windowTitle"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             stv:titleBarHeight="60dp"
