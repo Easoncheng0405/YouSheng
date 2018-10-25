@@ -1,6 +1,7 @@
 package com.yousheng.yousheng;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.yousheng.yousheng.activity.Market;
 import com.yousheng.yousheng.habit.Habit;
 
 import org.litepal.LitePal;
@@ -22,6 +23,7 @@ public class Application extends LitePalApplication {
         ARouter.openDebug();
         ApplicationContextHolder.setApplicationContext(this);
         insertHabitData();
+        insertMarketData();
     }
 
     private void insertHabitData() {
@@ -112,5 +114,80 @@ public class Application extends LitePalApplication {
             sprot.save();
         }
 
+    }
+
+    private void insertMarketData() {
+        if (LitePal.count(Market.class) > 0)
+            return;
+
+        {
+
+            Market huaWei = new Market();
+            huaWei.setId(1);
+            huaWei.setName("智汇云（华为）");
+            huaWei.setPackageName("com.huawei.appmarket");
+            huaWei.save();
+
+            Market baidu = new Market();
+            baidu.setId(2);
+            baidu.setName("百度手机助手");
+            baidu.setPackageName("com.baidu.appsearch");
+            baidu.save();
+
+            Market tencent = new Market();
+            tencent.setId(3);
+            tencent.setName("应用宝");
+            tencent.setPackageName("com.tencent.android.qqdownloader");
+            tencent.save();
+
+            Market qihoo = new Market();
+            qihoo.setId(4);
+            qihoo.setName("360");
+            qihoo.setPackageName("com.qihoo.appstore");
+            qihoo.save();
+
+            Market mi = new Market();
+            mi.setId(5);
+            mi.setName("小米应用商店");
+            mi.setPackageName("com.xiaomi.market");
+            mi.save();
+
+            Market oppo = new Market();
+            oppo.setId(6);
+            oppo.setName("OPPO应用商店");
+            oppo.setPackageName("com.oppo.market");
+            oppo.save();
+
+            Market vivo = new Market();
+            vivo.setId(7);
+            vivo.setName("VIVO应用商店");
+            vivo.setPackageName("com.bbk.appstore");
+            vivo.save();
+
+            Market wdj = new Market();
+            wdj.setId(8);
+            wdj.setName("豌豆荚");
+            wdj.setPackageName("com.wandoujia.phoenix2");
+            wdj.save();
+
+            Market az = new Market();
+            az.setId(9);
+            az.setName("安智");
+            az.setPackageName("cn.goapk.market");
+            az.save();
+
+            Market lenovo = new Market();
+            lenovo.setId(10);
+            lenovo.setName("联想乐商店");
+            lenovo.setPackageName("com.lenovo.leos.appstore");
+            lenovo.save();
+
+            Market cool = new Market();
+            cool.setId(11);
+            cool.setName("酷安");
+            cool.setPackageName("com.coolapk.market");
+            cool.save();
+
+        }
     }
 }

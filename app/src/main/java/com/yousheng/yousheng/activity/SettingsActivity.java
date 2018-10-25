@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
@@ -17,6 +18,9 @@ import com.yousheng.yousheng.html.Agreement;
 import com.yousheng.yousheng.html.Disclaimer;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
+import org.litepal.LitePal;
+
+import java.util.Collections;
 import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -70,6 +74,21 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             case R.id.menseManagement:
                 startActivity(new Intent(this, MenseManagementActivity.class));
                 break;
+            case R.id.update:
+                List<Market> markets = LitePal.findAll(Market.class);
+                Log.e("SettingsActivity", "counts = " + markets.size());
+
+                Collections.sort(markets);
+                boolean b = false;
+                for (Market market : markets) {
+                    if (startMarket(market.getPackageName())) {
+                        b = true;
+                        break;
+                    }
+                }
+                if (!b)
+                    ToastUtil.showMsg(this, "请搜索最新版本更新");
+                break;
         }
     }
 
@@ -78,10 +97,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         try {
             packageinfo = getPackageManager().getPackageInfo(packageName, 0);
         } catch (PackageManager.NameNotFoundException e) {
-            ToastUtil.showMsg(this, "请搜索最新版本更新");
+            Log.e("SettingsActivity", "startMarket: exception ", e);
             return false;
         }
         if (packageinfo == null) {
+            Log.e("SettingsActivity", packageName);
             return false;
         }
         Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);

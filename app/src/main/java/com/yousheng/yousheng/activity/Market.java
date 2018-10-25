@@ -2,19 +2,21 @@ package com.yousheng.yousheng.activity;
 
 import org.litepal.crud.LitePalSupport;
 
-public class Market extends LitePalSupport {
+import java.util.Comparator;
 
-    private long id;
+public class Market extends LitePalSupport implements Comparable<Market> {
+
+    private int id;
 
     private String name;
 
     private String packageName;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,4 +37,8 @@ public class Market extends LitePalSupport {
     }
 
 
+    @Override
+    public int compareTo(Market o) {
+        return id - o.id;
+    }
 }

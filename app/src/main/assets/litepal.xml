@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <!--数据库名-->
-    <dbname value="YouSheng"/>
+    <dbname value="YouSheng" />
 
-    <version value="1"/>
+    <version value="1" />
 
 
     <list>
         <!--这里放表-->
-        <mapping class="com.yousheng.yousheng.notify.NewItem"/>
-        <mapping class="com.yousheng.yousheng.habit.Habit"/>
-        <mapping class="com.yousheng.yousheng.habit.Record"/>
-        <mapping class="com.yousheng.yousheng.weight.Weight"/>
+        <mapping class="com.yousheng.yousheng.notify.NewItem" />
+        <mapping class="com.yousheng.yousheng.habit.Habit" />
+        <mapping class="com.yousheng.yousheng.habit.Record" />
+        <mapping class="com.yousheng.yousheng.weight.Weight" />
+        <mapping class="com.yousheng.yousheng.activity.Market" />
     </list>
 </litepal>
