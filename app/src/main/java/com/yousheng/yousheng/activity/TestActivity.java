@@ -50,14 +50,16 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.splash:
 //                ARouter.getInstance().build("/splash/activity").navigation();
-                startActivity(new Intent(this,SplashActivity.class));
+                startActivity(new Intent(this, SplashActivity.class));
                 break;
             case R.id.mense_management:
-                startActivity(new Intent(this,MenseManagementActivity.class));
+                startActivity(new Intent(this, MenseManagementActivity.class));
 //                ARouter.getInstance().build("/mensemanagement/activity").navigation();
                 break;
             case R.id.holdDays:
-                startActivity(new Intent(this, HoldOnDays.class));
+                Intent intent = new Intent(this, HoldOnDays.class);
+                intent.putExtra("id", LitePal.findFirst(Habit.class).getId());
+                startActivity(intent);
                 break;
             case R.id.btn_ready:
                 startActivity(new Intent(this, ReadyActivity.class));

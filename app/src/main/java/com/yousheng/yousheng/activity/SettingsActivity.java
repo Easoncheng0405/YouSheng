@@ -1,8 +1,12 @@
 package com.yousheng.yousheng.activity;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +15,9 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.html.Agreement;
 import com.yousheng.yousheng.html.Disclaimer;
+import com.yousheng.yousheng.uitl.ToastUtil;
+
+import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -65,4 +72,35 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+
+    private boolean startMarket(String packageName) {
+        PackageInfo packageinfo = null;
+        try {
+            packageinfo = getPackageManager().getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            ToastUtil.showMsg(this, "请搜索最新版本更新");
+            return false;
+        }
+        if (packageinfo == null) {
+            return false;
+        }
+        Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
+        resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        resolveIntent.setPackage(packageinfo.packageName);
+        List<ResolveInfo> resolveinfoList = getPackageManager()
+                .queryIntentActivities(resolveIntent, 0);
+        ResolveInfo resolveinfo = resolveinfoList.iterator().next();
+        if (resolveinfo != null) {
+            String name = resolveinfo.activityInfo.packageName;
+            String className = resolveinfo.activityInfo.name;
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            ComponentName componentName = new ComponentName(name, className);
+            intent.setComponent(componentName);
+            startActivity(intent);
+            return true;
+        }
+        return false;
+    }
+
 }

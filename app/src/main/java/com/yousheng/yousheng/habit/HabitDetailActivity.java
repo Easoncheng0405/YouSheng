@@ -37,8 +37,6 @@ public class HabitDetailActivity extends AppCompatActivity {
     private Calendar calendar = Calendar.getInstance(Locale.CHINA);
     private TimePickerDialog timePickerDialog;
 
-    private boolean isNotify;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +72,6 @@ public class HabitDetailActivity extends AppCompatActivity {
                 }
             });
 
-
-            isNotify = habit.isNotify();
             //初始化数据
             calendar.setTimeInMillis(habit.getClockTime());
             time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
@@ -105,18 +101,23 @@ public class HabitDetailActivity extends AppCompatActivity {
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     calendar.set(Calendar.MINUTE, minute);
                     time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
+                    Habit h = LitePal.find(Habit.class, habit.getId());
+                    h.setClockTime(calendar.getTimeInMillis());
+                    h.save();
                 }
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
             notify.setSwitchCheckedChangeListener(new SuperTextView.OnSwitchCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    isNotify = b;
                     if (b) {
                         time.setVisibility(View.VISIBLE);
                     } else {
                         time.setVisibility(View.GONE);
                     }
+                    Habit h = LitePal.find(Habit.class, habit.getId());
+                    h.setNotify(b);
+                    h.save();
                     scrollView.post(new Runnable() {
                         @Override
                         public void run() {
@@ -139,7 +140,6 @@ public class HabitDetailActivity extends AppCompatActivity {
             superTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    update(habit);
                     finish();
                 }
             });
@@ -147,13 +147,6 @@ public class HabitDetailActivity extends AppCompatActivity {
             titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
                 @Override
                 public void onClicked(View v, int action, String extra) {
-                    switch (action) {
-                        case 1:
-                            break;
-                        case 3:
-                            update(habit);
-                            break;
-                    }
                     finish();
                 }
             });
@@ -162,17 +155,5 @@ public class HabitDetailActivity extends AppCompatActivity {
             e.printStackTrace();
             finish();
         }
-    }
-
-    private void update(final Habit habit) {
-        Habit h = LitePal.find(Habit.class, habit.getId());
-        h.setNeedSign(!habit.isNeedSign());
-        h.setClockTime(calendar.getTimeInMillis());
-        h.setNotify(isNotify);
-        h.save();
-    }
-
-    private void reHeight(final ScrollView scrollView) {
-
     }
 }

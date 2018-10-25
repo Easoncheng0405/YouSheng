@@ -1,9 +1,7 @@
 package com.yousheng.yousheng.notify;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 
@@ -22,15 +21,12 @@ import android.widget.TimePicker;
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.receiver.AlarmHelper;
-import com.yousheng.yousheng.receiver.AlarmReceiver;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
 
 import org.litepal.LitePal;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -49,7 +45,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     private EditText content;
 
     private Context context;
-    private SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     private boolean legal = true;
     private long id = -1;
 
@@ -111,7 +106,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 calendar.setTimeInMillis(l);
             }
         }
-        time.setLeftString(format.format(calendar.getTime()));
+        time.setLeftString(DateFormat.format("HH:mm", calendar.getTime()));
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -131,7 +126,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
                 legal = calendar.getTimeInMillis() > System.currentTimeMillis();
-                time.setLeftString(format.format(calendar.getTime()));
+                time.setLeftString(DateFormat.format("HH:mm", calendar.getTime()));
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
