@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.html.Agreement;
+import com.yousheng.yousheng.html.Disclaimer;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,6 +56,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.agreement:
                 startActivity(new Intent(this, Agreement.class));
+                break;
+            case R.id.disclaimer:
+                startActivity(new Intent(this, Disclaimer.class));
                 break;
         }
     }

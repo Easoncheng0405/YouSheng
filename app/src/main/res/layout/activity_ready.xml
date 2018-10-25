@@ -29,7 +29,6 @@
         android:id="@+id/et_ready"
         android:layout_width="match_parent"
         android:layout_height="187dp"
-        android:layout_below="@id/mainTitle"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"

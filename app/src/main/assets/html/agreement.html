@@ -1,0 +1,1282 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width initial-scale=1'>
+  <title></title>
+
+  <style type='text/css'>
+    html {
+      overflow-x: initial !important;
+    }
+
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --select-text-bg-color: #B5D6FC;
+      --select-text-font-color: auto;
+      --monospace: "Lucida Console", Consolas, "Courier", monospace;
+    }
+
+    html {
+      font-size: 14px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0px;
+      padding: 0px;
+      height: auto;
+      bottom: 0px;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      font-size: 1rem;
+      line-height: 1.42857;
+      overflow-x: hidden;
+      background: inherit;
+    }
+
+    iframe {
+      margin: auto;
+    }
+
+    a.url {
+      word-break: break-all;
+    }
+
+    a:active,
+    a:hover {
+      outline: 0px;
+    }
+
+    .in-text-selection,
+    ::selection {
+      text-shadow: none;
+      background: var(--select-text-bg-color);
+      color: var(--select-text-font-color);
+    }
+
+    #write {
+      margin: 0px auto;
+      height: auto;
+      width: inherit;
+      word-break: normal;
+      word-wrap: break-word;
+      position: relative;
+      white-space: normal;
+      overflow-x: visible;
+    }
+
+    #write.first-line-indent p {
+      text-indent: 2em;
+    }
+
+    #write.first-line-indent li p,
+    #write.first-line-indent p * {
+      text-indent: 0px;
+    }
+
+    #write.first-line-indent li {
+      margin-left: 2em;
+    }
+
+    .for-image #write {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    body.typora-export {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    .typora-export .footnote-line,
+    .typora-export p {
+      white-space: pre-wrap;
+    }
+
+    @media screen and (max-width: 500px) {
+      body.typora-export {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      .CodeMirror-sizer {
+        margin-left: 0px !important;
+      }
+
+      .CodeMirror-gutters {
+        display: none !important;
+      }
+    }
+
+    #write li>figure:first-child {
+      margin-top: -20px;
+    }
+
+    #write ol,
+    #write ul {
+      position: relative;
+    }
+
+    img {
+      max-width: 100%;
+      vertical-align: middle;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      color: inherit;
+      font-style: inherit;
+      font-variant: inherit;
+      font-weight: inherit;
+      font-stretch: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      font-family: inherit;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      line-height: normal;
+      padding: 0px;
+    }
+
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box;
+    }
+
+    #write h1,
+    #write h2,
+    #write h3,
+    #write h4,
+    #write h5,
+    #write h6,
+    #write p,
+    #write pre {
+      width: inherit;
+    }
+
+    #write h1,
+    #write h2,
+    #write h3,
+    #write h4,
+    #write h5,
+    #write h6,
+    #write p {
+      position: relative;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      break-after: avoid-page;
+      break-inside: avoid;
+      orphans: 2;
+    }
+
+    p {
+      orphans: 4;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    h3 {
+      font-size: 1.6rem;
+    }
+
+    h4 {
+      font-size: 1.4rem;
+    }
+
+    h5 {
+      font-size: 1.2rem;
+    }
+
+    h6 {
+      font-size: 1rem;
+    }
+
+    .md-math-block,
+    .md-rawblock,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .md-blockmeta {
+      color: rgb(204, 204, 204);
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    a {
+      cursor: pointer;
+    }
+
+    sup.md-footnote {
+      padding: 2px 4px;
+      background-color: rgba(238, 238, 238, 0.7);
+      color: rgb(85, 85, 85);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    sup.md-footnote a,
+    sup.md-footnote a:hover {
+      color: inherit;
+      text-transform: inherit;
+      text-decoration: inherit;
+    }
+
+    #write input[type="checkbox"] {
+      cursor: pointer;
+      width: inherit;
+      height: inherit;
+    }
+
+    figure {
+      overflow-x: auto;
+      margin: 1.2em 0px;
+      max-width: calc(100% + 16px);
+      padding: 0px;
+    }
+
+    figure>table {
+      margin: 0px !important;
+    }
+
+    tr {
+      break-inside: avoid;
+      break-after: auto;
+    }
+
+    thead {
+      display: table-header-group;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0px;
+      width: 100%;
+      overflow: auto;
+      break-inside: auto;
+      text-align: left;
+    }
+
+    table.md-table td {
+      min-width: 80px;
+    }
+
+    .CodeMirror-gutters {
+      border-right: 0px;
+      background-color: inherit;
+    }
+
+    .CodeMirror {
+      text-align: left;
+    }
+
+    .CodeMirror-placeholder {
+      opacity: 0.3;
+    }
+
+    .CodeMirror pre {
+      padding: 0px 4px;
+    }
+
+    .CodeMirror-lines {
+      padding: 0px;
+    }
+
+    div.hr:focus {
+      cursor: none;
+    }
+
+    #write pre {
+      white-space: pre-wrap;
+    }
+
+    #write.fences-no-line-wrapping pre {
+      white-space: pre;
+    }
+
+    #write pre.ty-contain-cm {
+      white-space: normal;
+    }
+
+    .CodeMirror-gutters {
+      margin-right: 4px;
+    }
+
+    .md-fences {
+      font-size: 0.9rem;
+      display: block;
+      break-inside: avoid;
+      text-align: left;
+      overflow: visible;
+      white-space: pre;
+      background: inherit;
+      position: relative !important;
+    }
+
+    .md-diagram-panel {
+      width: 100%;
+      margin-top: 10px;
+      text-align: center;
+      padding-top: 0px;
+      padding-bottom: 8px;
+      overflow-x: auto;
+    }
+
+    #write .md-fences.mock-cm {
+      white-space: pre-wrap;
+    }
+
+    .md-fences.md-fences-with-lineno {
+      padding-left: 0px;
+    }
+
+    #write.fences-no-line-wrapping .md-fences.mock-cm {
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .md-fences.mock-cm.md-fences-with-lineno {
+      padding-left: 8px;
+    }
+
+    .CodeMirror-line,
+    twitterwidget {
+      break-inside: avoid;
+    }
+
+    .footnotes {
+      opacity: 0.8;
+      font-size: 0.9rem;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    .footnotes+.footnotes {
+      margin-top: 0px;
+    }
+
+    .md-reset {
+      margin: 0px;
+      padding: 0px;
+      border: 0px;
+      outline: 0px;
+      vertical-align: top;
+      background: 0px 0px;
+      text-decoration: none;
+      text-shadow: none;
+      float: none;
+      position: static;
+      width: auto;
+      height: auto;
+      white-space: nowrap;
+      cursor: inherit;
+      -webkit-tap-highlight-color: transparent;
+      line-height: normal;
+      font-weight: 400;
+      text-align: left;
+      box-sizing: content-box;
+      direction: ltr;
+    }
+
+    li div {
+      padding-top: 0px;
+    }
+
+    blockquote {
+      margin: 1rem 0px;
+    }
+
+    li .mathjax-block,
+    li p {
+      margin: 0.5rem 0px;
+    }
+
+    li {
+      margin: 0px;
+      position: relative;
+    }
+
+    blockquote> :last-child {
+      margin-bottom: 0px;
+    }
+
+    blockquote> :first-child,
+    li> :first-child {
+      margin-top: 0px;
+    }
+
+    .footnotes-area {
+      color: rgb(136, 136, 136);
+      margin-top: 0.714rem;
+      padding-bottom: 0.143rem;
+      white-space: normal;
+    }
+
+    #write .footnote-line {
+      white-space: pre-wrap;
+    }
+
+    @media print {
+
+      body,
+      html {
+        border: 1px solid transparent;
+        height: 99%;
+        break-after: avoid;
+        break-before: avoid;
+      }
+
+      #write {
+        margin-top: 0px;
+        border-color: transparent !important;
+      }
+
+      .typora-export * {
+        -webkit-print-color-adjust: exact;
+      }
+
+      html.blink-to-pdf {
+        font-size: 13px;
+      }
+
+      .typora-export #write {
+        padding-left: 1cm;
+        padding-right: 1cm;
+        padding-bottom: 0px;
+        break-after: avoid;
+      }
+
+      .typora-export #write::after {
+        height: 0px;
+      }
+
+      @page {
+        margin: 20mm 0px;
+      }
+    }
+
+    .footnote-line {
+      margin-top: 0.714em;
+      font-size: 0.7em;
+    }
+
+    a img,
+    img a {
+      cursor: pointer;
+    }
+
+    pre.md-meta-block {
+      font-size: 0.8rem;
+      min-height: 0.8rem;
+      white-space: pre-wrap;
+      background: rgb(204, 204, 204);
+      display: block;
+      overflow-x: hidden;
+    }
+
+    p>img:only-child {
+      display: block;
+      margin: auto;
+    }
+
+    p>.md-image:only-child {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+
+    #write .MathJax_Display {
+      margin: 0.8em 0px 0px;
+    }
+
+    .md-math-block {
+      width: 100%;
+    }
+
+    .md-math-block:not(:empty)::after {
+      display: none;
+    }
+
+    [contenteditable="true"]:active,
+    [contenteditable="true"]:focus {
+      outline: 0px;
+      box-shadow: none;
+    }
+
+    .md-task-list-item {
+      position: relative;
+      list-style-type: none;
+    }
+
+    .task-list-item.md-task-list-item {
+      padding-left: 0px;
+    }
+
+    .md-task-list-item>input {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      margin-left: -1.2em;
+      margin-top: calc(1em - 10px);
+    }
+
+    .math {
+      font-size: 1rem;
+    }
+
+    .md-toc {
+      min-height: 3.58rem;
+      position: relative;
+      font-size: 0.9rem;
+      border-radius: 10px;
+    }
+
+    .md-toc-content {
+      position: relative;
+      margin-left: 0px;
+    }
+
+    .md-toc-content::after,
+    .md-toc::after {
+      display: none;
+    }
+
+    .md-toc-item {
+      display: block;
+      color: rgb(65, 131, 196);
+    }
+
+    .md-toc-item a {
+      text-decoration: none;
+    }
+
+    .md-toc-inner:hover {
+      text-decoration: underline;
+    }
+
+    .md-toc-inner {
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .md-toc-h1 .md-toc-inner {
+      margin-left: 0px;
+      font-weight: 700;
+    }
+
+    .md-toc-h2 .md-toc-inner {
+      margin-left: 2em;
+    }
+
+    .md-toc-h3 .md-toc-inner {
+      margin-left: 4em;
+    }
+
+    .md-toc-h4 .md-toc-inner {
+      margin-left: 6em;
+    }
+
+    .md-toc-h5 .md-toc-inner {
+      margin-left: 8em;
+    }
+
+    .md-toc-h6 .md-toc-inner {
+      margin-left: 10em;
+    }
+
+    @media screen and (max-width: 48em) {
+      .md-toc-h3 .md-toc-inner {
+        margin-left: 3.5em;
+      }
+
+      .md-toc-h4 .md-toc-inner {
+        margin-left: 5em;
+      }
+
+      .md-toc-h5 .md-toc-inner {
+        margin-left: 6.5em;
+      }
+
+      .md-toc-h6 .md-toc-inner {
+        margin-left: 8em;
+      }
+    }
+
+    a.md-toc-inner {
+      font-size: inherit;
+      font-style: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
+
+    .footnote-line a:not(.reversefootnote) {
+      color: inherit;
+    }
+
+    .md-attr {
+      display: none;
+    }
+
+    .md-fn-count::after {
+      content: ".";
+    }
+
+    code,
+    pre,
+    samp,
+    tt {
+      font-family: var(--monospace);
+    }
+
+    kbd {
+      margin: 0px 0.1em;
+      padding: 0.1em 0.6em;
+      font-size: 0.8em;
+      color: rgb(36, 39, 41);
+      background: rgb(255, 255, 255);
+      border: 1px solid rgb(173, 179, 185);
+      border-radius: 3px;
+      box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    .md-comment {
+      color: rgb(162, 127, 3);
+      opacity: 0.8;
+      font-family: var(--monospace);
+    }
+
+    code {
+      text-align: left;
+      vertical-align: initial;
+    }
+
+    a.md-print-anchor {
+      white-space: pre !important;
+      border-width: initial !important;
+      border-style: none !important;
+      border-color: initial !important;
+      display: inline-block !important;
+      position: absolute !important;
+      width: 1px !important;
+      right: 0px !important;
+      outline: 0px !important;
+      background: 0px 0px !important;
+      text-decoration: initial !important;
+      text-shadow: initial !important;
+    }
+
+    .md-inline-math .MathJax_SVG .noError {
+      display: none !important;
+    }
+
+    .md-math-block .MathJax_SVG_Display {
+      text-align: center;
+      margin: 0px;
+      position: relative;
+      text-indent: 0px;
+      max-width: none;
+      max-height: none;
+      min-height: 0px;
+      min-width: 100%;
+      width: auto;
+      overflow-y: hidden;
+      display: block !important;
+    }
+
+    .MathJax_SVG_Display,
+    .md-inline-math .MathJax_SVG_Display {
+      width: auto;
+      margin: inherit;
+      display: inline-block !important;
+    }
+
+    .MathJax_SVG .MJX-monospace {
+      font-family: var(--monospace);
+    }
+
+    .MathJax_SVG .MJX-sans-serif {
+      font-family: sans-serif;
+    }
+
+    .MathJax_SVG {
+      display: inline;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      zoom: 90%;
+      text-indent: 0px;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      word-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      float: none;
+      direction: ltr;
+      max-width: none;
+      max-height: none;
+      min-width: 0px;
+      min-height: 0px;
+      border: 0px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .MathJax_SVG * {
+      transition: none;
+    }
+
+    .MathJax_SVG_Display svg {
+      vertical-align: middle !important;
+      margin-bottom: 0px !important;
+    }
+
+    .os-windows.monocolor-emoji .md-emoji {
+      font-family: "Segoe UI Symbol", sans-serif;
+    }
+
+    .md-diagram-panel>svg {
+      max-width: 100%;
+    }
+
+    [lang="mermaid"] svg,
+    [lang="flow"] svg {
+      max-width: 100%;
+    }
+
+    [lang="mermaid"] .node text {
+      font-size: 1rem;
+    }
+
+    table tr th {
+      border-bottom: 0px;
+    }
+
+    video {
+      max-width: 100%;
+      display: block;
+      margin: 0px auto;
+    }
+
+    iframe {
+      max-width: 100%;
+      width: 100%;
+      border: none;
+    }
+
+    .highlight td,
+    .highlight tr {
+      border: 0px;
+    }
+
+
+    :root {
+      --side-bar-bg-color: #fafafa;
+      --control-text-color: #777;
+    }
+
+    @font-face {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: normal;
+      src: local("Open Sans Regular"), url("./github/400.woff") format("woff");
+    }
+
+    @font-face {
+      font-family: "Open Sans";
+      font-style: italic;
+      font-weight: normal;
+      src: local("Open Sans Italic"), url("./github/400i.woff") format("woff");
+    }
+
+    @font-face {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: bold;
+      src: local("Open Sans Bold"), url("./github/700.woff") format("woff");
+    }
+
+    @font-face {
+      font-family: "Open Sans";
+      font-style: italic;
+      font-weight: bold;
+      src: local("Open Sans Bold Italic"), url("./github/700i.woff") format("woff");
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: rgb(51, 51, 51);
+      line-height: 1.6;
+    }
+
+    #write {
+      max-width: 860px;
+      margin: 0px auto;
+      padding: 30px 30px 100px;
+    }
+
+    #write>ul:first-child,
+    #write>ol:first-child {
+      margin-top: 30px;
+    }
+
+    a {
+      color: rgb(65, 131, 196);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      position: relative;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      line-height: 1.4;
+      cursor: text;
+    }
+
+    h1:hover a.anchor,
+    h2:hover a.anchor,
+    h3:hover a.anchor,
+    h4:hover a.anchor,
+    h5:hover a.anchor,
+    h6:hover a.anchor {
+      text-decoration: none;
+    }
+
+    h1 tt,
+    h1 code {
+      font-size: inherit;
+    }
+
+    h2 tt,
+    h2 code {
+      font-size: inherit;
+    }
+
+    h3 tt,
+    h3 code {
+      font-size: inherit;
+    }
+
+    h4 tt,
+    h4 code {
+      font-size: inherit;
+    }
+
+    h5 tt,
+    h5 code {
+      font-size: inherit;
+    }
+
+    h6 tt,
+    h6 code {
+      font-size: inherit;
+    }
+
+    h1 {
+      padding-bottom: 0.3em;
+      font-size: 2.25em;
+      line-height: 1.2;
+      border-bottom: 1px solid rgb(238, 238, 238);
+    }
+
+    h2 {
+      padding-bottom: 0.3em;
+      font-size: 1.75em;
+      line-height: 1.225;
+      border-bottom: 1px solid rgb(238, 238, 238);
+    }
+
+    h3 {
+      font-size: 1.5em;
+      line-height: 1.43;
+    }
+
+    h4 {
+      font-size: 1.25em;
+    }
+
+    h5 {
+      font-size: 1em;
+    }
+
+    h6 {
+      font-size: 1em;
+      color: rgb(119, 119, 119);
+    }
+
+    p,
+    blockquote,
+    ul,
+    ol,
+    dl,
+    table {
+      margin: 0.8em 0px;
+    }
+
+    li>ol,
+    li>ul {
+      margin: 0px;
+    }
+
+    hr {
+      height: 2px;
+      padding: 0px;
+      margin: 16px 0px;
+      background-color: rgb(231, 231, 231);
+      border: 0px none;
+      overflow: hidden;
+      box-sizing: content-box;
+    }
+
+    li p.first {
+      display: inline-block;
+    }
+
+    ul,
+    ol {
+      padding-left: 30px;
+    }
+
+    ul:first-child,
+    ol:first-child {
+      margin-top: 0px;
+    }
+
+    ul:last-child,
+    ol:last-child {
+      margin-bottom: 0px;
+    }
+
+    blockquote {
+      border-left: 4px solid rgb(223, 226, 229);
+      padding: 0px 15px;
+      color: rgb(119, 119, 119);
+    }
+
+    blockquote blockquote {
+      padding-right: 0px;
+    }
+
+    table {
+      padding: 0px;
+      word-break: initial;
+    }
+
+    table tr {
+      border-top: 1px solid rgb(223, 226, 229);
+      margin: 0px;
+      padding: 0px;
+    }
+
+    table tr:nth-child(2n),
+    thead {
+      background-color: rgb(248, 248, 248);
+    }
+
+    table tr th {
+      font-weight: bold;
+      border-width: 1px 1px 0px;
+      border-top-style: solid;
+      border-right-style: solid;
+      border-left-style: solid;
+      border-top-color: rgb(223, 226, 229);
+      border-right-color: rgb(223, 226, 229);
+      border-left-color: rgb(223, 226, 229);
+      border-image: initial;
+      border-bottom-style: initial;
+      border-bottom-color: initial;
+      text-align: left;
+      margin: 0px;
+      padding: 6px 13px;
+    }
+
+    table tr td {
+      border: 1px solid rgb(223, 226, 229);
+      text-align: left;
+      margin: 0px;
+      padding: 6px 13px;
+    }
+
+    table tr th:first-child,
+    table tr td:first-child {
+      margin-top: 0px;
+    }
+
+    table tr th:last-child,
+    table tr td:last-child {
+      margin-bottom: 0px;
+    }
+
+    .CodeMirror-lines {
+      padding-left: 4px;
+    }
+
+    .code-tooltip {
+      box-shadow: rgba(0, 28, 36, 0.3) 0px 1px 1px 0px;
+      border-top: 1px solid rgb(238, 242, 242);
+    }
+
+    .md-fences,
+    code,
+    tt {
+      border: 1px solid rgb(231, 234, 237);
+      background-color: rgb(248, 248, 248);
+      border-radius: 3px;
+      padding: 2px 4px 0px;
+      font-size: 0.9em;
+    }
+
+    code {
+      background-color: rgb(243, 244, 244);
+      padding: 0px 4px 2px;
+    }
+
+    .md-fences {
+      margin-bottom: 15px;
+      margin-top: 15px;
+      padding: 8px 1em 6px;
+    }
+
+    .md-task-list-item>input {
+      margin-left: -1.3em;
+    }
+
+    @media print {
+      html {
+        font-size: 13px;
+      }
+
+      table,
+      pre {
+        break-inside: avoid;
+      }
+
+      pre {
+        word-wrap: break-word;
+      }
+    }
+
+    .md-fences {
+      background-color: rgb(248, 248, 248);
+    }
+
+    #write pre.md-meta-block {
+      padding: 1rem;
+      font-size: 85%;
+      line-height: 1.45;
+      background-color: rgb(247, 247, 247);
+      border: 0px;
+      border-radius: 3px;
+      color: rgb(119, 119, 119);
+      margin-top: 0px !important;
+    }
+
+    .mathjax-block>.code-tooltip {
+      bottom: 0.375rem;
+    }
+
+    .md-mathjax-midline {
+      background: rgb(250, 250, 250);
+    }
+
+    #write>h3.md-focus::before {
+      left: -1.5625rem;
+      top: 0.375rem;
+    }
+
+    #write>h4.md-focus::before {
+      left: -1.5625rem;
+      top: 0.285714rem;
+    }
+
+    #write>h5.md-focus::before {
+      left: -1.5625rem;
+      top: 0.285714rem;
+    }
+
+    #write>h6.md-focus::before {
+      left: -1.5625rem;
+      top: 0.285714rem;
+    }
+
+    .md-image>.md-meta {
+      border-radius: 3px;
+      padding: 2px 0px 0px 4px;
+      font-size: 0.9em;
+      color: inherit;
+    }
+
+    .md-tag {
+      color: rgb(167, 167, 167);
+      opacity: 1;
+    }
+
+    .md-toc {
+      margin-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .sidebar-tabs {
+      border-bottom: none;
+    }
+
+    #typora-quick-open {
+      border: 1px solid rgb(221, 221, 221);
+      background-color: rgb(248, 248, 248);
+    }
+
+    #typora-quick-open-item {
+      background-color: rgb(250, 250, 250);
+      border-color: rgb(254, 254, 254) rgb(229, 229, 229) rgb(229, 229, 229) rgb(238, 238, 238);
+      border-style: solid;
+      border-width: 1px;
+    }
+
+    .on-focus-mode blockquote {
+      border-left-color: rgba(85, 85, 85, 0.12);
+    }
+
+    header,
+    .context-menu,
+    .megamenu-content,
+    footer {
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .file-node-content:hover .file-node-icon,
+    .file-node-content:hover .file-node-open-state {
+      visibility: visible;
+    }
+
+    .mac-seamless-mode #typora-sidebar {
+      background-color: var(--side-bar-bg-color);
+    }
+
+    .md-lang {
+      color: rgb(180, 101, 77);
+    }
+
+    .html-for-mac .context-menu {
+      --item-hover-bg-color: #E6F0FE;
+    }
+
+    #md-notification .btn {
+      border: 0px;
+    }
+
+    .dropdown-menu .divider {
+      border-color: rgb(229, 229, 229);
+    }
+
+
+
+
+
+    .typora-export p,
+    .typora-export .footnote-line {
+      white-space: normal;
+    }
+  </style>
+</head>
+
+<body class='typora-export os-windows'>
+  <div id='write' class='is-node'>
+    <h3 style="text-align:center">柚生用户协议</h3>
+    <p><strong>隐私协议</strong></p>
+    <p>柚生（北京）科技有限公司尊重并保护所有使用柚生用户个人的隐私。本软件隐私政策（以下称&quot;隐私权政策&quot;）规定：未事先得到您的同意，我们不会有意将涉及您个人隐私的内容透露给任何第三方，但本政策另有说明的除外。</p>
+    <p>柚生给您带来的价值：</p>
+    <p>柚生是一款智能、易用的女性经期、备孕、怀孕期间的生活习惯管理软件，旨在帮助广大女性用户更好的管理特殊时期的生活起居。</p>
+    <p> </p>
+    <p><strong>一 柚生软件的行为描述：</strong></p>
+    <p>1）经期管理</p>
+    <p>通过用户自行在软件设置的初始化数据，结合女性用户习惯，智能提醒用户，用户可根据需要，自主选择是否开启月经提醒。</p>
+    <p>2）排卵试纸结果管理</p>
+    <p>用户通过录入排卵试纸结果，软件通过分析用户的试纸结果，及时、智能的预测排卵日，以供用户参考。</p>
+    <p>用户可根据需要，自主选择是否准确录入排卵试纸结果。</p>
+    <p>3）习惯管理</p>
+    <p>用户可自行添加习惯卡片，为自己设立行为习惯目标。软件将在用户的主页面进行展示。</p>
+    <p>4）打卡管理</p>
+    <p>用户通过添加习惯，每日在软件点击“打卡”按钮，完成打卡动作。软件将记录打卡次数，连续打卡天数，用于敦促用户养成良好的孕期习惯。</p>
+    <p>5）代办事项管理</p>
+    <p>用户通过添加代办事项，通过制定提醒时间，软件将提前提醒用户该事项需要完成。用户可根据需要，自主选择是否开启代办事项的提醒。</p>
+    <p> </p>
+    <p><strong>二</strong> <strong>我们收集哪些信息？</strong></p>
+    <p>1）我们不收集个人信息。 个人信息包括你的地理位置信息、名字、地址、邮箱、电话、传真、你设备上存储的信息，和你使用应用、服务或网站时用来识别你或别人的信息。</p>
+    <p>2）非个人信息。在用户和我们的应用互动时，我们也许会收集与用户相关的非个人身份信息。非个人身份信息会包括你手机型号，安卓版本和其他相似信息。 </p>
+    <p>a.
+      会话和可用数据。“会话和可用数据”是你提供给我们的在你使用一个应用，包括但不限于你通过使用我们应用，产生的连接和服务相关的数据信息。可用数据包括和连接请求、服务器通信的信息，包含网络、服务质量、日期、时间。就像下文描述的信息一样，我们也可以聚集会话和可用数据。请注意，会话和可用数据不包括任何个人信息，也不包括你可能通过使用应用程序（如照片，联系人等）。
+    </p>
+    <p>b. 登陆数据。当你使用应用程序和我互动，我们的系统可能会自动收集你独特的用户设备编号，IP地址，操作系统类型，和你使用的日期和时间（“登录数据”）。</p>
+    <p>c. 汇总信息。“汇总信息”是我们收集的一个小组或服务类别或用户的数据，其中用户个人身份信息已经被移除。汇总信息帮助我们了解用户需求趋势，使我们更好的考虑新的功能，为你更好的服务。</p>
+    <p> </p>
+    <p><strong>三</strong> <strong>我们如何使用收集的信息？</strong></p>
+    <p>1）个人信息----我们不收集任何个人信息，所以我们不会以任何方式使用你的个人信息。 </p>
+    <p>2） 非个人信息。</p>
+    <p>我们可能会使用非个人信息用于以下目的： </p>
+    <p>a. 用于个性化用户体验---为了改善产品，满足用户新的需求，我们会持续增加和改善产品功能，因此我们需要知道每个产品功能的使用量，即有多少用户在使用这个产品功能，以便我们能够对每个产品功能的重要性做出正确的判断； </p>
+    <p>b. 用于帮助提高我们的服务---我们可能会使用非个人信息用来提供、维护、提高、改善应用、服务和网站，并开发新的服务。 </p>
+    <p>c. 收集到的数据，我们会进行汇总分析，以便用于微清理业务进一步发展---我们可能会以推广和开拓市场为目的使用非个人信息。</p>
+    <p> </p>
+    <p><strong>四</strong> <strong>个人信息被透露的可能性</strong></p>
+    <p>1）个人信息。我们不会储存个人信息，所以我们不会透露你的个人信息。 </p>
+    <p>2）非个人信息。我们不会把非个人信息和个人信息对应起来（比如把你的名字和你特有的用户设备编号）。</p>
+    <p> </p>
+    <p><strong>五</strong> <strong>安全</strong></p>
+    <p>对于维护你信息的保密性，柚生非常关心。我们不收集个人信息，并且我们采用有效的措施来保护你的非个人信息，使这些信息不会在未经授权的情况下被访问和使用。请注意虽然我们采取的保护你信息的安全措施很完善，但不能绝对保证你的非个人信息可以避免在未授权的情况下被访问和使用。
+    </p>
+    <p> </p>
+    <p><strong>六</strong> <strong>隐私政策的更改</strong></p>
+    <p>我们保留在任何时候由我们全权处理、变更、修改或者以其他方式改变这个政策的权利，你可以在首次启动的启动页面下方的隐私协议处随时查看我们的隐私政策的最新版本。</p>
+    <p>如果你不同意本政策的任何修改，你可以立刻停止使用所有应用、服务和网站。如果你在政策修改后继续使用任何应用、服务或者网站，就表示你接受被修改的政策。请注意我们的雇员或代理人没有权利来改变我们的任何政策。</p>
+    <p> </p>
+    <p> </p>
+  </div>
+</body>
+
+</html>

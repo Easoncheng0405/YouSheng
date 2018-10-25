@@ -65,7 +65,8 @@
         <activity android:name=".activity.ReadyActivity" />
         <activity android:name=".activity.PregnantCheckActivity" />
         <activity android:name=".activity.PregnantCheckDetailActivity" />
-        <activity android:name=".activity.Agreement"></activity>
+        <activity android:name=".html.Agreement" />
+        <activity android:name=".html.Disclaimer"></activity>
     </application>
 
 </manifest>
