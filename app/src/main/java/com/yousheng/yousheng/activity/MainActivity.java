@@ -8,13 +8,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 
 import com.yousheng.yousheng.adapter.HabitAdapter;
+import com.yousheng.yousheng.calendarlib.CalendarView;
 import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.receiver.AlarmHelper;
+import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
+import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
 
 import org.litepal.LitePal;
@@ -23,11 +25,19 @@ import org.litepal.crud.callback.FindMultiCallback;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    //view
-
     /***优生打卡recyclerview*/
     private RecyclerView mRvHabitiList;
     private HabitAdapter mHabitAdapter;
+
+    /****时间选择器, 选择月份*/
+    private CustomDatePicker mMonthPicker;
+
+    /****日历控件**/
+    private CalendarView mCalendarView;
+
+    /****当前日历控件选中的时间*/
+    private String mCurrentSelectedDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlarmHelper.notifyAllAlarm(this);
 
         init();
+        initMember();
+    }
+
+    private void initMember() {
+        mCurrentSelectedDate = CalendarUtils.formatDateString(System.currentTimeMillis(),
+                "yyyy-MM-dd");
     }
 
     @Override
@@ -58,6 +74,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.layout_ovulation:
                 startActivity(new Intent(this, OvulationActivity.class));
+                break;
+            case R.id.tv_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case R.id.tv_date:
+            case R.id.iv_icon_down:
+                mMonthPicker.show(mCurrentSelectedDate);
                 break;
             default:
                 break;
@@ -84,5 +107,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRvHabitiList = findViewById(R.id.rv_good_habbit);
         mRvHabitiList.setLayoutManager(new LinearLayoutManager(this));
         queryHabitData();
+
+        mCalendarView = findViewById(R.id.calendarView);
+
+        mMonthPicker =
+                new CustomDatePicker.Builder()
+                        .setContext(this)
+                        .setTitle("选择月份")
+                        .setStartDate("2010-01-01 00:00")
+                        .setEndDate(CalendarUtils.formatDateString(System.currentTimeMillis(), "yyyy-MM-dd hh:mm"))
+                        .setResultHandler(new CustomDatePicker.ResultHandler() {
+                            @Override
+                            public void handle(String time) {
+                                String[] timeUnits = time.split(" ")[0].split("-");
+                                int year = Integer.valueOf(timeUnits[0]);
+                                int month = Integer.valueOf(timeUnits[1]);
+                                mCalendarView.scrollToCalendar(year, month, 1);
+                            }
+                        })
+                        .create();
+        mMonthPicker.hideTimeUnit(CustomDatePicker.SCROLL_TYPE.HOUR,
+                CustomDatePicker.SCROLL_TYPE.MINUTE);
     }
 }
