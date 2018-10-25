@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <com.wuhenzhizao.titlebar.widget.CommonTitleBar
@@ -30,12 +30,12 @@
 
         <com.allen.library.SuperTextView
             android:id="@+id/time"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="8dp"
+            android:visibility="gone"
             stv:sRightIconRes="@mipmap/arrow_right"
             stv:sShapeCornersRadius="3dp"
             stv:sShapeStrokeColor="@color/gray"
@@ -55,28 +55,42 @@
             stv:sShapeStrokeColor="@color/gray"
             stv:sShapeStrokeWidth="0.3dp"
             stv:sUseShape="true" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/title1"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:layout_margin="20dp">
 
-        <TextView
-            android:id="@+id/title2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Drakgray"
-            android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/title2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/Drakgray"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
     <com.allen.library.SuperTextView

@@ -60,6 +60,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             case R.id.disclaimer:
                 startActivity(new Intent(this, Disclaimer.class));
                 break;
+            case R.id.menseManagement:
+                startActivity(new Intent(this, MenseManagementActivity.class));
+                break;
         }
     }
 }

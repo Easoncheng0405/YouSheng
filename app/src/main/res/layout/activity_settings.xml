@@ -22,6 +22,8 @@
         stv:statusBarColor="@color/colorPrimaryDark"/>
 
     <com.allen.library.SuperTextView
+        android:onClick="onClick"
+        android:id="@+id/menseManagement"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"

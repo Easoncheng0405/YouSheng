@@ -28,40 +28,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.habit).setOnClickListener(this);
         findViewById(R.id.holdDays).setOnClickListener(this);
         findViewById(R.id.btn_ready).setOnClickListener(this);
-
-        //默认文案
-        {
-
-            Habit a = new Habit(1);
-            a.setOfficial(true);
-            a.setMainTitle("补充叶酸");
-            a.setSubTitle("避免胎儿畸形，应提前3个月坚持每天补充400微克");
-            if (LitePal.find(Habit.class, 1) == null)
-                a.save();
-            Habit b = new Habit(2);
-            b.setOfficial(true);
-            b.setMainTitle("不喝咖啡");
-            b.setSubTitle("咖啡影响孕育，每天喝一杯咖啡以上的育龄女性，怀孕的可能性只是不喝咖啡者的一半");
-
-            if (LitePal.find(Habit.class, 2) == null)
-                b.save();
-
-            Habit c = new Habit(3);
-            c.setMainTitle("补充鱼油");
-            c.setClockTime(1539612919000L);
-
-            if (LitePal.find(Habit.class, 3) == null)
-                c.save();
-
-            Habit d = new Habit(4);
-            d.setNeedSign(true);
-            d.setOfficial(true);
-            d.setMainTitle("坚持运动");
-            d.setSubTitle("运动使人快乐");
-
-            if (LitePal.find(Habit.class, 4) == null)
-                d.save();
-        }
     }
 
     @Override

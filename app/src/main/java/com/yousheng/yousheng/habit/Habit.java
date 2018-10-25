@@ -43,6 +43,9 @@ public class Habit extends LitePalSupport {
     //打卡时间
     private long signTime;
 
+    //优先级
+    private int level;
+
     public boolean isSigned() {
         return isSigned;
     }
@@ -72,7 +75,7 @@ public class Habit extends LitePalSupport {
     }
 
     public Habit() {
-
+        level = Integer.MAX_VALUE;
     }
 
     public long getId() {
@@ -141,6 +144,14 @@ public class Habit extends LitePalSupport {
 
     public void setClockTime(long clockTime) {
         this.clockTime = clockTime;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     @Override

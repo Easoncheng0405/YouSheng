@@ -35,6 +35,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
     private Context context;
     private boolean isNotify = false;
     private Habit habit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +59,6 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         if (id != -1) {
             habit = LitePal.find(Habit.class, id);
             content.setText(habit.getMainTitle());
-            ToastUtil.showMsg(context, "" + habit.getClockTime());
             if (habit.getClockTime() > 0) {
                 calendar.setTimeInMillis(habit.getClockTime());
             }
@@ -160,6 +160,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
             habit.setMainTitle(str);
             habit.setClockTime(time);
             habit.setNotify(isNotify);
+            habit.setOfficial(false);
             habit.save();
         } else {
             habit = LitePal.find(Habit.class, id);

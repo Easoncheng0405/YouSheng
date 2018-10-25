@@ -2,11 +2,15 @@ package com.yousheng.yousheng.habit;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -23,7 +27,7 @@ import java.util.Locale;
 
 /**
  * 打卡详情页面
- * */
+ */
 @Route(path = "/habitdetail/activity")
 public class HabitDetailActivity extends AppCompatActivity {
 
@@ -39,6 +43,7 @@ public class HabitDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_detail);
+
         Intent intent = getIntent();
         calendar.set(Calendar.HOUR_OF_DAY, 8);
         calendar.set(Calendar.MINUTE, 0);
@@ -51,11 +56,25 @@ public class HabitDetailActivity extends AppCompatActivity {
             titleBar.getLeftTextView().setText("  " + habit.getMainTitle());
             String str = habit.isNeedSign() ? "移除" : "添加";
             titleBar.getRightTextView().setText(str);
-            SuperTextView superTextView = findViewById(R.id.ok);
+            final SuperTextView superTextView = findViewById(R.id.ok);
             superTextView.setCenterString(str.equals("移除") ? "从首页移除" : "添加到首页");
 
             time = findViewById(R.id.time);
             notify = findViewById(R.id.notify);
+
+            final ScrollView scrollView = findViewById(R.id.scrollView);
+
+            scrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    ViewGroup.LayoutParams params = scrollView.getLayoutParams();
+                    params.height = (int) ((superTextView.getTop() - notify.getBottom()) * 0.9);
+                    params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    scrollView.setLayoutParams(params);
+                }
+            });
+
+
             isNotify = habit.isNotify();
             //初始化数据
             calendar.setTimeInMillis(habit.getClockTime());
@@ -98,14 +117,25 @@ public class HabitDetailActivity extends AppCompatActivity {
                     } else {
                         time.setVisibility(View.GONE);
                     }
-
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ViewGroup.LayoutParams params = scrollView.getLayoutParams();
+                            params.height = (int) ((superTextView.getTop() - notify.getBottom()) * 0.9);
+                            params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                            scrollView.setLayoutParams(params);
+                        }
+                    });
                 }
             });
 
             TextView title1 = findViewById(R.id.title1);
+            title1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             TextView title2 = findViewById(R.id.title2);
+            TextView content = findViewById(R.id.content);
             title1.setText(habit.getMainTitle());
             title2.setText(habit.getSubTitle());
+            content.setText(habit.getContent());
             superTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -140,5 +170,9 @@ public class HabitDetailActivity extends AppCompatActivity {
         h.setClockTime(calendar.getTimeInMillis());
         h.setNotify(isNotify);
         h.save();
+    }
+
+    private void reHeight(final ScrollView scrollView) {
+
     }
 }
