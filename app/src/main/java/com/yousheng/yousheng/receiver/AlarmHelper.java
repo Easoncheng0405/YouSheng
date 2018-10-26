@@ -12,7 +12,9 @@ import com.yousheng.yousheng.notify.NewItem;
 
 import org.litepal.LitePal;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 在设备重启后，设置的所有闹钟都会被清除，监听到设备开机完成或网络切换的广播
@@ -46,9 +48,9 @@ public class AlarmHelper {
         try {
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(AlarmHelper.ITEM_IN_TIME);
-            intent.putExtra("id",item.getId());
+            intent.putExtra("id", item.getId());
             PendingIntent sender = PendingIntent.getBroadcast(context, (int) item.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            am.setExact(AlarmManager.RTC_WAKEUP, item.getTime(), sender);
+            am.setExact(AlarmManager.RTC_WAKEUP, getNextDayMillis(item.getTime()), sender);
         } catch (Exception e) {
             Log.e("AlarmHelper", "notifyNewItem exception", e);
         }
@@ -59,11 +61,22 @@ public class AlarmHelper {
         try {
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(AlarmHelper.HABIT_IN_TIME);
-            intent.putExtra("id",habit.getId());
+            intent.putExtra("id", habit.getId());
             PendingIntent sender = PendingIntent.getBroadcast(context, (int) habit.getId(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            am.setRepeating(AlarmManager.RTC_WAKEUP, habit.getClockTime(), DAY, sender);
+            am.setRepeating(AlarmManager.RTC_WAKEUP, getNextDayMillis(habit.getClockTime()), DAY, sender);
         } catch (Exception e) {
             Log.e("AlarmHelper", "notifyHabit exception", e);
         }
+    }
+
+    //往后一直加一天直到时间大于当前日期
+    private static long getNextDayMillis(long millis) {
+        long now = System.currentTimeMillis();
+        Calendar db = Calendar.getInstance(Locale.CHINA);
+        db.setTimeInMillis(millis);
+        while (db.getTimeInMillis() < now) {
+            db.add(Calendar.DATE, 1);
+        }
+        return db.getTimeInMillis();
     }
 }
