@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /****当前选中的MenseInfo**/
     private MenseInfo mMenseInfoSelected;
 
+    /****当前选中的calendar对象**/
+    private Calendar mCalendarSelected;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,18 +149,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
-                updateMenseInfo(calendar.getTimeInMillis());
-                switchMenseEnd.setChecked(calendar.isMenseEnd());
-                switchMenseStart.setChecked(calendar.isMenseStart());
-                switchMakeLove.setChecked(calendar.isHasMakeLoveToday());
 
                 long id = calendar.getId();
                 if (id > -1) {
                     mMenseInfoSelected = LitePal.find(MenseInfo.class, id);
-                }
-                if (mMenseInfoSelected == null) {
+                } else {
                     mMenseInfoSelected = new MenseInfo();
                 }
+
+                calendar.setId(mMenseInfoSelected.getId());
+
+                updateMenseInfo(calendar.getTimeInMillis());
+                switchMenseEnd.setChecked(mMenseInfoSelected.isMenseEnd());
+                switchMenseStart.setChecked(mMenseInfoSelected.isMenseStart());
+                switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());
 
             }
         });
@@ -196,13 +201,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (buttonView == switchMenseStart) {
-                            mMenseInfoSelected.setMenseStart(!isChecked);
+                            mMenseInfoSelected.setMenseStart(isChecked);
                             mMenseInfoSelected.save();
                         } else if (buttonView == switchMenseEnd) {
-                            mMenseInfoSelected.setMenseEnd(!isChecked);
+                            mMenseInfoSelected.setMenseEnd(isChecked);
                             mMenseInfoSelected.save();
                         } else if (buttonView == switchMakeLove) {
-                            mMenseInfoSelected.setHasMakeLove(!isChecked);
+                            mMenseInfoSelected.setHasMakeLove(isChecked);
                             mMenseInfoSelected.save();
                         }
                     }

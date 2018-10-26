@@ -4,9 +4,11 @@ import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.uitl.SPSingleton;
 
+import java.util.Calendar;
+
 /****根据当前时间推算经期，安全期等*/
 public class MenseCalculator {
-    private final static long ONE_DAY_TS = 24 * 60 * 60L;
+    private final static long ONE_DAY_TS = 24 * 60 * 60 * 1000L;
 
 
     /***四种状态*/
@@ -23,10 +25,15 @@ public class MenseCalculator {
                 Constants.DEFAULT_MENSE_DURAION));
         int menseGap = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DURATION,
                 Constants.DEFAULT_MENSE_GAP));
+        Calendar todayCalendar = Calendar.getInstance();
+        Calendar temp = Calendar.getInstance();
+        temp.set(todayCalendar.get(Calendar.YEAR),
+                todayCalendar.get(Calendar.MONTH),
+                todayCalendar.get(Calendar.DAY_OF_MONTH),
+                0, 0, 0);
+
         long lastMenseStartTs = SPSingleton.get().getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
-                System.currentTimeMillis());
-
-
+                temp.getTimeInMillis());
         return (endDateTs - lastMenseStartTs) > 0
                 && ((endDateTs - lastMenseStartTs) % ((menseDuration + menseGap) * ONE_DAY_TS) <= menseDuration * ONE_DAY_TS);
     }

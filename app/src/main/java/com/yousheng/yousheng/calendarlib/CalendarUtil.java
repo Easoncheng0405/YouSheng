@@ -641,7 +641,6 @@ final class CalendarUtil {
                 }
             }
 
-
             LunarCalendar.setupLunarCalendar(calendarDate);
             //初始化经期状态
             calendarDate.setMensesState(MenseCalculator.getMenseState(calendarDate.getTimeInMillis()));

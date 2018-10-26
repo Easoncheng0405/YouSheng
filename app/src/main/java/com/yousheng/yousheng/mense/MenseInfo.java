@@ -2,6 +2,7 @@ package com.yousheng.yousheng.mense;
 
 import com.yousheng.yousheng.habit.Habit;
 
+import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
 import java.util.Objects;
@@ -24,12 +25,8 @@ public class MenseInfo extends LitePalSupport {
     //今天的备注
     private String comment;
 
-    public MenseInfo(){
-
-    }
-
-    public MenseInfo(long id) {
-        this.id = id;
+    public MenseInfo() {
+        this.id = LitePal.count(MenseInfo.class) + 1;
     }
 
     public long getId() {
