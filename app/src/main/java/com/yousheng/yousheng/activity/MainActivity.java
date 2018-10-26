@@ -6,18 +6,25 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.TextView;
 
+import com.yousheng.yousheng.MenseCalculator;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 
 import com.yousheng.yousheng.adapter.HabitAdapter;
+import com.yousheng.yousheng.calendarlib.Calendar;
 import com.yousheng.yousheng.calendarlib.CalendarView;
 import com.yousheng.yousheng.habit.Habit;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
+import com.yousheng.yousheng.uitl.TextUtils;
 
 import org.litepal.LitePal;
 import org.litepal.crud.callback.FindMultiCallback;
@@ -34,6 +41,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /****日历控件**/
     private CalendarView mCalendarView;
+
+    /****顶部的日期**/
+    private TextView tvDate;
+    /****日期+今天你处于什么时期*/
+    private TextView tvPregnantDate;
+    /*****怀孕率*/
+    private TextView tvPregnantPercent;
+    /***怀孕率描述*/
+    private TextView tvPregnantDescription;
 
     /****当前日历控件选中的时间*/
     private String mCurrentSelectedDate;
@@ -110,6 +126,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mCalendarView = findViewById(R.id.calendarView);
 
+        mCalendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
+            @Override
+            public void onCalendarOutOfRange(Calendar calendar) {
+
+            }
+
+            @Override
+            public void onCalendarSelect(Calendar calendar, boolean isClick) {
+                updateMenseInfo(calendar.getTimeInMillis());
+            }
+        });
+
         mMonthPicker =
                 new CustomDatePicker.Builder()
                         .setContext(this)
@@ -118,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setEndDate(CalendarUtils.formatDateString(System.currentTimeMillis(), "yyyy-MM-dd hh:mm"))
                         .setResultHandler(new CustomDatePicker.ResultHandler() {
                             @Override
-                            public void handle(String time) {
+                            public void handle(String time, long timeMills) {
                                 String[] timeUnits = time.split(" ")[0].split("-");
                                 int year = Integer.valueOf(timeUnits[0]);
                                 int month = Integer.valueOf(timeUnits[1]);
@@ -128,5 +156,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .create();
         mMonthPicker.hideTimeUnit(CustomDatePicker.SCROLL_TYPE.HOUR,
                 CustomDatePicker.SCROLL_TYPE.MINUTE);
+
+        tvDate = findViewById(R.id.tv_date);
+        tvPregnantDate = findViewById(R.id.tv_pregnant_securedate);
+        tvPregnantPercent = findViewById(R.id.tv_pregnant_percent);
+        tvPregnantDescription = findViewById(R.id.tv_pregnant_percent_value);
+    }
+
+    /***
+     * 当日期更新时，
+     * */
+    private void updateMenseInfo(long timeMills) {
+        tvDate.setText(CalendarUtils.formatDateString(timeMills, "yyyy年MM月"));
+
+        //right pregnant date
+        tvPregnantDate.setText(CalendarUtils.formatDateString(timeMills, "yyyy年MM月dd日\n"));
+        tvPregnantDate.append("您今天处于");
+        SpannableString spannableString = new SpannableString(MenseCalculator.getDateType(timeMills));
+        ForegroundColorSpan span = new ForegroundColorSpan(getResources().getColor(R.color.text_color_red_theme));
+        spannableString.setSpan(span, 0, spannableString.length() - 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        tvPregnantDate.append(spannableString);
+
+        //left
+        tvPregnantPercent.setText(String.valueOf(MenseCalculator.calculateLucky(timeMills)).concat("%"));
+        tvPregnantDescription.setText("好孕率\n");
+        tvPregnantDescription.append(TextUtils
+                .getSpannableString(getResources().getColor(R.color.text_color_red_theme),
+                        MenseCalculator.getPercentDescription(timeMills)));
     }
 }

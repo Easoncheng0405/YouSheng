@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
+import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
@@ -91,7 +92,7 @@ public class MenseManagementActivity extends AppCompatActivity {
                         .setTitle(getResources().getString(R.string.mense_management))
                         .setResultHandler(new CustomDatePicker.ResultHandler() {
                             @Override
-                            public void handle(String time) {
+                            public void handle(String time, long timeMills) {
                                 tvDaysMenseDuration.setText(time);
                                 SPSingleton.get()
                                         .putString(PrefConstants.PREFS_KEY_MENSE_DURATION, time);
@@ -109,7 +110,7 @@ public class MenseManagementActivity extends AppCompatActivity {
                         .setTitle(getResources().getString(R.string.mense_days_main_title))
                         .setResultHandler(new CustomDatePicker.ResultHandler() {
                             @Override
-                            public void handle(String time) {
+                            public void handle(String time, long timeMills) {
                                 tvDaysMenseDays.setText(time);
                                 SPSingleton.get()
                                         .putString(PrefConstants.PREFS_KEY_MENSE_DAYS, time);
@@ -126,10 +127,10 @@ public class MenseManagementActivity extends AppCompatActivity {
                                 .formatDateString(System.currentTimeMillis(), "yyyy-MM-dd hh:mm"))
                         .setResultHandler(new CustomDatePicker.ResultHandler() {
                             @Override
-                            public void handle(String time) {
+                            public void handle(String time, long timeMills) {
                                 tvDaysMenseStart.setText(time.split(" ")[0]);
                                 SPSingleton.get()
-                                        .putString(PrefConstants.PREFS_KEY_MENSE_START_DAY, time);
+                                        .putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, timeMills);
                             }
                         })
                         .create();
@@ -163,6 +164,13 @@ public class MenseManagementActivity extends AppCompatActivity {
 
         switchNotify.setChecked(true);
         switchPregnant.setChecked(true);
+
+        tvDaysMenseDuration.setText(SPSingleton.get()
+                .getString(PrefConstants.PREFS_KEY_MENSE_DURATION, Constants.DEFAULT_MENSE_GAP));
+        tvDaysMenseDays.setText(SPSingleton.get()
+                .getString(PrefConstants.PREFS_KEY_MENSE_DAYS, Constants.DEFAULT_MENSE_DURAION));
+        tvDaysMenseStart.setText(CalendarUtils.formatDateString(SPSingleton.get()
+                .getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, System.currentTimeMillis()), "MM/dd"));
     }
 
     private View.OnClickListener mClickListener = new View.OnClickListener() {

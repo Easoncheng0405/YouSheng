@@ -26,7 +26,7 @@ import java.util.Locale;
 public class CustomDatePicker {
     /**** 定义结果回调接口**/
     public interface ResultHandler {
-        void handle(String time);
+        void handle(String time,long timeMills);
     }
 
     public enum SCROLL_TYPE {
@@ -253,10 +253,12 @@ public class CustomDatePicker {
             public void onClick(View view) {
                 if (!isDayModeOn) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
-                    handler.handle(sdf.format(selectedCalender.getTime()));
+                    handler.handle(sdf.format(selectedCalender.getTime()),
+                            selectedCalender.getTime().getTime());
                 } else {
                     if (handler != null) {
-                        handler.handle(selectedDaysInDayMode);
+                        handler.handle(selectedDaysInDayMode,
+                                selectedCalender.getTime().getTime());
                     }
                 }
                 datePickerDialog.dismiss();
