@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.view.View;
 
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.mense.MenseCalculator;
 
 /**
  * 高仿魅族日历布局
@@ -119,7 +120,7 @@ public class MeiZuMonthView extends MonthView {
 
         boolean isInRange = isInRange(calendar);
         Paint paint;
-        if (calendar.getMensesState() == MensesCalendar.STATE_PAILUAN_DATE) {
+        if (calendar.getMensesState() == MenseCalculator.STATE_PAILUAN_DATE) {
             paint = mPaiLuanDateTextPaint;
         } else {
             paint = calendar.isCurrentMonth() && isInRange ? mCurMonthTextPaint : mOtherMonthTextPaint;
@@ -155,22 +156,27 @@ public class MeiZuMonthView extends MonthView {
 
         //根据经期状态选择颜色
         switch (calendar.getMensesState()) {
-            case MensesCalendar.STATE_JINGQI:
+            case MenseCalculator.STATE_MENSE:
                 mBackGroundPaint.setColor(getResources().getColor(R.color.calendar_jingqi));
                 break;
-            case MensesCalendar.STATE_PAILUAN_DURATION:
+            case MenseCalculator.STATE_PAILUAN_DURATION:
                 mBackGroundPaint.setColor(getResources().getColor(R.color.calendar_pailuan_duration));
                 break;
-            case MensesCalendar.STATE_PAILUAN_DATE:
+            case MenseCalculator.STATE_PAILUAN_DATE:
                 mBackGroundPaint.setColor(getResources().getColor(R.color.calendar_pailuan_date));
                 break;
-            case MensesCalendar.STATE_NORMAL:
+            case MenseCalculator.STATE_NORMAL:
                 mBackGroundPaint.setColor(getResources().getColor(R.color.calendar_normal));
                 break;
         }
         canvas.drawRect(x + mPadding, y + mPadding, x + mItemWidth - mPadding, y + mItemHeight - mPadding, mBackGroundPaint);
         Rect dest = new Rect(left, top, right, bottom);
-        canvas.drawBitmap(mBitmapLoveEmpty, null, dest, mBitmapPaint);
+
+        if (calendar.isHasMakeLoveToday()) {
+            canvas.drawBitmap(mBitmapLoveFill, null, dest, mBitmapPaint);
+        } else if (calendar.getMensesState() == MenseCalculator.STATE_PAILUAN_DATE) {
+            canvas.drawBitmap(mBitmapLoveFill, null, dest, mBitmapPaint);
+        }
     }
 
     /**

@@ -13,5 +13,6 @@
         <mapping class="com.yousheng.yousheng.habit.Record" />
         <mapping class="com.yousheng.yousheng.weight.Weight" />
         <mapping class="com.yousheng.yousheng.activity.Market" />
+        <mapping class="com.yousheng.yousheng.mense.MenseInfo" />
     </list>
 </litepal>

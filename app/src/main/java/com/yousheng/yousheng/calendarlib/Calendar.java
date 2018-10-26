@@ -125,6 +125,53 @@ public final class Calendar implements Serializable {
      */
     private int mensesState;
 
+    /**
+     * 今天是否同房了
+     */
+    private boolean hasMakeLoveToday;
+
+    /***
+     * 月经开始和结束
+     * */
+    private boolean isMenseStart;
+    private boolean isMenseEnd;
+
+    /**
+     * 对应数据库中的id
+     */
+    private long id = -1;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean isHasMakeLoveToday() {
+        return hasMakeLoveToday;
+    }
+
+    public void setHasMakeLoveToday(boolean hasMakeLoveToday) {
+        this.hasMakeLoveToday = hasMakeLoveToday;
+    }
+
+    public boolean isMenseStart() {
+        return isMenseStart;
+    }
+
+    public void setMenseStart(boolean menseStart) {
+        isMenseStart = menseStart;
+    }
+
+    public boolean isMenseEnd() {
+        return isMenseEnd;
+    }
+
+    public void setMenseEnd(boolean menseEnd) {
+        isMenseEnd = menseEnd;
+    }
 
     public int getMensesState() {
         return mensesState;

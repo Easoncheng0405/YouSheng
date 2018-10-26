@@ -1,10 +1,19 @@
-package com.yousheng.yousheng;
+package com.yousheng.yousheng.mense;
 
+import com.yousheng.yousheng.Constants;
+import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.uitl.SPSingleton;
 
 /****根据当前时间推算经期，安全期等*/
 public class MenseCalculator {
     private final static long ONE_DAY_TS = 24 * 60 * 60L;
+
+
+    /***四种状态*/
+    public final static int STATE_NORMAL = 0;
+    public final static int STATE_PAILUAN_DURATION = 1;
+    public final static int STATE_MENSE = 2;
+    public final static int STATE_PAILUAN_DATE = 3;
 
     /**
      * 是否处于经期内
@@ -19,7 +28,7 @@ public class MenseCalculator {
 
 
         return (endDateTs - lastMenseStartTs) > 0
-                && ((endDateTs - lastMenseStartTs) % (menseDuration + menseGap) <= menseDuration);
+                && ((endDateTs - lastMenseStartTs) % ((menseDuration + menseGap) * ONE_DAY_TS) <= menseDuration * ONE_DAY_TS);
     }
 
     /**
@@ -129,10 +138,20 @@ public class MenseCalculator {
     /**
      * 获取当前日期的类型，为安全期，经期，排卵期，排卵日
      */
-    public static String getDateType(long dateTs) {
+    public static String getMenseStateString(long dateTs) {
         if (isInMense(dateTs)) return "经期";
         if (isInPaiLuanDuration(dateTs)) return "排卵期";
         if (isPaiLuanDate(dateTs)) return "排卵日";
         return "安全期";
+    }
+
+    /**
+     * 获取经期，安全期，排卵期等各种类型的int值
+     */
+    public static int getMenseState(long dateTs) {
+        if (isInMense(dateTs)) return MenseCalculator.STATE_MENSE;
+        if (isInPaiLuanDuration(dateTs)) return MenseCalculator.STATE_PAILUAN_DURATION;
+        if (isPaiLuanDate(dateTs)) return MenseCalculator.STATE_PAILUAN_DATE;
+        return MenseCalculator.STATE_NORMAL;
     }
 }

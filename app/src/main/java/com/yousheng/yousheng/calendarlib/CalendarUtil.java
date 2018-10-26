@@ -17,6 +17,12 @@ package com.yousheng.yousheng.calendarlib;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
+
+import com.yousheng.yousheng.mense.MenseCalculator;
+import com.yousheng.yousheng.mense.MenseInfo;
+
+import org.litepal.LitePal;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -473,6 +479,7 @@ final class CalendarUtil {
     /**
      * 运算 calendar1 - calendar2
      * test Pass
+     *
      * @param calendar1 calendar1
      * @param calendar2 calendar2
      * @return calendar1 - calendar2
@@ -567,6 +574,41 @@ final class CalendarUtil {
             nextMonth = month + 1;
             preMonthDaysCount = mPreDiff == 0 ? 0 : CalendarUtil.getMonthDaysCount(preYear, preMonth);
         }
+
+        //get All calendar-view info from DataBase
+        java.util.Calendar startcalendar = java.util.Calendar.getInstance();
+        java.util.Calendar endCalendar = java.util.Calendar.getInstance();
+        startcalendar.set(preYear, preMonth, preMonthDaysCount - mPreDiff + 1);
+
+        //从数据库中查询出来42天，一整个页面的日历item的数据。
+        long startTimeMills = startcalendar.getTimeInMillis();
+        long endTimeMills = startTimeMills + 42 * ONE_DAY;
+        Cursor cursor =
+                LitePal.findBySQL("select * from MenseInfo where date >"
+                        .concat(String.valueOf(startTimeMills))
+                        .concat(" and date < ".concat(String.valueOf(endTimeMills))
+                                .concat(" order by date asc")));
+        List<MenseInfo> menseInfos = new ArrayList<>();
+
+        int dateIndex = cursor.getColumnIndex("date");
+        int menseStartIndex = cursor.getColumnIndex("isMenseStart");
+        int menseEndIndex = cursor.getColumnIndex("isMenseEnd");
+        int makeLoveIndex = cursor.getColumnIndex("hasMakeLove");
+        int commentIndex = cursor.getColumnIndex("comment");
+        int idIndex = cursor.getColumnIndex("id");
+
+        if (cursor.moveToFirst()) {
+            do {
+                MenseInfo menseInfo = new MenseInfo();
+                menseInfo.setDate(cursor.getLong(dateIndex));
+                menseInfo.setMenseStart(cursor.getInt(menseStartIndex) != 0);
+                menseInfo.setMenseEnd(cursor.getInt(menseEndIndex) != 0);
+                menseInfo.setHasMakeLove(cursor.getInt(makeLoveIndex) != 0);
+                menseInfo.setComment(cursor.getString(commentIndex));
+                menseInfo.setId(cursor.getLong(idIndex));
+            } while (cursor.moveToNext());
+        }
+
         int nextDay = 1;
         for (int i = 0; i < size; i++) {
             Calendar calendarDate = new Calendar();
@@ -588,8 +630,23 @@ final class CalendarUtil {
             if (calendarDate.equals(currentDate)) {
                 calendarDate.setCurrentDay(true);
             }
+
+            for (MenseInfo menseInfo : menseInfos) {
+                if (menseInfo.getDate() == calendarDate.getTimeInMillis()) {
+                    calendarDate.setMenseEnd(menseInfo.isMenseEnd());
+                    calendarDate.setMenseStart(menseInfo.isMenseStart());
+                    calendarDate.setHasMakeLoveToday(menseInfo.isHasMakeLove());
+                    calendarDate.setId(menseInfo.getId());
+                    break;
+                }
+            }
+
+
             LunarCalendar.setupLunarCalendar(calendarDate);
-            MensesCalendar.setUpMensesCalendar(calendarDate);
+            //初始化经期状态
+            calendarDate.setMensesState(MenseCalculator.getMenseState(calendarDate.getTimeInMillis()));
+
+            //从数据库中
             mItems.add(calendarDate);
         }
         return mItems;

@@ -1,18 +1,22 @@
 package com.yousheng.yousheng.activity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
-import com.yousheng.yousheng.MenseCalculator;
+import com.yousheng.yousheng.mense.MenseCalculator;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 
@@ -20,6 +24,7 @@ import com.yousheng.yousheng.adapter.HabitAdapter;
 import com.yousheng.yousheng.calendarlib.Calendar;
 import com.yousheng.yousheng.calendarlib.CalendarView;
 import com.yousheng.yousheng.habit.Habit;
+import com.yousheng.yousheng.mense.MenseInfo;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
@@ -51,8 +56,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /***怀孕率描述*/
     private TextView tvPregnantDescription;
 
+    /****月经开始，月经结束，make love switch**/
+    private SwitchCompat switchMenseStart;
+    private SwitchCompat switchMenseEnd;
+    private SwitchCompat switchMakeLove;
+
     /****当前日历控件选中的时间*/
     private String mCurrentSelectedDate;
+
+    /****当前选中的MenseInfo**/
+    private MenseInfo mMenseInfoSelected;
 
 
     @Override
@@ -125,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         queryHabitData();
 
         mCalendarView = findViewById(R.id.calendarView);
-
         mCalendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
             public void onCalendarOutOfRange(Calendar calendar) {
@@ -135,6 +147,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
                 updateMenseInfo(calendar.getTimeInMillis());
+                switchMenseEnd.setChecked(calendar.isMenseEnd());
+                switchMenseStart.setChecked(calendar.isMenseStart());
+                switchMakeLove.setChecked(calendar.isHasMakeLoveToday());
+
+                long id = calendar.getId();
+                if (id > -1) {
+                    mMenseInfoSelected = LitePal.find(MenseInfo.class, id);
+                }
+                if (mMenseInfoSelected == null) {
+                    mMenseInfoSelected = new MenseInfo();
+                }
+
             }
         });
 
@@ -161,21 +185,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvPregnantDate = findViewById(R.id.tv_pregnant_securedate);
         tvPregnantPercent = findViewById(R.id.tv_pregnant_percent);
         tvPregnantDescription = findViewById(R.id.tv_pregnant_percent_value);
+
+        //init switch
+        switchMenseStart = findViewById(R.id.switch_menstruation_start);
+        switchMenseEnd = findViewById(R.id.switch_menstruation_end);
+        switchMakeLove = findViewById(R.id.switch_make_love);
+
+        CompoundButton.OnCheckedChangeListener switchListener =
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (buttonView == switchMenseStart) {
+                            mMenseInfoSelected.setMenseStart(!isChecked);
+                            mMenseInfoSelected.save();
+                        } else if (buttonView == switchMenseEnd) {
+                            mMenseInfoSelected.setMenseEnd(!isChecked);
+                            mMenseInfoSelected.save();
+                        } else if (buttonView == switchMakeLove) {
+                            mMenseInfoSelected.setHasMakeLove(!isChecked);
+                            mMenseInfoSelected.save();
+                        }
+                    }
+                };
+
+        switchMenseStart.setOnCheckedChangeListener(switchListener);
+        switchMenseEnd.setOnCheckedChangeListener(switchListener);
+        switchMakeLove.setOnCheckedChangeListener(switchListener);
     }
 
     /***
-     * 当日期更新时，
+     * 当日期更新时
      * */
     private void updateMenseInfo(long timeMills) {
         tvDate.setText(CalendarUtils.formatDateString(timeMills, "yyyy年MM月"));
-
         //right pregnant date
         tvPregnantDate.setText(CalendarUtils.formatDateString(timeMills, "yyyy年MM月dd日\n"));
         tvPregnantDate.append("您今天处于");
-        SpannableString spannableString = new SpannableString(MenseCalculator.getDateType(timeMills));
-        ForegroundColorSpan span = new ForegroundColorSpan(getResources().getColor(R.color.text_color_red_theme));
-        spannableString.setSpan(span, 0, spannableString.length() - 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        tvPregnantDate.append(spannableString);
+        tvPregnantDate
+                .append(TextUtils.getSpannableString(getResources().getColor(R.color.text_color_red_theme),
+                        MenseCalculator.getMenseStateString(timeMills)));
 
         //left
         tvPregnantPercent.setText(String.valueOf(MenseCalculator.calculateLucky(timeMills)).concat("%"));
