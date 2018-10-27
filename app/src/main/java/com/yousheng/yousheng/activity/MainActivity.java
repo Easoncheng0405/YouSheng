@@ -1,6 +1,7 @@
 package com.yousheng.yousheng.activity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
 import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.mense.MenseCalculator;
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initMember() {
         mCurrentSelectedDate = CalendarUtils.formatDateString(System.currentTimeMillis(),
-                "yyyy-MM-dd");
+                Constants.DATE_FORMAT);
     }
 
     @Override
@@ -132,6 +134,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_add_new_item:
                 startActivity(new Intent(this, NewItemActivity.class));
+                break;
+            case R.id.layout_comment:
+                Intent intent = new Intent(this, ReadyActivity.class);
+                intent.putExtra("date", mMenseInfoSelected.getDate());
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -168,19 +175,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
+                String dateString = CalendarUtils.formatDateString(calendar.getTimeInMillis(), Constants.DATE_FORMAT);
+                List<MenseInfo> menseInfos = LitePal
+                        .select(null)
+                        .where("date = ?", dateString)
+                        .find(MenseInfo.class);
+                mMenseInfoSelected = (menseInfos != null && menseInfos.size() > 0) ? menseInfos.get(0)
+                        : (new MenseInfo());
 
-                long id = calendar.getId();
-                if (id > -1) {
-                    mMenseInfoSelected = LitePal.find(MenseInfo.class, id);
-                }
-
-                if (id <= -1 || mMenseInfoSelected == null) {
-                    mMenseInfoSelected = new MenseInfo();
-                }
-
-                calendar.setId(mMenseInfoSelected.getId());
 
                 updateMenseInfo(calendar.getTimeInMillis());
+                mMenseInfoSelected.setDate(dateString);
+                mMenseInfoSelected.setDateTs(calendar.getTimeInMillis());
+                mMenseInfoSelected.save();
                 switchMenseEnd.setChecked(mMenseInfoSelected.isMenseEnd());
                 switchMenseStart.setChecked(mMenseInfoSelected.isMenseStart());
                 switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());

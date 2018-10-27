@@ -19,8 +19,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.mense.MenseCalculator;
 import com.yousheng.yousheng.model.MenseInfo;
+import com.yousheng.yousheng.uitl.CalendarUtils;
 
 import org.litepal.LitePal;
 
@@ -34,7 +36,7 @@ import java.util.List;
  */
 final class CalendarUtil {
 
-    private static final long ONE_DAY = 1000 * 3600 * 24;
+    public static final long ONE_DAY = 1000 * 3600 * 24L;
 
     @SuppressLint("SimpleDateFormat")
     static int getDate(String formatStr, Date date) {
@@ -583,31 +585,20 @@ final class CalendarUtil {
         //从数据库中查询出来42天，一整个页面的日历item的数据。
         long startTimeMills = startcalendar.getTimeInMillis();
         long endTimeMills = startTimeMills + 42 * ONE_DAY;
-        Cursor cursor =
+    /*    Cursor cursor =
                 LitePal.findBySQL("select * from MenseInfo where date >"
                         .concat(String.valueOf(startTimeMills))
                         .concat(" and date < ".concat(String.valueOf(endTimeMills))
                                 .concat(" order by date asc")));
-        List<MenseInfo> menseInfos = new ArrayList<>();
+        List<MenseInfo> menseInfos = new ArrayList<>();*/
 
-        int dateIndex = cursor.getColumnIndex("date");
-        int menseStartIndex = cursor.getColumnIndex("isMenseStart");
-        int menseEndIndex = cursor.getColumnIndex("isMenseEnd");
-        int makeLoveIndex = cursor.getColumnIndex("hasMakeLove");
-        int commentIndex = cursor.getColumnIndex("comment");
-        int idIndex = cursor.getColumnIndex("id");
+        List<MenseInfo> menseInfos =
+                LitePal.select(null)
+                        .where("datets < ? and datets > ?", String.valueOf(endTimeMills),
+                                String.valueOf(startTimeMills))
+                        .order("date asc")
+                        .find(MenseInfo.class);
 
-        if (cursor.moveToFirst()) {
-            do {
-                MenseInfo menseInfo = new MenseInfo();
-                menseInfo.setDate(cursor.getLong(dateIndex));
-                menseInfo.setMenseStart(cursor.getInt(menseStartIndex) != 0);
-                menseInfo.setMenseEnd(cursor.getInt(menseEndIndex) != 0);
-                menseInfo.setHasMakeLove(cursor.getInt(makeLoveIndex) != 0);
-                menseInfo.setComment(cursor.getString(commentIndex));
-                menseInfo.setId(cursor.getLong(idIndex));
-            } while (cursor.moveToNext());
-        }
 
         int nextDay = 1;
         for (int i = 0; i < size; i++) {
@@ -632,11 +623,12 @@ final class CalendarUtil {
             }
 
             for (MenseInfo menseInfo : menseInfos) {
-                if (menseInfo.getDate() == calendarDate.getTimeInMillis()) {
+                if (CalendarUtils
+                        .formatDateString(calendarDate.getTimeInMillis(), Constants.DATE_FORMAT)
+                        .equals(menseInfo.getDate())) {
                     calendarDate.setMenseEnd(menseInfo.isMenseEnd());
                     calendarDate.setMenseStart(menseInfo.isMenseStart());
                     calendarDate.setHasMakeLoveToday(menseInfo.isHasMakeLove());
-                    calendarDate.setId(menseInfo.getId());
                     break;
                 }
             }

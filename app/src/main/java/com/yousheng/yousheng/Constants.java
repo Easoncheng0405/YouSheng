@@ -16,4 +16,8 @@ public class Constants {
 
     /****试纸结果界面*/
 
+
+    /****时间常量**/
+    public final static long ONE_DAY_IN_TS = 24 * 3600 * 1000L;
+    public final static String DATE_FORMAT = "yyyy-MM-dd";
 }

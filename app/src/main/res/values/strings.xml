@@ -202,7 +202,7 @@
     <string name="welcome_text">柚生 ( 有质有料才精彩 )</string>
 
     <!--备注-->
-    <string name="ready_comment">  备注</string>
+    <string name="ready_comment">  加油坚持，小宝贝！</string>
     <string name="record_in">录入</string>
 
     <!--备孕必检项-->
@@ -247,4 +247,7 @@
     <string name="mense_notify_sub_title">提前2天提醒</string>
     <string name="mense_pregnant_main_title">备孕模式</string>
     <string name="mense_pregnant_sub_title">开启后切换到备孕模式</string>
+
+    <!--备注界面-->
+    <string name="comment_default_hint">加油坚持，小宝贝!</string>
 </resources>

@@ -136,18 +136,6 @@ public final class Calendar implements Serializable {
     private boolean isMenseStart;
     private boolean isMenseEnd;
 
-    /**
-     * 对应数据库中的id
-     */
-    private long id = -1;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public boolean isHasMakeLoveToday() {
         return hasMakeLoveToday;

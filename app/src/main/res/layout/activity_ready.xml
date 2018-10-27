@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ReadyActivity"
-    android:orientation="vertical">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".activity.ReadyActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
         android:id="@+id/title"
@@ -14,20 +16,20 @@
         stv:fillStatusBar="true"
         stv:leftDrawable="@drawable/back"
         stv:leftDrawablePadding="25dp"
-        stv:leftText="@string/record_ovulation_result"
+        stv:leftText="@string/comment"
         stv:leftTextColor="@color/white"
         stv:leftTextSize="20sp"
         stv:leftType="textView"
         stv:rightText="@string/record_in"
         stv:rightTextColor="@color/white"
         stv:rightTextSize="20sp"
+        stv:rightType="textView"
         stv:statusBarColor="@color/colorPrimaryDark"
         stv:titleBarColor="@color/colorPrimary"
         stv:titleBarHeight="60dp" />
 
     <EditText
         android:id="@+id/et_ready"
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="187dp"
         android:layout_marginEnd="8dp"
@@ -36,6 +38,8 @@
         android:background="@drawable/shape_ready_input_text_rectangle"
         android:gravity="top"
         android:hint="@string/ready_comment"
+        android:maxLines="8"
+        android:padding="10dp"
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/black"
         android:textCursorDrawable="@null" />

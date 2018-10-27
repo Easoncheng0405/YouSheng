@@ -62,7 +62,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.ReadyActivity" />
+        <activity
+            android:name=".activity.ReadyActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.PregnantCheckActivity" />
         <activity android:name=".activity.PregnantCheckDetailActivity" />
         <activity android:name=".html.Agreement" />

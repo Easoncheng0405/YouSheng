@@ -6,10 +6,12 @@ import org.litepal.crud.LitePalSupport;
 import java.util.Objects;
 
 public class MenseInfo extends LitePalSupport {
-    private long id;
 
     //当前日期
-    private long date;
+    private String date;
+
+    //日期的毫秒表示
+    private long dateTs;
 
     //月经开始
     private boolean isMenseStart;
@@ -23,24 +25,19 @@ public class MenseInfo extends LitePalSupport {
     //今天的备注
     private String comment;
 
-    public MenseInfo() {
-        this.id = LitePal.count(MenseInfo.class) + 1;
+    public long getDateTs() {
+        return dateTs;
     }
 
-    public long getId() {
-        return id;
+    public void setDateTs(long dateTs) {
+        this.dateTs = dateTs;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-
-    public long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -82,11 +79,7 @@ public class MenseInfo extends LitePalSupport {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MenseInfo menseInfo = (MenseInfo) o;
-        return id == menseInfo.id;
+        return menseInfo.getDate()==this.getDate();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
