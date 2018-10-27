@@ -159,7 +159,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-
                             android:layout_marginStart="20dp"
                             android:layout_toEndOf="@id/iv_level_three"
                             android:text="@string/ovulation_level_three"
@@ -229,7 +228,8 @@
                     android:id="@+id/switch_make_love"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true" />
             </RelativeLayout>
 
             <!--使用说明-->

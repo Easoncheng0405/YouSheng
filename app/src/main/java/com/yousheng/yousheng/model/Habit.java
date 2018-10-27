@@ -2,6 +2,8 @@ package com.yousheng.yousheng.model;
 
 import org.litepal.crud.LitePalSupport;
 
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -22,8 +24,6 @@ public class Habit extends LitePalSupport {
     //是否需要打卡?
     private boolean needSign;
 
-    //是否已经打卡
-    private boolean isSigned;
 
     //官方习惯?
     private boolean official;
@@ -46,13 +46,6 @@ public class Habit extends LitePalSupport {
     //优先级
     private int level;
 
-    public boolean isSigned() {
-        return isSigned;
-    }
-
-    public void setSigned(boolean signed) {
-        isSigned = signed;
-    }
 
     public long getSignTime() {
         return signTime;
@@ -152,6 +145,14 @@ public class Habit extends LitePalSupport {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public boolean isSigned() {
+        Calendar db = Calendar.getInstance(Locale.CHINA);
+        Calendar now = Calendar.getInstance(Locale.CHINA);
+        db.setTimeInMillis(signTime);
+        now.setTimeInMillis(System.currentTimeMillis());
+        return now.get(Calendar.DAY_OF_YEAR) <= db.get(Calendar.DAY_OF_YEAR);
     }
 
     @Override

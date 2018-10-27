@@ -13,8 +13,6 @@ import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.model.Habit;
-import com.yousheng.yousheng.model.Record;
-import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
 
@@ -26,12 +24,10 @@ import java.util.Locale;
 public class HoldOnDays extends AppCompatActivity {
 
     private Habit habit;
-    private Record record;
     private Calendar calendar = Calendar.getInstance(Locale.CHINA);
     private SuperTextView time;
     private SuperTextView notify;
     private TimePickerDialog timePickerDialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +35,24 @@ public class HoldOnDays extends AppCompatActivity {
         setContentView(R.layout.activity_hold_on_days);
         long id = getIntent().getLongExtra("id", -1);
         habit = LitePal.find(Habit.class, id);
-        record = LitePal.find(Record.class, id);
         //必须传入一个合法的并且从数据库查到此习惯
         if (id == -1 || habit == null) {
             finish();
             return;
         }
-        findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
+
+        SuperTextView superTextView = findViewById(R.id.ok);
+        superTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 record();
             }
         });
+        if (habit.isSigned())
+            superTextView.setCenterString("取消打卡");
+        else
+            superTextView.setCenterString("打卡");
+
         CommonTitleBar titleBar = findViewById(R.id.title);
 
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
@@ -64,13 +66,7 @@ public class HoldOnDays extends AppCompatActivity {
         ((TextView) findViewById(R.id.title1)).setText(habit.getMainTitle());
         if (habit.isOfficial())
             ((TextView) findViewById(R.id.title2)).setText(habit.getSubTitle());
-        if (record == null) {
-            record = new Record();
-            record.setId(habit.getId());
-            record.setDays(0);
-            record.setTime(0);
-        }
-        ((TextView) findViewById(R.id.number)).setText(record.getDays() + "");
+        ((TextView) findViewById(R.id.number)).setText(habit.getKeepDays() + "");
 
         calendar.setTimeInMillis(habit.getClockTime());
         time = findViewById(R.id.time);
@@ -130,21 +126,15 @@ public class HoldOnDays extends AppCompatActivity {
 
     //打卡
     private void record() {
-        long millis = System.currentTimeMillis();
-        Calendar db = Calendar.getInstance(Locale.CHINA);
-        Calendar now = Calendar.getInstance(Locale.CHINA);
-        db.setTimeInMillis(record.getTime());
-        now.setTimeInMillis(millis);
-        if (now.get(Calendar.DAY_OF_YEAR) <= db.get(Calendar.DAY_OF_YEAR)) {
-            ToastUtil.showMsg(this, "今天已经打过卡了哦！");
-            return;
+        if (habit.isSigned()) {
+            habit.setSignTime(1000);
+            habit.setKeepDays(habit.getKeepDays() - 1);
+            habit.save();
+        } else {
+            habit.setSignTime(System.currentTimeMillis());
+            habit.setKeepDays(habit.getKeepDays() + 1);
+            habit.save();
         }
-        //记录上次打卡时间
-        record.setTime(millis);
-        //打卡+1
-        record.setDays(record.getDays() + 1);
-        record.save();
-        //页面显示+1
-        ((TextView) findViewById(R.id.number)).setText(record.getDays() + "");
+        finish();
     }
 }

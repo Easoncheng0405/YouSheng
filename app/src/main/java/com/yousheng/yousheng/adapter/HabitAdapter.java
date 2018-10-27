@@ -15,9 +15,11 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.habit.HabitDetailActivity;
+import com.yousheng.yousheng.habit.HoldOnDays;
 import com.yousheng.yousheng.model.Habit;
 
+
+import org.litepal.LitePal;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,8 +46,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
     @Override
     public GoodHabitViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int index) {
         View itemView = mInflater.inflate(R.layout.layout_rv_item_goodhabit, null);
-        GoodHabitViewHolder holder = new GoodHabitViewHolder(itemView);
-        return holder;
+        return new GoodHabitViewHolder(itemView);
     }
 
     @Override
@@ -67,6 +68,10 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         else
             viewHolder.tvClock.setVisibility(View.GONE);
         viewHolder.checkBox.setChecked(habit.isSigned());
+        if (viewHolder.checkBox.isChecked()) {
+            viewHolder.itemView.setBackground(mContext.getResources()
+                    .getDrawable(R.drawable.shape_rv_item_selected));
+        }
         if (habit.isSigned()) {
             viewHolder.itemView.setBackground(mContext.getResources().
                     getDrawable(R.drawable.shape_rv_item_selected));
@@ -78,7 +83,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, HabitDetailActivity.class);
+                Intent intent = new Intent(mContext, HoldOnDays.class);
                 intent.putExtra("id", habit.getId());
                 mContext.startActivity(intent);
             }
@@ -90,9 +95,35 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
                 if (isChecked) {
                     viewHolder.itemView.setBackground(mContext.getResources()
                             .getDrawable(R.drawable.shape_rv_item_selected));
+                    habit.setSignTime(System.currentTimeMillis());
+                    habit.setKeepDays(habit.getKeepDays() + 1);
+                    SpannableString spannableString =
+                            new SpannableString("(已坚持".concat(String.valueOf(habit.getKeepDays())).concat("天)"));
+                    spannableString.setSpan(
+                            new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_color_red_theme)),
+                            4,
+                            4 + String.valueOf(habit.getKeepDays()).length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    viewHolder.tvKeepDays.setText(spannableString);
+                    Habit h = LitePal.find(Habit.class, habit.getId());
+                    h.setKeepDays(habit.getKeepDays());
+                    h.setSignTime(System.currentTimeMillis());
+                    h.save();
                 } else {
                     viewHolder.itemView.setBackground(mContext.getResources()
                             .getDrawable(R.drawable.shape_rv_item_unseleceted));
+                    habit.setSignTime(1000);
+                    habit.setKeepDays(habit.getKeepDays() - 1);
+                    SpannableString spannableString =
+                            new SpannableString("(已坚持".concat(String.valueOf(habit.getKeepDays())).concat("天)"));
+                    spannableString.setSpan(
+                            new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_color_red_theme)),
+                            4,
+                            4 + String.valueOf(habit.getKeepDays()).length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    viewHolder.tvKeepDays.setText(spannableString);
+                    Habit h = LitePal.find(Habit.class, habit.getId());
+                    h.setKeepDays(habit.getKeepDays());
+                    h.setSignTime(1000);
+                    h.save();
                 }
             }
         });
@@ -111,7 +142,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         private TextView tvClock;
         private View itemView;
 
-        public GoodHabitViewHolder(@NonNull View itemView) {
+        GoodHabitViewHolder(@NonNull View itemView) {
             super(itemView);
             this.tvMainTitle = itemView.findViewById(R.id.tv_main_title);
             this.tvSubTitle = itemView.findViewById(R.id.tv_sub_title);

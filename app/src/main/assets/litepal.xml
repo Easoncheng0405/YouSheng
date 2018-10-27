@@ -10,7 +10,6 @@
         <!--这里放表-->
         <mapping class="com.yousheng.yousheng.notify.NewItem" />
         <mapping class="com.yousheng.yousheng.model.Habit" />
-        <mapping class="com.yousheng.yousheng.model.Record" />
         <mapping class="com.yousheng.yousheng.model.Weight" />
         <mapping class="com.yousheng.yousheng.model.Market" />
         <mapping class="com.yousheng.yousheng.model.MenseInfo" />

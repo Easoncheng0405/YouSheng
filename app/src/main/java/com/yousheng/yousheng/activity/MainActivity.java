@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
+import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.mense.MenseCalculator;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
@@ -21,6 +22,7 @@ import com.yousheng.yousheng.calendarlib.Calendar;
 import com.yousheng.yousheng.calendarlib.CalendarView;
 import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.MenseInfo;
+import com.yousheng.yousheng.notify.NewItemActivity;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
@@ -28,7 +30,6 @@ import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.TextUtils;
 
 import org.litepal.LitePal;
-import org.litepal.crud.callback.FindMultiCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,6 +77,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //唤醒所有闹钟
         AlarmHelper.notifyAllAlarm(this);
+        mRvHabitiList = findViewById(R.id.rv_good_habbit);
+        mRvHabitiList.setLayoutManager(new LinearLayoutManager(this));
+
+        HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.TOP_DECORATION, 0);//top间距
+
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION, 25);//底部间距
+
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.LEFT_DECORATION, 10);//左间距
+
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.RIGHT_DECORATION, 10);//右间距
+
+        mRvHabitiList.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
+        mRvHabitiList.setNestedScrollingEnabled(false);
 
         init();
         initMember();
@@ -112,6 +127,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.iv_icon_down:
                 mMonthPicker.show(mCurrentSelectedDate);
                 break;
+            case R.id.btn_add_new_habbit:
+                startActivity(new Intent(this, AllHabitActivity.class));
+                break;
+            case R.id.btn_add_new_item:
+                startActivity(new Intent(this, NewItemActivity.class));
+                break;
             default:
                 break;
         }
@@ -130,17 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         mHabitAdapter = new HabitAdapter(list, MainActivity.this);
         mRvHabitiList.setAdapter(mHabitAdapter);
-        HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
-        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.TOP_DECORATION, 0);//top间距
 
-        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION, 20);//底部间距
-
-        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.LEFT_DECORATION, 0);//左间距
-
-        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.RIGHT_DECORATION, 0);//右间距
-
-        mRvHabitiList.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
-        mRvHabitiList.setNestedScrollingEnabled(false);
 
     }
 
@@ -148,10 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 初始化activity中的变量，从数据库中查询数据
      */
     private void init() {
-        mRvHabitiList = findViewById(R.id.rv_good_habbit);
-        mRvHabitiList.setLayoutManager(new LinearLayoutManager(this));
-        queryHabitData();
-
         mCalendarView = findViewById(R.id.calendarView);
         mCalendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
@@ -252,5 +259,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvPregnantDescription.append(TextUtils
                 .getSpannableString(getResources().getColor(R.color.text_color_red_theme),
                         MenseCalculator.getPercentDescription(timeMills)));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        queryHabitData();
     }
 }

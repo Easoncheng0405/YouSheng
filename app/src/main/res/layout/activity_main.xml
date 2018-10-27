@@ -423,6 +423,7 @@
                     android:textSize="24sp" />
 
                 <Button
+                    android:onClick="onClick"
                     android:id="@+id/btn_add_new_habbit"
                     style="@style/bottom_button_style"
                     android:layout_width="match_parent"
@@ -451,6 +452,7 @@
                     android:textSize="24sp" />
 
                 <Button
+                    android:onClick="onClick"
                     android:id="@+id/btn_add_new_item"
                     style="@style/bottom_button_style"
                     android:layout_width="match_parent"
