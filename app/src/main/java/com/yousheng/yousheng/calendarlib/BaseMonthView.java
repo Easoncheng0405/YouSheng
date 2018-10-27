@@ -18,6 +18,10 @@ package com.yousheng.yousheng.calendarlib;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.yousheng.yousheng.PrefConstants;
+import com.yousheng.yousheng.mense.MenseCalculator;
+import com.yousheng.yousheng.uitl.SPSingleton;
+
 /**
  * 月视图基础控件,可自由继承实现
  * 可通过此扩展各种视图如：MonthView、RangeMonthView
@@ -147,6 +151,12 @@ public abstract class BaseMonthView extends BaseView {
         invalidate();
     }
 
+    final void updateItemsMenseInfo() {
+        for (Calendar calendar : mItems) {
+            calendar.setMensesState(MenseCalculator.getMenseState(calendar.getTimeInMillis()));
+        }
+    }
+
     /**
      * 更新周起始
      */
@@ -168,7 +178,6 @@ public abstract class BaseMonthView extends BaseView {
             mHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight, mDelegate.getWeekStart());
         }
     }
-
 
 
     @Override

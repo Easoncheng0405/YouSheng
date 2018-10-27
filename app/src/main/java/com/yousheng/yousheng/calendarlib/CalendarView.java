@@ -1152,6 +1152,14 @@ public class CalendarView extends FrameLayout {
         mWeekPager.updateScheme();
     }
 
+
+    /***
+     * 从经期设置界面返回后，如果上次经期开始时间改变，需要更新calendar panel
+     * */
+    public final void updateMenseInfo(){
+        mMonthPager.updateMenseSatate();
+    }
+
     /**
      * 更新周视图
      */

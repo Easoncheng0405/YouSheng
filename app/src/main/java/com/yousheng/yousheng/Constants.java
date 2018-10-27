@@ -9,6 +9,8 @@ public class Constants {
     public final static int REQUEST_CODE_OVULATION_TO_RECORD = 1;
     public final static int RESULT_CODE_NO_CHANGE = -1;
     public final static int RESULT_CODE_HAS_CHANGE = -2;
+    public final static int RESULT_CODE_MENSE_START_DAY_CHANGED = -3;
+    public final static int REQUEST_CODE_SETTING_TO_MENSE_MANAGEMENT = 3;
 
     /****经期管理界面常量*/
     public final static String DEFAULT_MENSE_GAP = "28";

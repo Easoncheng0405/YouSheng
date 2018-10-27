@@ -5,15 +5,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
+import com.yousheng.yousheng.Constants;
+import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.html.Agreement;
 import com.yousheng.yousheng.html.Disclaimer;
 import com.yousheng.yousheng.model.Market;
+import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
@@ -70,7 +74,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, Disclaimer.class));
                 break;
             case R.id.menseManagement:
-                startActivity(new Intent(this, MenseManagementActivity.class));
+                startActivityForResult(new Intent(this, MenseManagementActivity.class),
+                        Constants.REQUEST_CODE_SETTING_TO_MENSE_MANAGEMENT);
                 break;
             case R.id.update:
                 List<Market> markets = LitePal.findAll(Market.class);
@@ -90,6 +95,17 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case Constants.REQUEST_CODE_SETTING_TO_MENSE_MANAGEMENT:
+                if (resultCode == Constants.RESULT_CODE_MENSE_START_DAY_CHANGED) {
+                    SPSingleton.get().putBoolean(PrefConstants.PRFS_KEY_MENSE_START_DAY_CHANGED, true);
+                }
+                break;
+        }
+    }
 
     /**
      * 跳转应用商店.

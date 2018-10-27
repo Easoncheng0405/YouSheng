@@ -109,6 +109,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_SAVED, false)) {
             startActivity(new Intent(this, MenseManagementActivity.class));
         }
+
+        if (SPSingleton.get().getBoolean(PrefConstants.PRFS_KEY_MENSE_START_DAY_CHANGED, false)) {
+            SPSingleton.get().putBoolean(PrefConstants.PRFS_KEY_MENSE_START_DAY_CHANGED, false);
+            mCalendarView.updateMenseInfo();
+        }
     }
 
     @Override
@@ -197,7 +202,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());
 
 
-
             }
         });
 
@@ -245,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else if (buttonView == switchMakeLove) {
                             mMenseInfoSelected.setHasMakeLove(isChecked);
                             mMenseInfoSelected.save();
-                            if(mCalendarSelected!=null){
+                            if (mCalendarSelected != null) {
                                 mCalendarSelected.setHasMakeLoveToday(isChecked);
                                 mCalendarView.update();
                             }

@@ -2,6 +2,7 @@ package com.yousheng.yousheng.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -141,8 +142,8 @@ public class MenseManagementActivity extends AppCompatActivity {
         btnStart.setOnClickListener(mClickListener);
 
         //init switch
-        final Switch switchNotify = layoutMenseNotify.findViewById(R.id.switch_mense);
-        final Switch switchPregnant = layoutMenseMode.findViewById(R.id.switch_mense);
+        final SwitchCompat switchNotify = layoutMenseNotify.findViewById(R.id.switch_mense);
+        final SwitchCompat switchPregnant = layoutMenseMode.findViewById(R.id.switch_mense);
 
         Switch.OnCheckedChangeListener checkListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -196,6 +197,7 @@ public class MenseManagementActivity extends AppCompatActivity {
                 case R.id.btn_start:
                     SPSingleton.get()
                             .putBoolean(PrefConstants.PREFS_KEY_MENSE_SAVED, true);
+                    setResult(Constants.RESULT_CODE_MENSE_START_DAY_CHANGED);
                     finish();
                     break;
             }

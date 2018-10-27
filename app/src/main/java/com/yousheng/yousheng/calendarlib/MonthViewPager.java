@@ -368,6 +368,14 @@ public final class MonthViewPager extends ViewPager {
         }
     }
 
+    void updateMenseSatate(){
+        for (int i = 0; i < getChildCount(); i++) {
+            BaseMonthView view = (BaseMonthView) getChildAt(i);
+            view.updateItemsMenseInfo();
+            view.update();
+        }
+    }
+
     /**
      * 更新标记日期
      */
