@@ -140,6 +140,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("date", mMenseInfoSelected.getDate());
                 startActivity(intent);
                 break;
+            case R.id.layout_pregnant_check:
+                startActivity(new Intent(this, PregnantCheckActivity.class));
+                break;
             default:
                 break;
         }
@@ -175,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
+                mCalendarSelected = calendar;
                 String dateString = CalendarUtils.formatDateString(calendar.getTimeInMillis(), Constants.DATE_FORMAT);
                 List<MenseInfo> menseInfos = LitePal
                         .select(null)
@@ -191,6 +195,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switchMenseEnd.setChecked(mMenseInfoSelected.isMenseEnd());
                 switchMenseStart.setChecked(mMenseInfoSelected.isMenseStart());
                 switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());
+
+
 
             }
         });
@@ -239,6 +245,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else if (buttonView == switchMakeLove) {
                             mMenseInfoSelected.setHasMakeLove(isChecked);
                             mMenseInfoSelected.save();
+                            if(mCalendarSelected!=null){
+                                mCalendarSelected.setHasMakeLoveToday(isChecked);
+                                mCalendarView.update();
+                            }
                         }
                     }
                 };

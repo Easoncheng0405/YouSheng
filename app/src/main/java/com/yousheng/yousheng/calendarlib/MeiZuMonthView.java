@@ -127,24 +127,6 @@ public class MeiZuMonthView extends MonthView {
         }
 
         canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top, paint);
-
-       /* if (isSelected) {
-            canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top,
-                    mSelectTextPaint);
-            canvas.drawText(calendar.getLunar(), cx, mTextBaseLine + y + mItemHeight / 10, mSelectedLunarTextPaint);
-        } else if (hasScheme) {
-            canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top,
-                    calendar.isCurrentMonth() && isInRange ? mSchemeTextPaint : mOtherMonthTextPaint);
-
-            canvas.drawText(calendar.getLunar(), cx, mTextBaseLine + y + mItemHeight / 10, mCurMonthLunarTextPaint);
-        } else {
-            canvas.drawText(String.valueOf(calendar.getDay()), cx, mTextBaseLine + top,
-                    calendar.isCurrentDay() ? mCurDayTextPaint :
-                            calendar.isCurrentMonth() && isInRange ? mCurMonthTextPaint : mOtherMonthTextPaint);
-            canvas.drawText(calendar.getLunar(), cx, mTextBaseLine + y + mItemHeight / 10,
-                    calendar.isCurrentDay() && isInRange ? mCurDayLunarTextPaint :
-                            calendar.isCurrentMonth() ? mCurMonthLunarTextPaint : mOtherMonthLunarTextPaint);
-        }*/
     }
 
     @Override
@@ -175,7 +157,7 @@ public class MeiZuMonthView extends MonthView {
         if (calendar.isHasMakeLoveToday()) {
             canvas.drawBitmap(mBitmapLoveFill, null, dest, mBitmapPaint);
         } else if (calendar.getMensesState() == MenseCalculator.STATE_PAILUAN_DATE) {
-            canvas.drawBitmap(mBitmapLoveFill, null, dest, mBitmapPaint);
+            canvas.drawBitmap(mBitmapLoveEmpty, null, dest, mBitmapPaint);
         }
     }
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="7dp"
+    android:layout_marginStart="7dp"
+    android:layout_marginTop="7dp"
+    android:background="@drawable/shape_background_rectangle"
+    android:paddingBottom="20dp"
+    android:paddingTop="20dp">
+
+    <!--主标题和副标题-->
+    <TextView
+        android:id="@+id/tv_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="最佳生育年龄" />
+
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_main_title"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="9dp"
+        android:textColor="@color/text_color_gray"
+        android:textSize="13sp"
+        tools:text="人的最佳生育年龄是24到30岁之间" />
+
+    <ImageView
+        android:id="@+id/iv_forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/forward" />
+</RelativeLayout>

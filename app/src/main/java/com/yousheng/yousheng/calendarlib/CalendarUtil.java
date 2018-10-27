@@ -596,7 +596,7 @@ final class CalendarUtil {
                 LitePal.select(null)
                         .where("datets < ? and datets > ?", String.valueOf(endTimeMills),
                                 String.valueOf(startTimeMills))
-                        .order("date asc")
+                        .order("datets asc")
                         .find(MenseInfo.class);
 
 

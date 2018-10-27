@@ -3,11 +3,11 @@
     xmlns:stv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activity.PregnantCheckDetailActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-        android:id="@+id/mainTitle"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         stv:fillStatusBar="true"
@@ -22,13 +22,25 @@
         stv:titleBarHeight="60dp" />
 
     <TextView
+        android:id="@+id/tv_bad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="27dp"
+        android:text="危害:"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/tv_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mainTitle"
+        android:layout_below="@id/tv_bad"
         android:layout_marginEnd="26dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="11dp"
+        android:scrollbars="vertical"
         android:textColor="@color/black"
         android:textSize="16sp" />
 </RelativeLayout>

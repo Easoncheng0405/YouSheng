@@ -342,11 +342,11 @@
 
             <!--备住-->
             <RelativeLayout
-                android:onClick="onClick"
                 android:id="@+id/layout_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
+                android:layout_marginTop="32dp"
+                android:onClick="onClick">
 
                 <TextView
                     android:id="@+id/tv_comment"
@@ -378,10 +378,12 @@
 
             <!--备孕必检项-->
             <RelativeLayout
+                android:id="@+id/layout_pregnant_check"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:background="@color/pink_pregnant_prepare"
+                android:onClick="onClick"
                 android:padding="18dp">
 
                 <TextView
