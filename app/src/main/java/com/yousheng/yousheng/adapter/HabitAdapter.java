@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.habit.Habit;
+import com.yousheng.yousheng.model.Habit;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

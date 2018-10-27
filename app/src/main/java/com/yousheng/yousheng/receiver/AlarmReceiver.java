@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.activity.MainActivity;
-import com.yousheng.yousheng.habit.Habit;
+import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.notify.NewItem;
 
 import org.litepal.LitePal;

@@ -1,4 +1,4 @@
-package com.yousheng.yousheng.habit;
+package com.yousheng.yousheng.model;
 
 import org.litepal.crud.LitePalSupport;
 

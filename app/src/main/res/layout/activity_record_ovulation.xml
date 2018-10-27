@@ -7,7 +7,7 @@
     tools:context=".activity.RecordOvulationActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-        android:id="@+id/mainTitle"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         stv:fillStatusBar="true"
@@ -26,23 +26,26 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mainTitle">
+        android:layout_below="@id/title">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp">
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp">
 
             <RelativeLayout
+                android:id="@+id/layout_record_ovulation_time"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shape_background_rectangle"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:onClick="onClick">
 
                 <TextView
+                    android:id="@+id/tv_record_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -65,10 +68,10 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shape_background_rectangle"
                 android:gravity="center_vertical"
-                android:paddingStart="19dp"
-                android:paddingTop="23dp"
+                android:paddingBottom="23dp"
                 android:paddingEnd="19dp"
-                android:paddingBottom="23dp">
+                android:paddingStart="19dp"
+                android:paddingTop="23dp">
 
                 <!--试纸强度说明-->
                 <LinearLayout
@@ -211,8 +214,8 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shape_background_rectangle"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp">
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -235,8 +238,8 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shape_background_rectangle"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp">
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -259,14 +262,16 @@
 
 
     <Button
+        android:id="@+id/btn_ensure"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="9dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="9dp"
         android:background="@color/text_color_red_theme"
+        android:onClick="onClick"
         android:text="@string/make_sure"
         android:textColor="@color/white"
         android:textSize="20sp" />

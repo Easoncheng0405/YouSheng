@@ -1,19 +1,14 @@
 package com.yousheng.yousheng.activity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.yousheng.yousheng.mense.MenseCalculator;
@@ -23,8 +18,8 @@ import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.adapter.HabitAdapter;
 import com.yousheng.yousheng.calendarlib.Calendar;
 import com.yousheng.yousheng.calendarlib.CalendarView;
-import com.yousheng.yousheng.habit.Habit;
-import com.yousheng.yousheng.mense.MenseInfo;
+import com.yousheng.yousheng.model.Habit;
+import com.yousheng.yousheng.model.MenseInfo;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
@@ -153,7 +148,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 long id = calendar.getId();
                 if (id > -1) {
                     mMenseInfoSelected = LitePal.find(MenseInfo.class, id);
-                } else {
+                }
+
+                if (id <= -1 || mMenseInfoSelected == null) {
                     mMenseInfoSelected = new MenseInfo();
                 }
 
@@ -183,7 +180,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         })
                         .create();
-        mMonthPicker.hideTimeUnit(CustomDatePicker.SCROLL_TYPE.HOUR,
+        mMonthPicker.hideTimeUnit(
+                CustomDatePicker.SCROLL_TYPE.DAY,
+                CustomDatePicker.SCROLL_TYPE.HOUR,
                 CustomDatePicker.SCROLL_TYPE.MINUTE);
 
         tvDate = findViewById(R.id.tv_date);

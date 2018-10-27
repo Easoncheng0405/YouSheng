@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.uitl.ToastUtil;
+import com.yousheng.yousheng.model.Habit;
 
 import org.litepal.LitePal;
 

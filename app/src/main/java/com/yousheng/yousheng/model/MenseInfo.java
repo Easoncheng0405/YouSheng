@@ -1,6 +1,4 @@
-package com.yousheng.yousheng.mense;
-
-import com.yousheng.yousheng.habit.Habit;
+package com.yousheng.yousheng.model;
 
 import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;

@@ -16,6 +16,7 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.html.Agreement;
 import com.yousheng.yousheng.html.Disclaimer;
+import com.yousheng.yousheng.model.Market;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;

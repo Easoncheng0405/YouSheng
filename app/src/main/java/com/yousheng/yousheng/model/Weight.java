@@ -1,4 +1,4 @@
-package com.yousheng.yousheng.weight;
+package com.yousheng.yousheng.model;
 
 import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
