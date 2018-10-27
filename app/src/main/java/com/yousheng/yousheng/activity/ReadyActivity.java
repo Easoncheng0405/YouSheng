@@ -24,12 +24,7 @@ public class ReadyActivity extends AppCompatActivity {
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {
-                switch (action){
-                    case CommonTitleBar.ACTION_LEFT_BUTTON:
-                        break;
-                    case CommonTitleBar.ACTION_RIGHT_TEXT:
-                        break;
-                }
+                finish();
             }
         });
     }

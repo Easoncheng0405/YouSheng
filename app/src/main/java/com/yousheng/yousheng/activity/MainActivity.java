@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
 import com.yousheng.yousheng.mense.MenseCalculator;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
@@ -34,6 +35,8 @@ import com.yousheng.yousheng.uitl.TextUtils;
 import org.litepal.LitePal;
 import org.litepal.crud.callback.FindMultiCallback;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -123,13 +126,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 查询打卡事项的详情
      */
     private void queryHabitData() {
-        LitePal.findAllAsync(Habit.class).listen(new FindMultiCallback<Habit>() {
-            @Override
-            public void onFinish(List<Habit> list) {
-                mHabitAdapter = new HabitAdapter(list, MainActivity.this);
-                mRvHabitiList.setAdapter(mHabitAdapter);
-            }
-        });
+
+        List<Habit> all = LitePal.findAll(Habit.class);
+        List<Habit> list = new ArrayList<>();
+        for (Habit habit : all) {
+            if (habit.isNeedSign())
+                list.add(habit);
+        }
+        mHabitAdapter = new HabitAdapter(list, MainActivity.this);
+        mRvHabitiList.setAdapter(mHabitAdapter);
+        HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.TOP_DECORATION, 0);//top间距
+
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION, 20);//底部间距
+
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.LEFT_DECORATION, 0);//左间距
+
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.RIGHT_DECORATION, 0);//右间距
+
+        mRvHabitiList.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
+        mRvHabitiList.setNestedScrollingEnabled(false);
+
     }
 
     /**

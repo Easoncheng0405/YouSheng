@@ -1,6 +1,7 @@
 package com.yousheng.yousheng.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -10,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.habit.Habit;
+import com.yousheng.yousheng.habit.HabitDetailActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,7 +49,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final GoodHabitViewHolder viewHolder, int index) {
+    public void onBindViewHolder(@NonNull final GoodHabitViewHolder viewHolder, final int index) {
         final Habit habit = mDatas.get(index);
         viewHolder.tvMainTitle.setText(habit.getMainTitle());
         viewHolder.tvSubTitle.setText(habit.getSubTitle());
@@ -56,10 +59,13 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         spannableString.setSpan(
                 new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_color_red_theme)),
                 4,
-                4+String.valueOf(habit.getKeepDays()).length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                4 + String.valueOf(habit.getKeepDays()).length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         viewHolder.tvKeepDays.setText(spannableString);
-
-        viewHolder.tvClock.setText(simpleDateFormat.format(new Date(habit.getClockTime())));
+        viewHolder.tvClock.setText(" " + simpleDateFormat.format(new Date(habit.getClockTime())));
+        if (habit.isNotify())
+            viewHolder.tvClock.setVisibility(View.VISIBLE);
+        else
+            viewHolder.tvClock.setVisibility(View.GONE);
         viewHolder.checkBox.setChecked(habit.isSigned());
         if (habit.isSigned()) {
             viewHolder.itemView.setBackground(mContext.getResources().
@@ -72,14 +78,21 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (viewHolder.checkBox.isChecked()) {
-                    //已经打卡，跳转到详情页面,携带habit id
-                    ARouter.getInstance().build("/habitdetail/activity")
-                            .withLong("id", (int) habit.getId());
-                } else {
-                    viewHolder.checkBox.setChecked(true);
+                Intent intent = new Intent(mContext, HabitDetailActivity.class);
+                intent.putExtra("id", habit.getId());
+                mContext.startActivity(intent);
+            }
+        });
+
+        viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
                     viewHolder.itemView.setBackground(mContext.getResources()
                             .getDrawable(R.drawable.shape_rv_item_selected));
+                } else {
+                    viewHolder.itemView.setBackground(mContext.getResources()
+                            .getDrawable(R.drawable.shape_rv_item_unseleceted));
                 }
             }
         });

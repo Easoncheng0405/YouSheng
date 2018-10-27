@@ -27,6 +27,7 @@
 
     <EditText
         android:id="@+id/et_ready"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="187dp"
         android:layout_marginEnd="8dp"

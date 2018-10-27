@@ -50,7 +50,7 @@ public class HabitDetailActivity extends AppCompatActivity {
             finish();
         try {
             final Habit habit = LitePal.find(Habit.class, id);
-            CommonTitleBar titleBar = findViewById(R.id.title);
+            final CommonTitleBar titleBar = findViewById(R.id.title);
             titleBar.getLeftTextView().setText("  " + habit.getMainTitle());
             String str = habit.isNeedSign() ? "移除" : "添加";
             titleBar.getRightTextView().setText(str);
@@ -140,6 +140,9 @@ public class HabitDetailActivity extends AppCompatActivity {
             superTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Habit h = LitePal.find(Habit.class, habit.getId());
+                    h.setNeedSign(!habit.isNeedSign());
+                    h.save();
                     finish();
                 }
             });
@@ -147,6 +150,15 @@ public class HabitDetailActivity extends AppCompatActivity {
             titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
                 @Override
                 public void onClicked(View v, int action, String extra) {
+                    switch (action) {
+                        case 1:
+                            break;
+                        case 3:
+                            Habit h = LitePal.find(Habit.class, habit.getId());
+                            h.setNeedSign(!habit.isNeedSign());
+                            h.save();
+                            break;
+                    }
                     finish();
                 }
             });
