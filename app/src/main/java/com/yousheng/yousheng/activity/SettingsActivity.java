@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -82,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 Collections.sort(markets);
                 boolean b = false;
                 for (Market market : markets) {
-                    if (startMarket(market.getPackageName())) {
+                    if (toMarket(market.getPackageName())) {
                         b = true;
                         break;
                     }
@@ -93,35 +94,27 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private boolean startMarket(String packageName) {
-        PackageInfo packageinfo = null;
+
+    /**
+     * 跳转应用商店.
+     *
+     * @param marketPkg 应用商店包名
+     * @return {@code true} 跳转成功 <br> {@code false} 跳转失败
+     */
+    public boolean toMarket(String marketPkg) {
+        Uri uri = Uri.parse("market://details?id=com.yousheng.yousheng");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (marketPkg != null) {
+            intent.setPackage(marketPkg);
+        }
         try {
-            packageinfo = getPackageManager().getPackageInfo(packageName, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e("SettingsActivity", "startMarket: exception ", e);
-            return false;
-        }
-        if (packageinfo == null) {
-            Log.e("SettingsActivity", packageName);
-            return false;
-        }
-        Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
-        resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        resolveIntent.setPackage(packageinfo.packageName);
-        List<ResolveInfo> resolveinfoList = getPackageManager()
-                .queryIntentActivities(resolveIntent, 0);
-        ResolveInfo resolveinfo = resolveinfoList.iterator().next();
-        if (resolveinfo != null) {
-            String name = resolveinfo.activityInfo.packageName;
-            String className = resolveinfo.activityInfo.name;
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            ComponentName componentName = new ComponentName(name, className);
-            intent.setComponent(componentName);
             startActivity(intent);
             return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
-        return false;
     }
 
 }
