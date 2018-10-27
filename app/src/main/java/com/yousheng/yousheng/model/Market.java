@@ -34,7 +34,6 @@ public class Market extends LitePalSupport implements Comparable<Market> {
         this.packageName = packageName;
     }
 
-
     @Override
     public int compareTo(Market o) {
         return id - o.id;

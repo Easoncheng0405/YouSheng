@@ -1,6 +1,5 @@
 package com.yousheng.yousheng.weight;
 
-
 import android.graphics.Color;
 import android.os.Bundle;
 

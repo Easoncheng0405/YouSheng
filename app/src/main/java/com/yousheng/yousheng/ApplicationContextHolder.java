@@ -3,7 +3,7 @@ package com.yousheng.yousheng;
 import android.content.Context;
 
 public class ApplicationContextHolder {
-    public static Context sApplicationContext;
+    private static Context sApplicationContext;
 
     public static Context getApplicationContext() {
         return sApplicationContext;

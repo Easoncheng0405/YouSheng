@@ -1,4 +1,4 @@
-package com.yousheng.yousheng.notify;
+package com.yousheng.yousheng.model;
 
 import org.litepal.crud.LitePalSupport;
 
@@ -18,7 +18,7 @@ public class NewItem extends LitePalSupport {
     //提醒?
     private boolean notify;
 
-    NewItem(String content, long time) {
+    public NewItem(String content, long time) {
         this.content = content;
         this.time = time;
     }

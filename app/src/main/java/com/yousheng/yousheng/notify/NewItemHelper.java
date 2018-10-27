@@ -1,6 +1,8 @@
 package com.yousheng.yousheng.notify;
 
 
+import com.yousheng.yousheng.model.NewItem;
+
 import org.litepal.LitePal;
 
 import java.util.ArrayList;

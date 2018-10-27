@@ -1,6 +1,5 @@
 package com.yousheng.yousheng.model;
 
-import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
 public class OvulationRecord extends LitePalSupport {

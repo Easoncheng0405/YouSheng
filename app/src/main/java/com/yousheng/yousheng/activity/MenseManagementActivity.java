@@ -180,7 +180,6 @@ public class MenseManagementActivity extends AppCompatActivity {
                 case R.id.layout_mense_duration:
                     mMenseDurationPicker.show("2018-10-10");
                     break;
-
                 case R.id.layout_mense_days:
                     mMenseDaysPicker.show("2018-10-10");
                     break;
@@ -189,10 +188,8 @@ public class MenseManagementActivity extends AppCompatActivity {
                     mMenseStartDatePicker.show(CalendarUtils
                             .formatDateString(System.currentTimeMillis(), "yyyy-MM-dd"));
                     break;
-
                 case R.id.layout_mense_notify:
                     break;
-
                 case R.id.layout_mense_mode:
                     break;
 

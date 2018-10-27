@@ -24,7 +24,6 @@ public class Habit extends LitePalSupport {
     //是否需要打卡?
     private boolean needSign;
 
-
     //官方习惯?
     private boolean official;
 
