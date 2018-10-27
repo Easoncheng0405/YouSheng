@@ -1,5 +1,7 @@
 package com.yousheng.yousheng.habit;
 
+import com.yousheng.yousheng.model.Habit;
+
 import org.litepal.LitePal;
 
 import java.util.ArrayList;

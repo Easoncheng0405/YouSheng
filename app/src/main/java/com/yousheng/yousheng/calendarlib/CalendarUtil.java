@@ -20,7 +20,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.yousheng.yousheng.mense.MenseCalculator;
-import com.yousheng.yousheng.mense.MenseInfo;
+import com.yousheng.yousheng.model.MenseInfo;
 
 import org.litepal.LitePal;
 

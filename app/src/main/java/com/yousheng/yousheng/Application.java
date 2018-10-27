@@ -1,8 +1,8 @@
 package com.yousheng.yousheng;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.yousheng.yousheng.activity.Market;
-import com.yousheng.yousheng.habit.Habit;
+import com.yousheng.yousheng.model.Market;
+import com.yousheng.yousheng.model.Habit;
 
 import org.litepal.LitePal;
 import org.litepal.LitePalApplication;

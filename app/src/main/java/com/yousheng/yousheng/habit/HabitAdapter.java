@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.allen.library.SuperTextView;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.model.Habit;
 
 import org.litepal.LitePal;
 

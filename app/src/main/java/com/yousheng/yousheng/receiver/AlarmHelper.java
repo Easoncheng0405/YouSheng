@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.yousheng.yousheng.habit.Habit;
+import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.notify.NewItem;
 
 import org.litepal.LitePal;

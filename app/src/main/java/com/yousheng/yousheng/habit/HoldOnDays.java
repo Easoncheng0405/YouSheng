@@ -12,6 +12,8 @@ import android.widget.TimePicker;
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.model.Habit;
+import com.yousheng.yousheng.model.Record;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;

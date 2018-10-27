@@ -1,8 +1,6 @@
-package com.yousheng.yousheng.activity;
+package com.yousheng.yousheng.model;
 
 import org.litepal.crud.LitePalSupport;
-
-import java.util.Comparator;
 
 public class Market extends LitePalSupport implements Comparable<Market> {
 

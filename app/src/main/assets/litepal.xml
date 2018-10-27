@@ -9,10 +9,11 @@
     <list>
         <!--这里放表-->
         <mapping class="com.yousheng.yousheng.notify.NewItem" />
-        <mapping class="com.yousheng.yousheng.habit.Habit" />
-        <mapping class="com.yousheng.yousheng.habit.Record" />
-        <mapping class="com.yousheng.yousheng.weight.Weight" />
-        <mapping class="com.yousheng.yousheng.activity.Market" />
-        <mapping class="com.yousheng.yousheng.mense.MenseInfo" />
+        <mapping class="com.yousheng.yousheng.model.Habit" />
+        <mapping class="com.yousheng.yousheng.model.Record" />
+        <mapping class="com.yousheng.yousheng.model.Weight" />
+        <mapping class="com.yousheng.yousheng.model.Market" />
+        <mapping class="com.yousheng.yousheng.model.MenseInfo" />
+        <mapping class="com.yousheng.yousheng.model.OvulationRecord"/>
     </list>
 </litepal>
