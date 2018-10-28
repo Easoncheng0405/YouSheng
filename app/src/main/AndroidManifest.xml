@@ -18,7 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/settings" />
@@ -30,11 +36,7 @@
             android:label="@string/weightRecord" />
         <activity android:name=".activity.OvulationActivity" />
         <activity android:name=".activity.TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".habit.AllHabitActivity" />
         <activity android:name=".activity.RecordOvulationActivity" />
@@ -53,7 +55,6 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
@@ -69,7 +70,7 @@
         <activity android:name=".activity.PregnantCheckDetailActivity" />
         <activity android:name=".html.Agreement" />
         <activity android:name=".html.Disclaimer" />
-        <activity android:name=".activity.PregnantNoticeActivity"></activity>
+        <activity android:name=".activity.PregnantNoticeActivity"/>
     </application>
 
 </manifest>

@@ -25,6 +25,7 @@ import com.yousheng.yousheng.calendarlib.Calendar;
 import com.yousheng.yousheng.calendarlib.CalendarView;
 import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.MenseInfo;
+import com.yousheng.yousheng.model.NewItem;
 import com.yousheng.yousheng.notify.NewItemActivity;
 import com.yousheng.yousheng.notify.NewItemHelper;
 import com.yousheng.yousheng.receiver.AlarmHelper;
@@ -108,24 +109,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RecyclerView rvFuture = findViewById(R.id.rv_todo_previous);
         RecyclerView rvNextWeek = findViewById(R.id.rv_todo_next_week);
         RecyclerView rvObselete = findViewById(R.id.rv_todo_obeslete);
+        RecyclerView rvNoDate = findViewById(R.id.rv_todo_no_date);
+
 
         rvToday.setLayoutManager(new LinearLayoutManager(this));
         rvTomorrow.setLayoutManager(new LinearLayoutManager(this));
         rvObselete.setLayoutManager(new LinearLayoutManager(this));
         rvFuture.setLayoutManager(new LinearLayoutManager(this));
         rvNextWeek.setLayoutManager(new LinearLayoutManager(this));
+        rvNoDate.setLayoutManager(new LinearLayoutManager(this));
 
         rvFuture.setItemAnimator(new DefaultItemAnimator());
         rvToday.setItemAnimator(new DefaultItemAnimator());
         rvTomorrow.setItemAnimator(new DefaultItemAnimator());
         rvObselete.setItemAnimator(new DefaultItemAnimator());
         rvNextWeek.setItemAnimator(new DefaultItemAnimator());
+        rvNoDate.setItemAnimator(new DefaultItemAnimator());
 
         rvToday.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.TODAY));
         rvTomorrow.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.TOMORROW));
         rvObselete.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.UP_TO_DATE));
         rvNextWeek.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.IN_WEEK));
         rvFuture.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.FUTURE));
+        rvNoDate.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.NO_DATE));
     }
 
     @Override
@@ -167,6 +173,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 .getAdapter()).notifyDataUpdate();
                     } else if (timeRange == NewItemHelper.TimeRange.IN_WEEK.getValue()) {
                         ((NewItemListAdapter) ((RecyclerView) findViewById(R.id.rv_todo_next_week))
+                                .getAdapter()).notifyDataUpdate();
+                    } else if (timeRange == NewItemHelper.TimeRange.FUTURE.getValue()) {
+                        ((NewItemListAdapter) ((RecyclerView) findViewById(R.id.rv_todo_previous))
                                 .getAdapter()).notifyDataUpdate();
                     }
                 }
@@ -341,5 +350,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         queryHabitData();
+        initItemTitle();
+    }
+
+
+    private void initItemTitle() {
+        HashMap<NewItemHelper.TimeRange, ArrayList<NewItem>> map = NewItemHelper.getAllNewItemInRange();
+        if (map.get(NewItemHelper.TimeRange.NO_DATE).size() > 0)
+            findViewById(R.id.noDate).setVisibility(View.VISIBLE);
+        else
+            findViewById(R.id.noDate).setVisibility(View.GONE);
+
+        if (map.get(NewItemHelper.TimeRange.UP_TO_DATE).size() > 0)
+            findViewById(R.id.upToDate).setVisibility(View.VISIBLE);
+        else
+            findViewById(R.id.upToDate).setVisibility(View.GONE);
+
+
+        if (map.get(NewItemHelper.TimeRange.TOMORROW).size() > 0)
+            findViewById(R.id.tomorrow).setVisibility(View.VISIBLE);
+        else
+            findViewById(R.id.tomorrow).setVisibility(View.GONE);
+
+
+        if (map.get(NewItemHelper.TimeRange.TODAY).size() > 0)
+            findViewById(R.id.today).setVisibility(View.VISIBLE);
+        else
+            findViewById(R.id.today).setVisibility(View.GONE);
+
+
+        if (map.get(NewItemHelper.TimeRange.IN_WEEK).size() > 0)
+            findViewById(R.id.week).setVisibility(View.VISIBLE);
+        else
+            findViewById(R.id.week).setVisibility(View.GONE);
+
+        if (map.get(NewItemHelper.TimeRange.FUTURE).size() > 0)
+            findViewById(R.id.future).setVisibility(View.VISIBLE);
+        else
+            findViewById(R.id.future).setVisibility(View.GONE);
     }
 }

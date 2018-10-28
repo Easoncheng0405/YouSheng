@@ -56,9 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingTop="21dp">
+            android:paddingTop="21dp"
+            android:paddingEnd="8dp">
             <!--好孕率及安全期-->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -80,8 +80,8 @@
                     android:id="@+id/tv_pregnant_percent_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/tv_pregnant_percent"
                     android:layout_alignTop="@id/tv_pregnant_percent"
+                    android:layout_alignBottom="@id/tv_pregnant_percent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="9dp"
                     android:layout_toEndOf="@id/tv_pregnant_percent"
@@ -95,9 +95,9 @@
                     android:id="@+id/tv_pregnant_securedate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_pregnant_percent"
                     android:layout_alignBottom="@id/tv_pregnant_percent"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@id/tv_pregnant_percent"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="19dp"
                     android:gravity="center_vertical"
@@ -329,8 +329,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/tv_ovulation"
                     android:layout_below="@id/tv_ovulation"
+                    android:layout_alignStart="@id/tv_ovulation"
                     android:layout_marginTop="10dp"
                     android:text="@string/ovulation_tip"
                     android:textColor="@color/text_color_gray"
@@ -365,8 +365,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/tv_comment"
                     android:layout_below="@id/tv_comment"
+                    android:layout_alignStart="@id/tv_comment"
                     android:layout_marginTop="10dp"
                     android:text="@string/come_on"
                     android:textColor="@color/text_color_gray"
@@ -402,8 +402,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/tv_beiyun"
                     android:layout_below="@id/tv_beiyun"
+                    android:layout_alignStart="@id/tv_beiyun"
                     android:layout_marginTop="10dp"
                     android:text="@string/tip_prepare_pregnant"
                     android:textColor="@color/text_color_gray"
@@ -441,6 +441,7 @@
                     android:text="@string/add_new_habbit" />
 
                 <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="5dp"
                     android:id="@+id/rv_good_habbit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -456,7 +457,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="27dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/to_do_list"
                     android:textColor="@color/black"
                     android:textSize="24sp" />
@@ -471,9 +472,11 @@
 
                 <!--今天的事项列表-->
                 <TextView
+                    android:id="@+id/today"
                     style="@style/main_activity_title_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text="今天" />
 
                 <android.support.v7.widget.RecyclerView
@@ -484,9 +487,11 @@
 
                 <!--明天的事项列表-->
                 <TextView
+                    android:id="@+id/tomorrow"
                     style="@style/main_activity_title_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text="明天" />
 
                 <android.support.v7.widget.RecyclerView
@@ -497,9 +502,11 @@
 
                 <!--接下来7天-->
                 <TextView
+                    android:id="@+id/week"
                     style="@style/main_activity_title_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text="接下来7天" />
 
                 <android.support.v7.widget.RecyclerView
@@ -510,9 +517,11 @@
 
                 <!--已过期-->
                 <TextView
+                    android:id="@+id/upToDate"
                     style="@style/main_activity_title_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text="已过期" />
 
                 <android.support.v7.widget.RecyclerView
@@ -523,9 +532,11 @@
 
 
                 <TextView
+                    android:id="@+id/future"
                     style="@style/main_activity_title_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text="更久" />
 
                 <android.support.v7.widget.RecyclerView
@@ -536,15 +547,18 @@
 
                 <!--没有日期-->
                 <TextView
+                    android:id="@+id/noDate"
                     style="@style/main_activity_title_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text="没有日期" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_todo_no_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/shape_background_rectangle" />
             </LinearLayout>
         </LinearLayout>

@@ -108,7 +108,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 calendar.setTimeInMillis(l);
             }
         }
-        time.setLeftString(DateFormat.format("HH:mm", calendar.getTime()));
+        time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -128,7 +128,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
                 legal = calendar.getTimeInMillis() > System.currentTimeMillis();
-                time.setLeftString(DateFormat.format("HH:mm", calendar.getTime()));
+                time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
@@ -170,7 +170,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         }
 
 
-        long time = calendar.getTimeInMillis();
+        long time = isNotify ? calendar.getTimeInMillis() : 0;
         NewItem item;
         if (id == -1) {
             item = new NewItem(str, time);
