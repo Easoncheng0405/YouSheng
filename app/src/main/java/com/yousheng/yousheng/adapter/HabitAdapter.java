@@ -118,6 +118,13 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (habit.getMainTitle().equals("记录体重")) {
+                    Intent intent = new Intent(mContext, WeightActivity.class);
+                    intent.putExtra("id", habit.getId());
+                    mContext.startActivity(intent);
+                    return;
+                }
+
                 if (isChecked) {
                     viewHolder.itemView.setBackground(mContext.getResources()
                             .getDrawable(R.drawable.shape_rv_item_selected));
