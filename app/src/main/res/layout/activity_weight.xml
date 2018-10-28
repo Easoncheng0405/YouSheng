@@ -63,12 +63,7 @@
             app:zjun_indicatorLineColor="@color/colorAccent"
             app:zjun_textSize="18sp" />
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp" />
+
     </LinearLayout>
 
     <com.allen.library.SuperTextView

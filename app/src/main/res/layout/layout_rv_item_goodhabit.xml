@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:background="@drawable/shape_rv_item_unseleceted"
-    android:padding="10dp"
-    android:layout_margin="5dp">
+    android:padding="10dp">
 
     <TextView
-        android:textAlignment="viewEnd"
         android:id="@+id/tv_main_title"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
+        android:textAlignment="viewEnd"
         android:textColor="@color/black"
         android:textSize="16sp"
         tools:text="每天早上七点之前起床" />
@@ -27,16 +27,16 @@
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:shadowColor="@color/text_color_red_theme" />
 
     <TextView
         android:id="@+id/tv_keep_on_days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/checkbox"
         android:layout_alignTop="@id/checkbox"
+        android:layout_alignBottom="@id/checkbox"
         android:layout_marginEnd="16dp"
         android:layout_toStartOf="@id/checkbox"
         android:textColor="@color/black"
@@ -44,12 +44,21 @@
         tools:text="(已坚持了33天)" />
 
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/tv_sub_title"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:visibility="gone" />
+
     <TextView
-        android:layout_marginTop="5dp"
         android:id="@+id/tv_clock_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_sub_title"
+        android:layout_below="@id/lineChart"
+        android:layout_marginTop="5dp"
         android:drawableStart="@drawable/clock"
         android:gravity="center_vertical"
         android:textColor="@color/gray"
