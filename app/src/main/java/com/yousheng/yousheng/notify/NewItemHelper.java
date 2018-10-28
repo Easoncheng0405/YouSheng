@@ -74,7 +74,6 @@ public class NewItemHelper {
 
         //查出所有代办事项
         List<NewItem> items = LitePal.findAll(NewItem.class);
-
         long millis = System.currentTimeMillis();
         for (NewItem item : items) {
             switch (getRange(millis, item)) {

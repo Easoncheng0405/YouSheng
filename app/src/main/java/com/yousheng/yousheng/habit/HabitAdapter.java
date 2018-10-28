@@ -16,6 +16,7 @@ import com.yousheng.yousheng.model.Habit;
 
 import org.litepal.LitePal;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,6 +51,8 @@ public class HabitAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
+        if (getCount() == 1)
+            return null;
         Object habit;
         switch (getStateByIndex(i)) {
             case OFFICIAL_OUT:
@@ -71,6 +74,8 @@ public class HabitAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
+        if (getCount() == 1)
+            return 0;
         return ((Habit) getItem(position)).getId();
     }
 
@@ -200,6 +205,10 @@ public class HabitAdapter extends BaseAdapter {
                 Habit h = LitePal.find(Habit.class, habit.getId());
                 h.setNeedSign(habit.isNeedSign());
                 h.save();
+                Collections.sort(customIn);
+                Collections.sort(customOut);
+                Collections.sort(officialIn);
+                Collections.sort(officialOut);
                 notifyDataSetInvalidated();
             }
         });

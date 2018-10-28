@@ -37,6 +37,7 @@ import com.yousheng.yousheng.uitl.TextUtils;
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -79,6 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ((TextView) findViewById(R.id.habit_title)).setText(
+                SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true)
+                        ? "优生打卡" : "习惯打卡");
 
         //唤醒所有闹钟
         AlarmHelper.notifyAllAlarm(this);
@@ -181,6 +186,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
         }
+
+        {
+
+        }
     }
 
     @Override
@@ -225,9 +234,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         List<Habit> all = LitePal.findAll(Habit.class);
         List<Habit> list = new ArrayList<>();
         for (Habit habit : all) {
-            if (habit.isNeedSign())
+            if (habit.isNeedSign() && habit.isYouSheng() == SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true))
                 list.add(habit);
         }
+        Collections.sort(list);
         mHabitAdapter = new HabitAdapter(list, MainActivity.this);
         mRvHabitiList.setAdapter(mHabitAdapter);
 

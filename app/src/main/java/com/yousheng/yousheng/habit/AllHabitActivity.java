@@ -46,7 +46,7 @@ public class AllHabitActivity extends AppCompatActivity {
         super.onStart();
         ListView habits = findViewById(R.id.habits);
         List<Habit> list = LitePal.findAll(Habit.class);
-        HabitAdapter adapter = new HabitAdapter(this, HabitHelper.getAllHabitInState(list));
+        HabitAdapter adapter = new HabitAdapter(this, HabitHelper.getAllHabitInState());
         habits.setAdapter(adapter);
         habits.setDivider(null);
     }

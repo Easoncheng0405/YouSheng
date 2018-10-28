@@ -151,20 +151,15 @@ public class MenseManagementActivity extends AppCompatActivity {
                 if (compoundButton.equals(switchNotify)) {
                     SPSingleton.get().putBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY, !isChecked);
                 } else if (compoundButton.equals(switchPregnant)) {
-                    SPSingleton.get().putBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, !isChecked);
+                    SPSingleton.get().putBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, isChecked);
                 }
             }
         };
         switchNotify.setOnCheckedChangeListener(checkListener);
         switchPregnant.setOnCheckedChangeListener(checkListener);
 
-        boolean isNotifyOn = SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY,
-                true);
-        boolean isMenseModeOn = SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE,
-                true);
-
         switchNotify.setChecked(true);
-        switchPregnant.setChecked(true);
+        switchPregnant.setChecked(SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true));
 
         tvDaysMenseDuration.setText(SPSingleton.get()
                 .getString(PrefConstants.PREFS_KEY_MENSE_DURATION, Constants.DEFAULT_MENSE_GAP));

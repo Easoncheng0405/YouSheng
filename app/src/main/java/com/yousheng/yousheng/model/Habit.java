@@ -8,7 +8,7 @@ import java.util.Objects;
 
 
 //习惯
-public class Habit extends LitePalSupport {
+public class Habit extends LitePalSupport implements Comparable<Habit> {
 
     private long id;
 
@@ -168,4 +168,8 @@ public class Habit extends LitePalSupport {
     }
 
 
+    @Override
+    public int compareTo(Habit o) {
+        return level - o.level;
+    }
 }
