@@ -20,7 +20,7 @@ public class NewItemHelper {
         UP_TO_DATE, //过期
         TODAY,      //今天
         TOMORROW,   //明天
-        IN_WEEK, //一周内
+        IN_WEEK,    //一周内
         FUTURE      //更久
     }
 
