@@ -26,6 +26,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.habit.HoldOnDays;
 import com.yousheng.yousheng.model.Habit;
@@ -118,6 +120,13 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (habit.getMainTitle().equals("记录体重")) {
+                    Intent intent = new Intent(mContext, WeightActivity.class);
+                    intent.putExtra("id", habit.getId());
+                    mContext.startActivity(intent);
+                    return;
+                }
+
                 if (isChecked) {
                     viewHolder.itemView.setBackground(mContext.getResources()
                             .getDrawable(R.drawable.shape_rv_item_selected));
@@ -186,9 +195,10 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
 
         List<Weight> weights = LitePal.findAll(Weight.class);
         Collections.sort(weights);
-        if (weights.size() > 7)
-            weights = weights.subList(0, 7);
+        if (weights.size() > 30)
+            weights = weights.subList(0,30);
         final List<Weight> list = weights;
+        final int mexWeightIndex = maxWeightIndex(list);
         if (list.size() == 0) {
             //无数据时显示的文字
             lineChart.setNoDataText("暂无数据，快去记录体重吧！");
@@ -206,7 +216,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
             entries.add(new Entry(i * 1.0f, list.get(i).getWeight() * 1.0f));
         }
         //一个LineDataSet就是一条线
-        LineDataSet lineDataSet = new LineDataSet(entries, "");
+        final LineDataSet lineDataSet = new LineDataSet(entries, "");
         //线颜色
         lineDataSet.setColor(Color.parseColor("#E91E63"));
         //线宽度
@@ -221,7 +231,16 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         lineDataSet.setFillColor(Color.parseColor("#FCE4EC"));
         LineData data = new LineData(lineDataSet);
         //折线图不显示数值
-        data.setDrawValues(true);
+        //data.setDrawValues(false);
+        data.setValueFormatter(new IValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                int index = (int) entry.getX();
+                if (index == 0 || index == list.size() - 1 || index == mexWeightIndex)
+                    return value + "";
+                return "";
+            }
+        });
         //得到X轴
         XAxis xAxis = lineChart.getXAxis();
         //设置X轴的位置（默认在上方)
@@ -242,9 +261,9 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 int index = (int) value;
-                if (index < 0 || index >= list.size())
-                    return "";
-                return DateFormat.format("MM/dd", list.get(index).getTime()).toString();
+                if (index == 0 || index == list.size() - 1 || index == mexWeightIndex)
+                    return DateFormat.format("MM/dd", list.get(index).getTime()).toString();
+                return "";
             }
         });
         //得到Y轴
@@ -278,6 +297,17 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
             if (w.getWeight() < res)
                 res = w.getWeight();
         return res;
+    }
+
+    private int maxWeightIndex(List<Weight> list) {
+        float res = Float.MIN_VALUE;
+        int index = 0;
+        for (int i = 0; i < list.size(); i++)
+            if (list.get(i).getWeight() > res) {
+                res = list.get(i).getWeight();
+                index = i;
+            }
+        return index;
     }
 }
 

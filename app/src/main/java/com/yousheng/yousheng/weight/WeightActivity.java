@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.Weight;
 import com.yousheng.yousheng.uitl.ToastUtil;
 import com.zjun.widget.RuleView;
@@ -61,13 +62,23 @@ public class WeightActivity extends AppCompatActivity {
 
     private void record() {
         Weight weight = LitePal.findLast(Weight.class);
+        Habit habit = LitePal.find(Habit.class, getIntent().getLongExtra("id", -1L));
+        if (habit == null) {
+            ToastUtil.showMsg(this, "发生了一些错误！");
+            finish();
+            return;
+        }
         long millis = System.currentTimeMillis();
-        if(weight==null){
+        if (weight == null) {
             Weight w = new Weight();
             w.setTime(millis);
+            habit.setSignTime(millis);
             w.setWeight(ruleView.getCurrentValue());
             w.save();
+            habit.setKeepDays(habit.getKeepDays() + 1);
+            habit.save();
             ToastUtil.showMsg(this, "打卡成功！");
+            finish();
             return;
         }
 
@@ -78,14 +89,20 @@ public class WeightActivity extends AppCompatActivity {
         if (now.get(Calendar.DAY_OF_YEAR) <= db.get(Calendar.DAY_OF_YEAR)) {
             weight.setWeight(ruleView.getCurrentValue());
             weight.setTime(millis);
+            habit.setSignTime(millis);
             weight.save();
+            habit.save();
             ToastUtil.showMsg(this, "体重已更新！");
         } else {
             Weight w = new Weight();
             w.setTime(millis);
             w.setWeight(ruleView.getCurrentValue());
             w.save();
+            habit.setKeepDays(habit.getKeepDays() + 1);
+            habit.setSignTime(millis);
+            habit.save();
             ToastUtil.showMsg(this, "打卡成功！");
         }
+        finish();
     }
 }
