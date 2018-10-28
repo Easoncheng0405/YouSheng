@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
@@ -19,6 +20,7 @@ import com.yousheng.yousheng.html.Disclaimer;
 import com.yousheng.yousheng.model.Market;
 import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.ToastUtil;
+import com.yousheng.yousheng.view.EvaluationPopupWindow;
 
 import org.litepal.LitePal;
 
@@ -26,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+    private EvaluationPopupWindow mEvaluationWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
+        mEvaluationWindow = new EvaluationPopupWindow(this);
     }
 
     @Override
@@ -91,6 +95,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 }
                 if (!b)
                     ToastUtil.showMsg(this, "请搜索最新版本更新");
+
+                break;
+            case R.id.stv_rating:
+                if (!mEvaluationWindow.isShowing()) {
+                    mEvaluationWindow
+                            .showAtLocation(findViewById(R.id.layout_setting_root), Gravity.CENTER, 0, 0);
+                }
                 break;
         }
     }
