@@ -1,10 +1,10 @@
 package com.yousheng.yousheng.activity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.yousheng.yousheng.Constants;
+import com.yousheng.yousheng.adapter.NewItemListAdapter;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
 import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.mense.MenseCalculator;
@@ -25,6 +26,7 @@ import com.yousheng.yousheng.calendarlib.CalendarView;
 import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.MenseInfo;
 import com.yousheng.yousheng.notify.NewItemActivity;
+import com.yousheng.yousheng.notify.NewItemHelper;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
@@ -93,14 +95,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mRvHabitiList.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
         mRvHabitiList.setNestedScrollingEnabled(false);
-
-        init();
-        initMember();
-    }
-
-    private void initMember() {
         mCurrentSelectedDate = CalendarUtils.formatDateString(System.currentTimeMillis(),
                 Constants.DATE_FORMAT);
+
+        initCalendarView();
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        RecyclerView rvToday = findViewById(R.id.rv_todo_today);
+        RecyclerView rvTomorrow = findViewById(R.id.rv_todo_tomorrow);
+        RecyclerView rvFuture = findViewById(R.id.rv_todo_previous);
+        RecyclerView rvNextWeek = findViewById(R.id.rv_todo_next_week);
+        RecyclerView rvObselete = findViewById(R.id.rv_todo_obeslete);
+
+        rvToday.setLayoutManager(new LinearLayoutManager(this));
+        rvTomorrow.setLayoutManager(new LinearLayoutManager(this));
+        rvObselete.setLayoutManager(new LinearLayoutManager(this));
+        rvFuture.setLayoutManager(new LinearLayoutManager(this));
+        rvNextWeek.setLayoutManager(new LinearLayoutManager(this));
+
+        rvFuture.setItemAnimator(new DefaultItemAnimator());
+        rvToday.setItemAnimator(new DefaultItemAnimator());
+        rvTomorrow.setItemAnimator(new DefaultItemAnimator());
+        rvObselete.setItemAnimator(new DefaultItemAnimator());
+        rvNextWeek.setItemAnimator(new DefaultItemAnimator());
+
+        rvToday.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.TODAY));
+        rvTomorrow.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.TOMORROW));
+        rvObselete.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.UP_TO_DATE));
+        rvNextWeek.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.IN_WEEK));
+        rvFuture.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.FUTURE));
     }
 
     @Override
@@ -117,8 +142,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case Constants.RESULT_CODE_MAIN_TO_NEWITEM:
+                if (data != null) {
+                    int timeRange = data.getIntExtra("timeRange", -1);
+                    if (timeRange == NewItemHelper.TimeRange.TODAY.getValue()) {
+                        ((NewItemListAdapter) ((RecyclerView) findViewById(R.id.rv_todo_today))
+                                .getAdapter()).notifyDataUpdate();
+                    } else if (timeRange == NewItemHelper.TimeRange.TOMORROW.getValue()) {
+                        ((NewItemListAdapter) ((RecyclerView) findViewById(R.id.rv_todo_tomorrow))
+                                .getAdapter()).notifyDataUpdate();
+                    } else if (timeRange == NewItemHelper.TimeRange.NO_DATE.getValue()) {
+                        ((NewItemListAdapter) ((RecyclerView) findViewById(R.id.rv_todo_no_date))
+                                .getAdapter()).notifyDataUpdate();
+                    } else if (timeRange == NewItemHelper.TimeRange.UP_TO_DATE.getValue()) {
+                        ((NewItemListAdapter) ((RecyclerView) findViewById(R.id.rv_todo_obeslete))
+                                .getAdapter()).notifyDataUpdate();
+                    } else if (timeRange == NewItemHelper.TimeRange.IN_WEEK.getValue()) {
+                        ((NewItemListAdapter) ((RecyclerView) findViewById(R.id.rv_todo_next_week))
+                                .getAdapter()).notifyDataUpdate();
+                    }
+                }
+                break;
+        }
     }
 
     @Override
@@ -137,9 +190,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_add_new_habbit:
                 startActivity(new Intent(this, AllHabitActivity.class));
                 break;
-            case R.id.btn_add_new_item:
-                startActivity(new Intent(this, NewItemActivity.class));
+            case R.id.btn_add_new_item: {
+                startActivityForResult(new Intent(this, NewItemActivity.class),
+                        Constants.REQUEST_CODE_MAIN_TO_NEWITEM);
                 break;
+            }
             case R.id.layout_comment:
                 Intent intent = new Intent(this, ReadyActivity.class);
                 intent.putExtra("date", mMenseInfoSelected.getDate());
@@ -171,9 +226,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * 初始化activity中的变量，从数据库中查询数据
+     * 初始化Calendarview，从数据库中查询数据
      */
-    private void init() {
+    private void initCalendarView() {
         mCalendarView = findViewById(R.id.calendarView);
         mCalendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
@@ -231,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvPregnantPercent = findViewById(R.id.tv_pregnant_percent);
         tvPregnantDescription = findViewById(R.id.tv_pregnant_percent_value);
 
-        //init switch
+        //initCalendarView switch
         switchMenseStart = findViewById(R.id.switch_menstruation_start);
         switchMenseEnd = findViewById(R.id.switch_menstruation_end);
         switchMakeLove = findViewById(R.id.switch_make_love);

@@ -13,7 +13,7 @@ public class NewItem extends LitePalSupport {
     private String content;
 
     //提醒时间戳
-    private long time;
+    private long time = -1;
 
     //提醒?
     private boolean notify;

@@ -16,23 +16,33 @@ public class NewItemHelper {
 
 
     public enum TimeRange {
-        NO_DATE,    //没有日期
-        UP_TO_DATE, //过期
-        TODAY,      //今天
-        TOMORROW,   //明天
-        IN_WEEK, //一周内
-        FUTURE      //更久
+        NO_DATE(0),    //没有日期
+        UP_TO_DATE(1), //过期
+        TODAY(2),      //今天
+        TOMORROW(3),   //明天
+        IN_WEEK(4), //一周内
+        FUTURE(5);     //更久
+
+        int value;
+
+        TimeRange(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
-    private static TimeRange getRange(long millis, NewItem item) {
+    public static TimeRange getRange(long compareTimeMillis, NewItem item) {
 
         if (item.getTime() <= 0)
             return TimeRange.NO_DATE;
-        if (item.getTime() < millis)
+        if (item.getTime() < compareTimeMillis)
             return TimeRange.UP_TO_DATE;
         //现在的日期
         Calendar now = Calendar.getInstance(Locale.CHINA);
-        now.setTimeInMillis(millis);
+        now.setTimeInMillis(compareTimeMillis);
         //待办事项的日期
         Calendar todo = Calendar.getInstance(Locale.CHINA);
         todo.setTimeInMillis(item.getTime());

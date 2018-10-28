@@ -469,10 +469,83 @@
                     android:onClick="onClick"
                     android:text="@string/add_new_item" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_todo_list"
+                <!--今天的事项列表-->
+                <TextView
+                    style="@style/main_activity_title_style"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="今天" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_todo_today"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_background_rectangle" />
+
+                <!--明天的事项列表-->
+                <TextView
+                    style="@style/main_activity_title_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="明天" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_todo_tomorrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_background_rectangle" />
+
+                <!--接下来7天-->
+                <TextView
+                    style="@style/main_activity_title_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="接下来7天" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_todo_next_week"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_background_rectangle" />
+
+                <!--已过期-->
+                <TextView
+                    style="@style/main_activity_title_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="已过期" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_todo_obeslete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_background_rectangle" />
+
+
+                <TextView
+                    style="@style/main_activity_title_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="更久" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_todo_previous"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_background_rectangle" />
+
+                <!--没有日期-->
+                <TextView
+                    style="@style/main_activity_title_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="没有日期" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_todo_no_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_background_rectangle" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

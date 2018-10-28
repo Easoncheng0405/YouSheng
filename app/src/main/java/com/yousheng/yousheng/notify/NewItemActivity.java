@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
+import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.model.NewItem;
 import com.yousheng.yousheng.receiver.AlarmHelper;
@@ -182,8 +183,12 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             item.setNotify(isNotify);
             item.save();
         }
+
         AlarmHelper.notifyNewItem(context, item);
         ToastUtil.showMsg(context, "成功添加提醒事项！");
+        Intent intent = new Intent();
+        intent.putExtra("timeRange", NewItemHelper.getRange(System.currentTimeMillis(), item).value);
+        setResult(Constants.RESULT_CODE_MAIN_TO_NEWITEM, intent);
         finish();
     }
 
