@@ -32,7 +32,7 @@ public class HabitHelper {
         List<Habit> customOut = new ArrayList<>();
         boolean yousheng = SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true);
         for (Habit habit : habits) {
-            if (habit.isYouSheng() == yousheng)
+            if (habit.isYouSheng() == yousheng || habit.getMainTitle().equals("记录体重"))
                 if (habit.isNeedSign()) {
                     if (habit.isOfficial())
                         officialIn.add(habit);

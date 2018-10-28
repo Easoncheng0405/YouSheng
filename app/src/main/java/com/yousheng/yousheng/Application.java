@@ -64,6 +64,7 @@ public class Application extends LitePalApplication {
             calendar.set(Calendar.HOUR_OF_DAY, 6);
             calendar.set(Calendar.MINUTE, 30);
             calendar.set(Calendar.SECOND, 0);
+
             Habit weight = new Habit();
             weight.setMainTitle("记录体重");
             weight.setSubTitle("体重超标不易怀孕，自律才能自强。");
@@ -215,30 +216,6 @@ public class Application extends LitePalApplication {
                     "7、易负面情绪\n" +
                     "研究发现，作息不规律会增加暴躁、易怒、悲伤等负面情绪，也更易和他人出现误解及争吵。");
             wakeUp.save();
-
-
-            calendar.set(Calendar.HOUR_OF_DAY, 6);
-            calendar.set(Calendar.MINUTE, 30);
-            calendar.set(Calendar.SECOND, 0);
-            Habit weight = new Habit();
-            weight.setMainTitle("记录体重");
-            weight.setSubTitle("体重超标不易怀孕，自律才能自强。");
-            weight.setLevel(2);
-            weight.setNeedSign(true);
-            weight.setYouSheng(true);
-            weight.setOfficial(true);
-            weight.setClockTime(calendar.getTimeInMillis());
-            weight.setContent("肥胖危害：\n" +
-                    "1、影响激素平衡，不易怀孕\n" +
-                    "导致内分泌紊乱，无排卵月经、月经稀少、闭经的比例远高于正常女性，排卵困难。\n" +
-                    "2、影响卵子发育\n" +
-                    "胖妈妈体内的胰岛素特别多，而胰岛素会影响女性生殖细胞的生长和发育，易导致卵子发育不成熟或者不健康，质量降低。宝宝出生后患上呼吸道疾病和腹泻的几率也会明显增加。\n" +
-                    "3、孕期易引发综合症\n" +
-                    "胖妈妈孕期出现妊娠糖尿病、妊娠高血压、脂肪肝、流产等问题的比例明显提高。\n" +
-                    "4、分娩易难产\n" +
-                    "胖妈妈非常容易怀上巨大儿，易发生难产，引起新生儿锁骨骨折、臂丛神经损伤及面神经瘫痪，如果产程时间过长，还可能使新生儿窒息，增加新生儿死亡率和后遗症。同时，还有可能发生准妈会阴及阴道的撕裂伤，产后子宫收缩乏力，引起产后大出血或产褥感染等并发症。如果采用剖腹产，由于脂肪层过厚，容易导致切口脂肪液化，伤口不容易愈合。");
-            weight.save();
-
 
             calendar.set(Calendar.HOUR_OF_DAY, 7);
             calendar.set(Calendar.MINUTE, 0);

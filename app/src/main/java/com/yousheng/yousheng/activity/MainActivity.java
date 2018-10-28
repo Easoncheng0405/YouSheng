@@ -234,7 +234,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         List<Habit> all = LitePal.findAll(Habit.class);
         List<Habit> list = new ArrayList<>();
         for (Habit habit : all) {
-            if (habit.isNeedSign() && habit.isYouSheng() == SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true))
+            if (habit.isNeedSign() && habit.isYouSheng() == SPSingleton.get().
+                    getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true)
+                    || habit.getMainTitle().equals("记录体重"))
                 list.add(habit);
         }
         Collections.sort(list);
