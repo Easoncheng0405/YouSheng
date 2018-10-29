@@ -108,8 +108,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 public void afterTextChanged(Editable s) {
                     Log.d("NewItemActivity", "text change");
                     Date[] dates = api.getDate(s.toString());
-                    if(dates.length>0){
-                        isNotify=true;
+
+                    if (dates.length > 0) {
+                        isNotify = true;
                         calendar.setTime(dates[0]);
                         notify.setSwitchIsChecked(true);
                         time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
