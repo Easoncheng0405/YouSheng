@@ -442,10 +442,10 @@
                     android:text="@string/add_new_habbit" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:layout_marginTop="5dp"
                     android:id="@+id/rv_good_habbit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp" />
 
             </LinearLayout>
 
@@ -458,6 +458,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/to_do_list"
                     android:textColor="@color/black"

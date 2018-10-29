@@ -9,7 +9,7 @@ public class OvulationRecord extends LitePalSupport {
     public final static int STATE_STRONG = 3;
     public final static int STATE_STRONGEST = 4;
 
-    /****time millis*/
+    /****com.yousheng.yousheng.uitl.time millis*/
     private long date;
 
     /****ovulation recor state from 0~4***/

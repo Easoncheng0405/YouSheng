@@ -1,4 +1,4 @@
-package time;
+package com.yousheng.yousheng.uitl.time;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import time.enums.RangeTimeEnum;
+import com.yousheng.yousheng.uitl.time.enums.RangeTimeEnum;
 
 
 /**
@@ -70,7 +70,7 @@ public class TimeUnit {
 	}
 
 	/**
-	 * return the accurate time object
+	 * return the accurate com.yousheng.yousheng.uitl.time object
 	 */
 	public Date getTime() {
 		return time;
@@ -871,7 +871,7 @@ public class TimeUnit {
 		}
 
 		Calendar cale = Calendar.getInstance(); // leverage a calendar object to
-												// figure out the final time
+												// figure out the final com.yousheng.yousheng.uitl.time
 		cale.clear();
 		if (Integer.parseInt(_result_tmp[0]) != -1) {
 			Time_Norm += _result_tmp[0] + "年";

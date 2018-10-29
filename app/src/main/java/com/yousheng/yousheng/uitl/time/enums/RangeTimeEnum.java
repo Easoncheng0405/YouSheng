@@ -9,7 +9,7 @@
  * ------------------------------------------------------<br>
  * 1.0		2016年5月3日		kexm		created.<br>
  */
-package time.enums;
+package com.yousheng.yousheng.uitl.time.enums;
 
 /**
  * <p>

@@ -513,7 +513,7 @@ final class SolarTermUtil {
      * 地心坐标中的日月位置计算
      *
      * @param lx    lx=1时计算t时刻日月角距与jiao的差, lx=0计算t时刻太阳黄经与jiao的差
-     * @param time  time
+     * @param time  com.yousheng.yousheng.uitl.time
      * @param angle angle
      * @return 地心坐标中的日月位置计算
      */

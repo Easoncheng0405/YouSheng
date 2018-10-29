@@ -57,7 +57,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         this.mDatas = mDatas;
         this.mInflater = LayoutInflater.from(context);
         this.mContext = context;
-        this.simpleDateFormat = new SimpleDateFormat("hh:mm", Locale.CHINA);
+        this.simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.CHINA);
     }
 
     @NonNull
@@ -77,8 +77,10 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         }
 
         viewHolder.tvMainTitle.setText(habit.getMainTitle());
-        viewHolder.tvSubTitle.setText(habit.getSubTitle());
-
+        if (habit.isOfficial())
+            viewHolder.tvSubTitle.setText(habit.getSubTitle());
+        else
+            viewHolder.tvSubTitle.setVisibility(View.GONE);
         SpannableString spannableString =
                 new SpannableString("(已坚持".concat(String.valueOf(habit.getKeepDays())).concat("天)"));
         spannableString.setSpan(
@@ -196,12 +198,13 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         List<Weight> weights = LitePal.findAll(Weight.class);
         Collections.sort(weights);
         if (weights.size() > 30)
-            weights = weights.subList(0,30);
+            weights = weights.subList(0, 30);
         final List<Weight> list = weights;
         final int mexWeightIndex = maxWeightIndex(list);
         if (list.size() == 0) {
             //无数据时显示的文字
             lineChart.setNoDataText("暂无数据，快去记录体重吧！");
+            lineChart.setNoDataTextColor(Color.parseColor("#f94989"));
             //图标刷新
             lineChart.invalidate();
             return;

@@ -1,4 +1,4 @@
-package time;
+package com.yousheng.yousheng.uitl.time;
 
 /**
  * 

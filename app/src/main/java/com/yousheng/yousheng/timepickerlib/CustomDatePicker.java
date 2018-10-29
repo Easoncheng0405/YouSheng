@@ -664,13 +664,13 @@ public class CustomDatePicker {
         }
 
       /*  if (canAccess) {
-            if (isValidDate(time, "yyyy-MM-dd")) {
+            if (isValidDate(com.yousheng.yousheng.uitl.time, "yyyy-MM-dd")) {
                 if (startCalendar.getTime().getTime() < endCalendar.getTime().getTime()) {
                     canAccess = true;
                     initParameter();
                     initTimer();
                     addListener();
-                    setSelectedTime(time);
+                    setSelectedTime(com.yousheng.yousheng.uitl.time);
                     datePickerDialog.show();
                 }
             } else {

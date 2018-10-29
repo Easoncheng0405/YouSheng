@@ -18,10 +18,6 @@
         stv:leftDrawable="@drawable/back"
         stv:leftType="textView"
         stv:leftText="  免责声明"
-        stv:rightType="textView"
-        stv:rightText="完成"
-        stv:rightTextSize="20sp"
-        stv:rightTextColor="@color/white"
         stv:fillStatusBar="true"
         stv:statusBarColor="@color/colorPrimaryDark"/>
 

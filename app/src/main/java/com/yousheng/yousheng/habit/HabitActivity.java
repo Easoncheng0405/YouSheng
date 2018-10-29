@@ -14,9 +14,11 @@ import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
+import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.receiver.AlarmHelper;
+import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
@@ -87,7 +89,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                         finish();
                         break;
                     case 3:
-                        addNewItem();
+                        addHabit();
                         break;
                 }
             }
@@ -127,7 +129,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ok:
-                addNewItem();
+                addHabit();
                 break;
             case R.id.notify:
                 notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
@@ -138,7 +140,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void addNewItem() {
+    private void addHabit() {
         String str = content.getText().toString();
         if (TextUtils.isEmpty(str) || str.trim().length() == 0) {
             ToastUtil.showMsg(context, "请填写提醒内容");
@@ -162,12 +164,16 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
             habit.setClockTime(time);
             habit.setNotify(isNotify);
             habit.setOfficial(false);
+            habit.setYouSheng(SPSingleton.get().
+                    getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true));
             habit.save();
         } else {
             habit = LitePal.find(Habit.class, id);
             habit.setMainTitle(str);
             habit.setClockTime(time);
             habit.setNotify(isNotify);
+            habit.setYouSheng(SPSingleton.get().
+                    getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true));
             habit.save();
         }
         AlarmHelper.notifyHabit(context, habit);

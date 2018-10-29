@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class NewItemListAdapter extends RecyclerView.Adapter<NewItemListAdapter.
         viewHolder.tvTitle.setText(newItem.getContent());
         viewHolder.checkBox.setChecked(false);
         if (mTimeRange == NewItemHelper.TimeRange.TODAY || mTimeRange == NewItemHelper.TimeRange.TOMORROW) {
-            viewHolder.tvDate.setText(CalendarUtils.formatDateString(newItem.getTime(), "hh:mm"));
+            viewHolder.tvDate.setText(DateFormat.format("HH:mm", newItem.getTime()));
         } else if (mTimeRange != NewItemHelper.TimeRange.NO_DATE) {
             viewHolder.tvDate.setText(CalendarUtils.formatDateString(newItem.getTime(), "MM/dd"));
         }

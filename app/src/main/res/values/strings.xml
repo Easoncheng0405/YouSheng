@@ -218,7 +218,7 @@
     <!--优生打卡 & 代办事项-->
     <string name="good_lifet_sign">优生打卡</string>
     <string name="add_new_habbit">添加新习惯</string>
-    <string name="to_do_list">代办事项</string>
+    <string name="to_do_list">待办事项</string>
     <string name="add_new_item">添加新事项</string>
 
     <!--date picker-->

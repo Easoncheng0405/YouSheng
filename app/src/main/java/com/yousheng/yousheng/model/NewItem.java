@@ -59,6 +59,6 @@ public class NewItem extends LitePalSupport {
 
     @Override
     public String toString() {
-        return "{id=" + id + ", content='" + content + '\'' + ", time=" + time + '}';
+        return "{id=" + id + ", content='" + content + '\'' + ", com.yousheng.yousheng.uitl.time=" + time + '}';
     }
 }

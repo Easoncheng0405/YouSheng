@@ -37,6 +37,7 @@ public class AlarmHelper {
         for (NewItem item : items)
             if (item.getTime() > 0 && item.isNotify())
                 notifyNewItem(context, item);
+
         List<Habit> habits = LitePal.findAll(Habit.class);
         for (Habit habit : habits)
             if (habit.getClockTime() > 0 && habit.isNotify())
