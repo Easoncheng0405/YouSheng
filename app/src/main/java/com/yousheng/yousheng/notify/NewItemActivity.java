@@ -5,10 +5,13 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
 
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -29,10 +32,15 @@ import com.yousheng.yousheng.uitl.ToastUtil;
 
 import org.litepal.LitePal;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+
+import time.Api;
 
 
 public class NewItemActivity extends AppCompatActivity implements View.OnClickListener {
@@ -51,12 +59,20 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     private long id = -1;
 
     private boolean isNotify = false;
+    private Api api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_itme);
         context = this;
+        AssetManager manager = getAssets();
+        try {
+            InputStream inputStream = manager.open("TimeExp.m");
+            api = new Api(inputStream);
+        } catch (Exception e) {
+            Log.e("NewItemActivity", "onCreate:  exception ", e);
+        }
 
         CommonTitleBar titleBar = findViewById(R.id.title);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
@@ -76,6 +92,28 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         time = findViewById(R.id.time);
         notify = findViewById(R.id.notify);
         content = findViewById(R.id.content);
+        if (api != null)
+            content.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    Log.d("NewItemActivity", "text change");
+                    Date[] dates = api.getDate(s.toString());
+                    for (Date date : dates) {
+                        Log.d("NewItemActivity", "date = " + DateFormat.format("yyyy/MM/dd HH:mm", date));
+                    }
+                }
+            });
+
 
         findViewById(R.id.ok).setOnClickListener(this);
         time.setOnClickListener(this);
@@ -206,5 +244,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+
 
 }
