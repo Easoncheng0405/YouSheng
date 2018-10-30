@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Constants.DATE_FORMAT);
 
         initCalendarView();
-        initRecyclerView();
+
     }
 
     private void initRecyclerView() {
@@ -363,6 +363,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         queryHabitData();
         initItemTitle();
+        initRecyclerView();
     }
 
 
