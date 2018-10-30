@@ -540,7 +540,8 @@ final class CalendarUtil {
      * @param weekStar    weekStar
      * @return 为月视图初始化日历项
      */
-    static List<Calendar> initCalendarForMonthView(int year, int month, Calendar currentDate, int weekStar) {
+    static List<Calendar>
+    initCalendarForMonthView(int year, int month, Calendar currentDate, int weekStar) {
         java.util.Calendar date = java.util.Calendar.getInstance();
 
         date.set(year, month - 1, 1);
@@ -622,20 +623,31 @@ final class CalendarUtil {
                 calendarDate.setCurrentDay(true);
             }
 
+            LunarCalendar.setupLunarCalendar(calendarDate);
+            //初始化经期状态
+            int menseState = MenseCalculator.getMenseState(calendarDate.getTimeInMillis());
+            calendarDate.setMensesState(menseState);
+            switch (menseState) {
+                case MenseCalculator.STATE_MENSE:
+                    calendarDate.setMenseStart(true);
+                    calendarDate.setMenseEnd(false);
+                    break;
+                default:
+                    calendarDate.setMenseStart(false);
+                    calendarDate.setMenseEnd(true);
+                    break;
+            }
+
             for (MenseInfo menseInfo : menseInfos) {
                 if (CalendarUtils
                         .formatDateString(calendarDate.getTimeInMillis(), Constants.DATE_FORMAT)
                         .equals(menseInfo.getDate())) {
-                    calendarDate.setMenseEnd(menseInfo.isMenseEnd());
-                    calendarDate.setMenseStart(menseInfo.isMenseStart());
                     calendarDate.setHasMakeLoveToday(menseInfo.isHasMakeLove());
+                    menseInfo.setMenseEnd(calendarDate.isMenseEnd());
+                    menseInfo.setMenseStart(calendarDate.isMenseStart());
                     break;
                 }
             }
-
-            LunarCalendar.setupLunarCalendar(calendarDate);
-            //初始化经期状态
-            calendarDate.setMensesState(MenseCalculator.getMenseState(calendarDate.getTimeInMillis()));
 
             //从数据库中
             mItems.add(calendarDate);

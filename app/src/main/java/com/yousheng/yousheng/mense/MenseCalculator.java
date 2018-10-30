@@ -21,6 +21,10 @@ public class MenseCalculator {
      * 是否处于经期内
      */
     public static boolean isInMense(long endDateTs) {
+        if (!checkDatelegal(endDateTs)) {
+            return false;
+        }
+
         int menseDuration = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DAYS,
                 Constants.DEFAULT_MENSE_DURAION));
         int menseGap = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DURATION,
@@ -35,24 +39,26 @@ public class MenseCalculator {
         long lastMenseStartTs = SPSingleton.get().getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
                 temp.getTimeInMillis());
         return (endDateTs - lastMenseStartTs) > 0
-                && ((endDateTs - lastMenseStartTs) % ((menseDuration + menseGap) * ONE_DAY_TS) <= menseDuration * ONE_DAY_TS);
+                && ((endDateTs - lastMenseStartTs) % ((menseGap) * ONE_DAY_TS) <= menseDuration * ONE_DAY_TS);
     }
 
     /**
      * 是否正处于排卵日
      */
     public static boolean isPaiLuanDate(long dateTs) {
-        int menseDuration = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DAYS,
-                Constants.DEFAULT_MENSE_DURAION));
-        int menseGap = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DURATION,
-                Constants.DEFAULT_MENSE_GAP));
-        long lastMenseStartTs = SPSingleton.get().getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
-                System.currentTimeMillis());
+        if (!checkDatelegal(dateTs)) {
+            return false;
+        }
 
-        long nextMenseStartTs = lastMenseStartTs + (menseDuration + menseGap) * ONE_DAY_TS;
-        long pailuanStartTs = nextMenseStartTs - 14 * ONE_DAY_TS;
+        return !isInMense(dateTs + 13 * ONE_DAY_TS) && isInMense(dateTs + 14 * ONE_DAY_TS);
+    }
 
-        return dateTs > pailuanStartTs && dateTs < (pailuanStartTs + ONE_DAY_TS);
+    private static boolean checkDatelegal(long dateTs) {
+        if (dateTs < SPSingleton.get().getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
+                System.currentTimeMillis())) {
+            return false;
+        }
+        return true;
     }
 
 
@@ -60,18 +66,15 @@ public class MenseCalculator {
      * 是否正处于排卵期
      * */
     public static boolean isInPaiLuanDuration(long dateTs) {
-        int menseDuration = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DAYS,
-                Constants.DEFAULT_MENSE_DURAION));
-        int menseGap = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DURATION,
-                Constants.DEFAULT_MENSE_GAP));
-        long lastMenseStartTs = SPSingleton.get().getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
-                System.currentTimeMillis());
+        if (!checkDatelegal(dateTs)) {
+            return false;
+        }
 
-        long nextMenseStartTs = lastMenseStartTs + (menseDuration + menseGap) * ONE_DAY_TS;
-        long pailuanStartTs = nextMenseStartTs - 14 * ONE_DAY_TS;
-
-        return (dateTs > (pailuanStartTs - 5 * ONE_DAY_TS))
-                && (dateTs < (pailuanStartTs + 5 * ONE_DAY_TS));
+        for (int i = -4; i <= 5; i++) {
+            if (isPaiLuanDate((ONE_DAY_TS) * i + dateTs))
+                return true;
+        }
+        return false;
     }
 
 
@@ -147,8 +150,8 @@ public class MenseCalculator {
      */
     public static String getMenseStateString(long dateTs) {
         if (isInMense(dateTs)) return "经期";
-        if (isInPaiLuanDuration(dateTs)) return "排卵期";
         if (isPaiLuanDate(dateTs)) return "排卵日";
+        if (isInPaiLuanDuration(dateTs)) return "排卵期";
         return "安全期";
     }
 
@@ -157,8 +160,8 @@ public class MenseCalculator {
      */
     public static int getMenseState(long dateTs) {
         if (isInMense(dateTs)) return MenseCalculator.STATE_MENSE;
-        if (isInPaiLuanDuration(dateTs)) return MenseCalculator.STATE_PAILUAN_DURATION;
         if (isPaiLuanDate(dateTs)) return MenseCalculator.STATE_PAILUAN_DATE;
+        if (isInPaiLuanDuration(dateTs)) return MenseCalculator.STATE_PAILUAN_DURATION;
         return MenseCalculator.STATE_NORMAL;
     }
 }

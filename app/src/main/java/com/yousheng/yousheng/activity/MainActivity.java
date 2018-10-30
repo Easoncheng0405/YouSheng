@@ -270,14 +270,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 updateMenseInfo(calendar.getTimeInMillis());
+
                 mMenseInfoSelected.setDate(dateString);
                 mMenseInfoSelected.setDateTs(calendar.getTimeInMillis());
+                mMenseInfoSelected.setMenseStart(calendar.isMenseStart());
+                mMenseInfoSelected.setMenseEnd(calendar.isMenseEnd());
                 mMenseInfoSelected.save();
-                switchMenseEnd.setChecked(mMenseInfoSelected.isMenseEnd());
-                switchMenseStart.setChecked(mMenseInfoSelected.isMenseStart());
+                switchMenseEnd.setChecked(calendar.isMenseEnd());
+                switchMenseStart.setChecked(calendar.isMenseStart());
                 switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());
-
-
             }
         });
 
@@ -316,13 +317,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (buttonView == switchMenseStart) {
-                            mMenseInfoSelected.setMenseStart(isChecked);
-                            mMenseInfoSelected.save();
-                        } else if (buttonView == switchMenseEnd) {
-                            mMenseInfoSelected.setMenseEnd(isChecked);
-                            mMenseInfoSelected.save();
-                        } else if (buttonView == switchMakeLove) {
+                        if (buttonView == switchMakeLove) {
                             mMenseInfoSelected.setHasMakeLove(isChecked);
                             mMenseInfoSelected.save();
                             if (mCalendarSelected != null) {
