@@ -23,6 +23,7 @@
             stv:leftText="  自定义添加"
             stv:rightType="textView"
             stv:rightTextSize="20sp"
+            stv:rightText="删除 "
             stv:rightTextColor="@color/white"
             stv:fillStatusBar="true"
             stv:statusBarColor="@color/colorPrimaryDark"/>

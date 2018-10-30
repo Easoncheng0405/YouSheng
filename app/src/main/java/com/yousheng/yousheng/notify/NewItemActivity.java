@@ -1,9 +1,11 @@
 package com.yousheng.yousheng.notify;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.NewItem;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.uitl.ToastUtil;
@@ -82,7 +85,27 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                         finish();
                         break;
                     case 3:
-                        addNewItem();
+                        if (id != -1L)
+                            new AlertDialog.Builder(context).setTitle("注意")
+                                    .setMessage("确定要删除此提醒事项吗？")
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            NewItem item = LitePal.find(NewItem.class, id);
+                                            if (item != null)
+                                                item.delete();
+                                            ToastUtil.showMsg(context, "成功删除提醒事项");
+                                            finish();
+                                        }
+                                    })
+                                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    })
+                                    .show();
+                        else
+                            addNewItem();
                         break;
                 }
             }
@@ -132,6 +155,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         id = intent.getLongExtra("id", -1);
         //初始化数据
         if (id != -1) {
+            titleBar.getRightTextView().setText("删除");
             NewItem item = LitePal.find(NewItem.class, id);
             if (item == null) {
                 ToastUtil.showMsg(context, "发生了一些错误，请联系客服！");
@@ -148,7 +172,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             if (l > 0) {
                 calendar.setTimeInMillis(l);
             }
-        }
+        } else
+            titleBar.getRightTextView().setText("添加");
+
         time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {

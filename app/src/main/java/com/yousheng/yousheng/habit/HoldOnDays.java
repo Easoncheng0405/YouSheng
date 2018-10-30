@@ -127,13 +127,15 @@ public class HoldOnDays extends AppCompatActivity {
     //打卡
     private void record() {
         if (habit.isSigned()) {
-            habit.setSignTime(1000);
-            habit.setKeepDays(habit.getKeepDays() - 1);
-            habit.save();
+            Habit h = LitePal.find(Habit.class, habit.getId());
+            h.setSignTime(1000);
+            h.setKeepDays(habit.getKeepDays() - 1);
+            h.save();
         } else {
-            habit.setSignTime(System.currentTimeMillis());
-            habit.setKeepDays(habit.getKeepDays() + 1);
-            habit.save();
+            Habit h = LitePal.find(Habit.class, habit.getId());
+            h.setSignTime(System.currentTimeMillis());
+            h.setKeepDays(habit.getKeepDays() + 1);
+            h.save();
         }
         finish();
     }

@@ -22,7 +22,7 @@
             stv:leftTextColor="@color/white"
             stv:leftTextSize="20sp"
             stv:leftType="textView"
-            stv:rightText="添加 "
+            stv:rightText="删除 "
             stv:rightTextColor="@color/white"
             stv:rightTextSize="20sp"
             stv:rightType="textView"
