@@ -13,11 +13,10 @@ import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.mense.MenseCalculator;
 
 /**
- * 高仿魅族日历布局
- * Created by huanghaibin on 2017/11/15.
+ * edit by zhaoyang on 2018/10/31.
  */
 
-public class MeiZuMonthView extends MonthView {
+public class YoushengMonthView extends MonthView {
 
     /**
      * 自定义魅族标记的文本画笔
@@ -35,7 +34,7 @@ public class MeiZuMonthView extends MonthView {
     private Bitmap mBitmapLoveEmpty;
     private Bitmap mBitmapLoveFill;
 
-    public MeiZuMonthView(Context context) {
+    public YoushengMonthView(Context context) {
         super(context);
         isNeedPaintBitmap = true;
 
@@ -75,8 +74,16 @@ public class MeiZuMonthView extends MonthView {
      */
     @Override
     protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
-        mSelectedPaint.setStyle(Paint.Style.FILL);
-        canvas.drawRect(x + mPadding, y + mPadding, x + mItemWidth - mPadding, y + mItemHeight - mPadding, mSelectedPaint);
+        int strokeWidth = dipToPx(getContext(), 1f);
+        mSelectedPaint.setStyle(Paint.Style.STROKE);
+        mSelectedPaint.setStrokeWidth(strokeWidth);
+        mSelectedPaint.setStrokeCap(Paint.Cap.ROUND);
+        mSelectedPaint.setStrokeJoin(Paint.Join.ROUND);
+        canvas.drawRect(
+                x + mPadding + strokeWidth,
+                y + mPadding +strokeWidth,
+                x + mItemWidth - mPadding - strokeWidth,
+                y + mItemHeight - mPadding - strokeWidth, mSelectedPaint);
         return true;
     }
 
@@ -90,13 +97,6 @@ public class MeiZuMonthView extends MonthView {
      */
     @Override
     protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
-//        mSchemeBasicPaint.setColor(calendar.getSchemeColor());
-//
-//        canvas.drawCircle(x + mItemWidth - mPadding - mRadio / 2, y + mPadding + mRadio, mRadio, mSchemeBasicPaint);
-//
-//        canvas.drawText(calendar.getScheme(),
-//                x + mItemWidth - mPadding - mRadio / 2 - getTextWidth(calendar.getScheme()) / 2,
-//                y + mPadding + mSchemeBaseLine, mTextPaint);
     }
 
     private float getTextWidth(String text) {
