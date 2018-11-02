@@ -75,9 +75,7 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
                 stv:sRightIconRes="@mipmap/arrow_right"
                 stv:sShapeCornersRadius="3dp"
                 stv:sShapeStrokeColor="@color/gray"
@@ -130,11 +128,12 @@
                 android:layout_margin="8dp"/>
 
             <TextView
-                android:layout_margin="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/title2"
-                android:textColor="@color/Drakgray"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
@@ -147,6 +146,7 @@
         android:layout_margin="20dp"
         stv:sCenterTextColor="@color/white"
         stv:sCenterTextString="打卡"
+        stv:sCenterTextSize="20sp"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeSelectorNormalColor="@color/colorPrimary"
         stv:sShapeSelectorPressedColor="@color/gray"
