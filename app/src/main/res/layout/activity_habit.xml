@@ -113,6 +113,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
         stv:sCenterTextColor="@color/white"
+        stv:sCenterTextSize="20sp"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeSelectorNormalColor="@color/colorPrimary"
         stv:sShapeSelectorPressedColor="@color/gray"

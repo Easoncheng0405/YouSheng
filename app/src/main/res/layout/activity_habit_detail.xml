@@ -102,6 +102,7 @@
         android:layout_margin="20dp"
         stv:sCenterTextColor="@color/white"
         stv:sShapeCornersRadius="3dp"
+        stv:sCenterTextSize="20sp"
         stv:sShapeSelectorNormalColor="@color/colorPrimary"
         stv:sShapeSelectorPressedColor="@color/gray"
         stv:sUseShape="true" />
