@@ -44,6 +44,8 @@ import java.util.Locale;
 
 import com.yousheng.yousheng.uitl.time.Api;
 
+import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
+
 
 public class NewItemActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -77,6 +79,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         CommonTitleBar titleBar = findViewById(R.id.title);
+        changeTitleImageLeftMargin(this, titleBar);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {

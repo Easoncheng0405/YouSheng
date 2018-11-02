@@ -26,6 +26,8 @@ import org.litepal.LitePal;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
+
 /**
  * 打卡详情页面
  */
@@ -52,6 +54,7 @@ public class HabitDetailActivity extends AppCompatActivity {
         try {
             final Habit habit = LitePal.find(Habit.class, id);
             final CommonTitleBar titleBar = findViewById(R.id.title);
+            changeTitleImageLeftMargin(this, titleBar);
             titleBar.getLeftTextView().setText("  " + habit.getMainTitle());
             String str = habit.isNeedSign() ? "移除" : "添加";
             titleBar.getRightTextView().setText(str);

@@ -137,7 +137,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.t1:
                 new AlertDialog.Builder(context).setTitle("注意")
-                        .setMessage("确定要删除此习惯吗？")
+                        .setMessage("确定要清除此习惯吗？")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

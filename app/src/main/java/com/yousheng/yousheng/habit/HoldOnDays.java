@@ -22,6 +22,8 @@ import org.litepal.LitePal;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
+
 
 //打卡activity
 public class HoldOnDays extends AppCompatActivity {
@@ -57,7 +59,7 @@ public class HoldOnDays extends AppCompatActivity {
             superTextView.setCenterString("打卡");
 
         CommonTitleBar titleBar = findViewById(R.id.title);
-
+        changeTitleImageLeftMargin(this, titleBar);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {

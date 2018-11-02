@@ -6,9 +6,12 @@ import android.webkit.WebView;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
+import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
+
 public  class HtmlActivity extends AppCompatActivity {
 
     protected void loadUrl(String url,CommonTitleBar titleBar,WebView webView){
+        changeTitleImageLeftMargin(this, titleBar);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {

@@ -8,11 +8,8 @@ import android.widget.ListView;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.model.Habit;
 
-import org.litepal.LitePal;
-
-import java.util.List;
+import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
 
 public class AllHabitActivity extends AppCompatActivity {
 
@@ -22,6 +19,7 @@ public class AllHabitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_habit);
 
         CommonTitleBar titleBar = findViewById(R.id.habit_all_title);
+        changeTitleImageLeftMargin(this, titleBar);
         titleBar.getRightImageButton().setPadding(0, 0, 80, 0);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
@@ -45,7 +43,6 @@ public class AllHabitActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         ListView habits = findViewById(R.id.habits);
-        List<Habit> list = LitePal.findAll(Habit.class);
         HabitAdapter adapter = new HabitAdapter(this, HabitHelper.getAllHabitInState());
         habits.setAdapter(adapter);
         habits.setDivider(null);

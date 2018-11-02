@@ -18,6 +18,8 @@ import org.litepal.LitePal;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
+
 
 public class WeightActivity extends AppCompatActivity {
 
@@ -40,6 +42,7 @@ public class WeightActivity extends AppCompatActivity {
         });
 
         CommonTitleBar titleBar = findViewById(R.id.title);
+        changeTitleImageLeftMargin(this, titleBar);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {
