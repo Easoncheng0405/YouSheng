@@ -1,52 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:windowSoftInputMode="adjustResize|stateHidden"
     tools:context=".habit.HabitActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
-        <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-            android:id="@+id/title"
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            stv:titleBarHeight="60dp"
-            stv:titleBarColor="@color/colorPrimary"
-            stv:leftTextSize="20sp"
-            stv:leftTextColor="@color/white"
-            stv:leftDrawable="@drawable/back"
-            stv:leftType="textView"
-            stv:leftText="  自定义添加"
-            stv:rightType="textView"
-            stv:rightTextSize="20sp"
-            stv:rightText="删除 "
-            stv:rightTextColor="@color/white"
-            stv:fillStatusBar="true"
-            stv:statusBarColor="@color/colorPrimaryDark"/>
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/title"
+                android:onClick="onClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:drawableLeft="@drawable/back"
+                android:text="  添加新习惯"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:onClick="onClick"
+                    android:id="@+id/t1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="清除习惯"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:onClick="onClick"
+                    android:id="@+id/t2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="放回"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
         <EditText
-            android:background="@drawable/edit_text"
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
+            android:background="@drawable/edit_text"
             android:hint="我的习惯我做主!"
-            android:textSize="16sp"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textSize="16sp" />
 
         <com.allen.library.SuperTextView
             android:id="@+id/time"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
+            android:visibility="gone"
             stv:sRightIconRes="@mipmap/arrow_right"
             stv:sShapeCornersRadius="3dp"
             stv:sShapeStrokeColor="@color/gray"
@@ -60,19 +97,21 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
-            stv:sRightViewType="switchBtn"
             stv:sLeftTextString="提醒"
+            stv:sRightViewType="switchBtn"
             stv:sShapeCornersRadius="3dp"
             stv:sShapeStrokeColor="@color/gray"
             stv:sShapeStrokeWidth="0.3dp"
             stv:sUseShape="true" />
     </LinearLayout>
+
     <com.allen.library.SuperTextView
+        android:onClick="onClick"
         android:id="@+id/ok"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
         stv:sCenterTextColor="@color/white"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeSelectorNormalColor="@color/colorPrimary"

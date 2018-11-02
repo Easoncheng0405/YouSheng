@@ -32,7 +32,7 @@ public class AllHabitActivity extends AppCompatActivity {
                         break;
                     case 4:
                         Intent intent = new Intent(AllHabitActivity.this, HabitActivity.class);
-                        intent.putExtra("id", -1);
+                        intent.putExtra("id", -1L);
                         startActivity(intent);
                         break;
                 }

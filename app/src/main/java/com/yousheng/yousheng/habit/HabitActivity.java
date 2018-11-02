@@ -12,6 +12,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
@@ -41,13 +42,17 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
     private boolean isNotify = false;
     private Habit habit;
 
+    private TextView t1, t2;
+    private boolean needSign;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit);
 
         context = this;
-
+        t1 = findViewById(R.id.t1);
+        t2 = findViewById(R.id.t2);
         calendar.set(Calendar.HOUR_OF_DAY, 8);
         calendar.set(Calendar.MINUTE, 0);
         notify = findViewById(R.id.notify);
@@ -56,13 +61,13 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         time.setOnClickListener(this);
 
         time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
-        CommonTitleBar titleBar = findViewById(R.id.title);
         Intent intent = getIntent();
         id = intent.getLongExtra("id", -1);
 
         //初始化数据
         if (id != -1) {
             habit = LitePal.find(Habit.class, id);
+            needSign = habit.isNeedSign();
             content.setText(habit.getMainTitle());
             if (habit.getClockTime() > 0) {
                 calendar.setTimeInMillis(habit.getClockTime());
@@ -73,49 +78,18 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                 notify.setSwitchIsChecked(true);
             }
             isNotify = habit.isNotify();
-            String str = habit.isNeedSign() ? "移除" : "添加";
+            String str = habit.isNeedSign() ? "放回" : "添加";
             SuperTextView superTextView = findViewById(R.id.ok);
-            superTextView.setCenterString(str.equals("移除") ? "从首页移除" : "添加到首页");
-            titleBar.getRightTextView().setText("删除");
+            superTextView.setCenterString(str.equals("放回") ? "放回到习惯库" : "添加到首页");
+            t1.setVisibility(View.VISIBLE);
+            t2.setText(str);
         } else {
+            needSign = true;
             SuperTextView superTextView = findViewById(R.id.ok);
             superTextView.setCenterString("添加到首页");
-            titleBar.getRightTextView().setText("添加");
+            t2.setText("添加");
+            t1.setVisibility(View.GONE);
         }
-
-        titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
-            @Override
-            public void onClicked(View v, int action, String extra) {
-                switch (action) {
-                    case 1:
-                        finish();
-                        break;
-                    case 3:
-                        if (id != -1L)
-                            new AlertDialog.Builder(context).setTitle("注意")
-                                    .setMessage("确定要删除此习惯吗？")
-                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Habit habit = LitePal.find(Habit.class, id);
-                                            if (habit != null)
-                                                habit.delete();
-                                            ToastUtil.showMsg(context, "成功删除习惯");
-                                            finish();
-                                        }
-                                    })
-                                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    })
-                                    .show();
-                        else
-                            addHabit();
-                        break;
-                }
-            }
-        });
 
         timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -151,7 +125,9 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ok:
-                addHabit();
+                if (id != -1)
+                    needSign = !needSign;
+                finish();
                 break;
             case R.id.notify:
                 notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
@@ -159,47 +135,59 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
             case R.id.time:
                 timePickerDialog.show();
                 break;
+            case R.id.t1:
+                new AlertDialog.Builder(context).setTitle("注意")
+                        .setMessage("确定要删除此习惯吗？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Habit habit = LitePal.find(Habit.class, id);
+                                if (habit != null)
+                                    habit.delete();
+                                ToastUtil.showMsg(context, "成功删除习惯");
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.t2:
+                if (id != -1)
+                    needSign = !needSign;
+                finish();
+                break;
+            case R.id.title:
+                finish();
+                break;
         }
     }
 
-    private void addHabit() {
-        String str = content.getText().toString();
-        if (TextUtils.isEmpty(str) || str.trim().length() == 0) {
-            ToastUtil.showMsg(context, "请填写提醒内容");
-            return;
-        }
-
-        if (str.length() > 150) {
-            ToastUtil.showMsg(context, "内容不能超过150字符哦");
-            return;
-        }
-
-
+    @Override
+    protected void onPause() {
         if (calendar.getTimeInMillis() < System.currentTimeMillis())
             calendar.add(Calendar.DATE, 1);
         long time = calendar.getTimeInMillis();
-
+        String str = content.getText().toString();
         Habit habit;
         if (id == -1) {
             habit = new Habit();
-            habit.setMainTitle(str);
-            habit.setClockTime(time);
-            habit.setNotify(isNotify);
-            habit.setOfficial(false);
-            habit.setYouSheng(SPSingleton.get().
-                    getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true));
-            habit.save();
         } else {
             habit = LitePal.find(Habit.class, id);
+        }
+        if (habit != null && str.trim().length() != 0) {
             habit.setMainTitle(str);
             habit.setClockTime(time);
             habit.setNotify(isNotify);
             habit.setYouSheng(SPSingleton.get().
                     getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true));
+            habit.setNeedSign(needSign);
             habit.save();
+            AlarmHelper.notifyHabit(context, habit);
         }
-        AlarmHelper.notifyHabit(context, habit);
-        ToastUtil.showMsg(context, "编辑已保存！");
-        finish();
+        super.onPause();
     }
 }
