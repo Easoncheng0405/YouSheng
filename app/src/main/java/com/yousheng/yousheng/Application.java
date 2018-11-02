@@ -95,7 +95,6 @@ public class Application extends LitePalApplication {
             sprot.setNeedSign(true);
             sprot.setClockTime(calendar.getTimeInMillis());
             sprot.setContent("最佳锻炼时间：至少30分钟，最佳1小时，不要超过2小时。\n" +
-                    "最佳锻炼时间：至少30分钟，最佳1小时，不要超过2小时。\n" +
                     "缺乏运动的危害：\n" +
                     "1.畸形儿、先天性心脏病、兔唇等疾病的发生率将大幅变高。\n" +
                     "2.使胸腔血液不足，导致人的心、肺功能进一步降低。\n" +
@@ -244,7 +243,6 @@ public class Application extends LitePalApplication {
             sprot.setNeedSign(true);
             sprot.setClockTime(calendar.getTimeInMillis());
             sprot.setContent("最佳锻炼时间：至少30分钟，最佳1小时，不要超过2小时。\n" +
-                    "最佳锻炼时间：至少30分钟，最佳1小时，不要超过2小时。\n" +
                     "缺乏运动的危害：\n" +
                     "1.畸形儿、先天性心脏病、兔唇等疾病的发生率将大幅变高。\n" +
                     "2.使胸腔血液不足，导致人的心、肺功能进一步降低。\n" +
