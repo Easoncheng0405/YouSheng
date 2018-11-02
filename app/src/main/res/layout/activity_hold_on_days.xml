@@ -7,9 +7,9 @@
     tools:context=".habit.HoldOnDays">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,10 +72,10 @@
 
             <com.allen.library.SuperTextView
                 android:id="@+id/clockTime"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
+                android:visibility="gone"
                 stv:sRightIconRes="@mipmap/arrow_right"
                 stv:sShapeCornersRadius="3dp"
                 stv:sShapeStrokeColor="@color/gray"
@@ -84,12 +84,11 @@
 
             <com.allen.library.SuperTextView
                 android:id="@+id/time"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
+                android:visibility="gone"
                 stv:sRightIconRes="@mipmap/arrow_right"
                 stv:sShapeCornersRadius="3dp"
                 stv:sShapeStrokeColor="@color/gray"
@@ -103,7 +102,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="50dp"
                 stv:sLeftTextString="提醒"
                 stv:sRightViewType="switchBtn"
                 stv:sShapeCornersRadius="3dp"
@@ -112,30 +110,37 @@
                 stv:sUseShape="true" />
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/title1"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:layout_margin="8dp"/>
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/title2"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/title1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:id="@+id/title2"
+                    android:lineSpacingExtra="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
     <com.allen.library.SuperTextView
@@ -145,8 +150,8 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
         stv:sCenterTextColor="@color/white"
-        stv:sCenterTextString="打卡"
         stv:sCenterTextSize="20sp"
+        stv:sCenterTextString="打卡"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeSelectorNormalColor="@color/colorPrimary"
         stv:sShapeSelectorPressedColor="@color/gray"

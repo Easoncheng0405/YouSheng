@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -41,7 +44,7 @@ public class HoldOnDays extends AppCompatActivity {
             return;
         }
 
-        SuperTextView superTextView = findViewById(R.id.ok);
+        final SuperTextView superTextView = findViewById(R.id.ok);
         superTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +68,7 @@ public class HoldOnDays extends AppCompatActivity {
         titleBar.getLeftTextView().setText("  " + habit.getMainTitle());
         ((TextView) findViewById(R.id.title1)).setText(habit.getMainTitle());
         if (habit.isOfficial())
-            ((TextView) findViewById(R.id.title2)).setText(habit.getSubTitle());
+            ((TextView) findViewById(R.id.title2)).setText(habit.getContent());
         ((TextView) findViewById(R.id.number)).setText(habit.getKeepDays() + "");
 
         calendar.setTimeInMillis(habit.getClockTime());
@@ -120,6 +123,18 @@ public class HoldOnDays extends AppCompatActivity {
                 Habit h = LitePal.find(Habit.class, habit.getId());
                 h.setNotify(b);
                 h.save();
+            }
+        });
+
+        final ScrollView scrollView = findViewById(R.id.scrollView);
+
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                ViewGroup.LayoutParams params = scrollView.getLayoutParams();
+                params.height = (int) ((superTextView.getTop() - notify.getBottom()));
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                scrollView.setLayoutParams(params);
             }
         });
     }
