@@ -178,6 +178,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         } else {
             habit = LitePal.find(Habit.class, id);
         }
+
         if (habit != null && str.trim().length() != 0) {
             habit.setMainTitle(str);
             habit.setClockTime(time);
