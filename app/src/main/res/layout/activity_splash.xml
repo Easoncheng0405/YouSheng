@@ -51,7 +51,7 @@
         android:layout_marginTop="17dp"
         android:background="@drawable/shape_background_rectangle"
         android:gravity="center"
-        android:text="点击跳过"
+        android:text="点击跳过 5"
         android:textColor="@color/white" />
 
 </RelativeLayout>
