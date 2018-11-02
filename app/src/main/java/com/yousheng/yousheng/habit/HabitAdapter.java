@@ -87,7 +87,7 @@ public class HabitAdapter extends BaseAdapter {
         TextView textView = convertView.findViewById(R.id.title);
         if (i + 1 == getCount()) {
             LinearLayout.LayoutParams margin = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            margin.setMargins(20, 70, 20, 80);
+            margin.setMargins(30, 70, 30, 80);
             superTextView.setLayoutParams(margin);
             superTextView.setCenterTextColor(Color.WHITE);
             superTextView.setCenterString("自定义添加");
@@ -151,6 +151,8 @@ public class HabitAdapter extends BaseAdapter {
         }
 
         superTextView.getLeftBottomTextView().setPadding(0, 0, 150, 0);
+        if (!habit.isOfficial())
+            superTextView.getLeftTextView().setPadding(30, 0, 0, 0);
         superTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,7 +165,6 @@ public class HabitAdapter extends BaseAdapter {
                     //自定义的去编辑页面
                     Intent intent = new Intent(context, HabitActivity.class);
                     intent.putExtra("id", habit.getId());
-                    //自定义习惯只有标题
                     context.startActivity(intent);
                 }
             }
