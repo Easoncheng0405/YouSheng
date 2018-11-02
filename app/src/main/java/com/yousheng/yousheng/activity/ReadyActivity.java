@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.model.MenseInfo;
@@ -18,6 +19,7 @@ import org.litepal.crud.callback.SaveCallback;
 
 import java.util.List;
 
+@Route(path = "/activity/ready")
 public class ReadyActivity extends AppCompatActivity {
     private MenseInfo mMenseInfo;
 
@@ -68,7 +70,7 @@ public class ReadyActivity extends AppCompatActivity {
                 }
             }
         });
-        if(!TextUtils.isEmpty(mMenseInfo.getComment())){
+        if (!TextUtils.isEmpty(mMenseInfo.getComment())) {
             ((EditText) findViewById(R.id.et_ready)).setText(mMenseInfo.getComment());
         }
     }

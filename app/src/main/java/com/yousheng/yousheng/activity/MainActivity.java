@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.adapter.NewItemListAdapter;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
-            case Constants.RESULT_CODE_MAIN_TO_NEWITEM:
+            case Constants.RESULT_CODE_MAIN_TO_NEWITEM: {
                 if (data != null) {
                     int timeRange = data.getIntExtra("timeRange", -1);
                     if (timeRange == NewItemHelper.TimeRange.TODAY.getValue()) {
@@ -185,9 +186,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
                 break;
-        }
-
-        {
+            }
+            case Constants.REQUEST_CODE_MAIN_TO_COMMENT: {
+                String text = data.getStringExtra("text");
+                ((TextView) findViewById(R.id.tv_comment)).setText(text);
+            }
+            break;
 
         }
     }
@@ -216,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.layout_comment:
                 Intent intent = new Intent(this, ReadyActivity.class);
                 intent.putExtra("date", mMenseInfoSelected.getDate());
-                startActivity(intent);
+                startActivityForResult(intent, Constants.REQUEST_CODE_MAIN_TO_COMMENT);
                 break;
             case R.id.layout_pregnant_check:
                 startActivity(new Intent(this, PregnantCheckActivity.class));

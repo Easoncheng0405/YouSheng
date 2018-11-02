@@ -9,6 +9,7 @@ public class Constants {
     public final static int REQUEST_CODE_OVULATION_TO_RECORD = 1;
     public final static int REQUEST_CODE_SETTING_TO_MENSE_MANAGEMENT = 3;
     public final static int REQUEST_CODE_MAIN_TO_NEWITEM = 4;
+    public final static int REQUEST_CODE_MAIN_TO_COMMENT = 5;
 
     public final static int RESULT_CODE_NO_CHANGE = 100 - 1;
     public final static int RESULT_CODE_HAS_CHANGE = 100 - 2;
@@ -25,4 +26,5 @@ public class Constants {
     /****时间常量**/
     public final static long ONE_DAY_IN_TS = 24 * 3600 * 1000L;
     public final static String DATE_FORMAT = "yyyy-MM-dd";
+
 }

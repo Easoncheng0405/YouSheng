@@ -210,7 +210,7 @@ public class CustomDatePicker {
     private void initDialog() {
         if (datePickerDialog == null) {
             datePickerDialog = new Dialog(context, R.style.date_picker_time_dialog);
-            datePickerDialog.setCancelable(false);
+            datePickerDialog.setCancelable(true);
             datePickerDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             datePickerDialog.setContentView(R.layout.custom_date_picker);
             Window window = datePickerDialog.getWindow();

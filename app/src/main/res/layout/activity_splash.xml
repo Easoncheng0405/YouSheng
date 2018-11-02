@@ -44,8 +44,8 @@
     <!--倒计时文字-->
     <TextView
         android:id="@+id/tv_count_down"
-        android:layout_width="70dp"
-        android:layout_height="21dp"
+        android:layout_width="80dp"
+        android:layout_height="26dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="17dp"
         android:layout_marginTop="17dp"
