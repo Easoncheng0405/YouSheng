@@ -24,7 +24,7 @@
         android:layout_toStartOf="@id/cb_complete"
         android:textAlignment="center"
         android:textColor="@color/text_color_red_theme"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
 
     <TextView
@@ -35,5 +35,6 @@
         android:layout_toStartOf="@id/tv_date"
         android:ellipsize="end"
         android:gravity="start"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
 </RelativeLayout>

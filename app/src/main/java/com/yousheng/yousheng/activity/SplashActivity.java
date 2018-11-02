@@ -25,15 +25,22 @@ public class SplashActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                TextView tvCountDown = findViewById(R.id.tv_count_down);
+                final TextView tvCountDown = findViewById(R.id.tv_count_down);
                 String countDownText = tvCountDown.getText().toString();
-                String[] texts = countDownText.split(" ");
+                final String[] texts = countDownText.split(" ");
                 int leftTimeSeconds = Integer.valueOf(texts[1]);
                 if (leftTimeSeconds > 0) {
                     leftTimeSeconds--;
-                    tvCountDown.setText(texts[0]
-                            .concat(" ")
-                            .concat(String.valueOf(leftTimeSeconds)));
+                    final int i = leftTimeSeconds;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvCountDown.setText(texts[0]
+                                    .concat(" ")
+                                    .concat(String.valueOf(i)));
+                        }
+                    });
+
                 } else {
                     timer.cancel();
                     startActivity(new Intent(SplashActivity.this
