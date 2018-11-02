@@ -6,12 +6,18 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yousheng.yousheng.R;
 
-@Route(path = "/splash/activity")
+import java.util.Timer;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        initTimer();
+    }
+
+    private void initTimer() {
+        Timer
     }
 }
