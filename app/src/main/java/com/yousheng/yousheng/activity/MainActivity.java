@@ -17,6 +17,7 @@ import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.adapter.NewItemListAdapter;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
 import com.yousheng.yousheng.habit.AllHabitActivity;
+import com.yousheng.yousheng.manager.FeedBackManager;
 import com.yousheng.yousheng.mense.MenseCalculator;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
@@ -151,6 +152,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SPSingleton.get().putBoolean(PrefConstants.PRFS_KEY_MENSE_START_DAY_CHANGED, false);
             mCalendarView.updateMenseInfo();
         }
+
+        findViewById(R.id.root_view).post(new Runnable() {
+            @Override
+            public void run() {
+                FeedBackManager.showEvaluationPopupWindow(MainActivity.this, findViewById(R.id.root_view));
+            }
+        });
     }
 
     @Override
@@ -277,7 +285,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switchMenseStart.setChecked(calendar.isMenseStart());
                 switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());
 
-                ((TextView) findViewById(R.id.tv_comment_sub)).setText(mMenseInfoSelected.getComment());
+                if (!android.text.TextUtils.isEmpty(mMenseInfoSelected.getComment())) {
+                    ((TextView) findViewById(R.id.tv_comment_sub)).setText(mMenseInfoSelected.getComment());
+                }
             }
         });
 

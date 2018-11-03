@@ -234,6 +234,8 @@
 
             <!--使用说明-->
             <RelativeLayout
+                android:id="@+id/layout_instruction"
+                android:onClick="onClick"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginTop="8dp"

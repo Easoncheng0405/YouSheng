@@ -1,5 +1,6 @@
 package com.yousheng.yousheng.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
@@ -76,7 +77,7 @@ public class RecordOvulationActivity extends AppCompatActivity implements View.O
                         .Builder()
                         .setContext(this)
                         .setStartDate("2010-01-01 00:00")
-                        .setEndDate(CalendarUtils.formatDateString(System.currentTimeMillis(),"yyyy-MM-dd hh:mm"))
+                        .setEndDate(CalendarUtils.formatDateString(System.currentTimeMillis(), "yyyy-MM-dd hh:mm"))
                         .setTitle("试纸测试时间录入")
                         .setResultHandler(new CustomDatePicker.ResultHandler() {
                             @Override
@@ -88,8 +89,8 @@ public class RecordOvulationActivity extends AppCompatActivity implements View.O
         mDatePicker.showSpecificTime(true);
 
         tvRecordDate = findViewById(R.id.tv_record_date);
-
         switchMakeLove = findViewById(R.id.switch_make_love);
+        updateRecordTime(System.currentTimeMillis());
     }
 
     private void updateRecordTime(long timeMillis) {
@@ -138,10 +139,15 @@ public class RecordOvulationActivity extends AppCompatActivity implements View.O
             case R.id.btn_ensure:
                 OvulationRecord record = new OvulationRecord();
                 record.setDate(mTimeMillis);
+                record.setState(mOvulationResult);
                 record.setHasMakeLove(switchMakeLove.isChecked());
                 record.save();
                 setResult(Constants.RESULT_CODE_HAS_CHANGE);
                 finish();
+                break;
+            case R.id.layout_instruction:
+                startActivity(new Intent(RecordOvulationActivity.this,
+                        OvulationInstructionActivity.class));
                 break;
         }
     }

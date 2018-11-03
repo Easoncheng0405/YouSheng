@@ -1,6 +1,8 @@
 package com.yousheng.yousheng.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.activity.FeedBackActivity;
+import com.yousheng.yousheng.manager.FeedBackManager;
 
 public class EvaluationPopupWindow extends PopupWindow {
     private ImageView ivStarOne;
@@ -24,7 +28,12 @@ public class EvaluationPopupWindow extends PopupWindow {
         BAD
     }
 
-    public EvaluationPopupWindow(Context context) {
+    private BUTTON_STATE mState;
+
+    private Activity mActivity;
+
+    public EvaluationPopupWindow(Activity context) {
+        this.mActivity = context;
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.layout_evaluation_popwindow, null);
         setContentView(view);
@@ -51,8 +60,10 @@ public class EvaluationPopupWindow extends PopupWindow {
 
     private void setButtonText(BUTTON_STATE state) {
         if (state == BUTTON_STATE.GOOD) {
+            mState = BUTTON_STATE.GOOD;
             btnJump.setText("去鼓励");
         } else if (state == BUTTON_STATE.BAD) {
+            mState = BUTTON_STATE.BAD;
             btnJump.setText("去吐槽");
         }
     }
@@ -109,6 +120,12 @@ public class EvaluationPopupWindow extends PopupWindow {
                     break;
 
                 case R.id.btn_comment:
+                    FeedBackManager.recordFeedBackButtonClicked();
+                    if (mState == BUTTON_STATE.GOOD) {
+                        //跳转到评价界面
+                    } else if (mState == BUTTON_STATE.BAD) {
+                        mActivity.startActivity(new Intent(mActivity, FeedBackActivity.class));
+                    }
                     break;
             }
         }

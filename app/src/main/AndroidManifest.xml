@@ -9,6 +9,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!--umeng-->
+    <meta-data android:value="YOUR_APP_KEY" android:name="5b97b864f29d985254000027"/>
+    <meta-data android:value="Channel ID" android:name="default"/>
+
+
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -18,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/settings" />
@@ -29,14 +34,13 @@
             android:name=".weight.WeightActivity"
             android:label="@string/weightRecord" />
         <activity android:name=".activity.OvulationActivity" />
-        <activity android:name=".activity.TestActivity">
-
-        </activity>
+        <activity android:name=".activity.TestActivity" />
         <activity android:name=".habit.AllHabitActivity" />
         <activity android:name=".activity.RecordOvulationActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -71,6 +75,8 @@
         <activity android:name=".html.Agreement" />
         <activity android:name=".html.Disclaimer" />
         <activity android:name=".activity.PregnantNoticeActivity" />
+        <activity android:name=".activity.FeedBackActivity" />
+        <activity android:name=".activity.OvulationInstructionActivity"></activity>
     </application>
 
 </manifest>

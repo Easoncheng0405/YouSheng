@@ -13,4 +13,9 @@ public class PrefConstants {
     public final static String PREFS_KEY_MENSE_SAVED = "prefs_key_mense_saved";
 
     public final static String PRFS_KEY_MENSE_START_DAY_CHANGED = "prefs_key_mense_start_day_changed";
+
+    /*****评价界面**/
+    public final static String PREFS_KEY_APP_LAUNCH_TIMES = "prefs_key_app_launch_times";
+    public final static String PREFS_KEY_FEEDBACK_BUTTON_CLICKED = "prefs_key_feedback_button_clicked";
+    public final static String PREFS_KEY_WINDOW_SHOWED = "prefs_window_showed";
 }

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:stv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    tools:context=".activity.ReadyActivity">
+    tools:context=".activity.FeedBackActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
         android:id="@+id/title"
@@ -16,11 +13,11 @@
         stv:fillStatusBar="true"
         stv:leftDrawable="@drawable/back"
         stv:leftDrawablePadding="25dp"
-        stv:leftText="@string/comment"
+        stv:leftText="@string/feed_back_activity"
         stv:leftTextColor="@color/white"
         stv:leftTextSize="20sp"
         stv:leftType="textView"
-        stv:rightText="@string/record_in"
+        stv:rightText="@string/send_feed_back"
         stv:rightTextColor="@color/white"
         stv:rightTextSize="20sp"
         stv:rightType="textView"
@@ -29,7 +26,8 @@
         stv:titleBarHeight="60dp" />
 
     <EditText
-        android:id="@+id/et_ready"
+        android:layout_below="@id/title"
+        android:id="@+id/edit_text"
         android:layout_width="match_parent"
         android:layout_height="187dp"
         android:layout_marginEnd="8dp"
@@ -37,11 +35,11 @@
         android:layout_marginTop="7dp"
         android:background="@drawable/shape_ready_input_text_rectangle"
         android:gravity="top"
-        android:hint="@string/ready_comment"
+        android:hint="@string/feed_back_hint"
         android:maxLines="8"
         android:padding="10dp"
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/text_color_gray_sub"
         android:textCursorDrawable="@null" />
 
-</LinearLayout>
+</RelativeLayout>

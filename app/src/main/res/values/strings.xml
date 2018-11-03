@@ -252,6 +252,12 @@
     <string name="comment_default_hint">加油坚持，小宝贝!</string>
 
 
+    <!--反馈界面-->
+    <string name="feed_back_activity">去吐槽</string>
+    <string name="send_feed_back">发送</string>
+    <string name="feed_back_hint">吐槽，给您带来的不便很抱歉！我们会尽快改正！</string>
+
+
     <!--备孕检查文本-->
     <string-array name="pregnant_check_main_title">
         <item>女性优生优育检查</item>
@@ -411,5 +417,5 @@
 
 
     <!--evaluation-->
-    <string name="evaluation_text"> 真实值得依赖！\n用心做产品!\n给个好评鼓励一下吧</string>
+    <string name="evaluation_text"> 真实可依赖！\n用心做产品!\n给个好评鼓励一下吧~</string>
 </resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.OvulationInstructionActivity">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        stv:fillStatusBar="true"
+        stv:leftDrawable="@drawable/back"
+        stv:leftDrawablePadding="25dp"
+        stv:leftText="@string/instruction"
+        stv:leftTextColor="@color/white"
+        stv:leftTextSize="20sp"
+        stv:leftType="textView"
+        stv:statusBarColor="@color/colorPrimaryDark"
+        stv:titleBarColor="@color/colorPrimary"
+        stv:titleBarHeight="60dp" />
+
+    <TextView
+        android:layout_below="@id/title"
+        android:id="@+id/iv_instruction_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="使用说明:"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_below="@id/iv_instruction_title"
+        android:id="@+id/tv_instruction_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+</RelativeLayout>

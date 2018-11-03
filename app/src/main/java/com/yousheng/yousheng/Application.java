@@ -1,8 +1,10 @@
 package com.yousheng.yousheng;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.yousheng.yousheng.manager.FeedBackManager;
 import com.yousheng.yousheng.model.Market;
 import com.yousheng.yousheng.model.Habit;
+import com.yousheng.yousheng.uitl.SPSingleton;
 
 import org.litepal.LitePal;
 import org.litepal.LitePalApplication;
@@ -24,6 +26,7 @@ public class Application extends LitePalApplication {
         ApplicationContextHolder.setApplicationContext(this);
         insertHabitData();
         insertMarketData();
+        FeedBackManager.recordAppLaunchTimes(this);
     }
 
     private void insertHabitData() {
