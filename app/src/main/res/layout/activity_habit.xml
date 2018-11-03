@@ -29,9 +29,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:drawableLeft="@drawable/back"
-                android:text="  添加新习惯"
+                android:text="   添加新习惯"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="19sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -45,20 +45,20 @@
                     android:id="@+id/t1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="26dp"
                     android:text="清除习惯"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="19sp" />
 
                 <TextView
                     android:onClick="onClick"
                     android:id="@+id/t2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="27dp"
                     android:text="放回"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="19sp" />
 
             </LinearLayout>
 

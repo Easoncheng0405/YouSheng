@@ -29,11 +29,17 @@ public class NewItemListAdapter extends RecyclerView.Adapter<NewItemListAdapter.
     private Activity mContext;
     private List<NewItem> mDatas;
     private NewItemHelper.TimeRange mTimeRange;
+    private View view;
 
-    public NewItemListAdapter(Activity context, NewItemHelper.TimeRange timeRange) {
+    public NewItemListAdapter(Activity context, NewItemHelper.TimeRange timeRange, View view) {
         this.mDatas = NewItemHelper.getAllNewItemInRange().get(timeRange);
         this.mContext = context;
         this.mTimeRange = timeRange;
+        this.view = view;
+        if (mDatas.size() == 0)
+            view.setVisibility(View.GONE);
+        else
+            view.setVisibility(View.VISIBLE);
     }
 
     @NonNull
@@ -58,7 +64,7 @@ public class NewItemListAdapter extends RecyclerView.Adapter<NewItemListAdapter.
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 LitePal.find(NewItem.class, newItem.getId()).delete();
-                notifyItemRemoved(index);
+                notifyDataUpdate();
                 mDatas.remove(newItem);
                 viewHolder.checkBox.setChecked(false);
                 initItemTitle();
@@ -77,6 +83,10 @@ public class NewItemListAdapter extends RecyclerView.Adapter<NewItemListAdapter.
 
     public void notifyDataUpdate() {
         mDatas = NewItemHelper.getAllNewItemInRange().get(mTimeRange);
+        if (mDatas.size() == 0)
+            view.setVisibility(View.GONE);
+        else
+            view.setVisibility(View.VISIBLE);
         this.notifyDataSetChanged();
 
     }

@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
@@ -43,8 +44,6 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import com.yousheng.yousheng.uitl.time.Api;
-
-import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
 
 
 public class NewItemActivity extends AppCompatActivity implements View.OnClickListener {
@@ -78,41 +77,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             Log.e("NewItemActivity", "onCreate:  exception ", e);
         }
 
-        CommonTitleBar titleBar = findViewById(R.id.title);
-        changeTitleImageLeftMargin(this, titleBar);
-        titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
-            @Override
-            public void onClicked(View v, int action, String extra) {
-                switch (action) {
-                    case 1:
-                        finish();
-                        break;
-                    case 3:
-                        if (id != -1L)
-                            new AlertDialog.Builder(context).setTitle("注意")
-                                    .setMessage("确定要删除此提醒事项吗？")
-                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            NewItem item = LitePal.find(NewItem.class, id);
-                                            if (item != null)
-                                                item.delete();
-                                            ToastUtil.showMsg(context, "成功删除提醒事项");
-                                            finish();
-                                        }
-                                    })
-                                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    })
-                                    .show();
-                        else
-                            addNewItem();
-                        break;
-                }
-            }
-        });
 
         time = findViewById(R.id.time);
         notify = findViewById(R.id.notify);
@@ -145,6 +109,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
 
 
         findViewById(R.id.ok).setOnClickListener(this);
+        TextView tv = findViewById(R.id.t2);
         time.setOnClickListener(this);
         notify.setOnClickListener(this);
 
@@ -158,7 +123,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         id = intent.getLongExtra("id", -1);
         //初始化数据
         if (id != -1) {
-            titleBar.getRightTextView().setText("删除");
+            findViewById(R.id.t1).setVisibility(View.VISIBLE);
             NewItem item = LitePal.find(NewItem.class, id);
             if (item == null) {
                 ToastUtil.showMsg(context, "发生了一些错误，请联系客服！");
@@ -175,9 +140,11 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             if (l > 0) {
                 calendar.setTimeInMillis(l);
             }
-        } else
-            titleBar.getRightTextView().setText("添加");
-
+            tv.setText("保存");
+        } else {
+            findViewById(R.id.t1).setVisibility(View.GONE);
+            tv.setText("添加");
+        }
         time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -264,6 +231,30 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.title:
+                finish();
+                break;
+            case R.id.t1:
+                new AlertDialog.Builder(context).setTitle("注意")
+                        .setMessage("确定要删除此提醒事项吗？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                NewItem item = LitePal.find(NewItem.class, id);
+                                if (item != null)
+                                    item.delete();
+                                ToastUtil.showMsg(context, "成功删除提醒事项");
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.t2:
             case R.id.ok:
                 addNewItem();
                 break;

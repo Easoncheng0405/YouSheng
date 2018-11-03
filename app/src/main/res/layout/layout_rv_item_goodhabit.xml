@@ -5,7 +5,10 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:background="@drawable/shape_rv_item_unseleceted"
-    android:padding="10dp">
+    android:paddingLeft="19dp"
+    android:paddingTop="18dp"
+    android:paddingRight="18dp"
+    android:paddingBottom="19dp">
 
     <TextView
         android:id="@+id/tv_main_title"
@@ -13,20 +16,25 @@
         android:layout_height="25dp"
         android:textAlignment="viewEnd"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="17sp"
         tools:text="每天早上七点之前起床" />
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/tv_sub_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_main_title"
+        android:textSize="13sp"
         tools:text="早起的鸟儿有虫吃" />
 
     <CheckBox
+        android:layout_centerVertical="true"
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
+        android:scaleX="0.85"
+        android:scaleY="0.85"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:shadowColor="@color/text_color_red_theme" />
@@ -36,11 +44,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/checkbox"
-        android:layout_alignBottom="@id/checkbox"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="17dp"
         android:layout_toStartOf="@id/checkbox"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="16sp"
         tools:text="(已坚持了33天)" />
 
 
@@ -62,7 +69,7 @@
         android:drawableStart="@drawable/clock"
         android:gravity="center_vertical"
         android:textColor="@color/gray"
-        android:textSize="16sp"
+        android:textSize="11sp"
         tools:text=" 07:00" />
 
 </RelativeLayout>
