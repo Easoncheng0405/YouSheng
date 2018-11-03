@@ -132,12 +132,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rvNextWeek.setItemAnimator(new DefaultItemAnimator());
         rvNoDate.setItemAnimator(new DefaultItemAnimator());
 
-        rvToday.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.TODAY));
-        rvTomorrow.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.TOMORROW));
-        rvObselete.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.UP_TO_DATE));
-        rvNextWeek.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.IN_WEEK));
-        rvFuture.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.FUTURE));
-        rvNoDate.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.NO_DATE));
+        rvToday.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.TODAY, rvToday));
+        rvTomorrow.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.TOMORROW, rvTomorrow));
+        rvObselete.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.UP_TO_DATE, rvObselete));
+        rvNextWeek.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.IN_WEEK, rvNextWeek));
+        rvFuture.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.FUTURE, rvFuture));
+        rvNoDate.setAdapter(new NewItemListAdapter(this, NewItemHelper.TimeRange.NO_DATE, rvNoDate));
     }
 
     @Override
