@@ -56,9 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingTop="21dp"
-            android:paddingEnd="8dp">
+            android:paddingTop="21dp">
             <!--好孕率及安全期-->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -80,8 +80,8 @@
                     android:id="@+id/tv_pregnant_percent_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_pregnant_percent"
                     android:layout_alignBottom="@id/tv_pregnant_percent"
+                    android:layout_alignTop="@id/tv_pregnant_percent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="9dp"
                     android:layout_toEndOf="@id/tv_pregnant_percent"
@@ -95,9 +95,9 @@
                     android:id="@+id/tv_pregnant_securedate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/tv_pregnant_percent"
                     android:layout_alignBottom="@id/tv_pregnant_percent"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@id/tv_pregnant_percent"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="19dp"
                     android:gravity="center_vertical"
@@ -329,8 +329,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_ovulation"
                     android:layout_alignStart="@id/tv_ovulation"
+                    android:layout_below="@id/tv_ovulation"
                     android:layout_marginTop="10dp"
                     android:text="@string/ovulation_tip"
                     android:textColor="@color/text_color_gray"
@@ -363,12 +363,15 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_comment_sub"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_comment"
                     android:layout_alignStart="@id/tv_comment"
+                    android:layout_below="@id/tv_comment"
                     android:layout_marginTop="10dp"
+                    android:ellipsize="end"
                     android:maxEms="15"
+                    android:maxLines="1"
                     android:text="@string/come_on"
                     android:textColor="@color/text_color_gray"
                     android:textSize="13sp" />
@@ -403,8 +406,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_beiyun"
                     android:layout_alignStart="@id/tv_beiyun"
+                    android:layout_below="@id/tv_beiyun"
                     android:layout_marginTop="10dp"
                     android:text="@string/tip_prepare_pregnant"
                     android:textColor="@color/text_color_gray"

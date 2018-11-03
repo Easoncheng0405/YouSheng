@@ -206,7 +206,7 @@
     <string name="record_in">录入</string>
 
     <!--备孕必检项-->
-    <string name="pregnant_check">备孕注意项</string>
+    <string name="pregnant_check">备孕必检项</string>
 
     <!--备孕详情-->
     <string name="pregnant_check_item_detail">备孕比检项详情</string>

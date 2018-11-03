@@ -15,6 +15,7 @@ public class Constants {
     public final static int RESULT_CODE_HAS_CHANGE = 100 - 2;
     public final static int RESULT_CODE_MENSE_START_DAY_CHANGED = 100 - 3;
     public final static int RESULT_CODE_MAIN_TO_NEWITEM = 100 - 4;
+    public final static int RESULT_CODE_MAIN_TO_COMMENT = 100 - 5;
 
     /****经期管理界面常量*/
     public final static String DEFAULT_MENSE_GAP = "28";

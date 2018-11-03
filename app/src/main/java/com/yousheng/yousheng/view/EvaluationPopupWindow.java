@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
@@ -15,6 +16,13 @@ public class EvaluationPopupWindow extends PopupWindow {
     private ImageView ivStarThree;
     private ImageView ivStarFour;
     private ImageView ivStarFive;
+
+    private Button btnJump;
+
+    private enum BUTTON_STATE {
+        GOOD,
+        BAD
+    }
 
     public EvaluationPopupWindow(Context context) {
         View view = LayoutInflater.from(context)
@@ -35,8 +43,18 @@ public class EvaluationPopupWindow extends PopupWindow {
         ivStarFour.setOnClickListener(listener);
         ivStarFive.setOnClickListener(listener);
 
+        btnJump = view.findViewById(R.id.btn_comment);
+        setButtonText(BUTTON_STATE.BAD);
         view.findViewById(R.id.btn_comment).setOnClickListener(listener);
         view.setOnClickListener(listener);
+    }
+
+    private void setButtonText(BUTTON_STATE state) {
+        if (state == BUTTON_STATE.GOOD) {
+            btnJump.setText("去鼓励");
+        } else if (state == BUTTON_STATE.BAD) {
+            btnJump.setText("去吐槽");
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -55,6 +73,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_empty);
+                    setButtonText(BUTTON_STATE.GOOD);
                     break;
                 case R.id.iv_star_two:
                     ivStarOne.setImageResource(R.drawable.evaluation_star_fill);
@@ -62,6 +81,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_empty);
+                    setButtonText(BUTTON_STATE.GOOD);
                     break;
                 case R.id.iv_star_three:
                     ivStarOne.setImageResource(R.drawable.evaluation_star_fill);
@@ -69,6 +89,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_fill);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_empty);
+                    setButtonText(BUTTON_STATE.GOOD);
                     break;
                 case R.id.iv_star_four:
                     ivStarOne.setImageResource(R.drawable.evaluation_star_fill);
@@ -76,6 +97,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_fill);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_fill);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_empty);
+                    setButtonText(BUTTON_STATE.GOOD);
                     break;
                 case R.id.iv_star_five:
                     ivStarOne.setImageResource(R.drawable.evaluation_star_fill);
@@ -83,6 +105,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_fill);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_fill);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_fill);
+                    setButtonText(BUTTON_STATE.GOOD);
                     break;
 
                 case R.id.btn_comment:

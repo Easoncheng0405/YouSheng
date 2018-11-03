@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 
+import com.wuhenzhizao.titlebar.utils.ScreenUtils;
 import com.yousheng.yousheng.R;
 
 import java.util.ArrayList;
@@ -158,13 +159,16 @@ public class DatePickerView extends View {
         mViewHeight = getMeasuredHeight();
         mViewWidth = getMeasuredWidth();
         // 按照View的高度计算字体大小
-        mMaxTextSize = mViewHeight / 7f;
+        mMaxTextSize = mViewHeight / 10f;
         mMinTextSize = mMaxTextSize / 2.2f;
         isInit = true;
         invalidate();
     }
 
     private void init() {
+        //init text size
+        mMinTextSize = ScreenUtils.dp2PxInt(context, 16);
+        mMaxTextSize = ScreenUtils.dp2Px(context, 18);
         timer = new Timer();
         mDataList = new ArrayList<>();
         //第一个paint

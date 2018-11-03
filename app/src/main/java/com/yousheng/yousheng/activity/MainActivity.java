@@ -154,11 +154,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onActivityReenter(int resultCode, Intent data) {
-        super.onActivityReenter(resultCode, data);
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
@@ -187,9 +182,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             }
-            case Constants.REQUEST_CODE_MAIN_TO_COMMENT: {
+            case Constants.RESULT_CODE_MAIN_TO_COMMENT: {
                 String text = data.getStringExtra("text");
-                ((TextView) findViewById(R.id.tv_comment)).setText(text);
+                ((TextView) findViewById(R.id.tv_comment_sub)).setText(text);
             }
             break;
 
@@ -246,8 +241,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Collections.sort(list);
         mHabitAdapter = new HabitAdapter(list, MainActivity.this);
         mRvHabitiList.setAdapter(mHabitAdapter);
-
-
     }
 
     /**
@@ -283,6 +276,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switchMenseEnd.setChecked(calendar.isMenseEnd());
                 switchMenseStart.setChecked(calendar.isMenseStart());
                 switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());
+
+                ((TextView) findViewById(R.id.tv_comment_sub)).setText(mMenseInfoSelected.getComment());
             }
         });
 
