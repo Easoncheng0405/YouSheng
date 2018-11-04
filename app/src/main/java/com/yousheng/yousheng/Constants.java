@@ -27,5 +27,6 @@ public class Constants {
     /****时间常量**/
     public final static long ONE_DAY_IN_TS = 24 * 3600 * 1000L;
     public final static String DATE_FORMAT = "yyyy-MM-dd";
+    public final static String DATE_FORMAT_MONTH_OF_YEAR = "yyyy-MM";
 
 }

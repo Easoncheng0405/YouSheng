@@ -20,6 +20,7 @@ import android.content.Context;
 
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.mense.MenseCalculator;
+import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
 
 /**
@@ -152,9 +153,7 @@ public abstract class BaseMonthView extends BaseView {
     }
 
     final void updateItemsMenseInfo() {
-        for (Calendar calendar : mItems) {
-            calendar.setMensesState(MenseCalculator.getMenseState(calendar.getTimeInMillis()));
-        }
+        mItems = CalendarUtil.initCalendarForMonthView(mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart());
     }
 
     /**

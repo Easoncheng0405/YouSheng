@@ -12,12 +12,12 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.adapter.NewItemListAdapter;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
 import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.manager.FeedBackManager;
+import com.yousheng.yousheng.manager.MenseManager;
 import com.yousheng.yousheng.mense.MenseCalculator;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
@@ -281,9 +281,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mMenseInfoSelected.setMenseStart(calendar.isMenseStart());
                 mMenseInfoSelected.setMenseEnd(calendar.isMenseEnd());
                 mMenseInfoSelected.save();
-                switchMenseEnd.setChecked(calendar.isMenseEnd());
-                switchMenseStart.setChecked(calendar.isMenseStart());
                 switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());
+
+                //only day after today show switch button
+                if (mMenseInfoSelected.getDateTs() > CalendarUtils.getTodayTimeMillis()) {
+                    findViewById(R.id.layout_mense_start).setVisibility(View.GONE);
+                    findViewById(R.id.layout_mense_end).setVisibility(View.GONE);
+                    findViewById(R.id.layout_make_love).setVisibility(View.GONE);
+                } else {
+                    findViewById(R.id.layout_mense_start).setVisibility(View.VISIBLE);
+                    findViewById(R.id.layout_mense_end).setVisibility(View.VISIBLE);
+                    findViewById(R.id.layout_make_love).setVisibility(View.VISIBLE);
+                    switchMenseEnd.setChecked(calendar.isMenseEnd());
+                    switchMenseStart.setChecked(calendar.isMenseStart());
+                }
 
                 if (!android.text.TextUtils.isEmpty(mMenseInfoSelected.getComment())) {
                     ((TextView) findViewById(R.id.tv_comment_sub)).setText(mMenseInfoSelected.getComment());
@@ -332,6 +343,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (mCalendarSelected != null) {
                                 mCalendarSelected.setHasMakeLoveToday(isChecked);
                                 mCalendarView.update();
+                            }
+                        } else if (buttonView == switchMenseStart) {
+                            if (mMenseInfoSelected.isMenseStart() && !isChecked) {
+                                MenseManager.resetMenseDuration(mMenseInfoSelected.getDateTs());
+                                mCalendarView.updateMenseInfo();
+                            } else if (isChecked) {
+                                MenseManager.recordMenseDuration(mMenseInfoSelected.getDateTs(),
+                                        true);
+                                mCalendarView.updateMenseInfo();
+                            }
+                        } else if (buttonView == switchMenseEnd) {
+                            if (mMenseInfoSelected.isMenseEnd() && !isChecked) {
+                                MenseManager.resetMenseDuration(mMenseInfoSelected.getDateTs());
+                                mCalendarView.updateMenseInfo();
+                            } else if (isChecked) {
+                                MenseManager.recordMenseDuration(mMenseInfoSelected.getDateTs(),
+                                        false);
+                                mCalendarView.updateMenseInfo();
                             }
                         }
                     }

@@ -259,6 +259,7 @@
             <!--开关-->
             <!--月经开始-->
             <RelativeLayout
+                android:id="@+id/layout_mense_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp">
@@ -283,6 +284,7 @@
 
             <!--月经结束-->
             <RelativeLayout
+                android:id="@+id/layout_mense_end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp">
@@ -307,6 +309,7 @@
 
             <!--同房爱爱-->
             <RelativeLayout
+                android:id="@+id/layout_make_love"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp">

@@ -2,6 +2,7 @@ package com.yousheng.yousheng.mense;
 
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
+import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
 
 import java.util.Calendar;
@@ -156,6 +157,9 @@ public class MenseCalculator {
      * 获取经期，安全期，排卵期等各种类型的int值
      */
     public static int getMenseState(long dateTs) {
+        if (dateTs < CalendarUtils.getTodayTimeMillis()) {
+            return MenseCalculator.STATE_NORMAL;
+        }
         if (isInMense(dateTs)) return MenseCalculator.STATE_MENSE;
         if (isPaiLuanDate(dateTs)) return MenseCalculator.STATE_PAILUAN_DATE;
         if (isInPaiLuanDuration(dateTs)) return MenseCalculator.STATE_PAILUAN_DURATION;

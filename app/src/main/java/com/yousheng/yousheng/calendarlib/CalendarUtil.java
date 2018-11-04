@@ -21,6 +21,7 @@ import android.database.Cursor;
 
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.mense.MenseCalculator;
+import com.yousheng.yousheng.model.MenseDurationInfo;
 import com.yousheng.yousheng.model.MenseInfo;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 
@@ -586,12 +587,6 @@ final class CalendarUtil {
         //从数据库中查询出来42天，一整个页面的日历item的数据。
         long startTimeMills = startcalendar.getTimeInMillis();
         long endTimeMills = startTimeMills + 42 * ONE_DAY;
-    /*    Cursor cursor =
-                LitePal.findBySQL("select * from MenseInfo where date >"
-                        .concat(String.valueOf(startTimeMills))
-                        .concat(" and date < ".concat(String.valueOf(endTimeMills))
-                                .concat(" order by date asc")));
-        List<MenseInfo> menseInfos = new ArrayList<>();*/
 
         List<MenseInfo> menseInfos =
                 LitePal.select(null)
@@ -622,20 +617,46 @@ final class CalendarUtil {
             if (calendarDate.equals(currentDate)) {
                 calendarDate.setCurrentDay(true);
             }
-
             LunarCalendar.setupLunarCalendar(calendarDate);
+
             //初始化经期状态
-            int menseState = MenseCalculator.getMenseState(calendarDate.getTimeInMillis());
-            calendarDate.setMensesState(menseState);
-            switch (menseState) {
-                case MenseCalculator.STATE_MENSE:
+            if (calendarDate.getTimeInMillis() >= CalendarUtils.getTodayTimeMillis()) {
+                int menseState = MenseCalculator.getMenseState(calendarDate.getTimeInMillis());
+                calendarDate.setMensesState(menseState);
+            } else {
+                MenseDurationInfo info = null;
+                String dateFormatMonth = CalendarUtils.formatDateString(calendarDate.getTimeInMillis(),
+                        Constants.DATE_FORMAT_MONTH_OF_YEAR);
+                String dateFormatDay = CalendarUtils.formatDateString(calendarDate.getTimeInMillis(),
+                        Constants.DATE_FORMAT);
+                List<MenseDurationInfo> list =
+                        LitePal
+                                .select()
+                                .where("monthofyear=?", dateFormatMonth)
+                                .find(MenseDurationInfo.class);
+                if (list != null && list.size() > 0) {
+                    info = list.get(0);
+                }
+
+                if (info == null) {
+                    info = new MenseDurationInfo();
+                }
+
+                if (dateFormatDay.equals(CalendarUtils.formatDateString(info.getStartTs(), Constants.DATE_FORMAT))) {
                     calendarDate.setMenseStart(true);
                     calendarDate.setMenseEnd(false);
-                    break;
-                default:
-                    calendarDate.setMenseStart(false);
+                } else if (dateFormatDay.equals(CalendarUtils.formatDateString(info.getEndTs(), Constants.DATE_FORMAT))) {
                     calendarDate.setMenseEnd(true);
-                    break;
+                    calendarDate.setMenseStart(false);
+                } else {
+                    calendarDate.setMenseStart(false);
+                    calendarDate.setMenseEnd(false);
+                }
+
+                if (calendarDate.getTimeInMillis() <= info.getEndTs()
+                        && calendarDate.getTimeInMillis() >= info.getStartTs()) {
+                    calendarDate.setMensesState(MenseCalculator.STATE_MENSE);
+                }
             }
 
             for (MenseInfo menseInfo : menseInfos) {
@@ -649,7 +670,6 @@ final class CalendarUtil {
                 }
             }
 
-            //从数据库中
             mItems.add(calendarDate);
         }
         return mItems;

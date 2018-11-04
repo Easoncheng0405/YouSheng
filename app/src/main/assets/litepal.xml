@@ -14,5 +14,6 @@
         <mapping class="com.yousheng.yousheng.model.Market" />
         <mapping class="com.yousheng.yousheng.model.MenseInfo" />
         <mapping class="com.yousheng.yousheng.model.OvulationRecord"/>
+        <mapping class="com.yousheng.yousheng.model.MenseDurationInfo"/>
     </list>
 </litepal>

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="77dp"
     android:paddingStart="26dp"
+    android:background="@color/white"
     android:paddingTop="20dp">
 
     <ImageView
