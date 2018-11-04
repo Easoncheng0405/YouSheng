@@ -88,39 +88,36 @@ public class MenseCalculator {
         if (isInMense(dateTs)) return 1;
         //处于排卵期
         if (isInPaiLuanDuration(dateTs)) {
-            int menseDuration = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DAYS,
-                    Constants.DEFAULT_MENSE_DURAION));
-            int menseGap = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DURATION,
-                    Constants.DEFAULT_MENSE_GAP));
-            long lastMenseStartTs = SPSingleton.get().getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
-                    System.currentTimeMillis());
-
-            long nextMenseStartTs = lastMenseStartTs + (menseDuration + menseGap) * ONE_DAY_TS;
-            long pailuanStartTs = nextMenseStartTs - 14 * ONE_DAY_TS;
-            long gapTs = dateTs - pailuanStartTs;
+            int gapDays;
+            for (gapDays = -4; gapDays <= 5; gapDays++) {
+                if (isPaiLuanDate(gapDays * ONE_DAY_TS + dateTs))
+                    break;
+            }
             //好孕率极高
-            switch ((int) (gapTs / ONE_DAY_TS)) {
+            switch (gapDays) {
                 case 0:
-                    if (gapTs > 0) {
+                    if ((gapDays * ONE_DAY_TS + dateTs) > 0) {
                         return 32;
                     } else {
                         return 26;
                     }
-                case 1:
+                case -1:
                     return 27;
+                case -2:
+                    return 22;
+                case -3:
+                    return 18;
+                case -4:
+                    return 15;
+                case 1:
+                    return 26;
                 case 2:
                     return 22;
                 case 3:
                     return 18;
                 case 4:
                     return 15;
-                case -1:
-                    return 22;
-                case -2:
-                    return 18;
-                case -3:
-                    return 15;
-                case -4:
+                case 5:
                     return 12;
             }
 

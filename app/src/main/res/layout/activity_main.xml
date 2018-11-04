@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:id="@+id/root_view"
     tools:context=".activity.MainActivity">
     <!--标题栏-->
     <LinearLayout
@@ -153,13 +153,16 @@
                     android:id="@+id/iv_dot_jingqi"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/dot_pailuan_date" />
 
                 <TextView
                     android:id="@+id/tv_dot_jingqi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="3dp"
+
                     android:layout_toEndOf="@id/iv_dot_jingqi"
                     android:text="@string/text_jingqi_duration"
                     android:textColor="@color/text_color_gray"
@@ -169,7 +172,9 @@
                     android:id="@+id/iv_dot_pailuan_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="12dp"
-                    android:layout_marginStart="13dp"
+
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
                     android:layout_toEndOf="@id/tv_dot_jingqi"
                     android:src="@drawable/dot_pailuan_date" />
 
@@ -177,7 +182,9 @@
                     android:id="@+id/tv_dot_pailuan_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="3dp"
+
                     android:layout_toEndOf="@id/iv_dot_pailuan_duration"
                     android:text="@string/text_pailuan_duration"
                     android:textColor="@color/text_color_gray"
@@ -187,7 +194,9 @@
                     android:id="@+id/iv_dot_pailuan_date"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:layout_marginStart="14dp"
+
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
                     android:layout_toEndOf="@id/tv_dot_pailuan_duration"
                     android:src="@drawable/dot_pailuan_date" />
 
@@ -195,6 +204,8 @@
                     android:id="@+id/tv_dot_pailuan_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="3dp"
                     android:layout_toEndOf="@id/iv_dot_pailuan_date"
                     android:text="@string/text_pailuan_date"
@@ -205,7 +216,9 @@
                     android:id="@+id/iv_dot_pailuan_suggestion_ml"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
+
                     android:layout_toEndOf="@id/tv_dot_pailuan_date"
                     android:src="@drawable/calendar_love_empty" />
 
@@ -213,7 +226,9 @@
                     android:id="@+id/tv_dot_pailuan_suggestion_ml"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="3dp"
+
                     android:layout_toEndOf="@id/iv_dot_pailuan_suggestion_ml"
                     android:text="@string/text_suggestion_ml"
                     android:textColor="@color/text_color_gray"
@@ -223,14 +238,18 @@
                     android:id="@+id/iv_dot_pailuan_already_ml"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:layout_marginStart="13dp"
+                    android:layout_centerVertical="true"
+
+                    android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
                     android:layout_toEndOf="@id/tv_dot_pailuan_suggestion_ml"
                     android:src="@drawable/calendar_love_fill" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="3dp"
+
                     android:layout_toEndOf="@id/iv_dot_pailuan_already_ml"
                     android:text="@string/text_already_ml"
                     android:textColor="@color/text_color_gray"
@@ -487,13 +506,13 @@
                     android:text="今天" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:visibility="gone"
-                    android:paddingTop="19dp"
-                    android:paddingBottom="19dp"
                     android:id="@+id/rv_todo_today"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_background_rectangle" />
+                    android:background="@drawable/shape_background_rectangle"
+                    android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
+                    android:visibility="gone" />
 
                 <!--明天的事项列表-->
                 <TextView
@@ -505,13 +524,13 @@
                     android:text="明天" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:visibility="gone"
-                    android:paddingTop="19dp"
-                    android:paddingBottom="19dp"
                     android:id="@+id/rv_todo_tomorrow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_background_rectangle" />
+                    android:background="@drawable/shape_background_rectangle"
+                    android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
+                    android:visibility="gone" />
 
                 <!--接下来7天-->
                 <TextView
@@ -523,13 +542,13 @@
                     android:text="接下来7天" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:visibility="gone"
-                    android:paddingTop="19dp"
-                    android:paddingBottom="19dp"
                     android:id="@+id/rv_todo_next_week"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_background_rectangle" />
+                    android:background="@drawable/shape_background_rectangle"
+                    android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
+                    android:visibility="gone" />
 
                 <!--已过期-->
                 <TextView
@@ -541,13 +560,13 @@
                     android:text="已过期" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:visibility="gone"
-                    android:paddingTop="19dp"
-                    android:paddingBottom="19dp"
                     android:id="@+id/rv_todo_obeslete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_background_rectangle" />
+                    android:background="@drawable/shape_background_rectangle"
+                    android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
+                    android:visibility="gone" />
 
 
                 <TextView
@@ -559,13 +578,13 @@
                     android:text="更久" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:visibility="gone"
-                    android:paddingTop="19dp"
-                    android:paddingBottom="19dp"
                     android:id="@+id/rv_todo_previous"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_background_rectangle" />
+                    android:background="@drawable/shape_background_rectangle"
+                    android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
+                    android:visibility="gone" />
 
                 <!--没有日期-->
                 <TextView
@@ -577,14 +596,14 @@
                     android:text="没有日期" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:visibility="gone"
-                    android:paddingTop="19dp"
-                    android:paddingBottom="19dp"
                     android:id="@+id/rv_todo_no_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/shape_background_rectangle" />
+                    android:background="@drawable/shape_background_rectangle"
+                    android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
