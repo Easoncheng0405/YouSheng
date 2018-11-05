@@ -11,6 +11,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.umeng.analytics.MobclickAgent;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
@@ -204,5 +205,17 @@ public class MenseManagementActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

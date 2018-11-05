@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.adapter.NewItemListAdapter;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
@@ -145,7 +146,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         if (!SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_SAVED, false)) {
-            startActivity(new Intent(this, MenseManagementActivity.class));
+            startActivityForResult(new Intent(this, MenseManagementActivity.class),
+                    Constants.REQUEST_CODE_MAIN_TO_MENSE);
         }
 
         if (SPSingleton.get().getBoolean(PrefConstants.PRFS_KEY_MENSE_START_DAY_CHANGED, false)) {
@@ -159,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FeedBackManager.showEvaluationPopupWindow(MainActivity.this, findViewById(R.id.root_view));
             }
         });
+
+        MobclickAgent.onResume(this);
     }
 
     @Override
@@ -397,6 +401,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         queryHabitData();
         initItemTitle();
         initRecyclerView();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 

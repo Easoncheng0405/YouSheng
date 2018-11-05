@@ -1,10 +1,15 @@
 package com.yousheng.yousheng;
 
+import android.util.Log;
+
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 import com.yousheng.yousheng.manager.FeedBackManager;
 import com.yousheng.yousheng.model.Market;
 import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.uitl.SPSingleton;
+import com.yousheng.yousheng.uitl.UMengUtils;
 
 import org.litepal.LitePal;
 import org.litepal.LitePalApplication;
@@ -27,6 +32,13 @@ public class Application extends LitePalApplication {
         insertHabitData();
         insertMarketData();
         FeedBackManager.recordAppLaunchTimes(this);
+
+        UMConfigure.init(this,Constants.UMENG_APP_KEY,"yousheng",UMConfigure.DEVICE_TYPE_PHONE,"");
+        UMConfigure.setLogEnabled(Constants.DEBUG);
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+
+        Log.d("Application", UMengUtils.getDeviceInfo(this));
     }
 
     private void insertHabitData() {
@@ -126,7 +138,7 @@ public class Application extends LitePalApplication {
                     "6. 促进肠动，解决便秘。便秘原因用很简单的话来讲就是体内缺失水分，因此，当我们的身体出现便秘问题时，我们可以通过喝很多很多的水来解决。");
             water.save();
 
-            calendar.set(Calendar.HOUR_OF_DAY,18);
+            calendar.set(Calendar.HOUR_OF_DAY, 18);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
             Habit noSmoke = new Habit();

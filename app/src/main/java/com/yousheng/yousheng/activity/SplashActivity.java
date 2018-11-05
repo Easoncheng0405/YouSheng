@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.umeng.analytics.MobclickAgent;
 import com.yousheng.yousheng.R;
 
 import java.util.Timer;
@@ -68,5 +69,17 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }, 1000, 1000);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
