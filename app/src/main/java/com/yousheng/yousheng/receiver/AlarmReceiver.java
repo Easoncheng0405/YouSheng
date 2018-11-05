@@ -45,7 +45,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setWhen(System.currentTimeMillis())
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setContentIntent(contentIntent);
