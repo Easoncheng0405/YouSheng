@@ -16,7 +16,7 @@ public class MenseManager {
         if (reset) {
             SPSingleton.get().putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
                     CalendarUtils.getTodayTimeMillis());
-            SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DURATION,
+            SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
                     Constants.DEFAULT_MENSE_DURAION);
         } else {
             String monthOfYear = CalendarUtils.formatDateString(startTs,
