@@ -77,8 +77,8 @@ public class MenseManager {
         }
 
         long menseDaysTs =
-                SPSingleton.get().getInt(PrefConstants.PREFS_KEY_MENSE_DAYS,
-                        Integer.valueOf(Constants.DEFAULT_MENSE_DURAION))
+                Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DAYS,
+                        Constants.DEFAULT_MENSE_DURAION))
                         * Constants.ONE_DAY_IN_TS;
 
         if (isStartDate) {
