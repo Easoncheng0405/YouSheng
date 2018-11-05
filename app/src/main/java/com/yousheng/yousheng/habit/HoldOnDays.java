@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
+import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
 
 
 //打卡activity
@@ -76,6 +77,10 @@ public class HoldOnDays extends AppCompatActivity {
         calendar.setTimeInMillis(habit.getClockTime());
         time = findViewById(R.id.time);
         notify = findViewById(R.id.notify);
+
+        int px = dip2px(this, 10);
+        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
         if (habit.isNotify()) {
             time.setVisibility(View.VISIBLE);

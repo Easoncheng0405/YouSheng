@@ -29,7 +29,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:drawableLeft="@drawable/back"
-                android:text="   添加新习惯"
+                android:text="添加新习惯"
                 android:textColor="@color/white"
                 android:textSize="19sp" />
 
@@ -84,7 +84,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:visibility="gone"
-            stv:sRightIconRes="@mipmap/arrow_right"
+            stv:sRightIconRes="@drawable/forward"
+            stv:sRightIconMarginRight="20dp"
             stv:sShapeCornersRadius="3dp"
             stv:sShapeStrokeColor="@color/gray"
             stv:sShapeStrokeWidth="0.3dp"
@@ -93,11 +94,13 @@
         <com.allen.library.SuperTextView
             android:id="@+id/notify"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="52dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
+            stv:sLeftTextColor="@color/black"
             stv:sLeftTextString="提醒"
+            stv:sLeftTextSize="16sp"
             stv:sRightViewType="switchBtn"
             stv:sShapeCornersRadius="3dp"
             stv:sShapeStrokeColor="@color/gray"

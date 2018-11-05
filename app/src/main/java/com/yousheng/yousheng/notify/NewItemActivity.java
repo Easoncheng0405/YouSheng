@@ -25,10 +25,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
-import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.NewItem;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.uitl.ToastUtil;
@@ -44,6 +42,8 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import com.yousheng.yousheng.uitl.time.Api;
+
+import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
 
 
 public class NewItemActivity extends AppCompatActivity implements View.OnClickListener {
@@ -69,6 +69,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_itme);
         context = this;
+
+        ((TextView) findViewById(R.id.title)).setCompoundDrawablePadding(dip2px(context, 25));
         AssetManager manager = getAssets();
         try {
             InputStream inputStream = manager.open("TimeExp.m");
@@ -112,7 +114,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         TextView tv = findViewById(R.id.t2);
         time.setOnClickListener(this);
         notify.setOnClickListener(this);
-
+        int px = dip2px(this, 10);
+        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         //默认提醒时间是明天早上8点
         calendar.add(Calendar.DATE, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 8);
@@ -266,6 +270,4 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
-
-
 }
