@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         stv:titleBarHeight="60dp"
         stv:titleBarColor="@color/colorPrimary"
+        stv:leftDrawablePadding="25dp"
         stv:leftTextSize="20sp"
         stv:leftTextColor="@color/white"
         stv:leftDrawable="@drawable/back"

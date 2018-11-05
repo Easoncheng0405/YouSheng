@@ -14,6 +14,7 @@
 
         <com.wuhenzhizao.titlebar.widget.CommonTitleBar
             android:id="@+id/title"
+            stv:leftDrawablePadding="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             stv:fillStatusBar="true"

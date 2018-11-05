@@ -51,6 +51,8 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_habit);
 
         context = this;
+        ((TextView) findViewById(R.id.title)).setCompoundDrawablePadding(dip2px(context, 25));
+
         t1 = findViewById(R.id.t1);
         t2 = findViewById(R.id.t2);
         calendar.set(Calendar.HOUR_OF_DAY, 8);
@@ -190,5 +192,10 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
             AlarmHelper.notifyHabit(context, habit);
         }
         super.onPause();
+    }
+
+    private int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

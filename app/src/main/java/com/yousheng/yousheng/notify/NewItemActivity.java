@@ -25,10 +25,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
-import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.R;
-import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.NewItem;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.uitl.ToastUtil;
@@ -69,6 +67,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_itme);
         context = this;
+
+        ((TextView) findViewById(R.id.title)).setCompoundDrawablePadding(dip2px(context, 25));
         AssetManager manager = getAssets();
         try {
             InputStream inputStream = manager.open("TimeExp.m");
@@ -267,5 +267,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
+    private int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
 }

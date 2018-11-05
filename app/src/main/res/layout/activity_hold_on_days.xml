@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 stv:fillStatusBar="true"
+                stv:leftDrawablePadding="25dp"
                 stv:leftDrawable="@drawable/back"
                 stv:leftTextColor="@color/white"
                 stv:leftTextSize="20sp"
