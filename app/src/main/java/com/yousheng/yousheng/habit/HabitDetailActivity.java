@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
+import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
 
 /**
  * 打卡详情页面
@@ -63,6 +64,10 @@ public class HabitDetailActivity extends AppCompatActivity {
 
             time = findViewById(R.id.time);
             notify = findViewById(R.id.notify);
+
+            int px = dip2px(this, 10);
+            ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+            ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
 
             final ScrollView scrollView = findViewById(R.id.scrollView);
 

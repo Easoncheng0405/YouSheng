@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
+import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
@@ -27,6 +28,8 @@ import org.litepal.LitePal;
 import java.util.Collections;
 import java.util.List;
 
+import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
+
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
     private EvaluationPopupWindow mEvaluationWindow;
 
@@ -35,6 +38,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         CommonTitleBar titleBar = findViewById(R.id.title);
+        int px = dip2px(this, 10);
+        ((SuperTextView)findViewById(R.id.menseManagement)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.stv_rating)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.bussiness)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.wechat)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.update)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.agreement)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.disclaimer)).getLeftTextView().setPadding(px, 0, 0, 0);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {

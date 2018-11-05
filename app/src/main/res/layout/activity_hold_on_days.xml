@@ -74,9 +74,11 @@
             <com.allen.library.SuperTextView
                 android:id="@+id/clockTime"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="52dp"
                 android:layout_marginTop="5dp"
                 android:visibility="gone"
+                stv:sLeftTextSize="16sp"
+                stv:sLeftTextColor="@color/black"
                 stv:sRightIconRes="@mipmap/arrow_right"
                 stv:sShapeCornersRadius="3dp"
                 stv:sShapeStrokeColor="@color/gray"

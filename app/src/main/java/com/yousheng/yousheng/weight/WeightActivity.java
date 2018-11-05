@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargin;
+import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
 
 
 public class WeightActivity extends AppCompatActivity {
@@ -50,7 +51,9 @@ public class WeightActivity extends AppCompatActivity {
         ruleView = findViewById(R.id.ruler);
         notify = findViewById(R.id.notify);
         time = findViewById(R.id.time);
-
+        int px = dip2px(this, 10);
+        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         Habit habit = LitePal.find(Habit.class, id);
         calendar.setTimeInMillis(habit.getClockTime());
         time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));

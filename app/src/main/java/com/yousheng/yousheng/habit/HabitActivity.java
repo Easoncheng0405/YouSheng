@@ -29,6 +29,8 @@ import org.litepal.LitePal;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
+
 public class HabitActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TimePickerDialog timePickerDialog;
@@ -58,10 +60,13 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         calendar.set(Calendar.HOUR_OF_DAY, 8);
         calendar.set(Calendar.MINUTE, 0);
         notify = findViewById(R.id.notify);
+
         content = findViewById(R.id.content);
         time = findViewById(R.id.time);
         time.setOnClickListener(this);
-
+        int px = dip2px(this, 10);
+        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
         Intent intent = getIntent();
         id = intent.getLongExtra("id", -1);
@@ -194,8 +199,5 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         super.onPause();
     }
 
-    private int dip2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
+
 }

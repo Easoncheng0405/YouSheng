@@ -43,6 +43,8 @@ import java.util.Locale;
 
 import com.yousheng.yousheng.uitl.time.Api;
 
+import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
+
 
 public class NewItemActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -112,7 +114,9 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         TextView tv = findViewById(R.id.t2);
         time.setOnClickListener(this);
         notify.setOnClickListener(this);
-
+        int px = dip2px(this, 10);
+        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         //默认提醒时间是明天早上8点
         calendar.add(Calendar.DATE, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 8);
@@ -265,10 +269,5 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 datePickerDialog.show();
                 break;
         }
-    }
-
-    private int dip2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
     }
 }
