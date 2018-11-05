@@ -19,7 +19,8 @@
         stv:leftTextColor="@color/white"
         stv:leftDrawable="@drawable/back"
         stv:leftType="textView"
-        stv:leftText="  设置"
+        stv:sRightIconMarginRight="20dp"
+        stv:leftText="设置"
         stv:fillStatusBar="true"
         stv:statusBarColor="@color/colorPrimaryDark"/>
 
@@ -33,9 +34,10 @@
         android:layout_marginRight="8dp"
         stv:sLeftTextString="经期设置"
         stv:sLeftTextSize="16sp"
-        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sRightIconRes="@drawable/forward"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
+        stv:sRightIconMarginRight="20dp"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
     <com.allen.library.SuperTextView
@@ -49,9 +51,10 @@
         android:layout_marginRight="8dp"
         stv:sLeftTextString="五星好评"
         stv:sLeftTextColor="@color/colorAccent"
-        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sRightIconRes="@drawable/forward"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
+        stv:sRightIconMarginRight="20dp"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
@@ -65,9 +68,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         stv:sLeftTextString="商务合作"
-        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sRightIconRes="@drawable/forward"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
+        stv:sRightIconMarginRight="20dp"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
@@ -81,9 +85,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         stv:sLeftTextString="微信公众号"
-        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sRightIconRes="@drawable/forward"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
+        stv:sRightIconMarginRight="20dp"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 
@@ -98,10 +103,11 @@
         android:layout_marginRight="8dp"
         stv:sLeftTextString="检查新版本"
         stv:sRightTextString="@string/version"
-        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sRightIconRes="@drawable/forward"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
+        stv:sRightIconMarginRight="20dp"
         stv:sUseShape="true" />
 
     <com.allen.library.SuperTextView
@@ -114,10 +120,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         stv:sLeftTextString="用户协议"
-        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sRightIconRes="@drawable/forward"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
+        stv:sRightIconMarginRight="20dp"
         stv:sUseShape="true" />
 
     <com.allen.library.SuperTextView
@@ -129,8 +136,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        stv:sRightIconMarginRight="20dp"
         stv:sLeftTextString="免责声明"
-        stv:sRightIconRes="@mipmap/arrow_right"
+        stv:sRightIconRes="@drawable/forward"
         stv:sShapeCornersRadius="3dp"
         stv:sShapeStrokeColor="@color/gray"
         stv:sShapeStrokeWidth="0.3dp"
