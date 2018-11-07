@@ -1,148 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_setting_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:stv="http://schemas.android.com/apk/res-auto"
-    tools:context=".activity.SettingsActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.SettingsActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
         android:id="@+id/title"
-        stv:leftDrawablePadding="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        stv:titleBarHeight="60dp"
-        stv:titleBarColor="@color/colorPrimary"
-        stv:leftTextSize="19sp"
-        stv:leftTextColor="@color/white"
+        stv:fillStatusBar="true"
         stv:leftDrawable="@drawable/back"
+        stv:leftDrawablePadding="25dp"
+        stv:leftText="设置"
+        stv:leftTextColor="@color/white"
+        stv:leftTextSize="19sp"
         stv:leftType="textView"
         stv:sRightIconMarginRight="20dp"
-        stv:leftText="设置"
-        stv:fillStatusBar="true"
-        stv:statusBarColor="@color/colorPrimaryDark"/>
+        stv:statusBarColor="@color/colorPrimaryDark"
+        stv:titleBarColor="@color/colorPrimary"
+        stv:titleBarHeight="60dp" />
 
     <com.allen.library.SuperTextView
-        android:onClick="onClick"
         android:id="@+id/menseManagement"
+        style="@style/setting_listview_item_style"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:onClick="onClick"
         stv:sLeftTextString="经期设置"
-        stv:sLeftTextSize="16sp"
-        stv:sRightIconRes="@drawable/forward"
-        stv:sShapeCornersRadius="3dp"
-        stv:sShapeStrokeColor="@color/gray"
-        stv:sRightIconMarginRight="20dp"
-        stv:sShapeStrokeWidth="0.3dp"
-        stv:sUseShape="true" />
+        stv:sRightIconRes="@drawable/forward" />
+
     <com.allen.library.SuperTextView
-        android:onClick="onClick"
-        stv:sLeftTextSize="16sp"
         android:id="@+id/stv_rating"
+        style="@style/setting_listview_item_style"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        stv:sLeftTextString="五星好评"
+        android:onClick="onClick"
         stv:sLeftTextColor="@color/colorAccent"
-        stv:sRightIconRes="@drawable/forward"
-        stv:sShapeCornersRadius="3dp"
-        stv:sShapeStrokeColor="@color/gray"
-        stv:sRightIconMarginRight="20dp"
-        stv:sShapeStrokeWidth="0.3dp"
-        stv:sUseShape="true" />
+        stv:sLeftTextString="五星好评"
+        stv:sRightIconRes="@drawable/forward" />
 
     <com.allen.library.SuperTextView
-        android:onClick="onClick"
         android:id="@+id/bussiness"
-        stv:sLeftTextSize="16sp"
+        style="@style/setting_listview_item_style"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:onClick="onClick"
         stv:sLeftTextString="商务合作"
-        stv:sRightIconRes="@drawable/forward"
-        stv:sShapeCornersRadius="3dp"
-        stv:sShapeStrokeColor="@color/gray"
-        stv:sRightIconMarginRight="20dp"
-        stv:sShapeStrokeWidth="0.3dp"
-        stv:sUseShape="true" />
+        stv:sRightIconRes="@drawable/forward" />
 
     <com.allen.library.SuperTextView
-        android:onClick="onClick"
         android:id="@+id/wechat"
-        stv:sLeftTextSize="16sp"
+        style="@style/setting_listview_item_style"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:onClick="onClick"
         stv:sLeftTextString="微信公众号"
-        stv:sRightIconRes="@drawable/forward"
-        stv:sShapeCornersRadius="3dp"
-        stv:sShapeStrokeColor="@color/gray"
-        stv:sRightIconMarginRight="20dp"
-        stv:sShapeStrokeWidth="0.3dp"
-        stv:sUseShape="true" />
+        stv:sRightIconRes="@drawable/forward" />
 
     <com.allen.library.SuperTextView
         android:id="@+id/update"
-        android:onClick="onClick"
-        stv:sLeftTextSize="16sp"
+        style="@style/setting_listview_item_style"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:onClick="onClick"
         stv:sLeftTextString="检查新版本"
-        stv:sRightTextString="@string/version"
         stv:sRightIconRes="@drawable/forward"
-        stv:sShapeCornersRadius="3dp"
-        stv:sShapeStrokeColor="@color/gray"
-        stv:sShapeStrokeWidth="0.3dp"
-        stv:sRightIconMarginRight="20dp"
-        stv:sUseShape="true" />
+        stv:sRightTextString="@string/version" />
 
     <com.allen.library.SuperTextView
         android:id="@+id/agreement"
-        android:onClick="onClick"
-        stv:sLeftTextSize="16sp"
+        style="@style/setting_listview_item_style"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:onClick="onClick"
         stv:sLeftTextString="用户协议"
-        stv:sRightIconRes="@drawable/forward"
-        stv:sShapeCornersRadius="3dp"
-        stv:sShapeStrokeColor="@color/gray"
-        stv:sShapeStrokeWidth="0.3dp"
-        stv:sRightIconMarginRight="20dp"
-        stv:sUseShape="true" />
+        stv:sRightIconRes="@drawable/forward" />
 
     <com.allen.library.SuperTextView
         android:id="@+id/disclaimer"
+        style="@style/setting_listview_item_style"
+        android:layout_width="match_parent"
         android:onClick="onClick"
         stv:sLeftTextSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        stv:sRightIconMarginRight="20dp"
         stv:sLeftTextString="免责声明"
-        stv:sRightIconRes="@drawable/forward"
-        stv:sShapeCornersRadius="3dp"
-        stv:sShapeStrokeColor="@color/gray"
-        stv:sShapeStrokeWidth="0.3dp"
-        stv:sUseShape="true" />
+        stv:sRightIconRes="@drawable/forward" />
 
 
 </LinearLayout>

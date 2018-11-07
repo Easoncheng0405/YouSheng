@@ -28,6 +28,7 @@ import com.yousheng.yousheng.uitl.SPSingleton;
  * 可通过此扩展各种视图如：MonthView、RangeMonthView
  */
 public abstract class BaseMonthView extends BaseView {
+    private final static int LINE_COUNT_MODE_ALL = 5;
 
     MonthViewPager mMonthViewPager;
     /**
@@ -104,7 +105,7 @@ public abstract class BaseMonthView extends BaseView {
         }
 
         if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ALL_MONTH) {
-            mLineCount = 5;
+            mLineCount = LINE_COUNT_MODE_ALL;
         } else {
             mLineCount = (preDiff + monthDayCount + mNextDiff) / 7;
         }
@@ -144,7 +145,7 @@ public abstract class BaseMonthView extends BaseView {
      */
     final void updateShowMode() {
         if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ALL_MONTH) {
-            mLineCount = 6;
+            mLineCount = LINE_COUNT_MODE_ALL;
             mHeight = mItemHeight * mLineCount;
         } else {
             mHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight, mDelegate.getWeekStart());
