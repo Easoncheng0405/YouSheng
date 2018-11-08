@@ -126,6 +126,7 @@ public class HabitAdapter extends BaseAdapter {
                 superTextView.setLeftBottomString(habit.getSubTitle());
                 superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.dev_red));
                 superTextView.getRightIconIV().setPadding(40, 40, 22, 40);
+                superTextView.setBackgroundColor(Color.parseColor("#E0E0E0"));
                 break;
             case CUSTOM_OUT:
                 if (i == oo) {
@@ -147,6 +148,7 @@ public class HabitAdapter extends BaseAdapter {
                 superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.dev_red));
                 superTextView.setPadding(0, 35, 0, 35);
                 superTextView.getRightIconIV().setPadding(40, 40, 40, 40);
+                superTextView.setBackgroundColor(Color.parseColor("#E0E0E0"));
                 break;
         }
 

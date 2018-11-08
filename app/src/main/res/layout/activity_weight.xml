@@ -106,6 +106,7 @@
         android:layout_alignParentBottom="true"
         app:sCenterTextColor="@color/white"
         app:sCenterTextString="打卡"
+        app:sCenterTextSize="20sp"
         app:sShapeCornersRadius="3dp"
         app:sShapeSelectorNormalColor="@color/colorPrimary"
         app:sShapeSelectorPressedColor="@color/gray"

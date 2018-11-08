@@ -7,13 +7,14 @@
     >
 
     <TextView
+        android:background="@drawable/textview_background"
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="10dp"
         android:textSize="14sp"/>
 
     <com.allen.library.SuperTextView
@@ -34,7 +35,7 @@
         stv:sLeftBottomTextString=""
         stv:sLeftViewGravity="left_center"
         stv:sShapeCornersRadius="3dp"
-        stv:sShapeStrokeColor="@color/gray"
+        stv:sShapeStrokeColor="#999999"
         stv:sShapeStrokeWidth="0.3dp"
         stv:sUseShape="true" />
 

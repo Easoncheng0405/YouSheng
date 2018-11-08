@@ -145,6 +145,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 calendar.setTimeInMillis(l);
             }
             tv.setText("保存");
+            ((TextView) findViewById(R.id.title)).setText("待办事项修改");
         } else {
             findViewById(R.id.t1).setVisibility(View.GONE);
             tv.setText("添加");

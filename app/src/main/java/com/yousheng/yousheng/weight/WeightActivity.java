@@ -52,8 +52,8 @@ public class WeightActivity extends AppCompatActivity {
         notify = findViewById(R.id.notify);
         time = findViewById(R.id.time);
         int px = dip2px(this, 10);
-        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         Habit habit = LitePal.find(Habit.class, id);
         calendar.setTimeInMillis(habit.getClockTime());
         time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
@@ -121,6 +121,9 @@ public class WeightActivity extends AppCompatActivity {
 
             }
         });
+
+        notify.setSwitchIsChecked(habit.isNotify());
+        time.setVisibility(habit.isNotify() ? View.VISIBLE : View.GONE);
         notify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
