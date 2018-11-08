@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.activity.FeedBackActivity;
 import com.yousheng.yousheng.manager.FeedBackManager;
+import com.yousheng.yousheng.uitl.time.MarketUtils;
 
 public class EvaluationPopupWindow extends PopupWindow {
     private ImageView ivStarOne;
@@ -123,8 +124,11 @@ public class EvaluationPopupWindow extends PopupWindow {
                     FeedBackManager.recordFeedBackButtonClicked();
                     if (mState == BUTTON_STATE.GOOD) {
                         //跳转到评价界面
+                        MarketUtils.navigationToAppStpre(mActivity);
+                        dismiss();
                     } else if (mState == BUTTON_STATE.BAD) {
                         mActivity.startActivity(new Intent(mActivity, FeedBackActivity.class));
+                        dismiss();
                     }
                     break;
             }

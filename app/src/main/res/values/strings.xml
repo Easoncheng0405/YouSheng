@@ -182,7 +182,7 @@
     <string name="make_love">同房爱爱</string>
     <string name="ovulation">排卵试纸</string>
     <string name="ovulation_tip">如正确使用，排卵日准确率接近100%</string>
-    <string name="comment">备住</string>
+    <string name="comment">备注</string>
     <string name="come_on">加油坚持，小宝贝</string>
     <string name="prepare_pregnant">备孕必检项</string>
     <string name="tip_prepare_pregnant">这些东西您一定要注意</string>
@@ -427,5 +427,5 @@
 
 
     <!--evaluation-->
-    <string name="evaluation_text"> 真实可依赖！\n用心做产品!\n给个好评鼓励一下吧~</string>
+    <string name="evaluation_text">&#032;&#032;&#032;真实可依赖！\n用心做产品!\n给个好评鼓励下吧~</string>
 </resources>

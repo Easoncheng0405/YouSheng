@@ -32,6 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@id/iv_background"
         android:layout_alignTop="@id/iv_background"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="25dp"
         android:src="@drawable/close_window" />
 
     <TextView
@@ -39,9 +41,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
+        android:paddingTop="30dp"
         android:text="@string/evaluation_text"
         android:textColor="@color/white"
-        android:textSize="26sp" />
+        android:textSize="22sp" />
 
 
     <RelativeLayout
@@ -103,7 +106,8 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="0dp"
             android:layout_toStartOf="@id/iv_star_one"
-            android:text="评分：" />
+            android:text="评分："
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 </RelativeLayout>

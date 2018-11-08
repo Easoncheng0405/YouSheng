@@ -96,7 +96,7 @@ public class RecordOvulationActivity extends AppCompatActivity implements View.O
     private void updateRecordTime(long timeMillis) {
         mTimeMillis = timeMillis;
         tvRecordDate.setText("检测时间:");
-        tvRecordDate.append(CalendarUtils.formatDateString(timeMillis, "yyyy/MM/dd hh:mm"));
+        tvRecordDate.append(CalendarUtils.formatDateString(timeMillis, "yyyy/MM/dd HH:mm"));
     }
 
     /**

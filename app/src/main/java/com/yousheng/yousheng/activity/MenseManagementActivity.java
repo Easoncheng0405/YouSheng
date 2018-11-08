@@ -49,15 +49,18 @@ public class MenseManagementActivity extends AppCompatActivity {
         View layoutMenseDays = findViewById(R.id.layout_mense_days);
         ((TextView) layoutMenseDays.findViewById(R.id.tv_main_title)).setText(getResources()
                 .getText(R.string.mense_days_main_title));
-//        (layoutMenseDays.findViewById(R.id.iv_logo)).setVisibility(View.GONE);
         ((TextView) layoutMenseDays.findViewById(R.id.tv_sub_title)).setText(getResources()
                 .getText(R.string.mense_days_sub_title));
+        ((ImageView)layoutMenseDays.findViewById(R.id.iv_logo)).setImageResource(R.drawable.mense_days);
+        ((ImageView)layoutMenseDays.findViewById(R.id.iv_logo)).setVisibility(View.INVISIBLE);
+
         View layoutStartDay = findViewById(R.id.layout_mense_start);
         ((TextView) layoutStartDay.findViewById(R.id.tv_main_title)).setText(getResources()
                 .getText(R.string.mense_start_day_main_title));
         ((TextView) layoutStartDay.findViewById(R.id.tv_sub_title)).setText(getResources()
                 .getText(R.string.mense_start_day_sub_title));
-//        layoutStartDay.findViewById(R.id.iv_logo).setVisibility(View.GONE);
+        ((ImageView)layoutStartDay.findViewById(R.id.iv_logo)).setImageResource(R.drawable.mense_days);
+        layoutStartDay.findViewById(R.id.iv_logo).setVisibility(View.INVISIBLE);
 
         //layout_item_two
         View layoutMenseNotify = findViewById(R.id.layout_mense_notify);

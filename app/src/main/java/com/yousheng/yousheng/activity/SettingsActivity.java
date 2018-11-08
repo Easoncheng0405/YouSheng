@@ -21,6 +21,7 @@ import com.yousheng.yousheng.html.Disclaimer;
 import com.yousheng.yousheng.model.Market;
 import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.ToastUtil;
+import com.yousheng.yousheng.uitl.time.MarketUtils;
 import com.yousheng.yousheng.view.EvaluationPopupWindow;
 
 import org.litepal.LitePal;
@@ -39,13 +40,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_settings);
         CommonTitleBar titleBar = findViewById(R.id.title);
         int px = dip2px(this, 10);
-        ((SuperTextView)findViewById(R.id.menseManagement)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.stv_rating)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.bussiness)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.wechat)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.update)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.agreement)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.disclaimer)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.menseManagement)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.stv_rating)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.bussiness)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.wechat)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.update)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.agreement)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.disclaimer)).getLeftTextView().setPadding(px, 0, 0, 0);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {
@@ -93,20 +94,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         Constants.REQUEST_CODE_SETTING_TO_MENSE_MANAGEMENT);
                 break;
             case R.id.update:
-                List<Market> markets = LitePal.findAll(Market.class);
-                Log.e("SettingsActivity", "counts = " + markets.size());
-
-                Collections.sort(markets);
-                boolean b = false;
-                for (Market market : markets) {
-                    if (toMarket(market.getPackageName())) {
-                        b = true;
-                        break;
-                    }
-                }
-                if (!b)
+                if (!MarketUtils.navigationToAppStpre(this))
                     ToastUtil.showMsg(this, "请搜索最新版本更新");
-
                 break;
             case R.id.stv_rating:
                 if (!mEvaluationWindow.isShowing()) {
@@ -126,28 +115,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                     SPSingleton.get().putBoolean(PrefConstants.PRFS_KEY_MENSE_START_DAY_CHANGED, true);
                 }
                 break;
-        }
-    }
-
-    /**
-     * 跳转应用商店.
-     *
-     * @param marketPkg 应用商店包名
-     * @return {@code true} 跳转成功 <br> {@code false} 跳转失败
-     */
-    public boolean toMarket(String marketPkg) {
-        Uri uri = Uri.parse("market://details?id=com.yousheng.yousheng");
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (marketPkg != null) {
-            intent.setPackage(marketPkg);
-        }
-        try {
-            startActivity(intent);
-            return true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
         }
     }
 

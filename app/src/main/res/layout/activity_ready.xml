@@ -40,7 +40,7 @@
         android:hint="@string/ready_comment"
         android:maxLines="8"
         android:padding="10dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/black"
         android:textColorHint="@color/text_color_gray_sub"
         android:textCursorDrawable="@null" />
 
