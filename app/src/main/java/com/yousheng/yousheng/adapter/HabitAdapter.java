@@ -3,6 +3,7 @@ package com.yousheng.yousheng.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -75,6 +76,13 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
             viewHolder.lineChart.setVisibility(View.VISIBLE);
             initLineChart(viewHolder.lineChart, habit);
         }
+
+        //比如drawleft设置图片大小
+        //获取图片
+        Drawable drawable = mContext.getResources().getDrawable(R.drawable.clock);
+        //第一个0是距左边距离，第二个0是距上边距离，40分别是长宽
+        drawable.setBounds(0, 0, 50, 50);
+        viewHolder.tvClock.setCompoundDrawables(drawable,null,null,null);
 
         viewHolder.tvMainTitle.setText(habit.getMainTitle());
         if (habit.isOfficial())
