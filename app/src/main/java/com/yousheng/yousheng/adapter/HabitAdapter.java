@@ -73,7 +73,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
 
         if (habit.getMainTitle().equals("记录体重")) {
             viewHolder.lineChart.setVisibility(View.VISIBLE);
-            initLineChart(viewHolder.lineChart);
+            initLineChart(viewHolder.lineChart, habit);
         }
 
         viewHolder.tvMainTitle.setText(habit.getMainTitle());
@@ -193,7 +193,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
     }
 
     //初始化体重折线图
-    private void initLineChart(LineChart lineChart) {
+    private void initLineChart(LineChart lineChart, final Habit habit) {
 
         List<Weight> weights = LitePal.findAll(Weight.class);
         Collections.sort(weights);
@@ -292,6 +292,19 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         lineChart.setData(data);
         //图标刷新
         lineChart.invalidate();
+
+        lineChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                if (habit.getMainTitle().equals("记录体重"))
+                    intent = new Intent(mContext, WeightActivity.class);
+                else
+                    intent = new Intent(mContext, HoldOnDays.class);
+                intent.putExtra("id", habit.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private float minWeight(List<Weight> list) {
