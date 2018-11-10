@@ -124,7 +124,7 @@ public class HoldOnDays extends AppCompatActivity {
                 h.setNotify(notify.getSwitchIsChecked());
                 h.save();
                 ViewGroup.LayoutParams params = scrollView.getLayoutParams();
-                params.height = (int) ((superTextView.getTop() - notify.getBottom()) * 0.95);
+                params.height = (int) ((superTextView.getTop() - notify.getBottom()) * 0.9);
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
                 scrollView.setLayoutParams(params);
             }
@@ -149,7 +149,7 @@ public class HoldOnDays extends AppCompatActivity {
             @Override
             public void run() {
                 ViewGroup.LayoutParams params = scrollView.getLayoutParams();
-                params.height = (int) ((superTextView.getTop() - notify.getBottom()) * 0.95);
+                params.height = (int) ((superTextView.getTop() - notify.getBottom()) * 0.9);
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
                 scrollView.setLayoutParams(params);
             }
