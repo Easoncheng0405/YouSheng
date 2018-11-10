@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:stv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,26 +7,50 @@
     android:orientation="vertical"
     tools:context=".habit.AllHabitActivity">
 
-    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-        android:id="@+id/habit_all_title"
+    <LinearLayout
+        android:layout_marginBottom="70dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        stv:fillStatusBar="true"
-        stv:leftDrawable="@drawable/back"
-        stv:leftText="添加新习惯"
-        stv:leftDrawablePadding="25dp"
-        stv:leftTextColor="@color/white"
-        stv:leftTextSize="20sp"
-        stv:leftType="textView"
-        stv:rightImageResource="@drawable/add"
-        stv:rightType="imageButton"
-        stv:statusBarColor="@color/colorPrimaryDark"
-        stv:titleBarColor="@color/colorPrimary"
-        stv:titleBarHeight="60dp" />
-    <ListView
-        android:id="@+id/habits"
+        android:layout_height="wrap_content">
+
+        <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+            android:id="@+id/habit_all_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            stv:fillStatusBar="true"
+            stv:leftDrawable="@drawable/back"
+            stv:leftDrawablePadding="25dp"
+            stv:leftText="添加新习惯"
+            stv:leftTextColor="@color/white"
+            stv:leftTextSize="20sp"
+            stv:leftType="textView"
+            stv:rightImageResource="@drawable/add"
+            stv:rightType="imageButton"
+            stv:statusBarColor="@color/colorPrimaryDark"
+            stv:titleBarColor="@color/colorPrimary"
+            stv:titleBarHeight="60dp" />
+
+        <ListView
+            android:id="@+id/habits"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/ok"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="20dp"
+        stv:sCenterTextColor="@color/white"
+        stv:sCenterTextSize="20sp"
+        stv:sCenterTextString="自定义添加"
+        stv:sShapeCornersRadius="3dp"
+        stv:sShapeSelectorNormalColor="@color/colorPrimary"
+        stv:sShapeSelectorPressedColor="@color/gray"
+        stv:sUseShape="true" />
 
-
-</LinearLayout>
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package com.yousheng.yousheng.habit;
 
 import android.app.TimePickerDialog;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -70,8 +71,12 @@ public class HoldOnDays extends AppCompatActivity {
 
         titleBar.getLeftTextView().setText("  " + habit.getMainTitle());
         ((TextView) findViewById(R.id.title1)).setText(habit.getMainTitle());
-        if (habit.isOfficial())
-            ((TextView) findViewById(R.id.title2)).setText(habit.getContent());
+        ((TextView) findViewById(R.id.title1)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+
+        if (habit.isOfficial()) {
+            ((TextView) findViewById(R.id.title2)).setText(habit.getSubTitle());
+            ((TextView) findViewById(R.id.content)).setText(habit.getContent());
+        }
         ((TextView) findViewById(R.id.number)).setText(habit.getKeepDays() + "");
 
         calendar.setTimeInMillis(habit.getClockTime());
@@ -79,8 +84,8 @@ public class HoldOnDays extends AppCompatActivity {
         notify = findViewById(R.id.notify);
 
         int px = dip2px(this, 10);
-        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
         if (habit.isNotify()) {
             time.setVisibility(View.VISIBLE);
@@ -105,6 +110,8 @@ public class HoldOnDays extends AppCompatActivity {
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
+        final ScrollView scrollView = findViewById(R.id.scrollView);
+
         notify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +123,10 @@ public class HoldOnDays extends AppCompatActivity {
                 Habit h = LitePal.find(Habit.class, habit.getId());
                 h.setNotify(notify.getSwitchIsChecked());
                 h.save();
+                ViewGroup.LayoutParams params = scrollView.getLayoutParams();
+                params.height = (int) ((superTextView.getTop() - notify.getBottom()) * 0.95);
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                scrollView.setLayoutParams(params);
             }
         });
 
@@ -133,13 +144,12 @@ public class HoldOnDays extends AppCompatActivity {
             }
         });
 
-        final ScrollView scrollView = findViewById(R.id.scrollView);
 
         scrollView.post(new Runnable() {
             @Override
             public void run() {
                 ViewGroup.LayoutParams params = scrollView.getLayoutParams();
-                params.height = (int) ((superTextView.getTop() - notify.getBottom()));
+                params.height = (int) ((superTextView.getTop() - notify.getBottom()) * 0.95);
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
                 scrollView.setLayoutParams(params);
             }
