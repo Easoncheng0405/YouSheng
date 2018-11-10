@@ -59,356 +59,360 @@
             android:orientation="vertical"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingTop="21dp">
-            <!--好孕率及安全期-->
-            <RelativeLayout
+            android:paddingTop="7dp">
+
+            <!--顶层布局，好孕率，日历，排卵试纸-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+                android:background="@drawable/shape_background_rectangle"
+                android:orientation="vertical"
+                android:paddingBottom="17dp"
+                android:paddingTop="20dp">
+                <!--好孕率及安全期-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_pregnant_percent"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_pregnant_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="18dp"
+                        android:text="20%"
+                        android:textColor="@color/text_color_red_theme"
+                        android:textSize="40sp"
+                        tools:text="20%" />
+
+                    <TextView
+                        android:id="@+id/tv_pregnant_percent_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tv_pregnant_percent"
+                        android:layout_alignTop="@id/tv_pregnant_percent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="9dp"
+                        android:layout_toEndOf="@id/tv_pregnant_percent"
+                        android:gravity="center_vertical"
+                        android:text="好孕率\n极低"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        tools:text="好孕率\n极低" />
+
+                    <TextView
+                        android:id="@+id/tv_pregnant_securedate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tv_pregnant_percent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@id/tv_pregnant_percent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="19dp"
+                        android:gravity="center_vertical"
+                        android:text="2018年5月19日\n您今天处于安全期"
+                        android:textColor="@color/black"
+                        tools:text="2018年5月19日\n您今天处于安全期" />
+                </RelativeLayout>
+
+                <com.yousheng.yousheng.calendarlib.CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="18dp"
                     android:layout_marginStart="18dp"
-                    android:text="20%"
-                    android:textColor="@color/text_color_red_theme"
-                    android:textSize="40sp"
-                    tools:text="20%" />
-
-                <TextView
-                    android:id="@+id/tv_pregnant_percent_value"
-                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    app:max_year="2020"
+                    app:min_year="2004"
+                    app:month_view="com.yousheng.yousheng.calendarlib.YoushengMonthView"
+                    app:month_view_show_mode="mode_all"
+                    app:other_month_text_color="#e1e1e1"
+                    app:selected_text_color="#333"
+                    app:selected_theme_color="@color/calendar_selected_stroke"
+                    app:week_background="@color/white"
+                    app:week_bar_width="350dp"
+                    app:week_start_with="sun"
+                    app:week_text_color="@color/sub_gray_eighty_alpha"
+                    app:week_view="com.yousheng.yousheng.calendarlib.MeizuWeekView"
+                    app:week_view_scrollable="false"
+                    app:year_view_day_text_color="#333333"
+                    app:year_view_day_text_size="9sp"
+                    app:year_view_month_text_color="#ff0000"
+                    app:year_view_month_text_size="20sp"
+                    app:year_view_scheme_color="#f17706" />
+                <!--时期说明-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/tv_pregnant_percent"
-                    android:layout_alignTop="@id/tv_pregnant_percent"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="9dp"
-                    android:layout_toEndOf="@id/tv_pregnant_percent"
-                    android:gravity="center_vertical"
-                    android:text="好孕率\n极低"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    tools:text="好孕率\n极低" />
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="12dp">
 
-                <TextView
-                    android:id="@+id/tv_pregnant_securedate"
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/iv_dot_jingqi"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/shape_main_logo_mense" />
+
+                    <TextView
+                        android:id="@+id/tv_dot_jingqi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/iv_dot_jingqi"
+                        android:text="@string/text_jingqi_duration"
+                        android:textColor="@color/text_color_gray"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_dot_pailuan_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="12dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
+                        android:layout_toEndOf="@id/tv_dot_jingqi"
+                        android:src="@drawable/shape_main_pailuan_logo" />
+
+                    <TextView
+                        android:id="@+id/tv_dot_pailuan_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/iv_dot_pailuan_duration"
+                        android:text="@string/text_pailuan_duration"
+                        android:textColor="@color/text_color_gray"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_dot_pailuan_date"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
+                        android:layout_toEndOf="@id/tv_dot_pailuan_duration"
+                        android:src="@drawable/dot_pailuan_date" />
+
+                    <TextView
+                        android:id="@+id/tv_dot_pailuan_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/iv_dot_pailuan_date"
+                        android:text="@string/text_pailuan_date"
+                        android:textColor="@color/text_color_gray"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_dot_pailuan_suggestion_ml"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
+
+                        android:layout_toEndOf="@id/tv_dot_pailuan_date"
+                        android:src="@drawable/calendar_love_empty" />
+
+                    <TextView
+                        android:id="@+id/tv_dot_pailuan_suggestion_ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+
+                        android:layout_toEndOf="@id/iv_dot_pailuan_suggestion_ml"
+                        android:text="@string/text_suggestion_ml"
+                        android:textColor="@color/text_color_gray"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_dot_pailuan_already_ml"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_centerVertical="true"
+
+                        android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
+                        android:layout_toEndOf="@id/tv_dot_pailuan_suggestion_ml"
+                        android:src="@drawable/calendar_love_fill" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+
+                        android:layout_toEndOf="@id/iv_dot_pailuan_already_ml"
+                        android:text="@string/text_already_ml"
+                        android:textColor="@color/text_color_gray"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+                <!--开关-->
+                <!--月经开始-->
+                <RelativeLayout
+                    android:id="@+id/layout_mense_start"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/tv_pregnant_percent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@id/tv_pregnant_percent"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="19dp"
-                    android:gravity="center_vertical"
-                    android:text="2018年5月19日\n您今天处于安全期"
-                    android:textColor="@color/black"
-                    tools:text="2018年5月19日\n您今天处于安全期" />
-            </RelativeLayout>
+                    android:layout_marginTop="32dp">
 
-            <com.yousheng.yousheng.calendarlib.CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:background="#fff"
-                app:calendar_padding="0dp"
-                app:calendar_width="50dp"
-                app:current_month_text_color="#333333"
-                app:max_year="2020"
-                app:min_year="2004"
-                app:month_view="com.yousheng.yousheng.calendarlib.YoushengMonthView"
-                app:month_view_show_mode="mode_fix"
-                app:other_month_lunar_text_color="#e1e1e1"
-                app:other_month_text_color="#e1e1e1"
-                app:selected_text_color="#333"
-                app:selected_theme_color="@color/calendar_selected_stroke"
-                app:week_background="#fff"
-                app:week_bar_width="350dp"
-                app:week_start_with="sun"
-                app:week_text_color="@color/sub_gray_eighty_alpha"
-                app:week_view="com.yousheng.yousheng.calendarlib.MeizuWeekView"
-                app:week_view_scrollable="false"
-                app:year_view_day_text_color="#333333"
-                app:year_view_day_text_size="9sp"
-                app:year_view_month_text_color="#ff0000"
-                app:year_view_month_text_size="20sp"
-                app:year_view_scheme_color="#f17706" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="19dp"
+                        android:text="@string/menstruation_start"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-            <!--时期说明-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="12dp">
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_menstruation_start"
+                        style="@style/Widget.AppCompat.CompoundButton.Switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="4dp" />
+                </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/iv_dot_jingqi"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/dot_pailuan_date" />
-
-                <TextView
-                    android:id="@+id/tv_dot_jingqi"
-                    android:layout_width="wrap_content"
+                <!--月经结束-->
+                <RelativeLayout
+                    android:id="@+id/layout_mense_end"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="32dp">
 
-                    android:layout_toEndOf="@id/iv_dot_jingqi"
-                    android:text="@string/text_jingqi_duration"
-                    android:textColor="@color/text_color_gray"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="19dp"
+                        android:text="@string/menstruation_end"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-                <ImageView
-                    android:id="@+id/iv_dot_pailuan_duration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="12dp"
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_menstruation_end"
+                        style="@style/Widget.AppCompat.CompoundButton.Switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="4dp" />
+                </RelativeLayout>
 
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
-                    android:layout_toEndOf="@id/tv_dot_jingqi"
-                    android:src="@drawable/dot_pailuan_date" />
-
-                <TextView
-                    android:id="@+id/tv_dot_pailuan_duration"
-                    android:layout_width="wrap_content"
+                <!--同房爱爱-->
+                <RelativeLayout
+                    android:id="@+id/layout_make_love"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="32dp">
 
-                    android:layout_toEndOf="@id/iv_dot_pailuan_duration"
-                    android:text="@string/text_pailuan_duration"
-                    android:textColor="@color/text_color_gray"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="19dp"
+                        android:text="@string/make_love"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-                <ImageView
-                    android:id="@+id/iv_dot_pailuan_date"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_make_love"
+                        style="@style/Widget.AppCompat.CompoundButton.Switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="4dp" />
+                </RelativeLayout>
 
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
-                    android:layout_toEndOf="@id/tv_dot_pailuan_duration"
-                    android:src="@drawable/dot_pailuan_date" />
-
-                <TextView
-                    android:id="@+id/tv_dot_pailuan_date"
-                    android:layout_width="wrap_content"
+                <!--排卵试纸-->
+                <RelativeLayout
+                    android:id="@+id/layout_ovulation"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:onClick="onClick">
 
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="3dp"
-                    android:layout_toEndOf="@id/iv_dot_pailuan_date"
-                    android:text="@string/text_pailuan_date"
-                    android:textColor="@color/text_color_gray"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_ovulation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:text="@string/ovulation"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-                <ImageView
-                    android:id="@+id/iv_dot_pailuan_suggestion_ml"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/tv_ovulation"
+                        android:layout_below="@id/tv_ovulation"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/ovulation_tip"
+                        android:textColor="@color/text_color_gray"
+                        android:textSize="13sp" />
 
-                    android:layout_toEndOf="@id/tv_dot_pailuan_date"
-                    android:src="@drawable/calendar_love_empty" />
+                    <ImageView
+                        android:id="@+id/iv_plus_ovulation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginTop="4dp"
+                        android:src="@drawable/plus" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_dot_pailuan_suggestion_ml"
-                    android:layout_width="wrap_content"
+                <!--备住-->
+                <RelativeLayout
+                    android:id="@+id/layout_comment"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="32dp"
+                    android:onClick="onClick">
 
-                    android:layout_toEndOf="@id/iv_dot_pailuan_suggestion_ml"
-                    android:text="@string/text_suggestion_ml"
-                    android:textColor="@color/text_color_gray"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:text="@string/comment"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-                <ImageView
-                    android:id="@+id/iv_dot_pailuan_already_ml"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_centerVertical="true"
+                    <TextView
+                        android:id="@+id/tv_comment_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/tv_comment"
+                        android:layout_below="@id/tv_comment"
+                        android:layout_marginTop="10dp"
+                        android:ellipsize="end"
+                        android:maxEms="15"
+                        android:maxLines="1"
+                        android:text="@string/come_on"
+                        android:textColor="@color/text_color_gray"
+                        android:textSize="13sp" />
 
-                    android:layout_marginStart="@dimen/margin_start_main_calendar_logo"
-                    android:layout_toEndOf="@id/tv_dot_pailuan_suggestion_ml"
-                    android:src="@drawable/calendar_love_fill" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="3dp"
-
-                    android:layout_toEndOf="@id/iv_dot_pailuan_already_ml"
-                    android:text="@string/text_already_ml"
-                    android:textColor="@color/text_color_gray"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <!--开关-->
-            <!--月经开始-->
-            <RelativeLayout
-                android:id="@+id/layout_mense_start"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="19dp"
-                    android:text="@string/menstruation_start"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/switch_menstruation_start"
-                    style="@style/Widget.AppCompat.CompoundButton.Switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="18dp" />
-            </RelativeLayout>
-
-            <!--月经结束-->
-            <RelativeLayout
-                android:id="@+id/layout_mense_end"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="19dp"
-                    android:text="@string/menstruation_end"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/switch_menstruation_end"
-                    style="@style/Widget.AppCompat.CompoundButton.Switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="18dp" />
-            </RelativeLayout>
-
-            <!--同房爱爱-->
-            <RelativeLayout
-                android:id="@+id/layout_make_love"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="19dp"
-                    android:text="@string/make_love"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/switch_make_love"
-                    style="@style/Widget.AppCompat.CompoundButton.Switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="18dp" />
-            </RelativeLayout>
-
-            <!--排卵试纸-->
-            <RelativeLayout
-                android:id="@+id/layout_ovulation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:onClick="onClick">
-
-                <TextView
-                    android:id="@+id/tv_ovulation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="19dp"
-                    android:text="@string/ovulation"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/tv_ovulation"
-                    android:layout_below="@id/tv_ovulation"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/ovulation_tip"
-                    android:textColor="@color/text_color_gray"
-                    android:textSize="13sp" />
-
-                <ImageView
-                    android:id="@+id/iv_plus_ovulation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="19dp"
-                    android:src="@drawable/plus" />
-            </RelativeLayout>
-
-            <!--备住-->
-            <RelativeLayout
-                android:id="@+id/layout_comment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:onClick="onClick">
-
-                <TextView
-                    android:id="@+id/tv_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="19dp"
-                    android:text="@string/comment"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_comment_sub"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@id/tv_comment"
-                    android:layout_below="@id/tv_comment"
-                    android:layout_marginTop="10dp"
-                    android:ellipsize="end"
-                    android:maxEms="15"
-                    android:maxLines="1"
-                    android:text="@string/come_on"
-                    android:textColor="@color/text_color_gray"
-                    android:textSize="13sp" />
-
-                <ImageView
-                    android:id="@+id/iv_plus_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="19dp"
-                    android:src="@drawable/plus" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/iv_plus_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginTop="4dp"
+                        android:src="@drawable/plus" />
+                </RelativeLayout>
+            </LinearLayout>
 
             <!--备孕必检项-->
             <RelativeLayout
                 android:id="@+id/layout_pregnant_check"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/pink_pregnant_prepare"
                 android:onClick="onClick"
                 android:padding="18dp">
@@ -446,10 +450,10 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginLeft="20dp"
                     android:id="@+id/habit_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="27dp"
                     android:gravity="start"
                     android:text="@string/good_lifet_sign"
@@ -476,8 +480,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"

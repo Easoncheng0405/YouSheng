@@ -34,7 +34,6 @@ public abstract class MonthView extends BaseMonthView {
     protected void onDraw(Canvas canvas) {
         if (mLineCount == 0)
             return;
-//        mItemWidth = (getWidth() - 2 * mDelegate.getCalendarPadding()) / 7;
         onPreviewHook();
         int count = mLineCount * 7;
         int d = 0;

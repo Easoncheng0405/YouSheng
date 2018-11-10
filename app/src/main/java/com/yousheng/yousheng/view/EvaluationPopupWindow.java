@@ -55,6 +55,8 @@ public class EvaluationPopupWindow extends PopupWindow {
         btnJump = view.findViewById(R.id.btn_comment);
         setButtonText(BUTTON_STATE.BAD);
         view.findViewById(R.id.btn_comment).setOnClickListener(listener);
+        view.findViewById(R.id.iv_close).setOnClickListener(listener);
+        view.findViewById(R.id.iv_background).setOnClickListener(listener);
         view.setOnClickListener(listener);
     }
 
@@ -72,6 +74,9 @@ public class EvaluationPopupWindow extends PopupWindow {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
+                case R.id.iv_background:
+                    //do nothing
+                    break;
                 case R.id.root_layout:
                     dismiss();
                     break;

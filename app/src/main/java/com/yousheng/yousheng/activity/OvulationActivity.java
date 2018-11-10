@@ -77,6 +77,7 @@ public class OvulationActivity extends AppCompatActivity implements View.OnClick
                 updateList();
                 break;
             case Constants.RESULT_CODE_NO_CHANGE:
+                break;
             default:
                 break;
         }

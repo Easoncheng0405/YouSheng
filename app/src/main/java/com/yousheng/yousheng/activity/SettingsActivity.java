@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.allen.library.SuperTextView;
+import com.umeng.analytics.MobclickAgent;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
@@ -50,6 +51,18 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         mEvaluationWindow = new EvaluationPopupWindow(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override

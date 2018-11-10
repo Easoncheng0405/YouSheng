@@ -28,7 +28,7 @@ import com.yousheng.yousheng.uitl.SPSingleton;
  * 可通过此扩展各种视图如：MonthView、RangeMonthView
  */
 public abstract class BaseMonthView extends BaseView {
-    private final static int LINE_COUNT_MODE_ALL = 5;
+    public final static int LINE_COUNT_MODE_ALL = 6;
 
     MonthViewPager mMonthViewPager;
     /**

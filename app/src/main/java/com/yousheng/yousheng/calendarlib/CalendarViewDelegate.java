@@ -266,7 +266,6 @@ final class CalendarViewDelegate {
      * 星期栏的高度
      */
     private int mWeekBarHeight;
-
     /**
      * 星期栏的宽度
      */
@@ -786,6 +785,11 @@ final class CalendarViewDelegate {
     void setWeekViewScrollable(boolean weekViewScrollable) {
         this.mWeekViewScrollable = weekViewScrollable;
     }
+
+    public void setmWeekBarWidth(int mWeekBarWidth) {
+        this.mWeekBarWidth = mWeekBarWidth;
+    }
+
 
     void setYearViewScrollable(boolean yearViewScrollable) {
         this.mYearViewScrollable = yearViewScrollable;

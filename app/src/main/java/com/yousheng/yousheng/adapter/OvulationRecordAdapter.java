@@ -1,6 +1,8 @@
 package com.yousheng.yousheng.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.activity.RecordOvulationActivity;
 import com.yousheng.yousheng.model.OvulationRecord;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 
@@ -18,10 +22,10 @@ import java.util.List;
 public class OvulationRecordAdapter extends RecyclerView.Adapter<OvulationRecordAdapter.OvulationRecordHolder> {
     private List<OvulationRecord> mRecords;
     private LayoutInflater mInflater;
-    private Context mContext;
+    private Activity mContext;
 
 
-    public  OvulationRecordAdapter(Context context, List<OvulationRecord> recordList) {
+    public OvulationRecordAdapter(Activity context, List<OvulationRecord> recordList) {
         this.mInflater = LayoutInflater.from(context);
         this.mRecords = recordList;
         this.mContext = context;
@@ -37,7 +41,7 @@ public class OvulationRecordAdapter extends RecyclerView.Adapter<OvulationRecord
 
     @Override
     public void onBindViewHolder(@NonNull OvulationRecordHolder holder, int index) {
-        OvulationRecord record = mRecords.get(index);
+        final OvulationRecord record = mRecords.get(index);
         holder.tvDate.setText(CalendarUtils.formatDateString(record.getDate(), "yyyy/MM/dd HH:mm"));
 
         switch (record.getState()) {
@@ -59,6 +63,16 @@ public class OvulationRecordAdapter extends RecyclerView.Adapter<OvulationRecord
                 break;
         }
         holder.ivMakeLove.setVisibility(record.isHasMakeLove() ? View.VISIBLE : View.GONE);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, RecordOvulationActivity.class);
+                intent.putExtra("date", record.getDate());
+                intent.putExtra("change", true);
+                mContext.startActivityForResult(intent, Constants.REQUEST_CODE_OVULATION_TO_RECORD);
+            }
+        });
     }
 
     @Override

@@ -17,6 +17,10 @@
         stv:leftTextColor="@color/white"
         stv:leftTextSize="20sp"
         stv:leftType="textView"
+        stv:rightText="删除"
+        stv:rightTextColor="@color/white"
+        stv:rightTextSize="20sp"
+        stv:rightType="textView"
         stv:statusBarColor="@color/colorPrimaryDark"
         stv:titleBarColor="@color/colorPrimary"
         stv:titleBarHeight="60dp" />
@@ -235,11 +239,11 @@
             <!--使用说明-->
             <RelativeLayout
                 android:id="@+id/layout_instruction"
-                android:onClick="onClick"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shape_background_rectangle"
+                android:onClick="onClick"
                 android:paddingEnd="20dp"
                 android:paddingStart="20dp">
 

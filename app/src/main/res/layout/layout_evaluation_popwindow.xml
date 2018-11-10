@@ -38,10 +38,11 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingBottom="40dp"
-        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/iv_background"
+        android:layout_alignTop="@id/iv_background"
+        android:gravity="center"
+        android:paddingTop="30dp"
         android:text="@string/evaluation_text"
         android:textColor="@color/white"
         android:textSize="22sp" />

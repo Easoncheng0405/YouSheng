@@ -12,6 +12,8 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.uitl.TitleBarUtils;
 
+import java.util.HashMap;
+
 public class FeedBackActivity extends AppCompatActivity {
     private EditText editText;
 
@@ -21,6 +23,18 @@ public class FeedBackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feed_back);
         initView();
         initTitleBar();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
     }
 
     private void initTitleBar() {
@@ -34,7 +48,10 @@ public class FeedBackActivity extends AppCompatActivity {
                         //发送反馈
                         String feedback = editText.getText().toString().trim();
                         if (!TextUtils.isEmpty(feedback)) {
-                            MobclickAgent.reportError(FeedBackActivity.this, feedback);
+                            HashMap<String,String> map = new HashMap<>();
+                            map.put("feedback",feedback);
+                            MobclickAgent.onEvent(FeedBackActivity.this,"evaluation_event",map);
+                            Toast.makeText(FeedBackActivity.this,"反馈已发送",Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
                             Toast.makeText(FeedBackActivity.this, "请填入反馈信息", Toast.LENGTH_SHORT);
@@ -51,4 +68,6 @@ public class FeedBackActivity extends AppCompatActivity {
     private void initView() {
         editText = findViewById(R.id.edit_text);
     }
+
+
 }

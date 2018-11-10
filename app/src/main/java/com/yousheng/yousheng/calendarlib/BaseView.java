@@ -25,6 +25,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.wuhenzhizao.titlebar.utils.ScreenUtils;
+
 import java.util.List;
 
 /**
@@ -295,9 +297,16 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
         updateItemHeight();
     }
 
+    /***
+     * 更新日历的宽度和高度，
+     * 先根据屏幕宽度，日历的起始和结束margin以及padding计算单个item宽度，再根据宽度计算item高度。
+     * */
     void updateItemHeight() {
-        this.mItemWidth = mDelegate.getCalendarItemWidth();
-        this.mItemHeight = mDelegate.getCalendarItemHeight();
+        this.mItemWidth = (int) ((ScreenUtils.getScreenWidth(getContext()) - ScreenUtils.dp2Px(getContext(), 52f)) / 7);
+        this.mItemHeight = mItemWidth * 37 /45;
+        mDelegate.setCalendarItemHeight(this.mItemHeight);
+        mDelegate.setCalendarItemWidth(this.mItemWidth);
+
         Paint.FontMetrics metrics = mCurMonthTextPaint.getFontMetrics();
         mTextBaseLine = mItemHeight / 2 + (metrics.bottom - metrics.top - metrics.ascent - metrics.descent) / 2;
     }

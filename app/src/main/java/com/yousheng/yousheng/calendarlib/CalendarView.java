@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 
+import com.wuhenzhizao.titlebar.utils.ScreenUtils;
 import com.yousheng.yousheng.R;
 
 import java.lang.reflect.Constructor;
@@ -105,6 +106,10 @@ public class CalendarView extends FrameLayout {
         }
 
         frameContent.addView(mWeekBar, 2);
+
+        //set weekbar width
+        mDelegate.setmWeekBarWidth((int) (ScreenUtils.getScreenWidth(getContext()) - ScreenUtils.dp2Px(getContext(), 52f)));
+
         mWeekBar.setup(mDelegate);
         mWeekBar.onWeekStartChange(mDelegate.getWeekStart());
 
@@ -1156,7 +1161,7 @@ public class CalendarView extends FrameLayout {
     /***
      * 从经期设置界面返回后，如果上次经期开始时间改变，需要更新calendar panel
      * */
-    public final void updateMenseInfo(){
+    public final void updateMenseInfo() {
         mMonthPager.updateMenseSatate();
     }
 

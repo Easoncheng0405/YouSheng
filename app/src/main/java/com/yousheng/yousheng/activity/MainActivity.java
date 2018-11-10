@@ -306,6 +306,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!android.text.TextUtils.isEmpty(mMenseInfoSelected.getComment())) {
                     ((TextView) findViewById(R.id.tv_comment_sub)).setText(mMenseInfoSelected.getComment());
                 }
+                else{
+                    ((TextView) findViewById(R.id.tv_comment_sub)).setText(getString(R.string.come_on));
+                }
             }
         });
 

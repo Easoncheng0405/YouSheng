@@ -17,45 +17,14 @@ import com.yousheng.yousheng.mense.MenseCalculator;
  */
 
 public class YoushengMonthView extends MonthView {
-
-    /**
-     * 自定义魅族标记的文本画笔
-     */
-    private Paint mTextPaint = new Paint();
-
-    /**
-     * 自定义魅族标记的圆形背景
-     */
-    private Paint mSchemeBasicPaint = new Paint();
-    private float mRadio;
     private int mPadding;
-    private float mSchemeBaseLine;
-
     private Bitmap mBitmapLoveEmpty;
     private Bitmap mBitmapLoveFill;
 
     public YoushengMonthView(Context context) {
         super(context);
         isNeedPaintBitmap = true;
-
-        mTextPaint.setTextSize(dipToPx(context, 8));
-        mTextPaint.setColor(0xffffffff);
-        mTextPaint.setAntiAlias(true);
-        mTextPaint.setFakeBoldText(true);
-
-        mSchemeBasicPaint.setAntiAlias(true);
-        mSchemeBasicPaint.setStyle(Paint.Style.FILL);
-        mSchemeBasicPaint.setTextAlign(Paint.Align.CENTER);
-        mSchemeBasicPaint.setFakeBoldText(true);
-        mRadio = dipToPx(getContext(), 7);
         mPadding = dipToPx(getContext(), 0);
-        Paint.FontMetrics metrics = mSchemeBasicPaint.getFontMetrics();
-        mSchemeBaseLine = mRadio - metrics.descent + (metrics.bottom - metrics.top) / 2 + dipToPx(getContext(), 1);
-
-        //兼容硬件加速无效的代码
-        setLayerType(View.LAYER_TYPE_SOFTWARE, mSchemeBasicPaint);
-        //4.0以上硬件加速会导致无效
-        mSchemeBasicPaint.setMaskFilter(new BlurMaskFilter(25, BlurMaskFilter.Blur.SOLID));
 
         //加载图标
         mBitmapLoveEmpty = BitmapFactory.decodeResource(getResources(), R.drawable.calendar_love_empty);
@@ -97,10 +66,6 @@ public class YoushengMonthView extends MonthView {
      */
     @Override
     protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
-    }
-
-    private float getTextWidth(String text) {
-        return mTextPaint.measureText(text);
     }
 
     /**
