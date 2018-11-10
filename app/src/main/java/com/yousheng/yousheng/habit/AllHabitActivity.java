@@ -13,11 +13,14 @@ import static com.yousheng.yousheng.uitl.TitleBarUtils.changeTitleImageLeftMargi
 
 public class AllHabitActivity extends AppCompatActivity {
 
+
+    private boolean flag = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_habit);
-
+        flag = false;
         CommonTitleBar titleBar = findViewById(R.id.habit_all_title);
         changeTitleImageLeftMargin(this, titleBar);
         titleBar.getRightImageButton().setPadding(0, 0, 80, 0);
@@ -29,14 +32,18 @@ public class AllHabitActivity extends AppCompatActivity {
                         finish();
                         break;
                     case 4:
-                        Intent intent = new Intent(AllHabitActivity.this, HabitActivity.class);
-                        intent.putExtra("id", -1L);
-                        startActivity(intent);
+                        addNewHabit();
                         break;
                 }
             }
         });
 
+        findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewHabit();
+            }
+        });
     }
 
     @Override
@@ -46,5 +53,14 @@ public class AllHabitActivity extends AppCompatActivity {
         HabitAdapter adapter = new HabitAdapter(this, HabitHelper.getAllHabitInState());
         habits.setAdapter(adapter);
         habits.setDivider(null);
+        if (flag)
+            habits.setSelection(habits.getBottom());
+        flag = true;
+    }
+
+    private void addNewHabit() {
+        Intent intent = new Intent(this, HabitActivity.class);
+        intent.putExtra("id", -1);
+        startActivity(intent);
     }
 }

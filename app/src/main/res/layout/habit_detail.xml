@@ -26,7 +26,7 @@
         android:layout_marginRight="8dp"
         android:padding="8dp"
         stv:sCenterSpaceHeight="3dp"
-        stv:sCenterTextSize="16sp"
+        stv:sCenterTextSize="20sp"
         stv:sLeftBottomTextColor="@color/gray"
         stv:sLeftBottomTextSize="14sp"
         stv:sLeftTextColor="@color/black"

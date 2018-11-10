@@ -46,7 +46,7 @@ public class HabitAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         //最后一个是添加自定义按钮
-        return oi + oo + ci + co + 1;
+        return oi + oo + ci + co;
     }
 
     @Override
@@ -85,26 +85,26 @@ public class HabitAdapter extends BaseAdapter {
         convertView = LayoutInflater.from(context).inflate(R.layout.habit_detail, null);
         SuperTextView superTextView = convertView.findViewById(R.id.habit);
         TextView textView = convertView.findViewById(R.id.title);
-        if (i + 1 == getCount()) {
-            LinearLayout.LayoutParams margin = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            margin.setMargins(30, 70, 30, 80);
-            superTextView.setLayoutParams(margin);
-            superTextView.setCenterTextColor(Color.WHITE);
-            superTextView.setCenterString("自定义添加");
-            superTextView.setShapeSelectorPressedColor(Color.rgb(188, 181, 181));
-            superTextView.setShapeSelectorNormalColor(Color.rgb(216, 27, 96));
-            superTextView.useShape();
-            superTextView.setPadding(0, 30, 0, 30);
-            superTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, HabitActivity.class);
-                    intent.putExtra("id", -1);
-                    context.startActivity(intent);
-                }
-            });
-            return convertView;
-        }
+//        if (i + 1 == getCount()) {
+//            LinearLayout.LayoutParams margin = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            margin.setMargins(30, 70, 30, 80);
+//            superTextView.setLayoutParams(margin);
+//            superTextView.setCenterTextColor(Color.WHITE);
+//            superTextView.setCenterString("自定义添加");
+//            superTextView.setShapeSelectorPressedColor(Color.rgb(188, 181, 181));
+//            superTextView.setShapeSelectorNormalColor(Color.rgb(216, 27, 96));
+//            superTextView.useShape();
+//            superTextView.setPadding(0, 30, 0, 30);
+//            superTextView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, HabitActivity.class);
+//                    intent.putExtra("id", -1);
+//                    context.startActivity(intent);
+//                }
+//            });
+//            return convertView;
+//        }
         final Habit habit = (Habit) getItem(i);
         switch (getStateByIndex(i)) {
             case OFFICIAL_OUT:
