@@ -105,11 +105,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         stv:sCenterTextColor="@color/white"
-        stv:sShapeCornersRadius="3dp"
         stv:sCenterTextSize="20sp"
+        stv:sShapeCornersRadius="3dp"
         stv:sShapeSelectorNormalColor="@color/colorPrimary"
         stv:sShapeSelectorPressedColor="@color/gray"
-        stv:sUseShape="true" />
+        stv:sUseShape="true"  />
 </RelativeLayout>
