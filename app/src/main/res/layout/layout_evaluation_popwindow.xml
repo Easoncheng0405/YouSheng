@@ -3,14 +3,14 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sub_gray_eighty_alpha">
+    android:background="@color/evaluation_pop_up_back">
 
     <ImageView
         android:id="@+id/iv_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="50dp"
         android:src="@drawable/evaluation_back" />
 
     <Button
@@ -40,8 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:paddingBottom="40dp"
         android:gravity="center_horizontal"
-        android:paddingTop="30dp"
         android:text="@string/evaluation_text"
         android:textColor="@color/white"
         android:textSize="22sp" />
@@ -52,8 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/iv_background"
-        android:layout_marginBottom="40dp"
-        android:orientation="horizontal">
+        android:layout_marginBottom="40dp">
+
+        <View
+            android:id="@+id/placeholder"
+            android:layout_width="1dp"
+            android:layout_height="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
 
         <ImageView
             android:id="@+id/iv_star_three"
@@ -61,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/placeholder"
             android:src="@drawable/evaluation_star_empty" />
 
 

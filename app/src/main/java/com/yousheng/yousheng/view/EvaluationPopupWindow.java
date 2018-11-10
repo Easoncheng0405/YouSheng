@@ -1,7 +1,6 @@
 package com.yousheng.yousheng.view;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +84,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_empty);
-                    setButtonText(BUTTON_STATE.GOOD);
+                    setButtonText(BUTTON_STATE.BAD);
                     break;
                 case R.id.iv_star_two:
                     ivStarOne.setImageResource(R.drawable.evaluation_star_fill);
@@ -93,7 +92,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_empty);
-                    setButtonText(BUTTON_STATE.GOOD);
+                    setButtonText(BUTTON_STATE.BAD);
                     break;
                 case R.id.iv_star_three:
                     ivStarOne.setImageResource(R.drawable.evaluation_star_fill);
@@ -101,7 +100,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_fill);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_empty);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_empty);
-                    setButtonText(BUTTON_STATE.GOOD);
+                    setButtonText(BUTTON_STATE.BAD);
                     break;
                 case R.id.iv_star_four:
                     ivStarOne.setImageResource(R.drawable.evaluation_star_fill);
@@ -109,7 +108,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     ivStarThree.setImageResource(R.drawable.evaluation_star_fill);
                     ivStarFour.setImageResource(R.drawable.evaluation_star_fill);
                     ivStarFive.setImageResource(R.drawable.evaluation_star_empty);
-                    setButtonText(BUTTON_STATE.GOOD);
+                    setButtonText(BUTTON_STATE.BAD);
                     break;
                 case R.id.iv_star_five:
                     ivStarOne.setImageResource(R.drawable.evaluation_star_fill);
@@ -124,7 +123,7 @@ public class EvaluationPopupWindow extends PopupWindow {
                     FeedBackManager.recordFeedBackButtonClicked();
                     if (mState == BUTTON_STATE.GOOD) {
                         //跳转到评价界面
-                        MarketUtils.navigationToAppStpre(mActivity);
+                        MarketUtils.navigationToAppStore(mActivity);
                         dismiss();
                     } else if (mState == BUTTON_STATE.BAD) {
                         mActivity.startActivity(new Intent(mActivity, FeedBackActivity.class));

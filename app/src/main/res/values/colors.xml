@@ -41,4 +41,8 @@
 
     <!--pop up window-->
     <color name="sub_gray_eighty_alpha">#7DCDCDCD</color>
+    <color name="evaluation_pop_up_back">#96000000</color>
+
+    <!--splash-->
+    <color name="splash_button_back_color">#4b000000</color>
 </resources>

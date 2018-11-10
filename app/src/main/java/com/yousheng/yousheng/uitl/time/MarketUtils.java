@@ -19,7 +19,7 @@ public class MarketUtils {
      *
      * @return 是否能找到应用商店
      * */
-    public static boolean navigationToAppStpre(Activity activity) {
+    public static boolean navigationToAppStore(Activity activity) {
         List<Market> markets = LitePal.findAll(Market.class);
         Collections.sort(markets);
 

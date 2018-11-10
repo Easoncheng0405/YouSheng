@@ -5,53 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.SplashActivity">
+    <!--广告界面，有网络时显示-->
+    <RelativeLayout
+        android:id="@+id/layout_advertisement"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--logo-->
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="33dp"
+            android:layout_marginStart="70dp"
+            android:background="@color/text_color_gray_sub"
+            android:src="@drawable/splash_ad_icon" />
 
-    <!--logo-->
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="33dp"
-        android:layout_marginStart="70dp"
-        android:background="@color/text_color_gray_sub"
-        android:src="@mipmap/ic_launcher" />
+        <!--欢迎语-->
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="33dp"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@id/iv_logo"
+            android:text="@string/welcome_text"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="柚生 (有质有料才精彩)" />
 
-    <!--欢迎语-->
-    <TextView
-        android:id="@+id/tv_welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="33dp"
-        android:layout_marginStart="7dp"
-        android:layout_toEndOf="@id/iv_logo"
-        android:text="@string/welcome_text"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        tools:text="柚生 (有质有料才精彩)" />
+        <!--背景广告图-->
+        <ImageView
+            android:id="@+id/iv_ad_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tv_welcome"
+            android:layout_marginBottom="28dp"
+            android:background="@color/text_color_gray_sub" />
 
-    <!--背景广告图-->
-    <ImageView
-        android:id="@+id/iv_ad_pic"
+        <!--倒计时文字-->
+        <TextView
+            android:id="@+id/tv_count_down"
+            android:layout_width="80dp"
+            android:layout_height="26dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginTop="17dp"
+            android:background="@drawable/shape_background_rectangl_splash"
+            android:gravity="center"
+            android:text="点击跳过 5"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <!--启动图，无网络时显示-->
+    <android.support.v7.widget.ViewStubCompat
+        android:id="@+id/stub_launch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tv_welcome"
-        android:layout_marginBottom="28dp"
-        android:background="@color/text_color_gray_sub" />
-
-    <!--倒计时文字-->
-    <TextView
-        android:id="@+id/tv_count_down"
-        android:layout_width="80dp"
-        android:layout_height="26dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="17dp"
-        android:layout_marginTop="17dp"
-        android:background="@drawable/shape_background_rectangl_splash"
-        android:gravity="center"
-        android:text="点击跳过 5"
-        android:textColor="@color/white" />
-
+        android:background="@color/white"
+        android:layout="@layout/layout_launcher_no_network" />
 </RelativeLayout>

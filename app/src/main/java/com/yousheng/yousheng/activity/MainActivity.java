@@ -155,15 +155,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mCalendarView.updateMenseInfo();
         }
 
-        findViewById(R.id.root_view).post(new Runnable() {
-            @Override
-            public void run() {
-                FeedBackManager.showEvaluationPopupWindow(MainActivity.this, findViewById(R.id.root_view));
-            }
-        });
+        findViewById(R.id.root_view).post(mShowEvaluationRunnable);
 
         MobclickAgent.onResume(this);
     }
+
+    private Runnable mShowEvaluationRunnable = new Runnable() {
+        @Override
+        public void run() {
+            FeedBackManager.showEvaluationPopupWindow(MainActivity.this, findViewById(R.id.root_view));
+
+        }
+    };
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -407,6 +410,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+        findViewById(R.id.root_view).removeCallbacks(mShowEvaluationRunnable);
     }
 
 

@@ -3,11 +3,9 @@ package com.yousheng.yousheng.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -18,16 +16,10 @@ import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.html.Agreement;
 import com.yousheng.yousheng.html.Disclaimer;
-import com.yousheng.yousheng.model.Market;
 import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.ToastUtil;
 import com.yousheng.yousheng.uitl.time.MarketUtils;
 import com.yousheng.yousheng.view.EvaluationPopupWindow;
-
-import org.litepal.LitePal;
-
-import java.util.Collections;
-import java.util.List;
 
 import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
 
@@ -94,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         Constants.REQUEST_CODE_SETTING_TO_MENSE_MANAGEMENT);
                 break;
             case R.id.update:
-                if (!MarketUtils.navigationToAppStpre(this))
+                if (!MarketUtils.navigationToAppStore(this))
                     ToastUtil.showMsg(this, "请搜索最新版本更新");
                 break;
             case R.id.stv_rating:
