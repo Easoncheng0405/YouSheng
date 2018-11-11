@@ -253,7 +253,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
                 return "";
             }
         });
-        data.setValueTextSize(15f);
+        data.setValueTextSize(13f);
         //得到X轴
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setTextColor(Color.parseColor("#999999"));
