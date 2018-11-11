@@ -82,7 +82,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         Drawable drawable = mContext.getResources().getDrawable(R.drawable.clock);
         //第一个0是距左边距离，第二个0是距上边距离，40分别是长宽
         drawable.setBounds(0, 0, 50, 50);
-        viewHolder.tvClock.setCompoundDrawables(drawable,null,null,null);
+        viewHolder.tvClock.setCompoundDrawables(drawable, null, null, null);
 
         viewHolder.tvMainTitle.setText(habit.getMainTitle());
         if (habit.isOfficial())
@@ -241,6 +241,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         lineDataSet.setDrawFilled(true);
         lineDataSet.setFillColor(Color.parseColor("#FCE4EC"));
         LineData data = new LineData(lineDataSet);
+        lineDataSet.setLineWidth(5f);
         //折线图不显示数值
         //data.setDrawValues(false);
         data.setValueFormatter(new IValueFormatter() {
@@ -252,8 +253,10 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
                 return "";
             }
         });
+        data.setValueTextSize(15f);
         //得到X轴
         XAxis xAxis = lineChart.getXAxis();
+        xAxis.setTextColor(Color.parseColor("#999999"));
         //设置X轴的位置（默认在上方)
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         //设置X轴坐标之间的最小间隔
@@ -261,8 +264,8 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         //设置X轴的刻度数量，第二个参数为true,将会画出明确数量（带有小数点），
         xAxis.setLabelCount(list.size());
         //设置X轴的值（最小值、最大值、然后会根据设置的刻度数量自动分配刻度显示）
-        //xAxis.setAxisMinimum(0f);
-        //xAxis.setAxisMaximum((float) list.size());
+        xAxis.setAxisMaximum(list.size() - 1 + 0.2f);
+        xAxis.setAxisMinimum(-0.2f);
         //不显示网格线
         xAxis.setDrawGridLines(false);
         // 标签倾斜
@@ -277,15 +280,15 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
                 return "";
             }
         });
+
         //得到Y轴
         YAxis yAxis = lineChart.getAxisLeft();
         YAxis rightYAxis = lineChart.getAxisRight();
+        yAxis.setTextColor(Color.parseColor("#999999"));
         //设置Y轴是否显示
         rightYAxis.setEnabled(false); //右侧Y轴不显示
         //显示网格线
         yAxis.setDrawGridLines(true);
-        yAxis.setAxisMinimum(minWeight(list) - 5);
-
         //图例：得到Legend
         Legend legend = lineChart.getLegend();
         //隐藏Legend
@@ -293,14 +296,15 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
 
         //隐藏描述
         Description description = new Description();
-        description.setEnabled(false);
+        description.setText("斤");
+        description.setEnabled(true);
+        description.setTextSize(13f);
+        description.setTextColor(Color.parseColor("#999999"));
         lineChart.setDescription(description);
-
         //设置数据
         lineChart.setData(data);
         //图标刷新
         lineChart.invalidate();
-
         lineChart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
