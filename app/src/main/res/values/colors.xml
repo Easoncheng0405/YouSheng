@@ -12,7 +12,7 @@
     <!--calendarview-->
     <color name="calendar_jingqi">#FCE4EC</color>
     <color name="calendar_pailuan_date">#E91E63</color>
-    <color name="calendar_pailuan_duration">#F8BBD0</color>
+    <color name="calendar_pailuan_duration">#FCE4EC</color>
     <color name="calendar_normal">#ffffff</color>
     <color name="calendar_selected_stroke">#AD1457</color>
 
