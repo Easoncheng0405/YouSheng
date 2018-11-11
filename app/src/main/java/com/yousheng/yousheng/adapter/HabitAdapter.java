@@ -81,7 +81,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         //获取图片
         Drawable drawable = mContext.getResources().getDrawable(R.drawable.clock);
         //第一个0是距左边距离，第二个0是距上边距离，40分别是长宽
-        drawable.setBounds(0, 0, 50, 50);
+        drawable.setBounds(0, 0, 35, 35);
         viewHolder.tvClock.setCompoundDrawables(drawable, null, null, null);
 
         viewHolder.tvMainTitle.setText(habit.getMainTitle());
