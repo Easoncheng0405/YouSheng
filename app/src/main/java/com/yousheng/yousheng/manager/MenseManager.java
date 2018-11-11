@@ -24,11 +24,13 @@ public class MenseManager {
             List<MenseDurationInfo> list = LitePal.select()
                     .order("startts asc").find(MenseDurationInfo.class);
             if (list != null && list.size() > 0) {
-                MenseDurationInfo info = list.get(list.size() - 1);
-                if (info.getMonthOfYear().equals(monthOfYear)) {
-                    SPSingleton.get().putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, info.getStartTs());
-                    SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
-                            String.valueOf((endTs - startTs) / Constants.ONE_DAY_IN_TS));
+                for (int i = list.size() - 1; i >= 0; i--) {
+                    MenseDurationInfo info = list.get(i);
+                    if (info.getStartTs() < CalendarUtils.getTodayTimeMillis() || i == 0) {
+                        SPSingleton.get().putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, info.getStartTs());
+                        SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
+                                String.valueOf((endTs - startTs) / Constants.ONE_DAY_IN_TS));
+                    }
                 }
             }
         }
