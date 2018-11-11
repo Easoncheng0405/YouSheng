@@ -638,25 +638,28 @@ final class CalendarUtil {
                     info = list.get(0);
                 }
 
-                if (info == null) {
-                    info = new MenseDurationInfo();
-                }
+                if (info != null) {
+                    if (dateFormatDay.equals(CalendarUtils.formatDateString(info.getStartTs(), Constants.DATE_FORMAT))) {
+                        calendarDate.setMenseStart(true);
+                        calendarDate.setMenseEnd(false);
+                    } else if (dateFormatDay.equals(CalendarUtils.formatDateString(info.getEndTs(), Constants.DATE_FORMAT))) {
+                        calendarDate.setMenseEnd(true);
+                        calendarDate.setMenseStart(false);
+                    } else {
+                        calendarDate.setMenseStart(false);
+                        calendarDate.setMenseEnd(false);
+                    }
 
-                if (dateFormatDay.equals(CalendarUtils.formatDateString(info.getStartTs(), Constants.DATE_FORMAT))) {
-                    calendarDate.setMenseStart(true);
-                    calendarDate.setMenseEnd(false);
-                } else if (dateFormatDay.equals(CalendarUtils.formatDateString(info.getEndTs(), Constants.DATE_FORMAT))) {
-                    calendarDate.setMenseEnd(true);
-                    calendarDate.setMenseStart(false);
+                    if (calendarDate.getTimeInMillis() <= info.getEndTs()
+                            && calendarDate.getTimeInMillis() >= info.getStartTs()) {
+                        calendarDate.setMensesState(MenseCalculator.STATE_MENSE);
+                    }
                 } else {
                     calendarDate.setMenseStart(false);
                     calendarDate.setMenseEnd(false);
+                    calendarDate.setMensesState(MenseCalculator.STATE_NORMAL);
                 }
 
-                if (calendarDate.getTimeInMillis() <= info.getEndTs()
-                        && calendarDate.getTimeInMillis() >= info.getStartTs()) {
-                    calendarDate.setMensesState(MenseCalculator.STATE_MENSE);
-                }
             }
 
             for (MenseInfo menseInfo : menseInfos) {

@@ -16,6 +16,7 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
+import com.yousheng.yousheng.manager.MenseManager;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
@@ -51,15 +52,15 @@ public class MenseManagementActivity extends AppCompatActivity {
                 .getText(R.string.mense_days_main_title));
         ((TextView) layoutMenseDays.findViewById(R.id.tv_sub_title)).setText(getResources()
                 .getText(R.string.mense_days_sub_title));
-        ((ImageView)layoutMenseDays.findViewById(R.id.iv_logo)).setImageResource(R.drawable.mense_days);
-        ((ImageView)layoutMenseDays.findViewById(R.id.iv_logo)).setVisibility(View.INVISIBLE);
+        ((ImageView) layoutMenseDays.findViewById(R.id.iv_logo)).setImageResource(R.drawable.mense_days);
+        ((ImageView) layoutMenseDays.findViewById(R.id.iv_logo)).setVisibility(View.INVISIBLE);
 
         View layoutStartDay = findViewById(R.id.layout_mense_start);
         ((TextView) layoutStartDay.findViewById(R.id.tv_main_title)).setText(getResources()
                 .getText(R.string.mense_start_day_main_title));
         ((TextView) layoutStartDay.findViewById(R.id.tv_sub_title)).setText(getResources()
                 .getText(R.string.mense_start_day_sub_title));
-        ((ImageView)layoutStartDay.findViewById(R.id.iv_logo)).setImageResource(R.drawable.mense_days);
+        ((ImageView) layoutStartDay.findViewById(R.id.iv_logo)).setImageResource(R.drawable.mense_days);
         layoutStartDay.findViewById(R.id.iv_logo).setVisibility(View.INVISIBLE);
 
         //layout_item_two
@@ -188,7 +189,8 @@ public class MenseManagementActivity extends AppCompatActivity {
 
                 case R.id.layout_mense_start:
                     mMenseStartDatePicker.show(CalendarUtils
-                            .formatDateString(System.currentTimeMillis(), "yyyy-MM-dd"));
+                            .formatDateString(SPSingleton.get().getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, System.currentTimeMillis()),
+                                    "yyyy-MM-dd"));
                     break;
                 case R.id.layout_mense_notify:
                     break;
@@ -199,6 +201,12 @@ public class MenseManagementActivity extends AppCompatActivity {
                     SPSingleton.get()
                             .putBoolean(PrefConstants.PREFS_KEY_MENSE_SAVED, true);
                     setResult(Constants.RESULT_CODE_MENSE_START_DAY_CHANGED);
+
+                    MenseManager.recordMenseDuration(
+                            SPSingleton.get().getLong
+                                            (PrefConstants.PREFS_KEY_MENSE_START_DAY,
+                                                    System.currentTimeMillis()),
+                            true);
                     finish();
                     break;
             }

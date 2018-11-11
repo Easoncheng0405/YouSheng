@@ -92,6 +92,23 @@ public class RecordOvulationActivity extends AppCompatActivity implements View.O
                 }
             }
         }
+
+        //init datePicker
+        mDatePicker =
+                new CustomDatePicker
+                        .Builder()
+                        .setContext(this)
+                        .setStartDate("2010-01-01 00:00")
+                        .setEndDate(CalendarUtils.formatDateString(mTimeMillis, "yyyy-MM-dd hh:mm"))
+                        .setTitle("试纸测试时间录入")
+                        .setResultHandler(new CustomDatePicker.ResultHandler() {
+                            @Override
+                            public void handle(String time, long timeMills) {
+                                updateRecordTime(timeMills);
+                            }
+                        })
+                        .create();
+        mDatePicker.showSpecificTime(true);
     }
 
     private void initView() {
@@ -131,7 +148,7 @@ public class RecordOvulationActivity extends AppCompatActivity implements View.O
         CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!isChecked) return;
+                if (!isChecked) return;
                 changeRadioButtonState((RadioButton) buttonView, isChecked);
             }
         };
@@ -140,24 +157,6 @@ public class RecordOvulationActivity extends AppCompatActivity implements View.O
         rdLevelTwo.setOnCheckedChangeListener(listener);
         rdLevelThree.setOnCheckedChangeListener(listener);
         rdLevelFour.setOnCheckedChangeListener(listener);
-
-        //init datePicker
-        mDatePicker =
-                new CustomDatePicker
-                        .Builder()
-                        .setContext(this)
-                        .setStartDate("2010-01-01 00:00")
-                        .setEndDate(CalendarUtils.formatDateString(System.currentTimeMillis(), "yyyy-MM-dd hh:mm"))
-                        .setTitle("试纸测试时间录入")
-                        .setResultHandler(new CustomDatePicker.ResultHandler() {
-                            @Override
-                            public void handle(String time, long timeMills) {
-                                updateRecordTime(timeMills);
-                            }
-                        })
-                        .create();
-        mDatePicker.showSpecificTime(true);
-
         tvRecordDate = findViewById(R.id.tv_record_date);
         switchMakeLove = findViewById(R.id.switch_make_love);
         updateRecordTime(System.currentTimeMillis());
@@ -207,7 +206,7 @@ public class RecordOvulationActivity extends AppCompatActivity implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_record_ovulation_time:
-                mDatePicker.show(CalendarUtils.formatDateString(System.currentTimeMillis(),
+                mDatePicker.show(CalendarUtils.formatDateString(mTimeMillis,
                         "yyyy-MM-dd"));
                 break;
             case R.id.btn_ensure:

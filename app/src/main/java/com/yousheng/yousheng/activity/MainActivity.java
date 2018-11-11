@@ -106,8 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mRvHabitiList.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
         mRvHabitiList.setNestedScrollingEnabled(false);
-        mCurrentSelectedDate = CalendarUtils.formatDateString(System.currentTimeMillis(),
-                Constants.DATE_FORMAT);
+
 
         initCalendarView();
 
@@ -274,6 +273,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
                 mCalendarSelected = calendar;
+                mCurrentSelectedDate = CalendarUtils.formatDateString(calendar.getTimeInMillis(),
+                        Constants.DATE_FORMAT);
+                if (mMonthPicker == null) {
+                    initMonthPicker();
+                }
                 String dateString = CalendarUtils.formatDateString(calendar.getTimeInMillis(), Constants.DATE_FORMAT);
                 List<MenseInfo> menseInfos = LitePal
                         .select(null)
@@ -312,27 +316,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-
-        mMonthPicker =
-                new CustomDatePicker.Builder()
-                        .setContext(this)
-                        .setTitle("选择月份")
-                        .setStartDate("2010-01-01 00:00")
-                        .setEndDate(CalendarUtils.formatDateString(System.currentTimeMillis(), "yyyy-MM-dd hh:mm"))
-                        .setResultHandler(new CustomDatePicker.ResultHandler() {
-                            @Override
-                            public void handle(String time, long timeMills) {
-                                String[] timeUnits = time.split(" ")[0].split("-");
-                                int year = Integer.valueOf(timeUnits[0]);
-                                int month = Integer.valueOf(timeUnits[1]);
-                                mCalendarView.scrollToCalendar(year, month, 1);
-                            }
-                        })
-                        .create();
-        mMonthPicker.hideTimeUnit(
-                CustomDatePicker.SCROLL_TYPE.DAY,
-                CustomDatePicker.SCROLL_TYPE.HOUR,
-                CustomDatePicker.SCROLL_TYPE.MINUTE);
 
         tvDate = findViewById(R.id.tv_date);
         tvPregnantDate = findViewById(R.id.tv_pregnant_securedate);
@@ -380,6 +363,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switchMenseStart.setOnCheckedChangeListener(switchListener);
         switchMenseEnd.setOnCheckedChangeListener(switchListener);
         switchMakeLove.setOnCheckedChangeListener(switchListener);
+    }
+
+    private void initMonthPicker() {
+        mMonthPicker =
+                new CustomDatePicker.Builder()
+                        .setContext(this)
+                        .setTitle("选择月份")
+                        .setStartDate("2010-01-01 00:00")
+                        .setEndDate(CalendarUtils.formatDateString(mCalendarSelected.getTimeInMillis(), "yyyy-MM-dd hh:mm"))
+                        .setResultHandler(new CustomDatePicker.ResultHandler() {
+                            @Override
+                            public void handle(String time, long timeMills) {
+                                String[] timeUnits = time.split(" ")[0].split("-");
+                                int year = Integer.valueOf(timeUnits[0]);
+                                int month = Integer.valueOf(timeUnits[1]);
+                                mCalendarView.scrollToCalendar(year, month, 1);
+                            }
+                        })
+                        .create();
+        mMonthPicker.hideTimeUnit(
+                CustomDatePicker.SCROLL_TYPE.DAY,
+                CustomDatePicker.SCROLL_TYPE.HOUR,
+                CustomDatePicker.SCROLL_TYPE.MINUTE);
     }
 
     /***
