@@ -582,14 +582,14 @@ final class CalendarUtil {
         //get All calendar-view info from DataBase
         java.util.Calendar startcalendar = java.util.Calendar.getInstance();
         java.util.Calendar endCalendar = java.util.Calendar.getInstance();
-        startcalendar.set(preYear, preMonth, preMonthDaysCount - mPreDiff + 1);
+        startcalendar.set(preYear, preMonth - 1, preMonthDaysCount - mPreDiff + 1);
 
         //从数据库中查询出来42天，一整个页面的日历item的数据。
         long startTimeMills = startcalendar.getTimeInMillis();
         long endTimeMills = startTimeMills + 42 * ONE_DAY;
 
         List<MenseInfo> menseInfos =
-                LitePal.select(null)
+                LitePal.select()
                         .where("datets < ? and datets > ?", String.valueOf(endTimeMills),
                                 String.valueOf(startTimeMills))
                         .order("datets asc")

@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
+import com.wuhenzhizao.titlebar.utils.ScreenUtils;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.adapter.NewItemListAdapter;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
@@ -96,7 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
         stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.TOP_DECORATION, 0);//top间距
 
-        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION, 25);//底部间距
+        stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.BOTTOM_DECORATION,
+                (int) ScreenUtils.dp2Px(MainActivity.this, 8));//底部间距
 
         stringIntegerHashMap.put(RecyclerViewSpacesItemDecoration.LEFT_DECORATION, 10);//左间距
 
@@ -291,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switchMakeLove.setChecked(mMenseInfoSelected.isHasMakeLove());
 
                 //only day after today show switch button
-                if (mMenseInfoSelected.getDateTs() > CalendarUtils.getTodayTimeMillis()) {
+                if (mMenseInfoSelected.getDateTs() > (CalendarUtils.getTodayTimeMillis() + Constants.ONE_DAY_IN_TS)) {
                     findViewById(R.id.layout_mense_start).setVisibility(View.GONE);
                     findViewById(R.id.layout_mense_end).setVisibility(View.GONE);
                     findViewById(R.id.layout_make_love).setVisibility(View.GONE);
@@ -305,8 +307,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (!android.text.TextUtils.isEmpty(mMenseInfoSelected.getComment())) {
                     ((TextView) findViewById(R.id.tv_comment_sub)).setText(mMenseInfoSelected.getComment());
-                }
-                else{
+                } else {
                     ((TextView) findViewById(R.id.tv_comment_sub)).setText(getString(R.string.come_on));
                 }
             }
@@ -352,7 +353,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             mMenseInfoSelected.save();
                             if (mCalendarSelected != null) {
                                 mCalendarSelected.setHasMakeLoveToday(isChecked);
-                                mCalendarView.update();
+                                mCalendarView.updateMenseInfo();
                             }
                         } else if (buttonView == switchMenseStart) {
                             if (mMenseInfoSelected.isMenseStart() && !isChecked) {
