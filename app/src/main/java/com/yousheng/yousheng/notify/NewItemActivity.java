@@ -71,8 +71,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         context = this;
 
         ((TextView) findViewById(R.id.title)).setCompoundDrawablePadding(dip2px(context, 25));
-        AssetManager manager = getAssets();
         try {
+            AssetManager manager = getAssets();
             InputStream inputStream = manager.open("TimeExp.m");
             api = new Api(inputStream);
         } catch (Exception e) {
@@ -105,6 +105,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                         calendar.setTime(dates[0]);
                         notify.setSwitchIsChecked(true);
                         time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
+                        legal = calendar.getTimeInMillis() > System.currentTimeMillis();
+
                     }
                 }
             });
@@ -115,8 +117,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         time.setOnClickListener(this);
         notify.setOnClickListener(this);
         int px = dip2px(this, 10);
-        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         //默认提醒时间是明天早上8点
         calendar.add(Calendar.DATE, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 8);

@@ -5,10 +5,14 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -23,10 +27,13 @@ import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.ToastUtil;
+import com.yousheng.yousheng.uitl.time.Api;
 
 import org.litepal.LitePal;
 
+import java.io.InputStream;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
@@ -46,12 +53,19 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
 
     private TextView t1, t2;
     private boolean needSign;
+    private Api api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit);
-
+        try {
+            AssetManager manager = getAssets();
+            InputStream inputStream = manager.open("TimeExp.m");
+            api = new Api(inputStream);
+        } catch (Exception e) {
+            Log.e("HabitActivity", "onCreate:  exception ", e);
+        }
         context = this;
         ((TextView) findViewById(R.id.title)).setCompoundDrawablePadding(dip2px(context, 25));
 
@@ -65,8 +79,8 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         time = findViewById(R.id.time);
         time.setOnClickListener(this);
         int px = dip2px(this, 10);
-        ((SuperTextView)findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
-        ((SuperTextView)findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
+        ((SuperTextView) findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
         time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
         Intent intent = getIntent();
         id = intent.getLongExtra("id", -1);
@@ -126,6 +140,32 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                 notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
             }
         });
+
+        if (api != null)
+            content.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    Date[] dates = api.getDate(s.toString());
+                    if (dates.length > 0) {
+                        isNotify = true;
+                        calendar.setTime(dates[0]);
+                        if ((calendar.getTimeInMillis() - 24 * 60 * 60 * 1000) > System.currentTimeMillis())
+                            calendar.add(Calendar.DAY_OF_YEAR, -1);
+                        notify.setSwitchIsChecked(true);
+                        time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
+                    }
+                }
+            });
     }
 
     @Override
