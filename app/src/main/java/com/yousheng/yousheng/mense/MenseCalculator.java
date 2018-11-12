@@ -28,7 +28,7 @@ public class MenseCalculator {
 
         int menseDuration = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DAYS,
                 Constants.DEFAULT_MENSE_DURAION));
-        int menseGap = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_DURATION,
+        int menseGap = Integer.valueOf(SPSingleton.get().getString(PrefConstants.PREFS_KEY_MENSE_GAP,
                 Constants.DEFAULT_MENSE_GAP));
         Calendar todayCalendar = Calendar.getInstance();
         Calendar temp = Calendar.getInstance();

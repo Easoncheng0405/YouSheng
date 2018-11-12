@@ -24,7 +24,7 @@ import com.yousheng.yousheng.uitl.TitleBarUtils;
 
 @Route(path = "/mensemanagement/activity")
 public class MenseManagementActivity extends AppCompatActivity {
-    private CustomDatePicker mMenseDurationPicker;
+    private CustomDatePicker mMenseGapPicker;
     private CustomDatePicker mMenseDaysPicker;
     private CustomDatePicker mMenseStartDatePicker;
 
@@ -90,20 +90,20 @@ public class MenseManagementActivity extends AppCompatActivity {
         layoutStartDay.setOnClickListener(mClickListener);
 
         //init date picker
-        mMenseDurationPicker =
+        mMenseGapPicker =
                 new CustomDatePicker.Builder()
                         .setContext(this)
                         .setStartDate("2012-12-12")
                         .setEndDate("2018-10-19")
                         .setDayModeOn(true)
-                        .setDayMode(CustomDatePicker.DAY_MODE.DURATION)
+                        .setDayMode(CustomDatePicker.DAY_MODE.GAP)
                         .setTitle(getResources().getString(R.string.mense_management))
                         .setResultHandler(new CustomDatePicker.ResultHandler() {
                             @Override
                             public void handle(String time, long timeMills) {
                                 tvDaysMenseDuration.setText(time);
                                 SPSingleton.get()
-                                        .putString(PrefConstants.PREFS_KEY_MENSE_DURATION, time);
+                                        .putString(PrefConstants.PREFS_KEY_MENSE_GAP, time);
                             }
                         })
                         .create();
@@ -169,7 +169,7 @@ public class MenseManagementActivity extends AppCompatActivity {
         switchPregnant.setChecked(SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true));
 
         tvDaysMenseDuration.setText(SPSingleton.get()
-                .getString(PrefConstants.PREFS_KEY_MENSE_DURATION, Constants.DEFAULT_MENSE_GAP));
+                .getString(PrefConstants.PREFS_KEY_MENSE_GAP, Constants.DEFAULT_MENSE_GAP));
         tvDaysMenseDays.setText(SPSingleton.get()
                 .getString(PrefConstants.PREFS_KEY_MENSE_DAYS, Constants.DEFAULT_MENSE_DURAION));
         tvDaysMenseStart.setText(CalendarUtils.formatDateString(SPSingleton.get()
@@ -181,10 +181,12 @@ public class MenseManagementActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.layout_mense_duration:
-                    mMenseDurationPicker.show("2018-10-10");
+                    mMenseGapPicker.show(SPSingleton.get()
+                            .getString(PrefConstants.PREFS_KEY_MENSE_GAP, Constants.DEFAULT_MENSE_GAP));
                     break;
                 case R.id.layout_mense_days:
-                    mMenseDaysPicker.show("2018-10-10");
+                    mMenseDaysPicker.show(SPSingleton.get()
+                            .getString(PrefConstants.PREFS_KEY_MENSE_DAYS, Constants.DEFAULT_MENSE_DURAION));
                     break;
 
                 case R.id.layout_mense_start:
@@ -204,8 +206,8 @@ public class MenseManagementActivity extends AppCompatActivity {
 
                     MenseManager.recordMenseDuration(
                             SPSingleton.get().getLong
-                                            (PrefConstants.PREFS_KEY_MENSE_START_DAY,
-                                                    System.currentTimeMillis()),
+                                    (PrefConstants.PREFS_KEY_MENSE_START_DAY,
+                                            System.currentTimeMillis()),
                             true);
                     finish();
                     break;
