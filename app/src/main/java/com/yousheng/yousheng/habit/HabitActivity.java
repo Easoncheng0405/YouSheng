@@ -1,7 +1,6 @@
 package com.yousheng.yousheng.habit;
 
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -17,15 +15,19 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
-import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.receiver.AlarmHelper;
+import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
+
+import static com.yousheng.yousheng.timepickerlib.CustomDatePicker.SCROLL_TYPE;
+
+import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
+import com.yousheng.yousheng.uitl.TextUtils;
 import com.yousheng.yousheng.uitl.ToastUtil;
 import com.yousheng.yousheng.uitl.time.Api;
 
@@ -40,7 +42,6 @@ import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
 
 public class HabitActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TimePickerDialog timePickerDialog;
     private EditText content;
     private SuperTextView time;
     private SuperTextView notify;
@@ -54,6 +55,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
     private TextView t1, t2;
     private boolean needSign;
     private Api api;
+    private CustomDatePicker mDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,15 +114,6 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
             t1.setVisibility(View.GONE);
         }
 
-        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                calendar.set(Calendar.MINUTE, minute);
-                time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
-            }
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
-
 
         notify.setSwitchCheckedChangeListener(new SuperTextView.OnSwitchCheckedChangeListener() {
             @Override
@@ -166,12 +159,37 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }
             });
+
+        //init datePicker
+        mDatePicker =
+                new CustomDatePicker
+                        .Builder()
+                        .setContext(this)
+                        .setStartDate("2010-01-01 00:00")
+                        .setEndDate("2100-01-01 23:59")
+                        .setTitle("选择一个时间")
+                        .setResultHandler(new CustomDatePicker.ResultHandler() {
+                            @Override
+                            public void handle(String t, long l) {
+                                if (l < System.currentTimeMillis())
+                                    l = l + 24 * 60 * 60 * 1000;
+                                calendar.setTimeInMillis(l);
+                                time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
+                            }
+                        })
+                        .create();
+        mDatePicker.showSpecificTime(true);
+        mDatePicker.hideTimeUnit(new SCROLL_TYPE[]{SCROLL_TYPE.YEAR, SCROLL_TYPE.MONTH, SCROLL_TYPE.DAY});
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ok:
+                if (content.getText().toString().trim().length() == 0) {
+                    ToastUtil.showMsg(context,"输入内容不能为空");
+                    return;
+                }
                 if (id != -1)
                     needSign = !needSign;
                 finish();
@@ -180,7 +198,8 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                 notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
                 break;
             case R.id.time:
-                timePickerDialog.show();
+                mDatePicker.show(CalendarUtils.formatDateString(calendar.getTimeInMillis(),
+                        "yyyy-MM-dd"));
                 break;
             case R.id.t1:
                 new AlertDialog.Builder(context).setTitle("注意")
@@ -203,6 +222,10 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                         .show();
                 break;
             case R.id.t2:
+                if (content.getText().toString().trim().length() == 0) {
+                    ToastUtil.showMsg(context,"输入内容不能为空");
+                    return;
+                }
                 if (id != -1)
                     needSign = !needSign;
                 finish();

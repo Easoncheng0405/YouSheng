@@ -1,6 +1,5 @@
 package com.yousheng.yousheng.weight;
 
-import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
@@ -8,13 +7,14 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.Weight;
+import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
+import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.ToastUtil;
 import com.zjun.widget.RuleView;
 
@@ -28,8 +28,7 @@ import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
 
 
 public class WeightActivity extends AppCompatActivity {
-    private TimePickerDialog timePickerDialog;
-
+    private CustomDatePicker mDatePicker;
     private TextView weight;
     private RuleView ruleView;
     private SuperTextView time;
@@ -54,14 +53,15 @@ public class WeightActivity extends AppCompatActivity {
         int px = dip2px(this, 10);
         ((SuperTextView) findViewById(R.id.notify)).getLeftTextView().setPadding(px, 0, 0, 0);
         ((SuperTextView) findViewById(R.id.time)).getLeftTextView().setPadding(px, 0, 0, 0);
-        Habit habit = LitePal.find(Habit.class, id);
+        final Habit habit = LitePal.find(Habit.class, id);
         calendar.setTimeInMillis(habit.getClockTime());
         time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
         notify.setSwitchIsChecked(habit.isNotify());
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timePickerDialog.show();
+                mDatePicker.show(CalendarUtils.formatDateString(calendar.getTimeInMillis(),
+                        "yyyy-MM-dd"));
             }
         });
 
@@ -93,19 +93,6 @@ public class WeightActivity extends AppCompatActivity {
         });
 
 
-        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                calendar.set(Calendar.MINUTE, minute);
-                time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
-                Habit habit = LitePal.find(Habit.class, id);
-                habit.setClockTime(calendar.getTimeInMillis());
-                habit.save();
-            }
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
-
-
         notify.setSwitchCheckedChangeListener(new SuperTextView.OnSwitchCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -130,6 +117,30 @@ public class WeightActivity extends AppCompatActivity {
                 notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
             }
         });
+
+        //init datePicker
+        mDatePicker =
+                new CustomDatePicker
+                        .Builder()
+                        .setContext(this)
+                        .setStartDate("2010-01-01 00:00")
+                        .setEndDate("2100-01-01 23:59")
+                        .setTitle("选择一个时间")
+                        .setResultHandler(new CustomDatePicker.ResultHandler() {
+                            @Override
+                            public void handle(String t, long l) {
+                                if (l < System.currentTimeMillis())
+                                    l = l + 24 * 60 * 60 * 1000;
+                                calendar.setTimeInMillis(l);
+                                time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
+                                Habit h = LitePal.find(Habit.class, habit.getId());
+                                h.setClockTime(calendar.getTimeInMillis());
+                                h.save();
+                            }
+                        })
+                        .create();
+        mDatePicker.showSpecificTime(true);
+        mDatePicker.hideTimeUnit(new CustomDatePicker.SCROLL_TYPE[]{CustomDatePicker.SCROLL_TYPE.YEAR, CustomDatePicker.SCROLL_TYPE.MONTH, CustomDatePicker.SCROLL_TYPE.DAY});
 
     }
 

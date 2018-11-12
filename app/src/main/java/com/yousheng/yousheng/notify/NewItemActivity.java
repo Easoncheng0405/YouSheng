@@ -1,9 +1,6 @@
 package com.yousheng.yousheng.notify;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,26 +16,24 @@ import android.util.Log;
 import android.view.View;
 
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.allen.library.SuperTextView;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.model.NewItem;
 import com.yousheng.yousheng.receiver.AlarmHelper;
+import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
+import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.ToastUtil;
 
 
 import org.litepal.LitePal;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
 import com.yousheng.yousheng.uitl.time.Api;
@@ -48,9 +43,8 @@ import static com.yousheng.yousheng.uitl.TitleBarUtils.dip2px;
 
 public class NewItemActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private DatePickerDialog datePickerDialog;
-    private TimePickerDialog timePickerDialog;
     private Calendar calendar = Calendar.getInstance(Locale.CHINA);
+    private CustomDatePicker mDatePicker;
 
 
     private SuperTextView notify;
@@ -154,27 +148,6 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
         }
         time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
 
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                timePickerDialog.show();
-            }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-
-        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                calendar.set(Calendar.MINUTE, minute);
-                legal = calendar.getTimeInMillis() > System.currentTimeMillis();
-                time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
-            }
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
 
         notify.setSwitchCheckedChangeListener(new SuperTextView.OnSwitchCheckedChangeListener() {
             @Override
@@ -188,11 +161,23 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        //用于测试
-        HashMap<NewItemHelper.TimeRange, ArrayList<NewItem>> map = NewItemHelper.getAllNewItemInRange();
-        for (NewItemHelper.TimeRange range : map.keySet()) {
-            Log.d("NewItemActivity", range + "|" + map.get(range));
-        }
+        mDatePicker =
+                new CustomDatePicker
+                        .Builder()
+                        .setContext(this)
+                        .setStartDate(CalendarUtils.formatDateString(System.currentTimeMillis(),
+                                "yyyy-MM-dd HH:mm"))
+                        .setEndDate("2100-01-01 23:59")
+                        .setTitle("选择一个时间")
+                        .setResultHandler(new CustomDatePicker.ResultHandler() {
+                            @Override
+                            public void handle(String t, long l) {
+                                calendar.setTimeInMillis(l);
+                                time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
+                            }
+                        })
+                        .create();
+        mDatePicker.showSpecificTime(true);
     }
 
     private void addNewItem() {
@@ -269,7 +254,8 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                 notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
                 break;
             case R.id.time:
-                datePickerDialog.show();
+                mDatePicker.show(CalendarUtils.formatDateString(System.currentTimeMillis(),
+                        "yyyy-MM-dd HH:mm"));
                 break;
         }
     }
