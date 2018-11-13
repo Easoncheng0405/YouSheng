@@ -81,6 +81,17 @@ public class AlarmHelper {
         }
     }
 
+    public static void cancelJinQi(Context context) {
+        try {
+            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(AlarmHelper.JIN_QI);
+            PendingIntent sender = PendingIntent.getBroadcast(context, -1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            am.cancel(sender);
+        } catch (Exception e) {
+            Log.e("AlarmHelper", "cancelJinQi exception", e);
+        }
+    }
+
     //往后一直加一天直到时间大于当前日期
     private static long getNextDayMillis(long millis) {
         long now = System.currentTimeMillis();
