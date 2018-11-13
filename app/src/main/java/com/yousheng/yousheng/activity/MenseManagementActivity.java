@@ -17,6 +17,7 @@ import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.manager.MenseManager;
+import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
@@ -139,6 +140,7 @@ public class MenseManagementActivity extends AppCompatActivity {
                                 tvDaysMenseStart.setText(time.split(" ")[0]);
                                 SPSingleton.get()
                                         .putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, timeMills);
+
                             }
                         })
                         .create();
@@ -156,7 +158,7 @@ public class MenseManagementActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (compoundButton.equals(switchNotify)) {
-                    SPSingleton.get().putBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY, !isChecked);
+                    SPSingleton.get().putBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY, isChecked);
                 } else if (compoundButton.equals(switchPregnant)) {
                     SPSingleton.get().putBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, isChecked);
                 }
@@ -165,7 +167,7 @@ public class MenseManagementActivity extends AppCompatActivity {
         switchNotify.setOnCheckedChangeListener(checkListener);
         switchPregnant.setOnCheckedChangeListener(checkListener);
 
-        switchNotify.setChecked(true);
+        switchNotify.setChecked(SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY, true));
         switchPregnant.setChecked(SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true));
 
         tvDaysMenseDuration.setText(SPSingleton.get()

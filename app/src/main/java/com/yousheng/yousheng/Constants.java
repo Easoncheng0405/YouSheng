@@ -34,4 +34,8 @@ public class Constants {
     public final static String DATE_FORMAT = "yyyy-MM-dd";
     public final static String DATE_FORMAT_MONTH_OF_YEAR = "yyyy-MM";
 
+
+    /*****闹钟常量**/
+    public final static int NOTICE_ID_MENSE = -1;
+
 }

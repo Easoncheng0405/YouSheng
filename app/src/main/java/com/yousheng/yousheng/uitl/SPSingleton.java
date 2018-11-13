@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.yousheng.yousheng.ApplicationContextHolder;
+import com.yousheng.yousheng.Constants;
+import com.yousheng.yousheng.PrefConstants;
+import com.yousheng.yousheng.receiver.AlarmHelper;
 
 import java.util.HashMap;
 
@@ -23,6 +26,35 @@ public class SPSingleton {
     private boolean isApplyMode = false;
     private static final String DEFAULT = "yousheng";
 
+    /*private SharedPreferences.OnSharedPreferenceChangeListener spChangeListener
+            = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            switch (key) {
+                case PrefConstants.PREFS_KEY_MENSE_NOTIFY: {
+                    boolean notifyOn = get().getBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY, false);
+                    long menseStartTs = get().getLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
+                            System.currentTimeMillis());
+                    if (notifyOn) {
+                        AlarmHelper.notifyMenseDay(ApplicationContextHolder.getApplicationContext(),
+                                menseStartTs - 2 * Constants.ONE_DAY_IN_TS);
+                    } else {
+                        AlarmHelper.cancelMenseDay(ApplicationContextHolder.getApplicationContext());
+                    }
+                }
+                break;
+
+                case PrefConstants.PREFS_KEY_MENSE_START_DAY: {
+
+                    AlarmHelper.cancelMenseDay(ApplicationContextHolder.getApplicationContext());
+                    AlarmHelper.notifyMenseDay(ApplicationContextHolder.getApplicationContext(),
+                            menseStartTs + menseGap - 2 * Constants.ONE_DAY_IN_TS);
+                }
+                break;
+            }
+        }
+    };
+*/
     private SPSingleton(String name) {
         if (DEFAULT.equals(name)) {
             sharedPreferences = PreferenceManager

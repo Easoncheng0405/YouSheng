@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.yousheng.yousheng.Constants;
+import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.model.Habit;
 import com.yousheng.yousheng.model.NewItem;
+import com.yousheng.yousheng.uitl.SPSingleton;
 
 import org.litepal.LitePal;
 
@@ -70,25 +73,25 @@ public class AlarmHelper {
         }
     }
 
-    public static void notifyJinQi(Context context, long l) {
+    public static void notifyMenseDay(Context context, long notifyTime) {
         try {
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(AlarmHelper.JIN_QI);
-            PendingIntent sender = PendingIntent.getBroadcast(context, -1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            am.setExact(AlarmManager.RTC_WAKEUP, l, sender);
+            PendingIntent sender = PendingIntent.getBroadcast(context, Constants.NOTICE_ID_MENSE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            am.setExact(AlarmManager.RTC_WAKEUP, notifyTime, sender);
         } catch (Exception e) {
-            Log.e("AlarmHelper", "notifyJinQi exception", e);
+            Log.e("AlarmHelper", "notifyMenseDay exception", e);
         }
     }
 
-    public static void cancelJinQi(Context context) {
+    public static void cancelMenseDay(Context context) {
         try {
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(AlarmHelper.JIN_QI);
-            PendingIntent sender = PendingIntent.getBroadcast(context, -1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent sender = PendingIntent.getBroadcast(context, Constants.NOTICE_ID_MENSE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             am.cancel(sender);
         } catch (Exception e) {
-            Log.e("AlarmHelper", "cancelJinQi exception", e);
+            Log.e("AlarmHelper", "cancelMenseDay exception", e);
         }
     }
 

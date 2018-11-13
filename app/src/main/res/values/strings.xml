@@ -248,6 +248,9 @@
     <string name="mense_pregnant_main_title">备孕模式</string>
     <string name="mense_pregnant_sub_title">开启后切换到备孕模式</string>
 
+    <string name="mense_notice_main_title">经期提醒</string>
+    <string name="mense_notice_sub_title">两天之内大姨妈就来了</string>
+
     <!--备注界面-->
     <string name="comment_default_hint">加油坚持，小宝贝!</string>
 

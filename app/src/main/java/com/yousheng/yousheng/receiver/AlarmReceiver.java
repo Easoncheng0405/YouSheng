@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.activity.MainActivity;
 import com.yousheng.yousheng.model.Habit;
@@ -75,9 +76,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 Log.d("AlarmReceiver", "onReceive item notify, id=" + item.getId() + ",content=" + item.getContent());
                 break;
             case AlarmHelper.JIN_QI:
-                builder.setContentTitle("大姨妈驾到");
-                builder.setContentText("还有两天来大姨妈");
-                notificationManager.notify(-1, builder.build());
+                builder.setContentTitle(context.getString(R.string.mense_notice_main_title));
+                builder.setContentText(context.getString(R.string.mense_notice_sub_title));
+                notificationManager.notify(Constants.NOTICE_ID_MENSE, builder.build());
                 break;
         }
     }

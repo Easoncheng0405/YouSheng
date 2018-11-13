@@ -165,4 +165,5 @@ public class MenseCalculator {
         if (isInPaiLuanDuration(dateTs)) return MenseCalculator.STATE_PAILUAN_DURATION;
         return MenseCalculator.STATE_NORMAL;
     }
+
 }

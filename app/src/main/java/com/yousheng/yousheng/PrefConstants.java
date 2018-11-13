@@ -6,7 +6,7 @@ package com.yousheng.yousheng;
 public class PrefConstants {
     /****经期管理界面**/
     public final static String PREFS_KEY_MENSE_GAP = "prefs_key_mense_duration";//两次经期之间的间隔
-    public final static String PREFS_KEY_MENSE_DAYS = "prefs_key_mense_days";
+    public final static String PREFS_KEY_MENSE_DAYS = "prefs_key_mense_days";//月经的持续时间
     public final static String PREFS_KEY_MENSE_START_DAY = "prefs_key_mense_start_day";
     public final static String PREFS_KEY_MENSE_NOTIFY = "prefs_key_mense_notify";
     public final static String PREFS_KEY_MENSE_MODE = "prefs_key_mense_mode";

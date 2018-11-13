@@ -1,8 +1,11 @@
 package com.yousheng.yousheng.manager;
 
+import com.yousheng.yousheng.ApplicationContextHolder;
 import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
+import com.yousheng.yousheng.mense.MenseCalculator;
 import com.yousheng.yousheng.model.MenseDurationInfo;
+import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
 
@@ -102,5 +105,21 @@ public class MenseManager {
         info.save();
 
         onMenseDurationChanged(info.getStartTs(), info.getEndTs(), false);
+    }
+
+    public static void showMenseNotice() {
+        if (!SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_NOTIFY, false)) {
+            return;
+        }
+        long todayTimeMillis = CalendarUtils.getTodayTimeMillis();
+        long tomorrowTimeMillis = todayTimeMillis + Constants.ONE_DAY_IN_TS;
+        long dayAfterTomorrowTimeMillis = tomorrowTimeMillis + Constants.ONE_DAY_IN_TS;
+
+        if (!MenseCalculator.isInMense(todayTimeMillis)) {
+            if (MenseCalculator.isInMense(tomorrowTimeMillis) || MenseCalculator.isInMense(dayAfterTomorrowTimeMillis)) {
+                AlarmHelper.notifyMenseDay(ApplicationContextHolder.getApplicationContext(),
+                        System.currentTimeMillis()+5*1000);
+            }
+        }
     }
 }

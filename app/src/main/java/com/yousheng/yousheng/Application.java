@@ -6,9 +6,9 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.yousheng.yousheng.manager.FeedBackManager;
+import com.yousheng.yousheng.manager.MenseManager;
 import com.yousheng.yousheng.model.Market;
 import com.yousheng.yousheng.model.Habit;
-import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.UMengUtils;
 
 import org.litepal.LitePal;
@@ -33,10 +33,11 @@ public class Application extends LitePalApplication {
         insertMarketData();
         FeedBackManager.recordAppLaunchTimes(this);
 
-        UMConfigure.init(this,Constants.UMENG_APP_KEY,"yousheng",UMConfigure.DEVICE_TYPE_PHONE,"");
+        UMConfigure.init(this, Constants.UMENG_APP_KEY, "yousheng", UMConfigure.DEVICE_TYPE_PHONE, "");
         UMConfigure.setLogEnabled(Constants.DEBUG);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
+        MenseManager.showMenseNotice();
 
         Log.d("Application", UMengUtils.getDeviceInfo(this));
     }
