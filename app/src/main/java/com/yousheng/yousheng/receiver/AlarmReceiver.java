@@ -46,7 +46,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setWhen(System.currentTimeMillis())
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setContentIntent(contentIntent);
         //发送通知请求
@@ -60,6 +59,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 Log.d("AlarmReceiver", "onReceive habit notify, id=" + habit.getId() + ",content=" + habit.getMainTitle());
                 builder.setContentTitle("新习惯提醒");
                 builder.setContentText(habit.getMainTitle());
+                builder.setWhen(habit.getClockTime());
                 notificationManager.notify((int) habit.getId(), builder.build());
                 break;
             case AlarmHelper.ITEM_IN_TIME:
@@ -69,6 +69,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 //提醒事项只提醒一次
                 builder.setContentTitle("待办事项提醒");
                 builder.setContentText(item.getContent());
+                builder.setWhen(item.getTime());
                 notificationManager.notify((int) item.getId(), builder.build());
                 item.setNotify(false);
                 item.save();
