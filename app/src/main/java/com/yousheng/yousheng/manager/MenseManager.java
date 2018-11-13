@@ -33,6 +33,7 @@ public class MenseManager {
                         SPSingleton.get().putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, info.getStartTs());
                         SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
                                 String.valueOf((endTs - startTs) / Constants.ONE_DAY_IN_TS));
+                        break;
                     }
                 }
             }

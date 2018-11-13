@@ -17,11 +17,16 @@ import com.yousheng.yousheng.Constants;
 import com.yousheng.yousheng.PrefConstants;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.manager.MenseManager;
+import com.yousheng.yousheng.model.MenseDurationInfo;
 import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.TitleBarUtils;
+
+import org.litepal.LitePal;
+
+import java.util.List;
 
 @Route(path = "/mensemanagement/activity")
 public class MenseManagementActivity extends AppCompatActivity {
@@ -202,6 +207,18 @@ public class MenseManagementActivity extends AppCompatActivity {
                     break;
 
                 case R.id.btn_start:
+                    //update menseduration info
+                    List<MenseDurationInfo> durationInfos = LitePal.select()
+                            .find(MenseDurationInfo.class);
+                    long menseGapTs = Integer.valueOf(SPSingleton.get()
+                            .getString(PrefConstants.
+                                    PREFS_KEY_MENSE_DAYS, Constants.DEFAULT_MENSE_DURAION)) * Constants.ONE_DAY_IN_TS;
+                    for (MenseDurationInfo info : durationInfos) {
+                        info.setEndTs(info.getStartTs() + menseGapTs);
+                        info.setEndDate(CalendarUtils.formatDateString(info.getEndTs(), Constants.DATE_FORMAT));
+                        info.saveOrUpdate();
+                    }
+
                     SPSingleton.get()
                             .putBoolean(PrefConstants.PREFS_KEY_MENSE_SAVED, true);
                     setResult(Constants.RESULT_CODE_MENSE_START_DAY_CHANGED);
