@@ -30,17 +30,17 @@
         android:id="@+id/iv_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/iv_background"
         android:layout_alignTop="@id/iv_background"
-        android:layout_marginEnd="35dp"
+        android:layout_alignEnd="@id/iv_background"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="35dp"
         android:src="@drawable/close_window" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@id/iv_background"
         android:layout_alignTop="@id/iv_background"
+        android:layout_alignBottom="@id/iv_background"
         android:gravity="center"
         android:paddingTop="30dp"
         android:text="@string/evaluation_text"
@@ -48,12 +48,13 @@
         android:textSize="22sp" />
 
 
+    <!--评分区域-->
     <RelativeLayout
         android:id="@+id/layout_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/iv_background"
-        android:layout_marginBottom="40dp">
+        android:layout_marginBottom="50dp">
 
         <View
             android:id="@+id/placeholder"

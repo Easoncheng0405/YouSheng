@@ -216,8 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
-            case R.id.tv_date:
-            case R.id.iv_icon_down:
+            case R.id.layout_date_picker:
                 mMonthPicker.show(mCurrentSelectedDate);
                 break;
             case R.id.btn_add_new_habbit:
