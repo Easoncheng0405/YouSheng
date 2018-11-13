@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -113,6 +114,10 @@ public class HabitAdapter extends BaseAdapter {
                     textView.setVisibility(View.VISIBLE);
                     textView.setText("自定义未添加");
                 }
+                WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                int width = (int) (wm.getDefaultDisplay().getWidth() * 0.7);
+                superTextView.getLeftTextView().setWidth(width);
+                superTextView.getLeftTextView().setPadding(0, 0, 40, 0);
                 superTextView.setLeftString(habit.getMainTitle());
                 superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.add_red));
                 superTextView.setPadding(0, 20, 0, 20);
@@ -124,6 +129,9 @@ public class HabitAdapter extends BaseAdapter {
                     textView.setVisibility(View.VISIBLE);
                     textView.setText("已添加");
                 }
+                WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                int w = (int) (manager.getDefaultDisplay().getWidth() * 0.7);
+                superTextView.getLeftTextView().setWidth(w);
                 superTextView.setLeftString(habit.getMainTitle());
                 superTextView.setRightIcon(context.getResources().getDrawable(R.drawable.dev_red));
                 superTextView.setPadding(0, 35, 0, 35);

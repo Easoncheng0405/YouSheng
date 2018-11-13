@@ -414,6 +414,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         queryHabitData();
         initItemTitle();
         initRecyclerView();
+        ((TextView) findViewById(R.id.habit_title)).setText(
+                SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true)
+                        ? "优生打卡" : "习惯打卡");
     }
 
     @Override

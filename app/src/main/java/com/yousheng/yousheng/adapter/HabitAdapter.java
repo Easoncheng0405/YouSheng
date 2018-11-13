@@ -13,6 +13,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -76,7 +77,6 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
             viewHolder.lineChart.setVisibility(View.VISIBLE);
             initLineChart(viewHolder.lineChart, habit);
         }
-
         //比如drawleft设置图片大小
         //获取图片
         Drawable drawable = mContext.getResources().getDrawable(R.drawable.clock);

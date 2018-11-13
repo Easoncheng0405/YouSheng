@@ -73,6 +73,7 @@
             android:layout_marginRight="5dp"
             android:background="@drawable/edit_text"
             android:hint="我的习惯我做主!"
+            android:maxLength="30"
             android:inputType="text"
             android:textSize="16sp" />
 

@@ -70,10 +70,10 @@ public class HoldOnDays extends AppCompatActivity {
         });
 
         titleBar.getLeftTextView().setText("  " + habit.getMainTitle());
-        ((TextView) findViewById(R.id.title1)).setText(habit.getMainTitle());
-        ((TextView) findViewById(R.id.title1)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
 
         if (habit.isOfficial()) {
+            ((TextView) findViewById(R.id.title1)).setText(habit.getMainTitle());
+            ((TextView) findViewById(R.id.title1)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             ((TextView) findViewById(R.id.title2)).setText(habit.getSubTitle());
             ((TextView) findViewById(R.id.content)).setText(habit.getContent());
         }
