@@ -72,6 +72,11 @@ public class WeightActivity extends AppCompatActivity {
             }
         });
 
+        Weight w = LitePal.findLast(Weight.class);
+        if (w != null) {
+            ruleView.setCurrentValue(w.getWeight());
+        }
+
         CommonTitleBar titleBar = findViewById(R.id.title);
         changeTitleImageLeftMargin(this, titleBar);
         titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
