@@ -74,6 +74,11 @@ public class AlarmReceiver extends BroadcastReceiver {
                 item.save();
                 Log.d("AlarmReceiver", "onReceive item notify, id=" + item.getId() + ",content=" + item.getContent());
                 break;
+            case AlarmHelper.JIN_QI:
+                builder.setContentTitle("大姨妈驾到");
+                builder.setContentText("还有两天来大姨妈");
+                notificationManager.notify(-1, builder.build());
+                break;
         }
     }
 }

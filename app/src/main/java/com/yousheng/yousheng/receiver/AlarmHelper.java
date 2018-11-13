@@ -29,6 +29,7 @@ public class AlarmHelper {
     //到提醒时间了
     static final String ITEM_IN_TIME = "com.yousheng.item";
     static final String HABIT_IN_TIME = "com.yousheng.habit";
+    static final String JIN_QI = "com.yousheng.jinqi";
     private static final long DAY = 24 * 60 * 60 * 1000;
 
     //依次打开所有闹钟，PendingIntent.FLAG_CANCEL_CURRENT会取消掉已有闹钟重新设置
@@ -66,6 +67,17 @@ public class AlarmHelper {
             am.setRepeating(AlarmManager.RTC_WAKEUP, getNextDayMillis(habit.getClockTime()), DAY, sender);
         } catch (Exception e) {
             Log.e("AlarmHelper", "notifyHabit exception", e);
+        }
+    }
+
+    public static void notifyJinQi(Context context, long l) {
+        try {
+            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(AlarmHelper.JIN_QI);
+            PendingIntent sender = PendingIntent.getBroadcast(context, -1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            am.setExact(AlarmManager.RTC_WAKEUP, l, sender);
+        } catch (Exception e) {
+            Log.e("AlarmHelper", "notifyJinQi exception", e);
         }
     }
 
