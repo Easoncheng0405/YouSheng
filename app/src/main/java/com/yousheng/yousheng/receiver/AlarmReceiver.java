@@ -1,12 +1,14 @@
 package com.yousheng.yousheng.receiver;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -47,11 +49,17 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setWhen(System.currentTimeMillis())
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setContentIntent(contentIntent);
         //发送通知请求
-
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel("yousheng", "柚生", NotificationManager.IMPORTANCE_HIGH);//设置唯一的渠道通知Id
+            mChannel.enableLights(true);//开启灯光
+            mChannel.setLightColor(Color.RED);
+            mChannel.enableVibration(true);//开启震动
+            mChannel.setVibrationPattern(new long[]{0, 1000, 0, 1000});//8.0以下版本的效果一样,都是震动
+            notificationManager.createNotificationChannel(mChannel);//在NotificationManager中注册渠道通知对象
+        }
 
         switch (intent.getAction()) {
             case AlarmHelper.HABIT_IN_TIME:
@@ -61,6 +69,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 Log.d("AlarmReceiver", "onReceive habit notify, id=" + habit.getId() + ",content=" + habit.getMainTitle());
                 builder.setContentTitle("新习惯提醒");
                 builder.setContentText(habit.getMainTitle());
+                builder.setWhen(habit.getClockTime());
                 notificationManager.notify((int) habit.getId(), builder.build());
                 break;
             case AlarmHelper.ITEM_IN_TIME:
@@ -70,6 +79,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 //提醒事项只提醒一次
                 builder.setContentTitle("待办事项提醒");
                 builder.setContentText(item.getContent());
+                builder.setWhen(item.getTime());
                 notificationManager.notify((int) item.getId(), builder.build());
                 item.setNotify(false);
                 item.save();

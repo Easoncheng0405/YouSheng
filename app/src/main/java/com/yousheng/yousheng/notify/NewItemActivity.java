@@ -173,6 +173,7 @@ public class NewItemActivity extends AppCompatActivity implements View.OnClickLi
                             @Override
                             public void handle(String t, long l) {
                                 calendar.setTimeInMillis(l);
+                                legal = calendar.getTimeInMillis() > System.currentTimeMillis();
                                 time.setLeftString(DateFormat.format("yyyy/MM/dd HH:mm", calendar.getTime()));
                             }
                         })
