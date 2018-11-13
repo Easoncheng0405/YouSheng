@@ -13,8 +13,7 @@
     <TextView
         android:id="@+id/tv_main_title"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:textAlignment="viewEnd"
+        android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="17sp"
         tools:text="每天早上七点之前起床" />

@@ -87,8 +87,12 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.GoodHabitVie
         viewHolder.tvMainTitle.setText(habit.getMainTitle());
         if (habit.isOfficial())
             viewHolder.tvSubTitle.setText(habit.getSubTitle());
-        else
+        else {
             viewHolder.tvSubTitle.setVisibility(View.GONE);
+            WindowManager manager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+            int w = (int) (manager.getDefaultDisplay().getWidth() * 0.45);
+            viewHolder.tvMainTitle.setWidth(w);
+        }
         SpannableString spannableString =
                 new SpannableString("(已坚持".concat(String.valueOf(habit.getKeepDays())).concat("天)"));
         spannableString.setSpan(
