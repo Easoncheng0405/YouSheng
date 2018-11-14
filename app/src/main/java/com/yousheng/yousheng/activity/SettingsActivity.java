@@ -80,7 +80,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.bussiness:
                 new AlertDialog.Builder(this).setTitle("商务合作")
-                        .setMessage("QQ: 260301369")
+                        .setMessage("QQ: 260301396")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,
