@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release_config {
+            keyAlias 'yousheng'
+            keyPassword '123yousheng'
+            storeFile file('/home/zhaoyang/workFile/YouSheng/YouSheng/yousheng.jks')
+            storePassword 'yousheng123'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.yousheng.yousheng"
@@ -15,13 +23,10 @@ android {
             }
         }
     }
-
     lintOptions {
         abortOnError false
         disable 'RestrictedApi'
     }
-
-
     buildTypes {
         release {
             minifyEnabled false
@@ -46,8 +51,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-//    umeng
+    //    umeng
     implementation 'com.umeng.sdk:common:latest.integration'
     implementation 'com.umeng.sdk:analytics:latest.integration'
 }
