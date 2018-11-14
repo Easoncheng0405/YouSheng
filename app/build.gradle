@@ -1,6 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    productFlavors {
+        portal {}
+        huawei {}
+        baidu {}
+        qihoo {}
+        wandoujia {}
+        xiaomi {}
+        vivo {}
+        oppo {}
+        jjhouse {}
+        yingyongbao {}
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.yousheng"
@@ -14,6 +31,7 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+        flavorDimensions "versionCode"
     }
 
     lintOptions {
