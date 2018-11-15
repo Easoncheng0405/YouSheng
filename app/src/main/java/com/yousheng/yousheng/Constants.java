@@ -4,6 +4,8 @@ package com.yousheng.yousheng;
  * 定义一些常量在这里
  * */
 public class Constants {
+    public final static String TAG = "YouSheng";
+
     /****UMeng**/
     public final static boolean DEBUG = true;
     public final static String UMENG_APP_KEY = "5b97b864f29d985254000027";

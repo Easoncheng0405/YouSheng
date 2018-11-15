@@ -33,13 +33,13 @@ public class Application extends LitePalApplication {
         insertMarketData();
         FeedBackManager.recordAppLaunchTimes(this);
 
-        UMConfigure.init(this, Constants.UMENG_APP_KEY, "yousheng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
         UMConfigure.setLogEnabled(Constants.DEBUG);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
         MenseManager.showMenseNotice();
 
-        Log.d("Application", UMengUtils.getDeviceInfo(this));
+//        Log.d("Application", UMengUtils.getDeviceInfo(this));
     }
 
     private void insertHabitData() {

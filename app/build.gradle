@@ -40,6 +40,8 @@ android {
             }
         }
         flavorDimensions "versionCode"
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "portal"]
+
     }
     lintOptions {
         abortOnError false

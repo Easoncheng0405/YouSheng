@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.SPSingleton;
 import com.yousheng.yousheng.uitl.TextUtils;
+import com.yousheng.yousheng.uitl.UMengUtils;
 
 import org.litepal.LitePal;
 
@@ -110,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initCalendarView();
 
+
+        //for test
+        Log.d(Constants.TAG, "[Umeng Channel]"
+                + UMengUtils.getAppMetaData(getApplicationContext(), "UMENG_CHANNEL"));
     }
 
     private void initRecyclerView() {
