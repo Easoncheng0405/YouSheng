@@ -18,6 +18,7 @@ import com.allen.library.SuperTextView;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.model.Habit;
+import com.yousheng.yousheng.receiver.AlarmHelper;
 import com.yousheng.yousheng.timepickerlib.CustomDatePicker;
 import com.yousheng.yousheng.uitl.CalendarUtils;
 import com.yousheng.yousheng.uitl.ToastUtil;
@@ -92,7 +93,7 @@ public class HabitDetailActivity extends AppCompatActivity {
             time.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mDatePicker.show(CalendarUtils.formatDateString(calendar.getTimeInMillis(),
+                    mDatePicker.show(CalendarUtils.formatDateString(System.currentTimeMillis(),
                             "yyyy-MM-dd"));
                 }
             });
@@ -173,9 +174,9 @@ public class HabitDetailActivity extends AppCompatActivity {
                             .setResultHandler(new CustomDatePicker.ResultHandler() {
                                 @Override
                                 public void handle(String t, long l) {
-                                    if (l < System.currentTimeMillis())
-                                        l = l + 24 * 60 * 60 * 1000;
                                     calendar.setTimeInMillis(l);
+                                    if (l < System.currentTimeMillis())
+                                        calendar.add(Calendar.DAY_OF_YEAR, 1);
                                     time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
                                     Habit h = LitePal.find(Habit.class, habit.getId());
                                     h.setClockTime(calendar.getTimeInMillis());
@@ -190,5 +191,11 @@ public class HabitDetailActivity extends AppCompatActivity {
             e.printStackTrace();
             finish();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        AlarmHelper.notifyAllAlarm(this);
+        super.onPause();
     }
 }

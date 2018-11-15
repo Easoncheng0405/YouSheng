@@ -171,9 +171,9 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                         .setResultHandler(new CustomDatePicker.ResultHandler() {
                             @Override
                             public void handle(String t, long l) {
-                                if (l < System.currentTimeMillis())
-                                    l = l + 24 * 60 * 60 * 1000;
                                 calendar.setTimeInMillis(l);
+                                if (l < System.currentTimeMillis())
+                                    calendar.add(Calendar.DAY_OF_YEAR, 1);
                                 time.setLeftString("每天" + DateFormat.format("HH:mm", calendar.getTime()));
                             }
                         })
@@ -187,7 +187,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.ok:
                 if (content.getText().toString().trim().length() == 0) {
-                    ToastUtil.showMsg(context,"输入内容不能为空");
+                    ToastUtil.showMsg(context, "输入内容不能为空");
                     return;
                 }
                 if (id != -1)
@@ -198,7 +198,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                 notify.setSwitchIsChecked(!notify.getSwitchIsChecked());
                 break;
             case R.id.time:
-                mDatePicker.show(CalendarUtils.formatDateString(calendar.getTimeInMillis(),
+                mDatePicker.show(CalendarUtils.formatDateString(System.currentTimeMillis(),
                         "yyyy-MM-dd"));
                 break;
             case R.id.t1:
@@ -223,7 +223,7 @@ public class HabitActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.t2:
                 if (content.getText().toString().trim().length() == 0) {
-                    ToastUtil.showMsg(context,"输入内容不能为空");
+                    ToastUtil.showMsg(context, "输入内容不能为空");
                     return;
                 }
                 if (id != -1)
