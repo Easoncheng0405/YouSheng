@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ((TextView) findViewById(R.id.habit_title)).setText(
                 SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true)
-                        ? "优生打卡" : "习惯打卡");
+                        ? "打卡" : "打卡");
 
         //唤醒所有闹钟
         AlarmHelper.notifyAllAlarm(this);
@@ -121,6 +121,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mGDTManager = new GDTNativeManager();
         mGDTManager.init(this, (ViewGroup)
                 findViewById(R.id.layout_ad).findViewById(R.id.fl_advertise));
+        mGDTManager.setStateListener(new GDTSplashManager.ADStateListener() {
+            @Override
+            public void onADTick(long timeMillis) {
+
+            }
+
+            @Override
+            public void onADShow() {
+
+            }
+
+            @Override
+            public void onADFetchFailed() {
+
+            }
+
+            @Override
+            public void onADExposure() {
+                findViewById(R.id.layout_ad).setVisibility(View.GONE);
+            }
+        });
 
 
         //for test
@@ -433,7 +454,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initRecyclerView();
         ((TextView) findViewById(R.id.habit_title)).setText(
                 SPSingleton.get().getBoolean(PrefConstants.PREFS_KEY_MENSE_MODE, true)
-                        ? "优生打卡" : "习惯打卡");
+                        ? "打卡" : "打卡");
     }
 
     @Override

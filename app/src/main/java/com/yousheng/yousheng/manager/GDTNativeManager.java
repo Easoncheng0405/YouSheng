@@ -24,6 +24,12 @@ public class GDTNativeManager extends AbstractGDTManager {
     private ViewGroup mContainer;
     private Activity mActivity;
 
+    public void setStateListener(GDTSplashManager.ADStateListener mStateListener) {
+        this.mStateListener = mStateListener;
+    }
+
+    private GDTSplashManager.ADStateListener mStateListener;
+
     public void init(Activity activity, ViewGroup container) {
         mAppId = Constants.GDT_APP_ID;
         mContainer = container;
@@ -31,11 +37,11 @@ public class GDTNativeManager extends AbstractGDTManager {
         channel = (channel == null ? "default" : channel);
 
         if (channel.equals("huawei")) {
-            mPosId1 = SPLASH_AD_ID1;
-            mPosId2 = SPLASH_AD_ID2;
+            mPosId1 = NATIVE_AD_ID1;
+            mPosId2 = NATIVE_AD_ID2;
         } else {
-            mPosId1 = SPLASH_AD_ID1_HUAWEI;
-            mPosId2 = SPLASH_AD_ID2_HUAWEI;
+            mPosId1 = NATIVE_AD_ID1_HUAWEI;
+            mPosId2 = NATIVE_AD_ID2_HUAWEI;
         }
 
 
@@ -131,6 +137,9 @@ public class GDTNativeManager extends AbstractGDTManager {
                 mContainer.removeAllViews();
                 mContainer.setVisibility(View.GONE);
             }
+            if(mStateListener!=null){
+                mStateListener.onADExposure();
+            }
         }
 
         @Override
@@ -222,6 +231,9 @@ public class GDTNativeManager extends AbstractGDTManager {
             if (mContainer != null && mContainer.getChildCount() > 0) {
                 mContainer.removeAllViews();
                 mContainer.setVisibility(View.GONE);
+            }
+            if(mStateListener!=null){
+                mStateListener.onADExposure();
             }
         }
 

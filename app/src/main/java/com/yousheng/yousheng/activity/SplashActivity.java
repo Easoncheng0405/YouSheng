@@ -5,12 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ViewStubCompat;
 import android.view.View;
-import android.view.ViewStub;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.umeng.analytics.MobclickAgent;
 import com.yousheng.yousheng.R;
 import com.yousheng.yousheng.manager.GDTSplashManager;
@@ -45,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
 
         gdtManager = new GDTSplashManager();
         gdtManager.init(this, adContainer, skipButton, 3000);
-        gdtManager.setmAdStateListener(new GDTSplashManager.SplashADStateListener() {
+        gdtManager.setmAdStateListener(new GDTSplashManager.ADStateListener() {
             @Override
             public void onADTick(long timeMillis) {
                 String countDownText = skipButton.getText().toString();

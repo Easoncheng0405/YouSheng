@@ -2,7 +2,6 @@ package com.yousheng.yousheng.manager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.support.v7.widget.ViewStubCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +26,11 @@ public class GDTSplashManager extends AbstractGDTManager{
     private View mSkipView;
 
 
-    public void setmAdStateListener(SplashADStateListener mAdStateListener) {
+    public void setmAdStateListener(ADStateListener mAdStateListener) {
         this.mAdStateListener = mAdStateListener;
     }
 
-    private SplashADStateListener mAdStateListener;
+    private ADStateListener mAdStateListener;
 
     /***
      * @param adContainer 广告位的容器
@@ -200,7 +199,7 @@ public class GDTSplashManager extends AbstractGDTManager{
         }
     };
 
-    public interface SplashADStateListener {
+    public interface ADStateListener {
         public void onADTick(long timeMillis);
 
         public void onADShow();

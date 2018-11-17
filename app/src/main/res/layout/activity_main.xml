@@ -610,7 +610,6 @@
                     android:id="@+id/rv_todo_no_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/shape_background_rectangle"
                     android:paddingBottom="19dp"
                     android:paddingTop="19dp"
@@ -622,7 +621,8 @@
                 android:id="@+id/layout_ad"
                 layout="@layout/layout_app_advertise"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="60dp" />
         </LinearLayout>
     </ScrollView>
 
