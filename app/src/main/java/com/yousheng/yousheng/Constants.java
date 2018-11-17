@@ -40,4 +40,8 @@ public class Constants {
     /*****闹钟常量**/
     public final static int NOTICE_ID_MENSE = -1;
 
+
+    /****广点通广告*/
+    public final static int GDT_APP_ID = 1107896449;
+
 }

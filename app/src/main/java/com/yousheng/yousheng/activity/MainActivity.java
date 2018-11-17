@@ -20,6 +20,7 @@ import com.yousheng.yousheng.adapter.NewItemListAdapter;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
 import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.manager.FeedBackManager;
+import com.yousheng.yousheng.manager.GDTSplashManager;
 import com.yousheng.yousheng.manager.MenseManager;
 import com.yousheng.yousheng.mense.MenseCalculator;
 import com.yousheng.yousheng.PrefConstants;

@@ -5,7 +5,7 @@ android {
         release_config {
             keyAlias 'yousheng'
             keyPassword '123yousheng'
-            storeFile file('/home/zhaoyang/workFile/YouSheng/YouSheng/yousheng.jks')
+            storeFile file('../yousheng.jks')
             storePassword 'yousheng123'
         }
     }
@@ -30,7 +30,7 @@ android {
     defaultConfig {
         applicationId "com.yousheng"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -75,4 +75,9 @@ dependencies {
     //    umeng
     implementation 'com.umeng.sdk:common:latest.integration'
     implementation 'com.umeng.sdk:analytics:latest.integration'
+
+//    rxjava
+    implementation "io.reactivex.rxjava2:rxjava:2.2.3"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
 }
