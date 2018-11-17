@@ -33,15 +33,16 @@ public class GDTNativeManager extends AbstractGDTManager {
     public void init(Activity activity, ViewGroup container) {
         mAppId = Constants.GDT_APP_ID;
         mContainer = container;
-        String channel = UMengUtils.getAppMetaData(activity, "UMENG_CHANNEL_VALUE");
+        String channel = UMengUtils.getAppMetaData(activity, "UMENG_CHANNEL");
         channel = (channel == null ? "default" : channel);
 
+        Log.d(TAG, "[channel]:" + channel);
         if (channel.equals("huawei")) {
-            mPosId1 = NATIVE_AD_ID1;
-            mPosId2 = NATIVE_AD_ID2;
-        } else {
             mPosId1 = NATIVE_AD_ID1_HUAWEI;
             mPosId2 = NATIVE_AD_ID2_HUAWEI;
+        } else {
+            mPosId1 = NATIVE_AD_ID1;
+            mPosId2 = NATIVE_AD_ID2;
         }
 
 
@@ -137,7 +138,7 @@ public class GDTNativeManager extends AbstractGDTManager {
                 mContainer.removeAllViews();
                 mContainer.setVisibility(View.GONE);
             }
-            if(mStateListener!=null){
+            if (mStateListener != null) {
                 mStateListener.onADExposure();
             }
         }
@@ -232,7 +233,7 @@ public class GDTNativeManager extends AbstractGDTManager {
                 mContainer.removeAllViews();
                 mContainer.setVisibility(View.GONE);
             }
-            if(mStateListener!=null){
+            if (mStateListener != null) {
                 mStateListener.onADExposure();
             }
         }
@@ -256,7 +257,10 @@ public class GDTNativeManager extends AbstractGDTManager {
         public void onNoAD(AdError adError) {
             Log.i(TAG, "onNoAD2");
             mContainer.setVisibility(View.GONE);
-        }
+            if(mStateListener!=null){
+                mStateListener.onADFetchFailed();
+    }
+}
     };
 
 

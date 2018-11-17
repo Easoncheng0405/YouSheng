@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onADFetchFailed() {
+                findViewById(R.id.layout_ad).setVisibility(View.GONE);
 
             }
 

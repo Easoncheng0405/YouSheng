@@ -28,7 +28,6 @@ public class SplashActivity extends AppCompatActivity {
         if (NetworkUtils.isNetworkConnected(this)) {
             initView();
             initGDT();
-//            initTimer(true);
         } else {
             initLayoutWhenNoNetwork();
             initTimer(false);
@@ -60,7 +59,8 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onADFetchFailed() {
-                navigateToMainActivity();
+//                navigateToMainActivity();
+                initTimer(true);
             }
 
             @Override
@@ -109,6 +109,17 @@ public class SplashActivity extends AppCompatActivity {
                     String countDownText = tvCountDown.getText().toString();
                     final String[] texts = countDownText.split(" ");
                     int leftTimeSeconds = Integer.valueOf(texts[1]);
+
+                    tvCountDown.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (mTimer != null) {
+                                mTimer.cancel();
+                            }
+                            navigateToMainActivity();
+                        }
+                    });
+
                     if (leftTimeSeconds > 0) {
                         leftTimeSeconds--;
                         final int i = leftTimeSeconds;

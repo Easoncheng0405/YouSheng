@@ -40,8 +40,10 @@ public class GDTSplashManager extends AbstractGDTManager{
                      final ViewGroup adContainer,
                      final View skipView,
                      final int fetchTimeOut) {
-        String channel = UMengUtils.getAppMetaData(activity, "UMENG_CHANNEL_VALUE");
+        String channel = UMengUtils.getAppMetaData(activity, "UMENG_CHANNEL");
         channel = (channel == null ? "default" : channel);
+        Log.d(TAG, "[channel]:" + channel);
+
         Flowable
                 .just(channel)
                 .subscribe(new Consumer<String>() {
@@ -54,11 +56,11 @@ public class GDTSplashManager extends AbstractGDTManager{
                         mAppId = Constants.GDT_APP_ID;
 
                         if (channel.equals("huawei")) {
-                            mPosId1 = SPLASH_AD_ID1;
-                            mPosId2 = SPLASH_AD_ID2;
-                        } else {
                             mPosId1 = SPLASH_AD_ID1_HUAWEI;
                             mPosId2 = SPLASH_AD_ID2_HUAWEI;
+                        } else {
+                            mPosId1 = SPLASH_AD_ID1;
+                            mPosId2 = SPLASH_AD_ID2;
                         }
                     }
                 });
