@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.yousheng.yousheng.adapter.NewItemListAdapter;
 import com.yousheng.yousheng.adapter.RecyclerViewSpacesItemDecoration;
 import com.yousheng.yousheng.habit.AllHabitActivity;
 import com.yousheng.yousheng.manager.FeedBackManager;
+import com.yousheng.yousheng.manager.GDTNativeManager;
 import com.yousheng.yousheng.manager.GDTSplashManager;
 import com.yousheng.yousheng.manager.MenseManager;
 import com.yousheng.yousheng.mense.MenseCalculator;
@@ -82,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /****当前选中的calendar对象**/
     private Calendar mCalendarSelected;
 
+    /****广点通广告对象*/
+    private GDTNativeManager mGDTManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +116,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         initCalendarView();
+
+        //init gdt
+        mGDTManager = new GDTNativeManager();
+        mGDTManager.init(this, (ViewGroup)
+                findViewById(R.id.layout_ad).findViewById(R.id.fl_advertise));
 
 
         //for test
@@ -166,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.root_view).post(mShowEvaluationRunnable);
 
         MobclickAgent.onResume(this);
+
+        mGDTManager.show();
     }
 
     private Runnable mShowEvaluationRunnable = new Runnable() {
@@ -475,5 +486,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mGDTManager.onActivityDestroy();
     }
 }

@@ -16,16 +16,8 @@ import com.yousheng.yousheng.uitl.UMengUtils;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Consumer;
 
-public class GDTSplashManager {
+public class GDTSplashManager extends AbstractGDTManager{
     private final static String TAG = "GDTSplashManager";
-
-
-    /***广告ID编号**/
-    public final static long SPLASH_AD_ID1 = 5030643482489904L;
-    public final static long SPLASH_AD_ID2 = 2020744452088995L;
-    public final static long SPLASH_AD_ID1_HUAWEI = 2060640402079030L;
-    public final static long SPLASH_AD_ID2_HUAWEI = 2060640402079030L;
-
 
     private SplashAD mSplashAD1;
     private SplashAD mSplashAD2;
@@ -34,14 +26,6 @@ public class GDTSplashManager {
     private ViewGroup mAdContainer;
     private View mSkipView;
 
-    private long mPosId1;
-    private long mPosId2;
-    private long mAppId;
-
-    /****开始拉取广告的时间点*/
-    private long mFetchADStartTime;
-    /****拉取广告的超时时间 3000~5000*/
-    private int mFetchADTimeOut;
 
     public void setmAdStateListener(SplashADStateListener mAdStateListener) {
         this.mAdStateListener = mAdStateListener;
@@ -58,7 +42,7 @@ public class GDTSplashManager {
                      final View skipView,
                      final int fetchTimeOut) {
         String channel = UMengUtils.getAppMetaData(activity, "UMENG_CHANNEL_VALUE");
-        channel = channel == null ? "default" : channel;
+        channel = (channel == null ? "default" : channel);
         Flowable
                 .just(channel)
                 .subscribe(new Consumer<String>() {
@@ -102,7 +86,6 @@ public class GDTSplashManager {
      */
     private void fetchSplashAD(Activity activity, ViewGroup adContainer, View skipContainer,
                                String appId, String posId, SplashADListener adListener, int fetchDelay, int index) {
-        mFetchADStartTime = System.currentTimeMillis();
         switch (index) {
             case 1:
                 mSplashAD1 = new SplashAD(activity, adContainer, skipContainer, appId, posId, adListener, fetchDelay);

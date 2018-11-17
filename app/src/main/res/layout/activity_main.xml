@@ -65,9 +65,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingTop="7dp"
-            android:paddingEnd="8dp">
+            android:paddingTop="7dp">
 
             <!--顶层布局，好孕率，日历，排卵试纸-->
             <LinearLayout
@@ -75,8 +75,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_background_rectangle"
                 android:orientation="vertical"
-                android:paddingTop="20dp"
-                android:paddingBottom="17dp">
+                android:paddingBottom="17dp"
+                android:paddingTop="20dp">
                 <!--好孕率及安全期-->
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -97,8 +97,8 @@
                         android:id="@+id/tv_pregnant_percent_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@id/tv_pregnant_percent"
                         android:layout_alignBottom="@id/tv_pregnant_percent"
+                        android:layout_alignTop="@id/tv_pregnant_percent"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="9dp"
                         android:layout_toEndOf="@id/tv_pregnant_percent"
@@ -112,9 +112,9 @@
                         android:id="@+id/tv_pregnant_securedate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@id/tv_pregnant_percent"
                         android:layout_alignBottom="@id/tv_pregnant_percent"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@id/tv_pregnant_percent"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="19dp"
                         android:gravity="center_vertical"
@@ -128,9 +128,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="18dp"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="18dp"
                     android:background="@color/white"
                     app:max_year="2020"
                     app:min_year="2004"
@@ -356,8 +356,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_ovulation"
                         android:layout_alignStart="@id/tv_ovulation"
+                        android:layout_below="@id/tv_ovulation"
                         android:layout_marginTop="10dp"
                         android:text="@string/ovulation_tip"
                         android:textColor="@color/text_color_gray"
@@ -368,8 +368,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="4dp"
                         android:layout_marginEnd="19dp"
+                        android:layout_marginTop="4dp"
                         android:src="@drawable/plus" />
                 </RelativeLayout>
 
@@ -396,18 +396,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="4dp"
                         android:layout_marginEnd="19dp"
+                        android:layout_marginTop="4dp"
                         android:src="@drawable/plus" />
 
                     <TextView
                         android:id="@+id/tv_comment_sub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_comment"
                         android:layout_alignStart="@id/tv_comment"
-                        android:layout_toStartOf="@id/iv_plus_comment"
+                        android:layout_below="@id/tv_comment"
                         android:layout_marginTop="10dp"
+                        android:layout_toStartOf="@id/iv_plus_comment"
                         android:text="@string/come_on"
                         android:textColor="@color/text_color_gray"
                         android:textSize="13sp" />
@@ -435,8 +435,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_beiyun"
                     android:layout_alignStart="@id/tv_beiyun"
+                    android:layout_below="@id/tv_beiyun"
                     android:layout_marginTop="10dp"
                     android:text="@string/tip_prepare_pregnant"
                     android:textColor="@color/text_color_gray"
@@ -521,8 +521,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_background_rectangle"
-                    android:paddingTop="19dp"
                     android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
                     android:visibility="gone" />
 
                 <!--明天的事项列表-->
@@ -539,8 +539,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_background_rectangle"
-                    android:paddingTop="19dp"
                     android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
                     android:visibility="gone" />
 
                 <!--接下来7天-->
@@ -557,8 +557,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_background_rectangle"
-                    android:paddingTop="19dp"
                     android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
                     android:visibility="gone" />
 
                 <!--已过期-->
@@ -575,8 +575,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_background_rectangle"
-                    android:paddingTop="19dp"
                     android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
                     android:visibility="gone" />
 
 
@@ -593,8 +593,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_background_rectangle"
-                    android:paddingTop="19dp"
                     android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
                     android:visibility="gone" />
 
                 <!--没有日期-->
@@ -612,10 +612,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/shape_background_rectangle"
-                    android:paddingTop="19dp"
                     android:paddingBottom="19dp"
+                    android:paddingTop="19dp"
                     android:visibility="gone" />
             </LinearLayout>
+
+            <!--广告-->
+            <include
+                android:id="@+id/layout_ad"
+                layout="@layout/layout_app_advertise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 

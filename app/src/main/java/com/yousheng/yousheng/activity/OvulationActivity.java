@@ -43,20 +43,23 @@ public class OvulationActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void updateList() {
-        LitePal.findAllAsync(OvulationRecord.class).listen(new FindMultiCallback<OvulationRecord>() {
-            @Override
-            public void onFinish(List<OvulationRecord> list) {
-                if (list != null && list.size() > 0) {
-                    findViewById(R.id.tv_empty).setVisibility(View.GONE);
-                    mRecyclerView.setVisibility(View.VISIBLE);
-                    mAdapter = new OvulationRecordAdapter(OvulationActivity.this, list);
-                    mRecyclerView.setAdapter(mAdapter);
-                } else {
-                    findViewById(R.id.tv_empty).setVisibility(View.VISIBLE);
-                    mRecyclerView.setVisibility(View.GONE);
-                }
-            }
-        });
+        LitePal.select()
+                .order("date desc")
+                .findAsync(OvulationRecord.class)
+                .listen(new FindMultiCallback<OvulationRecord>() {
+                    @Override
+                    public void onFinish(List<OvulationRecord> list) {
+                        if (list != null && list.size() > 0) {
+                            findViewById(R.id.tv_empty).setVisibility(View.GONE);
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                            mAdapter = new OvulationRecordAdapter(OvulationActivity.this, list);
+                            mRecyclerView.setAdapter(mAdapter);
+                        } else {
+                            findViewById(R.id.tv_empty).setVisibility(View.VISIBLE);
+                            mRecyclerView.setVisibility(View.GONE);
+                        }
+                    }
+                });
     }
 
     @Override
