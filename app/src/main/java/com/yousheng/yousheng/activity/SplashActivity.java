@@ -21,6 +21,8 @@ public class SplashActivity extends AppCompatActivity {
 
     private GDTSplashManager gdtManager;
 
+    private boolean isAdExposured = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,8 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onADExposure() {
-                navigateToMainActivity();
+//                navigateToMainActivity();
+                isAdExposured = true;
             }
         });
         gdtManager.fetch();
@@ -152,6 +155,10 @@ public class SplashActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+
+        if(isAdExposured){
+            navigateToMainActivity();
+        }
     }
 
     @Override
