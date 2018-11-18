@@ -142,6 +142,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onADExposure() {
                 findViewById(R.id.layout_ad).setVisibility(View.GONE);
             }
+
+            @Override
+            public void onADClicked() {
+
+            }
         });
 
 

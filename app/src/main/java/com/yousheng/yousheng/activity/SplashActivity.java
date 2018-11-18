@@ -21,7 +21,9 @@ public class SplashActivity extends AppCompatActivity {
 
     private GDTSplashManager gdtManager;
 
-    private boolean isAdExposured = false;
+    //    private boolean isAdClicked = false;
+    private boolean isTickTimeConsumed = false;
+    private boolean isJumpPermitted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,10 @@ public class SplashActivity extends AppCompatActivity {
                 skipButton.setText(texts[0]
                         .concat(" ")
                         .concat(String.valueOf((timeMillis + 500) / 1000)));
+                if (timeMillis <= 500) {
+                    isTickTimeConsumed = true;
+                    navigateToMainActivity();
+                }
             }
 
             @Override
@@ -62,13 +68,15 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onADFetchFailed() {
 //                navigateToMainActivity();
-                initTimer(true);
             }
 
             @Override
             public void onADExposure() {
-//                navigateToMainActivity();
-                isAdExposured = true;
+                navigateToMainActivity();
+            }
+
+            @Override
+            public void onADClicked() {
             }
         });
         gdtManager.fetch();
@@ -97,9 +105,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void navigateToMainActivity() {
-        startActivity(new Intent(SplashActivity.this
-                , MainActivity.class));
-        finish();
+        //如果点击了广告链接且广告还未完全展示，则不跳转到主界面
+        if (isJumpPermitted) {
+            startActivity(new Intent(SplashActivity.this
+                    , MainActivity.class));
+            finish();
+        }
     }
 
     private void initTimer(boolean isNetworkConnected) {
@@ -156,7 +167,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onResume();
         MobclickAgent.onResume(this);
 
-        if(isAdExposured){
+        isJumpPermitted = true;
+        if (isTickTimeConsumed) {
             navigateToMainActivity();
         }
     }
@@ -165,5 +177,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+        isJumpPermitted = false;
     }
 }

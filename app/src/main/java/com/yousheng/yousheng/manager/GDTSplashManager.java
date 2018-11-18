@@ -146,7 +146,9 @@ public class GDTSplashManager extends AbstractGDTManager{
         @Override
         public void onADClicked() {
             Log.d(TAG, "onAD1Clicked");
-
+            if(mAdStateListener!=null){
+                mAdStateListener.onADClicked();
+            }
         }
 
         @Override
@@ -184,7 +186,9 @@ public class GDTSplashManager extends AbstractGDTManager{
         @Override
         public void onADClicked() {
             Log.d(TAG, "onAD2Clicked");
-
+            if(mAdStateListener!=null){
+                mAdStateListener.onADClicked();
+            }
         }
 
         @Override
@@ -209,5 +213,7 @@ public class GDTSplashManager extends AbstractGDTManager{
         public void onADFetchFailed();
 
         public void onADExposure();
+
+        public void onADClicked();
     }
 }
