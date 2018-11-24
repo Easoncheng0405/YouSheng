@@ -620,7 +620,7 @@ final class CalendarUtil {
             LunarCalendar.setupLunarCalendar(calendarDate);
 
             //初始化经期状态
-            if (calendarDate.getTimeInMillis() >= CalendarUtils.getTodayTimeMillis()) {
+            if (calendarDate.getTimeInMillis() >= CalendarUtils.getTodayTimeMillis()+Constants.ONE_DAY_IN_TS) {
                 int menseState = MenseCalculator.getMenseState(calendarDate.getTimeInMillis());
                 calendarDate.setMensesState(menseState);
             } else {

@@ -68,6 +68,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onADFetchFailed() {
 //                navigateToMainActivity();
+                initTimer(true);
             }
 
             @Override
@@ -115,7 +116,22 @@ public class SplashActivity extends AppCompatActivity {
 
     private void initTimer(boolean isNetworkConnected) {
         mTimer = new Timer();
+
         if (isNetworkConnected) {
+            findViewById(R.id.tv_count_down).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mTimer != null) {
+                                mTimer.cancel();
+                            }
+                            navigateToMainActivity();
+                        }
+                    });
+                }
+            });
             mTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -124,15 +140,6 @@ public class SplashActivity extends AppCompatActivity {
                     final String[] texts = countDownText.split(" ");
                     int leftTimeSeconds = Integer.valueOf(texts[1]);
 
-                    tvCountDown.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (mTimer != null) {
-                                mTimer.cancel();
-                            }
-                            navigateToMainActivity();
-                        }
-                    });
 
                     if (leftTimeSeconds > 0) {
                         leftTimeSeconds--;
@@ -145,7 +152,6 @@ public class SplashActivity extends AppCompatActivity {
                                         .concat(String.valueOf(i)));
                             }
                         });
-
                     } else {
                         mTimer.cancel();
                         navigateToMainActivity();
