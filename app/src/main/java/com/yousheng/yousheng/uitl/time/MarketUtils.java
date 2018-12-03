@@ -40,7 +40,8 @@ public class MarketUtils {
      * @return {@code true} 跳转成功 <br> {@code false} 跳转失败
      */
     public static boolean toMarket(Activity activity, String marketPkg) {
-        Uri uri = Uri.parse("market://details?id=com.yousheng.yousheng");
+        Log.d("MarketUtils","start to find "+marketPkg);
+        Uri uri = Uri.parse("market://details?id=com.yousheng");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (marketPkg != null) {
@@ -51,7 +52,7 @@ public class MarketUtils {
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return false;
         }
+        return false;
     }
 }
