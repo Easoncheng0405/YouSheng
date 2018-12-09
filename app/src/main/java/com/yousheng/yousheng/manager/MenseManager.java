@@ -29,7 +29,7 @@ public class MenseManager {
             if (list != null && list.size() > 0) {
                 for (int i = list.size() - 1; i >= 0; i--) {
                     MenseDurationInfo info = list.get(i);
-                    if (info.getStartTs() < CalendarUtils.getTodayTimeMillis() || i == 0) {
+                    if (info.getStartTs() < (CalendarUtils.getTodayTimeMillis()+Constants.ONE_DAY_IN_TS) || i == 0) {
                         SPSingleton.get().putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, info.getStartTs());
                         SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
                                 String.valueOf((endTs - startTs) / Constants.ONE_DAY_IN_TS));
