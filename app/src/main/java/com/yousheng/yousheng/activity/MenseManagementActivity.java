@@ -205,7 +205,6 @@ public class MenseManagementActivity extends AppCompatActivity {
                     break;
                 case R.id.layout_mense_mode:
                     break;
-
                 case R.id.btn_start:
                     //update menseduration info
                     List<MenseDurationInfo> durationInfos = LitePal.select()
@@ -216,7 +215,7 @@ public class MenseManagementActivity extends AppCompatActivity {
                     for (MenseDurationInfo info : durationInfos) {
                         info.setEndTs(info.getStartTs() + menseGapTs);
                         info.setEndDate(CalendarUtils.formatDateString(info.getEndTs(), Constants.DATE_FORMAT));
-                        info.saveOrUpdate();
+                        info.save();
                     }
 
                     SPSingleton.get()
