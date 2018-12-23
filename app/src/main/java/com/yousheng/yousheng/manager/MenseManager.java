@@ -19,8 +19,8 @@ public class MenseManager {
         if (reset) {
             SPSingleton.get().putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY,
                     CalendarUtils.getTodayTimeMillis());
-            SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
-                    Constants.DEFAULT_MENSE_DURAION);
+//            SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
+//                    Constants.DEFAULT_MENSE_DURAION);
         } else {
             String monthOfYear = CalendarUtils.formatDateString(startTs,
                     Constants.DATE_FORMAT_MONTH_OF_YEAR);
@@ -31,8 +31,8 @@ public class MenseManager {
                     MenseDurationInfo info = list.get(i);
                     if (info.getStartTs() < (CalendarUtils.getTodayTimeMillis()+Constants.ONE_DAY_IN_TS) || i == 0) {
                         SPSingleton.get().putLong(PrefConstants.PREFS_KEY_MENSE_START_DAY, info.getStartTs());
-                        SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
-                                String.valueOf((endTs - startTs) / Constants.ONE_DAY_IN_TS));
+//                        SPSingleton.get().putString(PrefConstants.PREFS_KEY_MENSE_DAYS,
+//                                String.valueOf((endTs - startTs) / Constants.ONE_DAY_IN_TS));
                         break;
                     }
                 }

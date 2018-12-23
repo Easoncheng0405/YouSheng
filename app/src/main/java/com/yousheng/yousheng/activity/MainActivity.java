@@ -199,6 +199,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mCalendarView.updateMenseInfo();
         }
 
+        if(mMenseInfoSelected!=null){
+            switchMenseStart.setChecked(mMenseInfoSelected.isMenseStart());
+            switchMenseEnd.setChecked(mMenseInfoSelected.isMenseEnd());
+        }
+
         findViewById(R.id.root_view).post(mShowEvaluationRunnable);
 
         MobclickAgent.onResume(this);
